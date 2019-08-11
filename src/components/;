@@ -1,0 +1,44 @@
+import React from 'react';
+import { Link } from "react-router-dom"
+import { connect } from 'react-redux'
+import { queueActions } from '../../actions/queue-actions'
+
+export default class Queues extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			queuez: []
+		}
+	}
+
+	componentDidMount() {
+		fetch("http://localhost:3000/queue/all", {
+			method: 'GET'
+		}).then(response => {
+			if (response.status < 400) {
+                return response
+            } else {
+                var error = new Error(response.statusText)
+                error.response = response
+                throw error
+            }
+		}).then(response => {
+			return response.json()
+		}).then(response => {
+			this.setState({queuez:response})
+			console.log(this.state)
+		})
+	}
+	render() {
+		return (
+			<div>
+				<ul>
+					{this.state.queuez.map(q => (
+						<li>{q.name}</li>
+					))}
+				</ul>
+			</div>
+		)
+		// THE WHOLE FUCKING QUEUEZ IS NOT AN ARRAY BUT A FUCKING PROMISE, NEED TO PARSE THAT SHIT SOMEHOW, OR RERENDER
+	}
+}
