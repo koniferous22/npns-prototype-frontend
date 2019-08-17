@@ -1,18 +1,19 @@
 import React from 'react';
-import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { queueActions } from '../../actions/queue-actions'
+import { appConfig } from '../../appConfig'
+import QueueSidebarEntries from './QueueSidebarEntries'
 
-export default class Queues extends React.Component {
+export default class QueueSidebar extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			queuez: []
+			queues: {}
 		}
 	}
 
 	componentDidMount() {
-		fetch("http://localhost:3000/queue/all", {
+		fetch(appConfig.backendUrl + "/queue/hierarchy", {
 			method: 'GET'
 		}).then(response => {
 			if (response.status < 400) {
@@ -25,20 +26,16 @@ export default class Queues extends React.Component {
 		}).then(response => {
 			return response.json()
 		}).then(response => {
-			this.setState({queuez:response})
-			console.log(this.state)
+			this.setState({queues:{
+				"Index":response.hierarchy.root
+			}})
 		})
 	}
 	render() {
 		return (
 			<div>
-				<ul>
-					{this.state.queuez.map(q => (
-						<li>{q.name}</li>
-					))}
-				</ul>
+                <QueueSidebarEntries queues={this.state.queues}/>
 			</div>
 		)
-		// THE WHOLE FUCKING QUEUEZ IS NOT AN ARRAY BUT A FUCKING PROMISE, NEED TO PARSE THAT SHIT SOMEHOW, OR RERENDER
 	}
 }

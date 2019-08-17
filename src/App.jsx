@@ -2,10 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Homepage from "./components/home/Homepage"
+
+import Header from "./components/header/Header"
+
 import Register from "./components/register/Register"
 import Login from "./components/login/Login"
-import Header from "./components/header/Header"
-import QueueIndex from "./components/queues/QueueIndex"
+import QueueIndex from "./components/queues/QueueIndex-useless"
 import Profile from "./components/profile/Profile"
 import ProblemIndex from "./components/problems/ProblemIndex"
 import Problem from "./components/problems/Problem"
@@ -16,7 +18,8 @@ export default class App extends React.Component {
 		return (
 			<Router>
 				<div>
-					<Header />					
+					<Header />
+					
 					<Route exact path="/" component={ Homepage } />
 					<Route path="/register" component={ Register } />
 					<Route path="/login" component={ Login } />
