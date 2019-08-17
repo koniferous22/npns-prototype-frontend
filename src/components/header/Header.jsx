@@ -16,17 +16,22 @@ const Public = [
 	},
 	{
 		to: "/q",
-		label: "kjuuz"
+		label: "Problems"
 	}
 ]
 const Private = [
 	{
-		to: "/topsecret",
-		label: "neklikat"
+		to: "/",
+		label: "My Submissions"
 	},
 	{
 		to: "/profile",
-		label: "profil mucQ"
+		label: "My Profile"
+	},
+
+	{
+		to: "/topsecret",
+		label: "Statistics"
 	}
 ]
 
