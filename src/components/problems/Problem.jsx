@@ -31,16 +31,14 @@ export default class Problem extends React.Component {
 	render() {
 		return (
 			<div>
-				<p>	 
-           				{this.state.problem.map(q => (
-                        <ul>
-						    <li>Title: {q.title}</li>
-						    <li>Description: {q.description}</li>
-						    <li>Timestamp: {q.timestamp}</li>
-						    <li>User ID: {q.userId}</li>
-                        </ul>
-					))}
-				</p>
+   				{this.state.problem.map(q => (
+                    <ul>
+					    <li>Title: {q.title}</li>
+					    <li>Description: {q.description}</li>
+					    <li>Timestamp: {q.timestamp}</li>
+					    <li>User ID: {q.userId}</li>
+                    </ul>
+				))}
 			</div>
 		)
 	}

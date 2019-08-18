@@ -23,15 +23,17 @@ export default class App extends React.Component {
 					<Route exact path="/" component={ Homepage } />
 					<Route path="/register" component={ Register } />
 					<Route path="/login" component={ Login } />
-					<Route path="/q" component={ QueueIndex } />
+				
 					<Route path="/profile" component={ Profile } />
-					<Route path="/problemindex/:id" component={ ProblemIndex } />
+					<Route path="/q/:id" component={ ProblemIndex } />
 					<Route path="/problem/:id" component={ Problem } />
 				</div>
 			</Router>
 		);
 	}
 }
+
+// <Route path="/q" component={ QueueIndex } />
 
 
 

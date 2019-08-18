@@ -11,7 +11,7 @@ export default class Problems extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch(appConfig.backendUrl + "/problem/allinqueue/" + this.props.id, {
+		fetch(appConfig.backendUrl + "/queue/" + (this.props.name || 'Index') + '/problems', {
 			method: 'GET'
 		}).then(response => {
 			if (response.status < 400) {
@@ -31,11 +31,11 @@ export default class Problems extends React.Component {
 	render() {
 		return (
 			<div>
-				<p>
+				<ul>
 					{this.state.problemz.map(q => (
                         <li><Link to={{pathname: "/problem/" + q._id, id: q._id}}>{q.title}</Link></li>
 					))}
-				</p>
+				</ul>
 			</div>
 		)
 	}

@@ -4,10 +4,10 @@ import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
     dispatch(problemActions.add({
-    	queueId: props.queueId,
-    	userId: localStorage.getItem('userId'),
+    	queue_id: props.queueName,
+    	submitted_by: localStorage.getItem('userId'),
     	title: values.title,
-    	description: values.description,
+    	description: values.description
     }))
 }
 

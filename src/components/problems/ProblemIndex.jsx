@@ -8,15 +8,16 @@ export default class ProblemIndex extends React.Component {
 
     	// reimplement using redux
 
-        var queueId = this.props.location.pathname.split("/")[2]
+        var queueName = this.props.location.pathname.split("/")[2]
+        console.log(queueName)
         return (
             <div>
                 <QueueSidebar />
                 
                 <h3>Problem Index</h3>
-                <Problems id={queueId}/>
+                <Problems name={queueName}/>
                 <p>u got a problem? post it down below</p>
-                <ProblemAddForm queueId={queueId}/>
+                <ProblemAddForm queueName={queueName}/>
             </div>
         );
     }

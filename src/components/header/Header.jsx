@@ -15,7 +15,7 @@ const Public = [
 		label: "Home"
 	},
 	{
-		to: "/q",
+		to: "/q/Index",
 		label: "Problems"
 	}
 ]
