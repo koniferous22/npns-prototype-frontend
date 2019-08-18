@@ -26,9 +26,7 @@ export default class QueueSidebar extends React.Component {
 		}).then(response => {
 			return response.json()
 		}).then(response => {
-			this.setState({queues:{
-				"Index":response.hierarchy.root
-			}})
+			this.setState({queues:response.hierarchy})
 		})
 	}
 	render() {
