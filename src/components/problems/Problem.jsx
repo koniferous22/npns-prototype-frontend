@@ -8,10 +8,11 @@ export default class Problem extends React.Component {
 		this.state = {
 			problem: []
 		}
+        console.log(props)
 	}
 
 	componentDidMount() {
-		fetch(appConfig.backendUrl + "/problem/" + this.props.location.id, {
+		fetch(appConfig.backendUrl + this.props.location.pathname, {
 			method: 'GET'
 		}).then(response => {
 			if (response.status < 400) {
@@ -31,14 +32,12 @@ export default class Problem extends React.Component {
 	render() {
 		return (
 			<div>
-   				{this.state.problem.map(q => (
                     <ul>
-					    <li>Title: {q.title}</li>
-					    <li>Description: {q.description}</li>
-					    <li>Timestamp: {q.timestamp}</li>
-					    <li>User ID: {q.userId}</li>
+					    <li>Title: {this.state.problem.title}</li>
+					    <li>Description: {this.state.problem.description}</li>
+					    <li>Created: {this.state.problem.created}</li>
+					    <li>User ID: {this.state.problem.submitted_by}</li>
                     </ul>
-				))}
 			</div>
 		)
 	}
