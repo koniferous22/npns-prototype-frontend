@@ -5,6 +5,9 @@ import QueueSidebar from '../queues/QueueSidebar'
 
 export default class ProblemIndex extends React.Component {
     render() {
+
+    	// reimplement using redux
+
         var queueId = this.props.location.pathname.split("/")[2]
         return (
             <div>
