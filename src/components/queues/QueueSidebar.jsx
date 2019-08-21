@@ -11,6 +11,7 @@ export default class QueueSidebar extends React.Component {
 			queues: {}
 		}
 	}
+
 	componentDidMount() {
 		fetch(appConfig.backendUrl + "/queue/hierarchy", {
 			method: 'GET'
@@ -31,8 +32,7 @@ export default class QueueSidebar extends React.Component {
 	render() {
 		return (
 			<div>
-                <h2>QueueSidebar</h2>
-                <QueueSidebarEntries queues={this.state.queues} changeOnScreenQueue={this.props.changeOnScreenQueue}/>
+                <QueueSidebarEntries queues={this.state.queues}/>
 			</div>
 		)
 	}
