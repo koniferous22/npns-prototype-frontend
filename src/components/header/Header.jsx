@@ -13,10 +13,6 @@ const Public = [
 	{
 		to: "/",
 		label: "Home"
-	},
-	{
-		to: "/q/Index",
-		label: "Problems"
 	}
 ]
 const Private = [

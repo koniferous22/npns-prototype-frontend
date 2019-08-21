@@ -11,7 +11,9 @@ export default class Problems extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch(appConfig.backendUrl + "/queue/" + (this.props.name || 'Index') + '/problems', {
+	}
+	render() {
+		fetch(appConfig.backendUrl + "/queue/" + (this.props.queueName || 'Index') + '/problems', {
 			method: 'GET'
 		}).then(response => {
 			if (response.status < 400) {
@@ -23,12 +25,12 @@ export default class Problems extends React.Component {
             }
 		}).then(response => {
 			return response.json()
-		}).then(response => {
-			this.setState({problemz:response})
+		}).then(response => {           //toto je tu, lebo na Array nejde len tak pouzit === ... strasne cosi
+            if (this.state.problemz.length !== response.length && this.state.problemz.sort().every(function(value, index) { return value !== response.sort()[index]})) {
+			    this.setState({problemz:response})
+            }
 			console.log(this.state)
 		})
-	}
-	render() {
 		return (
 			<div>
 				<ul>
@@ -40,3 +42,5 @@ export default class Problems extends React.Component {
 		)
 	}
 }
+
+//uz mi to skoro funguje, len to hadze 2 requesty a to je dost blbe...

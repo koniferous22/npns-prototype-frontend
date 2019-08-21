@@ -13,13 +13,14 @@ export default class QueueSidebarEntries extends React.Component {
             );
         } else {
             const keys = Object.keys(queues)
+            console.log(keys) //to stopPropagation() je nutne, lebo inak sa onClick spusti pre viac komponent
             return (
                 <div>
                     <ul>
                         {keys.map(k => (
-                            <li key={k}>
+                            <li key={k} onClick={(e) => {this.props.changeOnScreenQueue(k); e.stopPropagation()}}>
                                 {k}
-                                <QueueSidebarEntries queues={this.props.queues[k]}/>
+                                <QueueSidebarEntries queues={this.props.queues[k]} changeOnScreenQueue={this.props.changeOnScreenQueue}/>   
                             </li>
                         ))}
                     </ul>
@@ -28,3 +29,5 @@ export default class QueueSidebarEntries extends React.Component {
         }
     }
 }
+
+//Z nejakeho dovodu to stale hadze Index nech klikam kdekolvek do zoznamu...
