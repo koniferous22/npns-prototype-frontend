@@ -32,7 +32,7 @@ export default class QueueSidebar extends React.Component {
 	render() {
 		return (
 			<div>
-                <QueueSidebarEntries queues={this.state.queues}/>
+          <QueueSidebarEntries queues={this.state.queues}/>
 			</div>
 		)
 	}

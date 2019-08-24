@@ -7,14 +7,10 @@ export default class QueueSidebarEntries extends React.Component {
 
     render() {
         var {queues} = this.props;
-        if(!queues) {
-            return (
-                <div></div>
-            );
-        } else {
-            const keys = Object.keys(queues)
-            return (
-                <div>
+        const keys = Object.keys(queues);
+        return (
+            <div>
+                {(queues) ?
                     <ul>
                         {keys.map(k => (
                             <li key={k}>
@@ -22,9 +18,11 @@ export default class QueueSidebarEntries extends React.Component {
                                 <QueueSidebarEntries queues={this.props.queues[k]}/>
                             </li>
                         ))}
-                    </ul>
-                </div>
-            );
-        }
+                    </ul> :
+                    <span>loading queue entry</span>
+                }
+            </div>
+        );
     }
 }
+
