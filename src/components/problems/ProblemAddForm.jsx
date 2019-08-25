@@ -7,7 +7,7 @@ let submit = (values, dispatch, props) => {
     	queue_name: props.queueName,
     	submitted_by: localStorage.getItem('userId'),
     	title: values.title,
-    	description: values.description
+    	content: values.description
     }))
 }
 
