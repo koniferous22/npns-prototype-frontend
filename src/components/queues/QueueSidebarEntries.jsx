@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default class QueueSidebarEntries extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         var {queues} = this.props;
         const keys = Object.keys(queues);

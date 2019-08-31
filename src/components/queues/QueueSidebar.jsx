@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { queueActions } from '../../actions/queue-actions'
 import { appConfig } from '../../appConfig'
 import QueueSidebarEntries from './QueueSidebarEntries'
 

@@ -7,11 +7,9 @@ import Header from "./components/header/Header"
 
 import Register from "./components/register/Register"
 import Login from "./components/login/Login"
-import QueueIndex from "./components/queues/QueueIndex-useless"
 import Profile from "./components/profile/Profile"
 import ProblemIndex from "./components/problems/ProblemIndex"
 import Problem from "./components/problems/Problem"
-import PrivateRoute from "./components/helper/PrivateRoute"
 
 export default class App extends React.Component {
 	render() {

@@ -1,5 +1,4 @@
 import { userConstants } from '../constants/user-constants';
-import { alertActions } from './alert-actions'
 import { appConfig } from '../appConfig'
 
 export const userActions = {
@@ -43,7 +42,6 @@ function login(username, password) {
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user: user } }
     function success(token) { return { type: userConstants.LOGIN_SUCCESS, token: token } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error: error } }
-    function homepage(message) { return { type: userConstants.ALERT_MESSAGE, message: message } }
 }
 
 function logout(token) {
