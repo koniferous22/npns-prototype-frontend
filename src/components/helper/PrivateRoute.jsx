@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state, ownProps) => {
 	return Object.assign(ownProps, {
-		loggedIn: state.login.loggedIn
+		loggedIn: !!state.auth.user
 	});
 }
 

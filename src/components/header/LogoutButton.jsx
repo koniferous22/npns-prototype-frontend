@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
 	return {
-		loggedIn: state.login.loggedIn,
-		token: state.login.token
+		loggedIn: !!state.auth.user,
+		token: state.auth.token
 	}
 }
 

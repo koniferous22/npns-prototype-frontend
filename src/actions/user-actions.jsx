@@ -1,4 +1,4 @@
-import { userConstants } from '../constants/user-constants';
+import { authConstants } from '../constants/auth';
 import { appConfig } from '../appConfig'
 
 export const userActions = {
@@ -39,9 +39,9 @@ function login(username, password) {
         })
     };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user: user } }
-    function success(token) { return { type: userConstants.LOGIN_SUCCESS, token: token } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error: error } }
+    function request(user) { return { type: authConstants.LOGIN_REQUEST, user: user } }
+    function success(token) { return { type: authConstants.LOGIN_SUCCESS, token: token } }
+    function failure(error) { return { type: authConstants.LOGIN_FAILURE, error: error } }
 }
 
 function logout(token) {
@@ -50,7 +50,7 @@ function logout(token) {
     fetch(appConfig.backendUrl + "/logout?token=" + token,{
         method: 'GET',
     });
-    return { type: userConstants.LOGOUT };
+    return { type: authConstants.LOGOUT };
 }
 
 function register(user) {
@@ -78,8 +78,8 @@ function register(user) {
         })
     }
     
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+    function request(user) { return { type: authConstants.REGISTER_REQUEST, user } }
+    function success(user) { return { type: authConstants.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: authConstants.REGISTER_FAILURE, error } }
     
 }
