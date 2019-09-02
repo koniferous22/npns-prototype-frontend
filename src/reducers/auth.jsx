@@ -1,10 +1,7 @@
 import { authConstants } from '../constants/auth'
 
 const initialState = { }
-
-/*
-waiting:
-*/
+//const user = localStorage.getItem('user');
 
 export function auth(state = initialState, action) {
 	switch (action.type) {
@@ -15,11 +12,12 @@ export function auth(state = initialState, action) {
 			};
 		case authConstants.LOGIN_SUCCESS:
 			return {
-				user: action.user,
+				user: action.user,/*localStorage.getItem('user'),*/
 				token: action.token
 				// possibly redirect here
 			};
-		case authConstants.LOGIN_FAILURE:
+		// parse if status was 401, then print this, other set new state for server errorz
+		case authConstants.LOGIN_INVALID_CREDENTIALS:
 			return {
 				message: 'Invalid credentials'
 			};

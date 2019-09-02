@@ -1,9 +1,9 @@
 import React from 'react'
-import { userActions } from '../../actions/user-actions'
+import { registrationActions } from '../../actions/registration'
 import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
-    dispatch(userActions.register({
+    dispatch(registrationActions.signup({
     	username: values.username,
     	password: values.password,
     	email: values.email,

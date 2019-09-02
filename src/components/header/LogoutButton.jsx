@@ -1,5 +1,5 @@
 import React from 'react'
-import { userActions } from '../../actions/user-actions'
+import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		logout: token => {
-			dispatch(userActions.logout(token))
+			dispatch(authActions.logout(token))
 		}
 	}
 }

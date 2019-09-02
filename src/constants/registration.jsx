@@ -1,0 +1,5 @@
+export const registrationConstants = {
+	REQUEST: 'REGISTRATION_REQUEST',
+    SUCCESS: 'REGISTRATION_SUCCESS',
+    FAILED: 'REGISTRATION_FAILED'
+};
