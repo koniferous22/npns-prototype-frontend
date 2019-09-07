@@ -46,7 +46,7 @@ const Unregistered = [
 	}
 ]
 
-const Header = connect(mapStateToProps)(({loggedIn}) => {
+const Header = connect(mapStateToProps)(({loggedIn, logout}) => {
 	return loggedIn ? (
 		<div>
 			<ul>
@@ -61,7 +61,7 @@ const Header = connect(mapStateToProps)(({loggedIn}) => {
 					</li>
 				))}
 			</ul>
-			<LogoutButton/>
+			<LogoutButton loggedIn={true} logout={logout}/>
 		</div>
 	) : (
 		<div>

@@ -1,9 +1,9 @@
 import { authConstants } from '../constants/auth'
 
-const initialState = { }
+const initialState = { token: localStorage.getItem('token') || undefined }
 //const user = localStorage.getItem('user');
 
-export function auth(state = initialState, action) {
+export function authReducer(state = initialState, action) {
 	switch (action.type) {
 		case authConstants.LOGIN_REQUEST:
 			return {
@@ -13,8 +13,8 @@ export function auth(state = initialState, action) {
 		case authConstants.LOGIN_SUCCESS:
 			return {
 				user: action.user,/*localStorage.getItem('user'),*/
-				token: action.token
-				// possibly redirect here
+				token: action.token,
+				message: "Welcome"
 			};
 		// parse if status was 401, then print this, other set new state for server errorz
 		case authConstants.LOGIN_INVALID_CREDENTIALS:
@@ -26,11 +26,16 @@ export function auth(state = initialState, action) {
 				message: 'Logged out'
 				// possibly redirect here
 			}
-		case authConstants.TOKEN_VERIFY:
+		case authConstants.TOKEN_VERIFY_REQUEST:
 			return {
-				user: state.user,
 				token: state.token,
-				waiting: true
+				message: 'Re-logging in'
+			}
+		case authConstants.TOKEN_VERIFIED:
+			return {
+				user: action.user,/*localStorage.getItem('user'),*/
+				token: action.token,
+				message: "Logged In"
 			}
 		case authConstants.TOKEN_EXPIRED:
 			return {

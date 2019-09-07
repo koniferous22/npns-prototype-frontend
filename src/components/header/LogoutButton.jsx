@@ -1,5 +1,5 @@
 import React from 'react'
-import { authActions } from '../../actions/auth'
+/*import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
@@ -24,9 +24,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 			dispatchProps.logout(stateProps.token)
 		}
 	}
-}
+}*/
 
-const LogoutButton = connect(mapStateToProps, mapDispatchToProps,mergeProps)(({loggedIn,logout}) => {
+const LogoutButton = /*connect(mapStateToProps, mapDispatchToProps,mergeProps)*/(({loggedIn,logout}) => {
 	if (loggedIn) {
 		return <button onClick={logout}>Log out</button>
 	}

@@ -25,7 +25,6 @@ export default class Problems extends React.Component {
 			return response.json()
 		}).then(response => {
 			this.setState({problemz:response})
-			console.log(this.state)
 		})
 	}
 	render() {

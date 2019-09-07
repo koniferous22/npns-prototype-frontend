@@ -1,16 +1,14 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
-import { auth } from './auth'
-import { homepageAlert } from './alert'
-import { getAllQueues } from './queue'
-
+import { authReducer } from './auth'
+import { globalReducer } from './global'
 
 const rootReducer = combineReducers({
 	form: formReducer,
-	auth: auth,
-	alert: homepageAlert,
-	queue: getAllQueues
+	auth: authReducer,
+	global: globalReducer
+	//queue: getAllQueues
 })
 
 export default rootReducer

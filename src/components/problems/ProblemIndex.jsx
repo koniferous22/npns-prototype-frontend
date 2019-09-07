@@ -9,7 +9,6 @@ export default class ProblemIndex extends React.Component {
     	// reimplement using redux
 
         var queueName = this.props.location.pathname.split("/")[2]
-        console.log(queueName)
         return (
             <div>
                 <QueueSidebar />
