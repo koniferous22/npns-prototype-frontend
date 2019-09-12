@@ -1,37 +1,27 @@
 import React from 'react';
-import { appConfig } from '../../appConfig'
+import { connect } from 'react-redux'
+
 import QueueSidebarEntries from './QueueSidebarEntries'
+//import { appConfig } from '../../appConfig'
+import { globalActions } from '../../actions/global'
+const mapStateToProps = state => ({
+	hierarchy: state.global.hierarchy
+})
 
-export default class QueueSidebar extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			queues: {}
-		}
-	}
+const mapDispatchToProps = dispatch => ({
+	loadHierarchy: () => dispatch(globalActions.hierarchy())
+})
 
+class QueueSidebar extends React.Component {
 	componentDidMount() {
-		fetch(appConfig.backendUrl + "/queue/hierarchy", {
-			method: 'GET'
-		}).then(response => {
-			if (response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-		}).then(response => {
-			return response.json()
-		}).then(response => {
-			this.setState({queues:response.hierarchy})
-		})
+		this.props.loadHierarchy()
 	}
 	render() {
 		return (
-			<div>
-          <QueueSidebarEntries queues={this.state.queues}/>
-			</div>
+			<QueueSidebarEntries queues={this.props.hierarchy}/>
 		)
 	}
 }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QueueSidebar)

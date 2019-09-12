@@ -14,7 +14,6 @@ import ProblemIndex from "./components/problems/ProblemIndex"
 import Problem from "./components/problems/Problem"
 
 import { authActions } from './actions/auth'
-//import { globalActions } from './actions/global'
 
 const App = (props) => {
 	const loggedIn = !!props.user

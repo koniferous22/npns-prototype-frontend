@@ -1,7 +1,9 @@
 import { globalConstants } from '../constants/global'
+import { appConfig } from '../appConfig'
 
 export const globalActions = {
-	setActiveQueue
+	setActiveQueue,
+    hierarchy
 }
 
 function setActiveQueue(queue) {
@@ -14,8 +16,8 @@ function setActiveQueue(queue) {
 function hierarchy() {
 	return dispatch => {
         dispatch(request())
-        fetch(appConfig.backendUrl + "/hierarchy", {
-            method: 'POST',
+        fetch(appConfig.backendUrl + "/queue/hierarchy", {
+            method: 'GET',
             headers: {
                 'Content-Type'  : 'application/json'/*,
                 'Authorization' : 'Bearer ' + token*/
@@ -32,7 +34,7 @@ function hierarchy() {
         }).then(response => {
             return response.json()
         }).then(response => { 
-            dispatch(success(response))
+            dispatch(success(response.hierarchy))
         }
         ).catch(error => {
             dispatch(failed())
