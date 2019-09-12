@@ -1,62 +1,64 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect, Provider } from 'react-redux'
+import { connect } from 'react-redux'
 
 import Homepage from "./components/home/Homepage"
 import Header from "./components/header/Header"
 
 import PrivateRoute from "./components/auth/PrivateRoute"
 
-import Register from "./components/register/Register"
-import Login from "./components/login/Login"
+import Signup from "./components/signup/Signup"
+import Login from "./components/auth/Login"
 import Profile from "./components/profile/Profile"
 import ProblemIndex from "./components/problems/ProblemIndex"
 import Problem from "./components/problems/Problem"
 
 import { authActions } from './actions/auth'
-import { globalActions } from './actions/global'
+//import { globalActions } from './actions/global'
 
-class App extends React.Component {
-
-	render() {
-		return (
-			<div className='App'>
-				<Router>
-					<Route render={({history}) => {
-						return (
-							<div className='App'>
-								<Header logout={this.props.logout}/>
-								<Route exact path="/" component={ Homepage } />
-								<Route path="/register" component={ Register } />
-								<Route path="/login" component={ Login } />
+const App = (props) => {
+	const loggedIn = !!props.user
+	return (
+		<div className='App'>
+			<Router>
+				<Route render={({history}) => {
+					return (
+						<div className='App'>
+							{
+								// use switch components in case of routing conflicts
+							}
+							<Header logout={props.logout} loggedIn={loggedIn}/>
+							<Route exact path="/" render={() => <Homepage />} />
+							<Route path="/signup" component={ Signup } />
+							<Route path="/login" render={() => <Login loggedIn={loggedIn}/>} />
+							<Route path="/q/:id" component={ ProblemIndex } activeQueue={props.activeQueue}/>
+							<Route path="/problem/:id" component={ Problem } />
+						
 							
-								
-								<PrivateRoute path="/profile" component={ Profile } verify={this.props.verify} token={this.props.token} loggedIn={!!this.props.user}/>
-								<Route path="/q/:id" component={ ProblemIndex } />
-								<Route path="/problem/:id" component={ Problem } />
-							</div>
-						);
-					}} />
-								
-				</Router>
-			</div>
-		)
-	}
+							<PrivateRoute path="/profile" render={ () => <Profile /> } loggedIn={loggedIn}/>
+						</div>
+					);
+				}} />
+							
+			</Router>
+		</div>
+	)
 }
 
 const mapStateToProps = (state) => ({
 	// GLOBAL REDUCER
 	activeQueue: state.global.activeQueue,
 	// AUTH REDUCER
-	user: state.auth.user,
-	token: state.auth.token
+	user: state.auth.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
+	// GLOBAL
+	/*setActiveQueue: queue => dispatch(globalActions.setActiveQueue(queue)),*/
+	// AUTH
 	logout: token => dispatch(authActions.logout(token)),
 	login: (username, pwd) => dispatch(authActions.login(username, pwd)),
-	verify: token => dispatch(authActions.verify(token)),
-	...globalActions
+	verify: token => dispatch(authActions.verify(token))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps/*, mergeProps*/)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,7 +1,7 @@
-import { registrationConstants } from '../constants/registration';
-import { appConfig } from '../appConfig'
+import { signupConstants } from '../../constants/signup';
+import { appConfig } from '../../appConfig'
 
-export const registrationActions = {
+export const signupActions = {
     signup
 };
 
@@ -30,8 +30,8 @@ function signup(user) {
         })
     }
     
-    function request(user) { return { type: registrationConstants.REQUEST, user } }
-    function success(user) { return { type: registrationConstants.SUCCESS, user } }
-    function failure(error) { return { type: registrationConstants.FAILURE, error } }
+    function request(user) { return { type: signupConstants.REQUEST, user } }
+    function success(user) { return { type: signupConstants.SUCCESS, user } }
+    function failure(error) { return { type: signupConstants.FAILURE, error } }
     
 }

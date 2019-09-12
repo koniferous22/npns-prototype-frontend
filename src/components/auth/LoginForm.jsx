@@ -23,8 +23,9 @@ let LoginForm = props => {
 
 
 LoginForm = reduxForm({
-	form: 'login',
+	form: 'form',
 	onSubmit: submit,
+	getFormState: ({content}) => content.login
 })(LoginForm)
 
 export default LoginForm

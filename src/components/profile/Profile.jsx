@@ -1,12 +1,7 @@
 import React from 'react';
-//import UserProblems from '../problems/UserProblems'
 
-export default class Profile extends React.Component {
-    render() {
-        return (
-            <div>
-                <p>Your profile</p>
-            </div>
-        );
-    }
-}
+const Profile = (props) => (
+	<p>Your profile</p>
+);
+
+export default Profile;

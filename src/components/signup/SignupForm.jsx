@@ -1,9 +1,9 @@
 import React from 'react'
-import { registrationActions } from '../../actions/registration'
+import { signupActions } from '../../actions/content/signup'
 import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
-    dispatch(registrationActions.signup({
+    dispatch(signupActions.signup({
     	username: values.username,
     	password: values.password,
     	email: values.email,
@@ -12,7 +12,7 @@ let submit = (values, dispatch, props) => {
     }))
 }
 
-let RegistrationForm = props => {
+let SignUpForm = props => {
     const { handleSubmit } = props;
     return (<form onSubmit={handleSubmit}>
         <div>
@@ -39,9 +39,10 @@ let RegistrationForm = props => {
     </form>)
 }
 
-RegistrationForm = reduxForm({
-    form: 'registration',
-    onSubmit: submit
-})(RegistrationForm)
+SignUpForm = reduxForm({
+    form: 'form',
+    onSubmit: submit,
+    getFormState: ({content}) => content.signup.form
+})(SignUpForm)
 
-export default RegistrationForm
+export default SignUpForm

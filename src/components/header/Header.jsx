@@ -1,13 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
-import { connect } from 'react-redux'
 import LogoutButton from "./LogoutButton"
-
-const mapStateToProps = state => {
-	return {
-		loggedIn: !!state.auth.user,
-	}
-}
 
 const Public = [
 	{
@@ -41,12 +34,12 @@ const Unregistered = [
 		label: "Logen"
 	},
 	{
-		to: "/register",
+		to: "/signup",
 		label: "Regooster"
 	}
 ]
 
-const Header = connect(mapStateToProps)(({loggedIn, logout}) => {
+const Header = ({loggedIn, logout}) => {
 	return loggedIn ? (
 		<div>
 			<ul>
@@ -79,6 +72,6 @@ const Header = connect(mapStateToProps)(({loggedIn, logout}) => {
 			</ul>
 		</div>
 	);
-})
+}
 
 export default Header
