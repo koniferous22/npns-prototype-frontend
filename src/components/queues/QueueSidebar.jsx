@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import QueueSidebarEntries from './QueueSidebarEntries'
-//import { appConfig } from '../../appConfig'
 import { globalActions } from '../../actions/global'
 const mapStateToProps = state => ({
 	hierarchy: state.global.hierarchy

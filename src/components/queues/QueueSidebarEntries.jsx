@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 
 const QueueSidebarEntries = ({queues}) => {
     const keys = Object.keys(queues);
@@ -6,7 +7,7 @@ const QueueSidebarEntries = ({queues}) => {
         <ul>
             {keys.map(k => (
                 <li key={k}>
-                    {k}
+                    <Link to={'/q/' + k}>{k}</Link>    
                     <QueueSidebarEntries queues={queues[k]}/>
                 </li>
             ))}

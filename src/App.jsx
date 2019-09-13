@@ -17,6 +17,9 @@ import { authActions } from './actions/auth'
 
 const App = (props) => {
 	const loggedIn = !!props.user
+	const activeQueue = props.activeQueue
+	console.log('App props')
+	console.log(props)
 	return (
 		<div className='App'>
 			<Router>
@@ -30,7 +33,10 @@ const App = (props) => {
 							<Route exact path="/" render={() => <Homepage />} />
 							<Route path="/signup" component={ Signup } />
 							<Route path="/login" render={() => <Login loggedIn={loggedIn}/>} />
-							<Route path="/q/:id" component={ ProblemIndex } activeQueue={props.activeQueue}/>
+							{
+								//component={ ProblemIndex } activeQueue={props.activeQueue}
+							}
+							<Route path="/q/:name" render={(props) => <ProblemIndex queue={props.match.params.name} />} />
 							<Route path="/problem/:id" component={ Problem } />
 						
 							
@@ -56,8 +62,8 @@ const mapDispatchToProps = (dispatch) => ({
 	/*setActiveQueue: queue => dispatch(globalActions.setActiveQueue(queue)),*/
 	// AUTH
 	logout: token => dispatch(authActions.logout(token)),
-	login: (username, pwd) => dispatch(authActions.login(username, pwd)),
-	verify: token => dispatch(authActions.verify(token))
+	login: (username, pwd) => dispatch(authActions.login(username, pwd))/*,
+	verify: token => dispatch(authActions.verify(token))*/
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
