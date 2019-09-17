@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
     dispatch(problemActions.add({
-    	queue_name: props.queueName,
+    	queue_name: props.queue,
     	submitted_by: localStorage.getItem('userId'),
     	title: values.title,
     	content: values.description
@@ -27,8 +27,9 @@ let ProblemAddForm = props => {
 }
 
 ProblemAddForm = reduxForm({
-    form: 'problemAdd',
-    onSubmit: submit
+    form: 'form',
+    onSubmit: submit,
+    getFormState: ({content}) => content.submitProblem
 })(ProblemAddForm)
 
 export default ProblemAddForm

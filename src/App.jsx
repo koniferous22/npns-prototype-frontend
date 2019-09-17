@@ -10,7 +10,8 @@ import PrivateRoute from "./components/auth/PrivateRoute"
 import Signup from "./components/signup/Signup"
 import Login from "./components/auth/Login"
 import Profile from "./components/profile/Profile"
-import ProblemIndex from "./components/problems/ProblemIndex"
+//import ProblemIndex from "./components/problems/ProblemIndex"
+import QueuePage from "./components/queues/QueuePage"
 import Problem from "./components/problems/Problem"
 
 import { authActions } from './actions/auth'
@@ -18,8 +19,6 @@ import { authActions } from './actions/auth'
 const App = (props) => {
 	const loggedIn = !!props.user
 	const activeQueue = props.activeQueue
-	console.log('App props')
-	console.log(props)
 	return (
 		<div className='App'>
 			<Router>
@@ -36,7 +35,7 @@ const App = (props) => {
 							{
 								//component={ ProblemIndex } activeQueue={props.activeQueue}
 							}
-							<Route path="/q/:name" render={(props) => <ProblemIndex queue={props.match.params.name} />} />
+							<Route path="/q/:name" render={() => <QueuePage queue={activeQueue} />} />
 							<Route path="/problem/:id" component={ Problem } />
 						
 							

@@ -1,5 +1,5 @@
 import { appConfig } from '../../appConfig'
-import { problemConstants } from '../../constants/problem-constants';
+import { problemConstants } from '../../constants/content/problem';
 
 export const problemActions = {
     add
