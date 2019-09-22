@@ -6,7 +6,8 @@ function setActivePage(queue,pageIndex) {
 	const request = (queue, activePage) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_REQUEST, activePage, queue })
 	const success = (queue, activePage, data, hasMore) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, queue, hasMore })
 	const failure = (queue, message) => ({ type: queuePageConstants.NETWORK_ERROR, message, queue })
-	return dispatch => {
+
+    return dispatch => {
 		dispatch(request(queue, pageIndex));
 		var requestUrl = appConfig.backendUrl + "/queue/" + queue + "/problems"
 		requestUrl = (pageIndex && pageIndex > 0) ? requestUrl + "?page=" + pageIndex : requestUrl
@@ -35,14 +36,14 @@ function setActivePage(queue,pageIndex) {
             dispatch(failure(queue, error))
         })
 	}
-
-
 }
 
-function setActiveEntry(activePage, activeEntry) {
+
+function setActiveEntry(queue, activePage, activeEntry) {
 	return {
 		type: queuePageConstants.SET_ACTIVE_ENTRY,
-		activePage,
+		queue,
+        activePage,
 		activeEntry
 	}
 }

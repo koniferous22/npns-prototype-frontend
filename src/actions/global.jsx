@@ -2,15 +2,7 @@ import { globalConstants } from '../constants/global'
 import { appConfig } from '../appConfig'
 
 export const globalActions = {
-	setActiveQueue,
     hierarchy
-}
-
-function setActiveQueue(queue) {
-	return {
-		type: globalConstants.SET_ACTIVE_QUEUE,
-		activeQueue: queue
-	}
 }
 
 function hierarchy() {

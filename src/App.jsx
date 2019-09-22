@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 
 import Homepage from "./components/home/Homepage"
@@ -10,15 +10,13 @@ import PrivateRoute from "./components/auth/PrivateRoute"
 import Signup from "./components/signup/Signup"
 import Login from "./components/auth/Login"
 import Profile from "./components/profile/Profile"
-//import ProblemIndex from "./components/problems/ProblemIndex"
-import QueuePage from "./components/queues/QueuePage"
-import Problem from "./components/problems/Problem"
+import QueuePage from "./components/queue/QueuePage"
+import Problem from "./components/problem/Problem"
 
 import { authActions } from './actions/auth'
 
 const App = (props) => {
 	const loggedIn = !!props.user
-	const activeQueue = props.activeQueue
 	return (
 		<div className='App'>
 			<Router>
@@ -35,7 +33,7 @@ const App = (props) => {
 							{
 								//component={ ProblemIndex } activeQueue={props.activeQueue}
 							}
-							<Route path="/q/:name" render={() => <QueuePage queue={activeQueue} />} />
+							<Route path="/q/:name" render={(props) => <QueuePage queue={props.match.params.name} />} />
 							<Route path="/problem/:id" component={ Problem } />
 						
 							
@@ -50,8 +48,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-	// GLOBAL REDUCER
-	activeQueue: state.global.activeQueue,
 	// AUTH REDUCER
 	user: state.auth.user
 })

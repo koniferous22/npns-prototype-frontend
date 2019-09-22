@@ -1,4 +1,5 @@
 import { queuePageConstants } from '../../constants/content/queuePage'
+import { globalConstants } from '../../constants/global'
 
 const defaultQueueState = {
 	entries: [],
@@ -10,22 +11,23 @@ const defaultQueueState = {
 const defaultState = {}
 
 function singleQueueReducer(state = defaultQueueState, action) {
-	const activePage = (!action.activePage || action.activePage <= 0) ? 0 : action.activePage
+	const activePage = (!action.activePage || action.activePage <= 1) ? 1 : action.activePage
 	switch (action.type) {
 		case queuePageConstants.SET_ACTIVE_PAGE_REQUEST:
 			return {
 				entries: state.entries,
 				active: {
-					page: activePage
+					page: state.active.page
 				}
 			}
 		case queuePageConstants.SET_ACTIVE_PAGE_SUCCESS:
 			const newEntries = state.entries
-			newEntries[activePage] = action.data
+			newEntries[activePage - 1] = action.data
 			return {
-				entries: newEntries.slice(activePage),
+				entries: newEntries.slice(0,activePage),
 				active: {
-					page: activePage
+					// If there was no data, dont update
+					page: (action.data && action.data.length > 0) ? activePage : state.active.page
 				},
 				hasMore: action.hasMore
 			}
@@ -48,8 +50,10 @@ function singleQueueReducer(state = defaultQueueState, action) {
 }
 
 export default function queuePageReducer(state = defaultState, action) {
-	console.log('ACTION')
-	console.log(action)
-	state[action.queue] = singleQueueReducer(state[action.queue] || defaultQueueState, action)
-	return state
+	// tried to solve this for 5 hours, when state is modified directly redux does not detect change :)
+	const newState = {...state}
+	if (action.queue) {
+		newState[action.queue] = singleQueueReducer(state[action.queue] || defaultQueueState, action)	
+	}
+	return newState
 }

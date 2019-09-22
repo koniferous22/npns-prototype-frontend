@@ -8,7 +8,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	setActiveQueue: queue => dispatch(globalActions.setActiveQueue(queue)),
 	loadHierarchy: () => dispatch(globalActions.hierarchy())
 
 })
@@ -19,7 +18,7 @@ class QueueSidebar extends React.Component {
 	}
 	render() {
 		return (
-			<QueueSidebarEntries queues={this.props.hierarchy} setActiveQueue={this.props.setActiveQueue}/>
+			<QueueSidebarEntries queues={this.props.hierarchy} />
 		)
 	}
 }
