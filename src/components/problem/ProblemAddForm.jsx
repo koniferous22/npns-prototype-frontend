@@ -1,5 +1,5 @@
 import React from 'react'
-import { problemActions } from '../../actions/content/problem'
+import { problemActions } from '../../actions/content/problemAddForm'
 import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {

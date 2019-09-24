@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from 'react-redux'
 
 import Homepage from "./components/home/Homepage"
@@ -30,11 +30,8 @@ const App = (props) => {
 							<Route exact path="/" render={() => <Homepage />} />
 							<Route path="/signup" component={ Signup } />
 							<Route path="/login" render={() => <Login loggedIn={loggedIn}/>} />
-							{
-								//component={ ProblemIndex } activeQueue={props.activeQueue}
-							}
 							<Route path="/q/:name" render={(props) => <QueuePage queue={props.match.params.name} />} />
-							<Route path="/problem/:id" component={ Problem } />
+							<Route path="/problem/:id" render={ () => <Problem /> } />
 						
 							
 							<PrivateRoute path="/profile" render={ () => <Profile /> } loggedIn={loggedIn}/>

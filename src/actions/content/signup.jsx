@@ -1,4 +1,4 @@
-import { signupConstants } from '../../constants/signup';
+import { signupConstants } from '../../constants/content/signUpPage';
 import { appConfig } from '../../appConfig'
 
 export const signupActions = {

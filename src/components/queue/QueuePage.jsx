@@ -2,13 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
-import { withRouter } from "react-router"
 
 import { queuePageActions } from '../../actions/content/queuePage'
 
 import QueueSidebar from './QueueSidebar'
-import ProblemAddForm from '../problems/ProblemAddForm'
-
+//import ProblemAddForm from '../problem/ProblemAddForm'
 //import ProblemBoxes from './QueuePage/ProblemBoxes'
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,17 +15,16 @@ const mapStateToProps = (state, ownProps) => {
 	if (!queueState) {
 		return {
 			entries: [],
-			active: {
-				page: 0
+			paging: {
+				page: 0,
+				hasMore: true
 			},
-			hasMore: true,
 			queue: queue
 		}
 	}
 	return {
 		entries: queueState.entries.reduce((acc, cv) => acc.concat(cv),[]),
-		active: queueState.active,
-		hasMore: queueState.hasMore,
+		paging: queueState.paging,
 		queue: queue
 	}
 }
@@ -42,13 +39,14 @@ class QueuePage extends React.Component {
 		return (
 			<div>
 	            <QueueSidebar />
+
 	            <h3>{"Problems of queue: " + this.props.queue}</h3>
 	            <InfiniteScroll
 	            	pageStart={1}
 	            	loadMore={() => {
-	            		this.props.loadPage(this.props.active.page + 1)	
+	            		this.props.loadPage(this.props.paging.page + 1)	
 	            	}}
-				    hasMore={this.props.hasMore}
+				    hasMore={this.props.paging.hasMore}
 				    loader={<div className="loader" key={0}>Loading ...</div>}
 	            >
 	            	<ul>
@@ -59,7 +57,6 @@ class QueuePage extends React.Component {
 					</ul>
 	            </InfiniteScroll>
 				
-	            <button onClick={() => this.props.loadPage(this.props.active.page + 1)} >Load stuff</button>
         	</div>
         );
 	}

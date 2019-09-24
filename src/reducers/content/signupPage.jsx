@@ -1,7 +1,7 @@
 import { reducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import { signupConstants } from '../../constants/signup'
+import { signupConstants } from '../../constants/content/signUpPage'
 
 const initialState = {}
 

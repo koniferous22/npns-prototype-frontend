@@ -1,5 +1,5 @@
 import { appConfig } from '../../appConfig'
-import { problemConstants } from '../../constants/content/problem';
+import { problemPageConstants } from '../../constants/content/problemPage';
 
 export const problemActions = {
     add
@@ -30,8 +30,8 @@ function add(problem) {
         })
     }
     
-    function request(problem) { return { type: problemConstants.ADD_REQUEST, problem } }
-    function success(problem) { return { type: problemConstants.ADD_SUCCESS, problem } }
-    function failure(error) { return { type: problemConstants.ADD_FAILURE, error } }
+    function request(problem) { return { type: problemPageConstants.ADD_REQUEST, problem } }
+    function success(problem) { return { type: problemPageConstants.ADD_SUCCESS, problem } }
+    function failure(error) { return { type: problemPageConstants.ADD_FAILURE, error } }
     
 }
