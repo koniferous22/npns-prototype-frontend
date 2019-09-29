@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+//
 import { connect } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { queuePageActions } from '../../actions/content/queuePage'
 
 import QueueSidebar from './QueueSidebar'
-//import ProblemAddForm from '../problem/ProblemAddForm'
-//import ProblemBoxes from './QueuePage/ProblemBoxes'
+import { ProblemBox } from './QueuePage/ProblemBox'
 
 const mapStateToProps = (state, ownProps) => {
 	const queue = ownProps.queue
@@ -52,7 +51,7 @@ class QueuePage extends React.Component {
 	            	<ul>
 					{
 						this.props.entries.map((p,index) => (
-							<li key={index}><Link to={{pathname: "/problem/" + p._id, id: p._id}}>{p.title}</Link></li>
+							<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
 					))}
 					</ul>
 	            </InfiniteScroll>

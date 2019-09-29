@@ -10,7 +10,7 @@ function setActivePage(queue,pageIndex) {
     return dispatch => {
 		dispatch(request(queue, pageIndex));
 		var requestUrl = appConfig.backendUrl + "/queue/" + queue + "/problems"
-		requestUrl = (pageIndex && pageIndex > 0) ? requestUrl + "?page=" + pageIndex : requestUrl
+		requestUrl += (pageIndex && pageIndex > 0) ? "?page=" + pageIndex : ""
 		fetch(requestUrl, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
@@ -24,13 +24,7 @@ function setActivePage(queue,pageIndex) {
                 throw error
             }
         }).then(response => response.json())
-        .then(body => {
-            console.log({
-                activePage: pageIndex,
-                data: body.data,
-                hasMore: body.hasMore
-            })
-        
+        .then(body => {        
             dispatch(success(queue, pageIndex, body.data, body.hasMore))
         }).catch(error => {
             dispatch(failure(queue, error))

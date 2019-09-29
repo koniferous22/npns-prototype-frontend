@@ -33,7 +33,11 @@ function singleQueueReducer(state = defaultQueueState, action) {
 			}
 		case queuePageConstants.NETWORK_ERROR:
 			return {
-				message: action.message
+				message: action.message,
+				paging: {
+					...state.paging,
+					hasMore: false
+				}
 			}
 		case queuePageConstants.SET_ACTIVE_ENTRY:
 			return {

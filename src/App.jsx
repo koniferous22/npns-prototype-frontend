@@ -11,7 +11,7 @@ import Signup from "./components/signup/Signup"
 import Login from "./components/auth/Login"
 import Profile from "./components/profile/Profile"
 import QueuePage from "./components/queue/QueuePage"
-import Problem from "./components/problem/Problem"
+import ProblemPage from "./components/problem/ProblemPage"
 
 import { authActions } from './actions/auth'
 
@@ -25,13 +25,14 @@ const App = (props) => {
 						<div className='App'>
 							{
 								// use switch components in case of routing conflicts
+								// user={props.user}
 							}
 							<Header logout={props.logout} loggedIn={loggedIn}/>
 							<Route exact path="/" render={() => <Homepage />} />
 							<Route path="/signup" component={ Signup } />
 							<Route path="/login" render={() => <Login loggedIn={loggedIn}/>} />
-							<Route path="/q/:name" render={(props) => <QueuePage queue={props.match.params.name} />} />
-							<Route path="/problem/:id" render={ () => <Problem /> } />
+							<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
+							<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={props.token} problemId={routeProps.match.params.id}/>} />
 						
 							
 							<PrivateRoute path="/profile" render={ () => <Profile /> } loggedIn={loggedIn}/>
@@ -46,7 +47,8 @@ const App = (props) => {
 
 const mapStateToProps = (state) => ({
 	// AUTH REDUCER
-	user: state.auth.user
+	user: state.auth.user,
+	token: state.auth.token
 })
 
 const mapDispatchToProps = (dispatch) => ({

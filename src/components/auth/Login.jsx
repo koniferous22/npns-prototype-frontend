@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import LoginForm from './LoginForm'
 
 const Login = ({loggedIn, ...rest}) => {
-	console.log(rest)
 	return (loggedIn === true) ? <Redirect to="/"/> : <LoginForm />
 }
 
