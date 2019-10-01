@@ -65,7 +65,6 @@ function logout(token) {
 function verify(token) {
     return dispatch => {
         dispatch(request(token))
-        //console.log('fetching')
         fetch(appConfig.backendUrl + "/verifyLogin", {
             method: 'POST',
             headers: {
@@ -74,7 +73,6 @@ function verify(token) {
             }
             
         }).then(response => {
-            //console.log('parsing status code')
             if (response.status >= 200 && response.status < 400) {
                 return response
             } else {
@@ -83,7 +81,6 @@ function verify(token) {
                 throw error;
             }
         }).then(response => {
-            //console.log('parsing json')
             return response.json()
         }).then(response => { 
             dispatch(success(response.user, response.token))
