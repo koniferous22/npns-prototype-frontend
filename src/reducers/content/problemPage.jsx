@@ -30,6 +30,7 @@ function problemPageReducer(state = defaultState, action) {
 		return undefined;
 	}
 	const transformEntries = (entries) => {
+		entries = entries ? entries : []
 		const transformed_entries = {}
 		entries.forEach(entry => {
 			transformed_entries[entry._id] = {...entry, _id:undefined}
