@@ -47,7 +47,7 @@ class App extends React.Component {
 								<Header logout={this.props.logout} loggedIn={loggedIn}/>
 								<Route exact path="/" render={() => <Homepage />} />
 								<Route path="/signup" component={ Signup } />
-								<Route path="/login" render={() => <Login loggedIn={loggedIn}/>} />
+								<Route path="/login" render={(routeProps) => <Login loggedIn={loggedIn} redirect={routeProps.location.state.from}/>} />
 								<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 								<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 							

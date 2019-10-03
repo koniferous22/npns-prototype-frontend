@@ -3,6 +3,7 @@ import { /*Route,*/ Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 
 import { authActions } from '../../actions/auth'
+import history from '../../history'
 
 class Auth extends React.Component {
 	componentDidMount() {
@@ -17,7 +18,7 @@ class Auth extends React.Component {
 			<Redirect
 				to={{
 					pathname: "/login",
-					state: { from: this.props.location }
+					state: { from: history.location.pathname }
 				}}
 			/>
 		)

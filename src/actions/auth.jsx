@@ -65,7 +65,7 @@ function logout(token) {
 function verify(token) {
     return dispatch => {
         dispatch(request(token))
-        fetch(appConfig.backendUrl + "/verifyLogin", {
+        fetch(appConfig.backendUrl + "/verify/login", {
             method: 'POST',
             headers: {
                 'Content-Type'  : 'application/json',

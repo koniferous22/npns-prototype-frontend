@@ -3,12 +3,13 @@ import { Route } from "react-router-dom";
 
 import  Auth from './Auth'
 
-const PrivateRoute = ({loggedIn, component, render, ...rest}) => {
+const PrivateRoute = ({loggedIn, render, ...rest}) => {
+	
 	return (
 		<Route
 			{...rest}
 			render={() => {
-					return <Auth loggedIn={loggedIn} component={component || render} />
+					return <Auth loggedIn={loggedIn} component={render} />
 				}
 			}
 		/>

@@ -28,13 +28,13 @@ export function authReducer(state = initialState, action) {
 			}
 		case authConstants.TOKEN_VERIFY_REQUEST:
 			return {
+				user: state.user, // leave it here, then when accessing private resource, detects as logged out and redirects
 				token: state.token,
 				message: 'Re-logging in'
 			}
 		case authConstants.TOKEN_VERIFIED:
 			return {
-				user: action.user,/*localStorage.getItem('user'),*/
-				//test: !!action.user,
+				user: action.user,
 				token: action.token,
 				message: "Logged In"
 			}
