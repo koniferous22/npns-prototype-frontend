@@ -17,7 +17,6 @@ function login(username, password) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         }).then(response => {
-            //console.log("Hell yeah, status: " + response.status)
             if (response.status >= 200 && response.status < 400){
                 return response
             } else {

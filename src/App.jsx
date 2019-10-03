@@ -13,6 +13,8 @@ import Profile from "./components/profile/Profile"
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
 
+import ConfirmRegistrationPage from "./components/confirm/registration"
+
 import { authActions } from './actions/auth'
 
 class App extends React.Component {
@@ -47,16 +49,16 @@ class App extends React.Component {
 								<Header logout={this.props.logout} loggedIn={loggedIn}/>
 								<Route exact path="/" render={() => <Homepage />} />
 								<Route path="/signup" component={ Signup } />
-								<Route path="/login" render={(routeProps) => <Login loggedIn={loggedIn} redirect={routeProps.location.state.from}/>} />
+								<Route path="/login" render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>} />
 								<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 								<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
-							
-								
+																
 								<PrivateRoute path="/profile" render={ () => <Profile /> } loggedIn={loggedIn}/>
+
+								<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 							</div>
 						);
-					}} />
-								
+					}} />								
 				</Router>
 			</div>
 		)

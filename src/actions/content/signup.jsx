@@ -32,6 +32,6 @@ function signup(user) {
     
     function request(user) { return { type: signupConstants.REQUEST, user } }
     function success(user) { return { type: signupConstants.SUCCESS, user } }
-    function failure(error) { return { type: signupConstants.FAILURE, error } }
+    function failure(error) { return { type: signupConstants.FAILED, error } }
     
 }
