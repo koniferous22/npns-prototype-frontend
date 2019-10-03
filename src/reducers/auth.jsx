@@ -1,6 +1,7 @@
 import { authConstants } from '../constants/auth'
 
-const initialState = { token: localStorage.getItem('token').replace(new RegExp('"(.*)"'),(match, x) => x) }
+const token = localStorage.getItem('token')
+const initialState = { token: token || token === "" ? token.replace(new RegExp('"(.*)"'),(match, x) => x) : null }
 
 export function authReducer(state = initialState, action) {
 	switch (action.type) {
