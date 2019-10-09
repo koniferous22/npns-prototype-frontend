@@ -29,7 +29,6 @@ function singleQueueReducer(state = defaultQueueState, action) {
 					page: (action.data && action.data.length > 0) ? activePage : state.paging.page,
 					hasMore: action.hasMore
 				},
-				
 			}
 		case queuePageConstants.NETWORK_ERROR:
 			return {
@@ -37,7 +36,8 @@ function singleQueueReducer(state = defaultQueueState, action) {
 				paging: {
 					...state.paging,
 					hasMore: false
-				}
+				},
+				entries: state.entries
 			}
 		case queuePageConstants.SET_ACTIVE_ENTRY:
 			return {

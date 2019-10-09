@@ -2,53 +2,53 @@ import React from "react";
 import { Link } from "react-router-dom"
 import LogoutButton from "./LogoutButton"
 
-const Public = [
-	{
-		to: "/",
-		label: "Home"
-	},
-	{
-		to: "/q/Index",
-		label: "Problems"
-	}
-]
-const Private = [
-	{
-		to: "/",
-		label: "My Submissions"
-	},
-	{
-		to: "/profile",
-		label: "My Profile"
-	},
+const Header = ({loggedIn, logout, username}) => {
+	const publicStuff = [
+		{
+			to: "/",
+			label: "Home"
+		},
+		{
+			to: "/q/Index",
+			label: "Problems"
+		}
+	]
 
-	{
-		to: "/topsecret",
-		label: "Statistics"
-	}
-]
+	const privateStuff = [
+		{
+			to: "/",
+			label: "My Submissions"
+		},
+		{
+			to: "/u/" + username,
+			label: "My Profile"
+		},
 
-const Unregistered = [
-	{
-		to: "/login",
-		label: "Logen"
-	},
-	{
-		to: "/signup",
-		label: "Regooster"
-	}
-]
+		{
+			to: "/topsecret",
+			label: "Statistics"
+		}
+	]	
+	const unregisteredStuff = [
+		{
+			to: "/login",
+			label: "Logen"
+		},
+		{
+			to: "/signup",
+			label: "Regooster"
+		}
+	]
 
-const Header = ({loggedIn, logout}) => {
 	return loggedIn ? (
 		<div>
 			<ul>
-				{Public.map((o,index) => (
+				{publicStuff.map((o,index) => (
 					<li key={index}>
 						<Link to={o.to}>{o.label}</Link>	
 					</li>
 				))}
-				{Private.map((o,index) => (
+				{privateStuff.map((o,index) => (
 					<li key={index}>
 						<Link to={o.to}>{o.label}</Link>	
 					</li>
@@ -59,12 +59,12 @@ const Header = ({loggedIn, logout}) => {
 	) : (
 		<div>
 			<ul>
-				{Public.map((o,index) => (
+				{publicStuff.map((o,index) => (
 					<li key={index}>
 						<Link to={o.to}>{o.label}</Link>	
 					</li>
 				))}
-				{Unregistered.map((o,index) => (
+				{unregisteredStuff.map((o,index) => (
 					<li key={index}>
 						<Link to={o.to}>{o.label}</Link>	
 					</li>

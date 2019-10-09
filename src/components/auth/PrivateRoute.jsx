@@ -8,8 +8,8 @@ const PrivateRoute = ({loggedIn, render, ...rest}) => {
 	return (
 		<Route
 			{...rest}
-			render={() => {
-					return <Auth loggedIn={loggedIn} component={render} />
+			render={(routeProps) => {
+					return <Auth loggedIn={loggedIn} component={() => render(routeProps)} />
 				}
 			}
 		/>
