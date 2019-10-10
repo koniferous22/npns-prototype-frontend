@@ -9,7 +9,7 @@ import PrivateRoute from "./components/auth/PrivateRoute"
 
 import Signup from "./components/signup/Signup"
 import Login from "./components/auth/Login"
-import Profile from "./components/profile/Profile"
+import ProfilePage from "./components/profile/ProfilePage"
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
 
@@ -55,7 +55,7 @@ class App extends React.Component {
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 																	
 									<Route path="/u/:username" render={ 
-										(routeProps) => <Profile 
+										(routeProps) => <ProfilePage 
 											viewer={this.props.user ? this.props.user.username : null}
 											user={routeProps.match.params.username}
 											loggedIn={loggedIn}

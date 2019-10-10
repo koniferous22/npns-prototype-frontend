@@ -4,6 +4,10 @@ import { Link } from "react-router-dom"
 const ProfileSidebar = (props) => {
 	const Routes = [
 		{
+			to: "/",
+			label: "My profile page"
+		},
+		{
 			to: "/personal",
 			label: "Personal Information"
 		},
