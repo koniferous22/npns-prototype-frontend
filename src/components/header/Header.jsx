@@ -16,14 +16,13 @@ const Header = ({loggedIn, logout, username}) => {
 
 	const privateStuff = [
 		{
-			to: "/",
+			to: "/u/" + username + "/activity",
 			label: "My Submissions"
 		},
 		{
 			to: "/u/" + username,
 			label: "My Profile"
 		},
-
 		{
 			to: "/topsecret",
 			label: "Statistics"

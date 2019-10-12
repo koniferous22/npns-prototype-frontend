@@ -3,7 +3,7 @@ import ProfileSidebar from './ProfileSidebar'
 
 const TranscationPage = (props) => (
 	<div>
-		<ProfileSidebar baseUrl={'/u/' + props.user} />
+		<ProfileSidebar baseUrl={'/u/' + props.user} auth_view/>
 		Transactionsssss
 	</div>
 )

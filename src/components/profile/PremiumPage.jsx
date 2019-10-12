@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const PremiumPage = (props) => (<div>
-		<ProfileSidebar baseUrl={'/u/' + props.user}/>
+		<ProfileSidebar baseUrl={'/u/' + props.user} auth_view/>
 		{props.text}
 		{props.premiumActive ? <button onClick={() => props.unsubscribe()}>Unsubscribe</button> : <button onClick={() => props.subscribe()}>Subscribe</button>}
 	</div>

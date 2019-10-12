@@ -2,11 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 const ProfileSidebar = (props) => {
-	const Routes = [
-		{
-			to: "/",
-			label: "My profile page"
-		},
+	const privateRoutes = [
 		{
 			to: "/personal",
 			label: "Personal Information"
@@ -20,9 +16,21 @@ const ProfileSidebar = (props) => {
 			label: "Transactions"
 		}
 	]
+	const publicRoutes = [
+		{
+			to: "/",
+			label: (props.auth_view) ? "My profile page" : "Profile page"
+		},
+		{
+			to: "/activity",
+			label: "User Activity"
+		}
+	]
+
+	const routes = (props.auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
 	return (<ul>
 		{
-			Routes.map((entry, index) => (
+			routes.map((entry, index) => (
 				<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
 			))
 		}

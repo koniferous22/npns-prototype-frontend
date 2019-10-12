@@ -14,6 +14,8 @@ import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
 
 import ProfilePage from "./components/profile/ProfilePage"
+import ActivityPage from "./components/profile/ActivityPage"
+
 import PersonalInformationPage from './components/profile/PersonalInformationPage'
 import PremiumPage from './components/profile/PremiumPage'
 import TransactionPage from './components/profile/TransactionPage'
@@ -67,7 +69,12 @@ class App extends React.Component {
 											user={routeProps.match.params.username}
 											loggedIn={loggedIn}
 										/> }/>
-
+									<Route path="/u/:username/activity" render={ 
+										(routeProps) => <ActivityPage 
+											viewer={this.props.user ? this.props.user.username : null}
+											user={routeProps.match.params.username}
+											loggedIn={loggedIn}
+										/> }/>
 									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
