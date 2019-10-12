@@ -42,6 +42,7 @@ const Header = ({loggedIn, logout, username}) => {
 
 	return loggedIn ? (
 		<div>
+			<p>{'Logged in as ' + username}</p>
 			<ul>
 				{publicStuff.map((o,index) => (
 					<li key={index}>
@@ -58,6 +59,7 @@ const Header = ({loggedIn, logout, username}) => {
 		</div>
 	) : (
 		<div>
+			<p>You are not logged in</p>
 			<ul>
 				{publicStuff.map((o,index) => (
 					<li key={index}>

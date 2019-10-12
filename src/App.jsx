@@ -5,13 +5,18 @@ import { connect } from 'react-redux'
 import Homepage from "./components/home/Homepage"
 import Header from "./components/header/Header"
 
-import PrivateRoute from "./components/auth/PrivateRoute"
+//import PrivateRoute from "./components/routes/PrivateRoute"
+import ProfileRoute from "./components/routes/ProfileRoute"
 
 import Signup from "./components/signup/Signup"
 import Login from "./components/auth/Login"
-import ProfilePage from "./components/profile/ProfilePage"
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
+
+import ProfilePage from "./components/profile/ProfilePage"
+import PersonalInformationPage from './components/profile/PersonalInformationPage'
+import PremiumPage from './components/profile/PremiumPage'
+import TransactionPage from './components/profile/TransactionPage'
 
 import ConfirmRegistrationPage from "./components/confirm/registration"
 
@@ -31,6 +36,8 @@ class App extends React.Component {
 
 	render() {
 		const loggedIn = !!this.props.user
+		console.log('APP PROPS')
+		console.log(this.props)
 		return (
 			<div className='App'>
 				<Router>
@@ -38,13 +45,13 @@ class App extends React.Component {
 						return (
 							<div className='App'>
 								{
-									'Redux Token: ' + this.props.token + '\n'
+									//'Redux Token: ' + this.props.token + '\n'
 								}
 								{
-									'Storage Token: ' + localStorage.getItem('token') + '\n'
+									//'Storage Token: ' + localStorage.getItem('token') + '\n'
 								}
 								{
-									'LoggedIn: ' + loggedIn
+									//'LoggedIn: ' + loggedIn
 								}
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>
 								<Switch>
@@ -54,16 +61,20 @@ class App extends React.Component {
 									<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 																	
-									<Route path="/u/:username" render={ 
+									<Route exact path="/u/:username" render={ 
 										(routeProps) => <ProfilePage 
 											viewer={this.props.user ? this.props.user.username : null}
 											user={routeProps.match.params.username}
 											loggedIn={loggedIn}
-										/> } loggedIn={loggedIn}/>
+										/> }/>
+
+									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
+									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
+									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									
-									<Redirect from='/profile' to={'/u/' + ((this.props.user && this.props.user.username) ? this.props.user.username : null)} />
+									<Redirect from='/profile' to={(this.props.user && this.props.user.username) ? '/u/' + this.props.user.username : '/'} />
 								</Switch>
 							</div>
 						);

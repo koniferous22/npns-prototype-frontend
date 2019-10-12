@@ -1,7 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom";
 
-import  Auth from './Auth'
+import  Auth from '../auth/Auth'
 
 const PrivateRoute = ({loggedIn, render, ...rest}) => {
 	
