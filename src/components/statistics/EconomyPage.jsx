@@ -19,16 +19,16 @@ class ProblemPage extends React.Component {
 	componentDidMount() {
 		this.props.hierarchy()
     this.props.loadKarmaValues(this.props.token)
-    console.log('oh boi')
-    console.log(this.props)
+    console.log('karmaValues incoming')
+    console.log(this.props.karmaValues)
   }
 
 	render() {
-    console.log('oh boyzz')
-    console.log(this.props)
 		return (
-      <p>woohoo aspon toto funguje</p>
-		)
+      <div>
+        not working yet, karmaValues are only in console log
+      </div>
+    );
 	}
 }
 

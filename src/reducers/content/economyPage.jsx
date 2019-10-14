@@ -10,20 +10,15 @@ function economyPageReducer(state = defaultState, action) {
 			}
 		case economyPageConstants.LOAD_KARMA_VALUES_SUCCESS:
       var newState = {}
-      var karmaValues = {}
-      for (const set of state) {
-        karmaValues[set.name] = set.karmaValue
-      }
-      newState['karmaValues'] = karmaValues
-			return newState
-			//osetrit null a undefined
+      newState['karmaValues'] = action.data
+      return newState
 		case economyPageConstants.LOAD_KARMA_VALUES_FAILED:
 			return {
-        message: action.message //snad takto + tu mam vratit aj predosly state
+        message: action.message //tu asi este vratit aj predosly state
       }
 		default:
 			return state
 	}
 }
-
+//este osetrit null a undefined
 export default economyPageReducer

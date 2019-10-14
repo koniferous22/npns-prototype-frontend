@@ -2,14 +2,13 @@ import { appConfig } from '../../appConfig'
 import { economyPageConstants } from '../../constants/content/economyPage';
 
 function loadKarmaValues(authToken) {
-  //upravit argumenty a return shit tychto troch funkcii, podla toho ci treba aj ine data...
 	const request = () => ({ type: economyPageConstants.LOAD_KARMA_VALUES_REQUEST })
 	const success = (data) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_SUCCESS, data})
 	const failure = (message) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_FAILED, message })
 
   return dispatch => {
 	dispatch(request());
-	var requestUrl = appConfig.backendUrl + "/queue/economy/karmaValues" //dalej som telo nemenil
+	var requestUrl = appConfig.backendUrl + "/queue/economy/karmaValues"
 	fetch(requestUrl, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken }
