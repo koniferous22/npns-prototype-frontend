@@ -19,6 +19,7 @@ import ActivityPage from "./components/profile/ActivityPage"
 import PersonalInformationPage from './components/profile/PersonalInformationPage'
 import PremiumPage from './components/profile/PremiumPage'
 import TransactionPage from './components/profile/TransactionPage'
+import EconomyPage from "./components/statistics/EconomyPage"
 
 import ConfirmRegistrationPage from "./components/confirm/registration"
 
@@ -71,6 +72,7 @@ class App extends React.Component {
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									
 									<Redirect from='/profile' to={(this.props.user && this.props.user.username) ? '/u/' + this.props.user.username : '/'} />
+									<Route path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
 								</Switch>
 							</div>
 						);
