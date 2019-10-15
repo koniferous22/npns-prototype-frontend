@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom"
 
 import { economyPageActions } from '../../actions/content/economyPage'
 import { globalActions } from '../../actions/global'
@@ -19,16 +20,29 @@ class ProblemPage extends React.Component {
 	componentDidMount() {
 		this.props.hierarchy()
     this.props.loadKarmaValues(this.props.token)
-    console.log('karmaValues incoming')
-    console.log(this.props.karmaValues)
   }
 
 	render() {
-		return (
-      <div>
-        not working yet, karmaValues are only in console log
-      </div>
-    );
+    const karmaValues = this.props.karmaValues
+    if (!karmaValues) {
+	  	return (
+          <p>loading...</p>
+      )
+    }
+    else {
+      return(
+        <div>
+        <ul>
+            {karmaValues.map(q => (
+                <li key={q.name}>
+                    <Link to={'/q/' + q.name}>{q.name}</Link> 
+                    <p>karma value: {q.karmaValue}</p>
+                </li>
+            ))}
+        </ul>
+        </div>
+      )
+    }
 	}
 }
 
