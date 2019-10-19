@@ -3,8 +3,13 @@ import { Route } from "react-router-dom";
 
 import ProfileAccess from '../profile/ProfileAccess'
 
-const ProfileRoute = ({render, viewer, loggedIn, ...rest}) => (
-	<Route 
+const ProfileRoute = ({render, viewer, loggedIn, isPublic, ...rest}) => {
+	return (isPublic) 
+	 ? <Route 
+	 	{...rest}
+	 	render={(routeProps) => render(routeProps)}
+	 />
+	 : <Route 
 		{...rest}
 		render={(routeProps) => <ProfileAccess
 			user={routeProps.match.params.username} 
@@ -13,7 +18,7 @@ const ProfileRoute = ({render, viewer, loggedIn, ...rest}) => (
 			component={() => render(routeProps)}
 			loggedIn={loggedIn}
 		/>}
-	/>
-)
+	/>;
+}
 
 export default ProfileRoute

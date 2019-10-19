@@ -27,6 +27,15 @@ class ProblemPage extends React.Component {
 	}
 
 	render() {
+		if (!this.props.problem) {
+			return (
+				<div>
+					<QueueSidebar />
+					{this.props.message}
+				</div>
+			)
+		}
+
 		// Honestly looked for this bug for 8 hours, when this statement was moved to mapStateToProps, new object is constructed every time, which results in cyclic updating
 		// Great infinite loop :D :D 
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})

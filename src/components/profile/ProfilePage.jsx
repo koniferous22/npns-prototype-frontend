@@ -14,7 +14,6 @@ class ProfilePage extends React.Component {
 		this.props.loadUserData(this.props.user)
 	}
 	render() {
-		console.log(this.props)
 		const base_url = '/u/' + this.props.user
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 

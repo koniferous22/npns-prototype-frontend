@@ -29,7 +29,7 @@ function loadProblemData(problemId) {
         .then(body => {        
             dispatch(success(body))
         }).catch(error => {
-            dispatch(failure(error))
+            dispatch(failure(JSON.stringify(error)))
         })
 	}
 
@@ -59,7 +59,7 @@ function loadSubmissionPage(problemId, activePage) {
         .then(body => {        
             dispatch(success(body.data, body.hasMore))
         }).catch(error => {
-            dispatch(failure(error))
+            dispatch(failure(JSON.stringify(error)))
         })
     }
 }

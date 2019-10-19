@@ -35,6 +35,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class QueuePage extends React.Component {
 	render() {
+		/*
+			no need to solve this if queue doesnt exist, backend returns only empty array
+		*/
 		return (
 			<div>
 	            <QueueSidebar />

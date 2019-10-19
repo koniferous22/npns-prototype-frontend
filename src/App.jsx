@@ -38,23 +38,12 @@ class App extends React.Component {
 
 	render() {
 		const loggedIn = !!this.props.user
-		console.log('APP PROPS')
-		console.log(this.props)
 		return (
 			<div className='App'>
 				<Router>
 					<Route render={({history}) => {
 						return (
 							<div className='App'>
-								{
-									//'Redux Token: ' + this.props.token + '\n'
-								}
-								{
-									//'Storage Token: ' + localStorage.getItem('token') + '\n'
-								}
-								{
-									//'LoggedIn: ' + loggedIn
-								}
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>
 								<Switch>
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />

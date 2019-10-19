@@ -52,6 +52,11 @@ function problemPageReducer(state = defaultState, action) {
 	const submission = (action.submission) ? findContentInEntries(newSubmissionEntries, action.submission) : null
 	switch (action.type) {
 		case problemPageConstants.LOAD_PROBLEM_DATA_FAILED:
+			return {
+				...state,
+				message: action.message,
+				problem: undefined
+			}
 		case problemPageConstants.LOAD_REPLY_PAGE_FAILED:
 		case problemPageConstants.POST_SUBMISSION_FAILED:
 		case problemPageConstants.REPLY_SUBMISSION_FAILED:
