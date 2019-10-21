@@ -24,25 +24,20 @@ class ProblemPage extends React.Component {
 
 	render() {
 		const karmaValues = this.props.karmaValues
-		if (!karmaValues) {
-			return (
-          <p>loading...</p>
-      )
-    }
-    else {
-      return(
-        <div>
-        <ul>
-            {karmaValues.map(q => (
-                <li key={q.name}>
-                    <Link to={'/q/' + q.name}>{q.name}</Link> 
-                    <p>karma value: {q.karmaValue}</p>
-                </li>
-            ))}
-        </ul>
-        </div>
-      )
-    }
+		const message = this.props.message
+		return(
+			<div>
+				{message && message}
+				<ul>
+					{karmaValues && karmaValues.map(q => (
+						<li key={q.name}>
+							<Link to={'/q/' + q.name}>{q.name} </Link> 
+							karma value: { q.karmaValue}
+						</li>
+					))}
+				</ul>
+			</div>
+		)
 	}
 }
 
