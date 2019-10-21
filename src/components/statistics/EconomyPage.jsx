@@ -7,11 +7,11 @@ import { globalActions } from '../../actions/global'
 
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,
-  ...state.content.economyPage
+	...state.content.economyPage
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  loadKarmaValues: (token) => dispatch(economyPageActions.loadKarmaValues(token)),
+	loadKarmaValues: (token) => dispatch(economyPageActions.loadKarmaValues(token)),
 	hierarchy: () => dispatch(globalActions.hierarchy())
 })
 
@@ -19,13 +19,13 @@ class ProblemPage extends React.Component {
 
 	componentDidMount() {
 		this.props.hierarchy()
-    this.props.loadKarmaValues(this.props.token)
-  }
+		this.props.loadKarmaValues(this.props.token)
+	}
 
 	render() {
-    const karmaValues = this.props.karmaValues
-    if (!karmaValues) {
-	  	return (
+		const karmaValues = this.props.karmaValues
+		if (!karmaValues) {
+			return (
           <p>loading...</p>
       )
     }

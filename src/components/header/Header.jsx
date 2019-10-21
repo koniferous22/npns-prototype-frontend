@@ -24,10 +24,10 @@ const Header = ({loggedIn, logout, username}) => {
 			label: "My Profile"
 		},
 		{
-			to: "/topsecret",
+			to: "/statistics/economy",
 			label: "Statistics"
 		}
-	]	
+	]
 	const unregisteredStuff = [
 		{
 			to: "/login",
