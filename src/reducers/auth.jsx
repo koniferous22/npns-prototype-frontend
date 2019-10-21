@@ -7,7 +7,6 @@ export function authReducer(state = initialState, action) {
 	switch (action.type) {
 		case authConstants.LOGIN_REQUEST:
 			return {
-				user: action.user,
 				message: 'Logging in...'
 			};
 		case authConstants.LOGIN_SUCCESS:
@@ -39,6 +38,7 @@ export function authReducer(state = initialState, action) {
 				message: "Logged In"
 			}
 		case authConstants.TOKEN_EXPIRED:
+			localStorage.removeItem('token')
 			return {
 				message: 'Session expired re-log in',
 				token: state.token

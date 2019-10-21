@@ -8,7 +8,7 @@ import Header from "./components/header/Header"
 //import PrivateRoute from "./components/routes/PrivateRoute"
 import ProfileRoute from "./components/routes/ProfileRoute"
 
-import Signup from "./components/signup/Signup"
+import SignUpPage from "./components/signup/SignUpPage"
 import Login from "./components/auth/Login"
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
@@ -47,7 +47,7 @@ class App extends React.Component {
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>
 								<Switch>
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />
-									<Route path="/signup" component={ Signup } />
+									<Route path="/signup" render={() => <SignUpPage/> } />
 									<Route path="/login" render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>} />
 									<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />

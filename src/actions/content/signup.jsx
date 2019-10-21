@@ -2,12 +2,13 @@ import { signupConstants } from '../../constants/content/signUpPage';
 import { appConfig } from '../../appConfig'
 
 export const signupActions = {
-    signup
+    signup,
+    reset
 };
 
 function signup(user) {
     return dispatch => {
-        dispatch(request(user));
+        dispatch(request());
 
         fetch(appConfig.backendUrl + "/signup", {
             method: 'POST',
@@ -26,12 +27,18 @@ function signup(user) {
         .then(user => {
             dispatch(success(user))
         }).catch(error => {
-            dispatch(failure(error))
+            dispatch(failure(JSON.stringify(error)))
         })
     }
     
-    function request(user) { return { type: signupConstants.REQUEST, user } }
-    function success(user) { return { type: signupConstants.SUCCESS, user } }
-    function failure(error) { return { type: signupConstants.FAILED, error } }
+    function request() { return { type: signupConstants.REQUEST } }
+    function success({user}) { return { type: signupConstants.SUCCESS, user } }
+    function failure(message) { return { type: signupConstants.FAILED, message } }
     
+}
+
+function reset() {
+    return {
+        type: signupConstants.RESET
+    }
 }

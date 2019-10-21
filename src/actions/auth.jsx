@@ -62,6 +62,9 @@ function logout(token) {
 }
 
 function verify(token) {
+    if (!token) {
+        return no_token()
+    }
     return dispatch => {
         dispatch(request(token))
         fetch(appConfig.backendUrl + "/verify/login", {
@@ -93,4 +96,5 @@ function verify(token) {
     function request(token) { return { type: authConstants.TOKEN_VERIFY_REQUEST, token }}
     function success(user, token) { return { type: authConstants.TOKEN_VERIFIED, user, token} }
     function token_expired() { return { type: authConstants.TOKEN_EXPIRED } }
+    function no_token() { return {type: authConstants.LOGOUT} }
 }
