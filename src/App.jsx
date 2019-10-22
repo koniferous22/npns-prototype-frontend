@@ -23,6 +23,7 @@ import ActivityPage from "./components/profile/ActivityPage"
 import PersonalInformationPage from './components/profile/PersonalInformationPage'
 import PremiumPage from './components/profile/PremiumPage'
 import TransactionPage from './components/profile/TransactionPage'
+import EconomyPage from "./components/statistics/EconomyPage"
 
 import ConfirmRegistrationPage from "./components/confirm/registration"
 
@@ -73,10 +74,13 @@ class App extends React.Component {
 									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
+									<PrivateRoute path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
+									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
+									
 								</Switch>
 							</div>
 						);
