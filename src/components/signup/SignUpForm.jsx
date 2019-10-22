@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form'
 import renderField from '../form/RenderField'
 import { signupActions } from '../../actions/content/signup'
 
-import { signupConstants } from '../../constants/content/signUpPage';
 import { appConfig } from '../../appConfig'
 
 const submit = (values, dispatch, props) => {
@@ -25,8 +24,8 @@ const validate = values => {
     if (!values.confirmPassword) {
         errors.confirmPassword = 'Required'
     }
-    if (values.confirmPassword != values.password) {
-        errors.confirmPassword = 'Passwords dont match'
+    if (values.confirmPassword !== values.password) {
+        errors.confirmPassword = 'Passwords don\'t match'
     }
     return errors
 }

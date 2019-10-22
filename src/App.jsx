@@ -5,11 +5,15 @@ import { connect } from 'react-redux'
 import Homepage from "./components/home/Homepage"
 import Header from "./components/header/Header"
 
-//import PrivateRoute from "./components/routes/PrivateRoute"
+import PrivateRoute from "./components/routes/PrivateRoute"
+import NonAuthRoute from './components/routes/NonAuthRoute'
 import ProfileRoute from "./components/routes/ProfileRoute"
 
 import SignUpPage from "./components/signup/SignUpPage"
 import Login from "./components/auth/Login"
+import LogoutPage from './components/auth/LogoutPage'
+
+import ForgotPassword from './components/forgotpwd/ForgotPassword'
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
 
@@ -47,8 +51,9 @@ class App extends React.Component {
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>
 								<Switch>
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />
-									<Route path="/signup" render={() => <SignUpPage/> } />
-									<Route path="/login" render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>} />
+									<NonAuthRoute path="/signup" loggedIn={loggedIn} render={() => <SignUpPage/> } />
+									<NonAuthRoute path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
+									<NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
 									<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 																	
@@ -67,10 +72,11 @@ class App extends React.Component {
 									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
-
+									
+									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									
-									<Redirect from='/profile' to={(this.props.user && this.props.user.username) ? '/u/' + this.props.user.username : '/'} />
+									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 								</Switch>
 							</div>
 						);
