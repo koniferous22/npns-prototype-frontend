@@ -1,0 +1,11 @@
+export const forgotPwdConstants = {
+	REQUEST: "FORGOT_PWD_PAGE_REQUEST",
+	SUCCESS: "FORGOT_PWD_PAGE_SUCCESS",
+	FAILURE: "FORGOT_PWD_PAGE_FAILURE",
+	RESET: "FORGOT_PWD_PAGE_RESET"
+}
+
+export const forgotPwdStages = {
+	SUBMITTING_FORM: 0,
+	EMAIL_SENT: 1
+}

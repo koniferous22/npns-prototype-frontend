@@ -9,21 +9,21 @@ function confirm(confirmationToken)  {
 	return dispatch => {
 		dispatch(request())
 		fetch(appConfig.backendUrl + "/verify/registration", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({emailToken: confirmationToken})
-        }).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-            	dispatch(success())
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).catch(error => {
-            // temporary, was testing that, bit bad when rendering
-            dispatch(failure(JSON.stringify(error)))
-        })
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({emailToken: confirmationToken})
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				dispatch(success())
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).catch(error => {
+			// temporary, was testing that, bit bad when rendering
+			dispatch(failure(JSON.stringify(error)))
+		})
 	}
 }
 

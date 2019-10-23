@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import SubmitProblemForm from './SubmitProblemForm'
+import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
 
 const mapStateToProps = (state, ownProps) => ({
 	queue: ownProps.queue,

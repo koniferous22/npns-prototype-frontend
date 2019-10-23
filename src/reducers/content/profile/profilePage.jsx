@@ -14,7 +14,7 @@ const defaultState = {
 function profilePageReducer(state=defaultState, action) {
 	switch(action.type) {
 		case profilePageConstants.LOAD_USER_REQUEST:
-		 	return {...state, message: "Loading data"}
+			return {...state, message: "Loading data"}
 		case profilePageConstants.LOAD_USER_SUCCESS:
 			return {data: action.user || defaultState}
 		case profilePageConstants.LOAD_USER_FAILED:

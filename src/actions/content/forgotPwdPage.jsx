@@ -1,16 +1,16 @@
-import { signupConstants } from '../../constants/content/signUpPage';
+import { forgotPwdConstants } from '../../constants/content/forgotPwdPage';
 import { appConfig } from '../../appConfig'
 
-export const signupActions = {
-	signup,
+export const forgotPwdActions = {
+	forgotPwd,
 	reset
 };
 
-function signup(user) {
+function forgotPwd(user) {
 	return dispatch => {
 		dispatch(request());
 
-		fetch(appConfig.backendUrl + "/signup", {
+		fetch(appConfig.backendUrl + "/passwordReset", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(user)
@@ -31,14 +31,14 @@ function signup(user) {
 		})
 	}
 	
-	function request() { return { type: signupConstants.REQUEST } }
-	function success({user}) { return { type: signupConstants.SUCCESS, user } }
-	function failure(message) { return { type: signupConstants.FAILED, message } }
+	function request() { return { type: forgotPwdConstants.REQUEST } }
+	function success({user}) { return { type: forgotPwdConstants.SUCCESS, user } }
+	function failure(message) { return { type: forgotPwdConstants.FAILED, message } }
 	
 }
 
 function reset() {
 	return {
-		type: signupConstants.RESET
+		type: forgotPwdConstants.RESET
 	}
 }

@@ -40,7 +40,7 @@ class ProblemPage extends React.Component {
 		// Great infinite loop :D :D 
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
 		const submissions = Object.keys(mergedEntries).map((submissionEntry, index) => (
-        		<Submission
+				<Submission
 					id={submissionEntry}
 					key={index}
 					problemOwner={this.props.user && this.props.user._id === this.props.problem.submitted_by}
@@ -51,7 +51,7 @@ class ProblemPage extends React.Component {
 					content={mergedEntries[submissionEntry].content}
 					replyEntries={mergedEntries[submissionEntry].replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})}
 				/>
-    		))
+			))
 		return (
 			<div>
 				<QueueSidebar />
@@ -63,13 +63,13 @@ class ProblemPage extends React.Component {
 					this.props.loggedIn && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
 				}
 				<InfiniteScroll
-		        	pageStart={0}
-		        	loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
-				    hasMore={this.props.paging.hasMore}
-				    loader={<div className="loader" key={0}>Loading ...</div>}
-		        >
-		        	{submissions}
-		        </InfiniteScroll>
+					pageStart={0}
+					loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
+					hasMore={this.props.paging.hasMore}
+					loader={<div className="loader" key={0}>Loading ...</div>}
+				>
+					{submissions}
+				</InfiniteScroll>
 			</div>
 		)
 	}

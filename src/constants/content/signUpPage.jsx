@@ -1,8 +1,8 @@
 export const signupConstants = {
 	REQUEST: 'SIGNUP_REQUEST',
-    SUCCESS: 'SIGNUP_SUCCESS',
-    FAILED: 'SIGNUP_FAILED',
-    RESET: 'SIGNUP_PAGE_RESET'
+	SUCCESS: 'SIGNUP_SUCCESS',
+	FAILED: 'SIGNUP_FAILED',
+	RESET: 'SIGNUP_PAGE_RESET'
 };
 
 export const signupStages = {

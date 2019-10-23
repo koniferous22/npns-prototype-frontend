@@ -15,12 +15,12 @@ export default class Problems extends React.Component {
 			method: 'GET'
 		}).then(response => {
 			if (response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
 		}).then(response => {
 			return response.json()
 		}).then(response => {
@@ -32,10 +32,10 @@ export default class Problems extends React.Component {
 			<div>
 				<p>
 					{this.state.problemz.map(q => (
-                        <li><Link to={{pathname: "/problem/" + q._id, id: q._id}}>{q.title}</Link></li>
+						<li><Link to={{pathname: "/problem/" + q._id, id: q._id}}>{q.title}</Link></li>
 					))}
 				</p>
-    		</div>
+			</div>
 		)
 	}
 }

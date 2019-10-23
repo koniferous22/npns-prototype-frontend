@@ -7,90 +7,90 @@ function loadProblemData(problemId) {
 	const success = (problem) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS, problem})
 	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message})
 
-    if (!problemId) {
-        return dispatch => {}        
-    }
+	if (!problemId) {
+		return dispatch => {}        
+	}
 
 	return dispatch => {
 		dispatch(request())
 		const requestUrl = appConfig.backendUrl + "/problem/" + problemId
 		fetch(requestUrl, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {        
-            dispatch(success(body))
-        }).catch(error => {
-            dispatch(failure(JSON.stringify(error)))
-        })
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {        
+			dispatch(success(body))
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
 	}
 
 }
 
 function loadSubmissionPage(problemId, activePage) {
-    const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST })
-    const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
-    const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message})
+	const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST })
+	const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
+	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message})
 
-    return dispatch => {
-        dispatch(request())
-        var requestUrl = appConfig.backendUrl + "/problem/" + problemId + "/submissions"
-        requestUrl += (activePage && activePage > 0) ? "?page=" + activePage : ""
-        fetch(requestUrl, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {        
-            dispatch(success(body.data, body.hasMore))
-        }).catch(error => {
-            dispatch(failure(JSON.stringify(error)))
-        })
-    }
+	return dispatch => {
+		dispatch(request())
+		var requestUrl = appConfig.backendUrl + "/problem/" + problemId + "/submissions"
+		requestUrl += (activePage && activePage > 0) ? "?page=" + activePage : ""
+		fetch(requestUrl, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {        
+			dispatch(success(body.data, body.hasMore))
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
+	}
 }
 
 function loadReplyPage(submissionId, activePage) {
-    const request = () => ({ type: problemPageConstants.LOAD_REPLY_PAGE_REQUEST })
-    const success = (submission, activeReplyPage, data, hasMore) => ({ type: problemPageConstants.LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
-    const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message})
+	const request = () => ({ type: problemPageConstants.LOAD_REPLY_PAGE_REQUEST })
+	const success = (submission, activeReplyPage, data, hasMore) => ({ type: problemPageConstants.LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
+	const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message})
 
-    return dispatch => {
-        dispatch(request())
-        var requestUrl = appConfig.backendUrl + "/submission/" + submissionId + "/replies"
-        requestUrl += (activePage && activePage > 0) ? "?page=" + activePage : ""
-        fetch(requestUrl, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {        
-            dispatch(success(submissionId, activePage, body.data, body.hasMore))
-        }).catch(error => {
-            dispatch(failure(error))
-        })   
-    }
+	return dispatch => {
+		dispatch(request())
+		var requestUrl = appConfig.backendUrl + "/submission/" + submissionId + "/replies"
+		requestUrl += (activePage && activePage > 0) ? "?page=" + activePage : ""
+		fetch(requestUrl, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' }
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {        
+			dispatch(success(submissionId, activePage, body.data, body.hasMore))
+		}).catch(error => {
+			dispatch(failure(error))
+		})   
+	}
 }
 
 function postSubmission(submission, token) {
@@ -106,19 +106,19 @@ function postSubmission(submission, token) {
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
 			body: JSON.stringify(submission)
 		}).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {
-            dispatch(success(body))
-        }).catch(error => {
-            dispatch(failure(error))
-        })
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {
+			dispatch(success(body))
+		}).catch(error => {
+			dispatch(failure(error))
+		})
 	}
 }
 
@@ -135,19 +135,19 @@ function replySubmission(reply, token) {
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
 			body: JSON.stringify(reply)
 		}).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {        
-            dispatch(success(body.submission, body))
-        }).catch(error => {
-            dispatch(failure(error))
-        })
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {        
+			dispatch(success(body.submission, body))
+		}).catch(error => {
+			dispatch(failure(error))
+		})
 	}
 }
 
@@ -167,35 +167,35 @@ function acceptSubmission(submission, token) {
 				submission: submission._id
 			})
 		}).then(response => {
-            if (response.status >= 200 && response.status < 400) {
-                return response
-            } else {
-                var error = new Error(response.statusText)
-                error.response = response
-                throw error
-            }
-        }).then(response => response.json())
-        .then(body => {        
-            dispatch(success())
-        }).catch(error => {
-            dispatch(failure(error))
-        })	
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {        
+			dispatch(success())
+		}).catch(error => {
+			dispatch(failure(error))
+		})	
 	}
 }
 
 function selectReplyForm(submission) {
-    return {
-        type: problemPageConstants.SELECT_REPLY_FORM,
-        replyForm: submission
-    }
+	return {
+		type: problemPageConstants.SELECT_REPLY_FORM,
+		replyForm: submission
+	}
 }
 
 export const problemPageActions = {
 	loadProblemData,
-    loadSubmissionPage,
-    loadReplyPage,
-    postSubmission,
-    replySubmission,
-    acceptSubmission,
-    selectReplyForm
+	loadSubmissionPage,
+	loadReplyPage,
+	postSubmission,
+	replySubmission,
+	acceptSubmission,
+	selectReplyForm
 }

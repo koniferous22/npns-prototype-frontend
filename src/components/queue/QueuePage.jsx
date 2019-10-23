@@ -41,27 +41,28 @@ class QueuePage extends React.Component {
 		*/
 		return (
 			<div>
-	            <QueueSidebar />
-              <Link to={'/' + this.props.queue + '/submitProblem'}>Submit problem to {this.props.queue} queue</Link>							
-	            <h3>{"Problems of queue: " + this.props.queue}</h3>
-	            <InfiniteScroll
-	            	pageStart={1}
-	            	loadMore={() => {
-	            		this.props.loadPage(this.props.paging.page + 1)	
-	            	}}
-				    hasMore={this.props.paging.hasMore}
-				    loader={<div className="loader" key={0}>Loading ...</div>}
-	            >
-	            	<ul>
+				<QueueSidebar />
+				{'Submit problem '}
+				<Link to={'/q/' + this.props.queue + '/submitProblem'}>here</Link>
+				<h3>{"Problems of queue: " + this.props.queue}</h3>
+				<InfiniteScroll
+					pageStart={1}
+					loadMore={() => {
+						this.props.loadPage(this.props.paging.page + 1) 
+					}}
+					hasMore={this.props.paging.hasMore}
+					loader={<div className="loader" key={0}>Loading ...</div>}
+				>
+					<ul>
 					{
 						this.props.entries.map((p,index) => (
 							<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
 					))}
 					</ul>
-	            </InfiniteScroll>
+				</InfiniteScroll>
 				
-        	</div>
-        );
+			</div>
+		);
 	}
 }
 

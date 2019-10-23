@@ -6,8 +6,8 @@ import ProfileAccess from '../profile/ProfileAccess'
 const ProfileRoute = ({render, viewer, loggedIn, isPublic, ...rest}) => {
 	return (isPublic) 
 	 ? <Route 
-	 	{...rest}
-	 	render={(routeProps) => render(routeProps)}
+		{...rest}
+		render={(routeProps) => render(routeProps)}
 	 />
 	 : <Route 
 		{...rest}
