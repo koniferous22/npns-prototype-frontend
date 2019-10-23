@@ -16,6 +16,7 @@ import LogoutPage from './components/auth/LogoutPage'
 import ForgotPassword from './components/forgotpwd/ForgotPassword'
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
+import SubmitProblemPage from "./components/problem/SubmitProblemPage/SubmitProblemPage"
 
 import ProfilePage from "./components/profile/ProfilePage"
 import ActivityPage from "./components/profile/ActivityPage"
@@ -58,6 +59,8 @@ class App extends React.Component {
 									<Route path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 																	
+									<PrivateRoute path="/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
+
 									<Route exact path="/u/:username" render={ 
 										(routeProps) => <ProfilePage 
 											viewer={this.props.user ? this.props.user.username : null}

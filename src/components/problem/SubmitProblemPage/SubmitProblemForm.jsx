@@ -1,17 +1,20 @@
 import React from 'react'
-import { problemActions } from '../../actions/content/problemAddForm'
+import { submitProblemActions } from '../../../actions/content/submitProblemPage'
 import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
-    dispatch(problemActions.add({
+    dispatch(submitProblemActions.submit({
     	queue_name: props.queue,
-    	submitted_by: localStorage.getItem('userId'),
+    	submitted_by: props.userId,
     	title: values.title,
     	content: values.description
-    }))
+    },
+			props.token
+			)
+		)
 }
 
-let ProblemAddForm = props => {
+let SubmitProblemForm = props => {
     const { handleSubmit } = props;
     return (<form onSubmit={handleSubmit}>
         <div>
@@ -26,10 +29,9 @@ let ProblemAddForm = props => {
     </form>)
 }
 
-ProblemAddForm = reduxForm({
+SubmitProblemForm = reduxForm({
     form: 'form',
-    onSubmit: submit,
-    getFormState: ({content}) => content.submitProblem
-})(ProblemAddForm)
+    onSubmit: submit
+})(SubmitProblemForm)
 
-export default ProblemAddForm
+export default SubmitProblemForm

@@ -2,6 +2,7 @@ import React from 'react';
 //
 import { connect } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from "react-router-dom"
 
 import { queuePageActions } from '../../actions/content/queuePage'
 
@@ -41,7 +42,7 @@ class QueuePage extends React.Component {
 		return (
 			<div>
 	            <QueueSidebar />
-
+              <Link to={'/' + this.props.queue + '/submitProblem'}>Submit problem to {this.props.queue} queue</Link>							
 	            <h3>{"Problems of queue: " + this.props.queue}</h3>
 	            <InfiniteScroll
 	            	pageStart={1}

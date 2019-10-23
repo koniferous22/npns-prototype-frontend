@@ -1,17 +1,17 @@
 import { appConfig } from '../../appConfig'
-import { problemPageConstants } from '../../constants/content/problemPage';
+import { submitProblemPageConstants } from '../../constants/content/submitProblemPage';
 
-export const problemActions = {
-    add
+export const submitProblemActions = {
+    submit
 };
 
-function add(problem) {
+function submit(problem, authToken) {
     return dispatch => {
         dispatch(request(problem));
 
         fetch(appConfig.backendUrl + "/problem/add", {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
             body: JSON.stringify(problem)
         }).then(response => {
             // NOTE: refactor this my friend
@@ -30,8 +30,7 @@ function add(problem) {
         })
     }
     
-    function request(problem) { return { type: problemPageConstants.ADD_REQUEST, problem } }
-    function success(problem) { return { type: problemPageConstants.ADD_SUCCESS, problem } }
-    function failure(error) { return { type: problemPageConstants.ADD_FAILURE, error } }
-    
+    function request(problem) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST, problem } }
+    function success(problem) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS, problem } }
+    function failure(error) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_FAILED, error } }
 }
