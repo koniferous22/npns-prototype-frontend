@@ -11,6 +11,7 @@ import ProfileRoute from "./components/routes/ProfileRoute"
 
 import SignUpPage from "./components/signup/SignUpPage"
 import Login from "./components/auth/Login"
+import LoginPage from "./components/auth/LoginPage"
 import LogoutPage from './components/auth/LogoutPage'
 
 import ForgotPassword from './components/forgotpwd/ForgotPassword'
@@ -54,12 +55,14 @@ class App extends React.Component {
 								<Switch>
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />
 									<NonAuthRoute path="/signup" loggedIn={loggedIn} render={() => <SignUpPage/> } />
-									<NonAuthRoute path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
 									<NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
+									<Route path="/login" loggedIn={loggedIn} render={(routeProps) => <LoginPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
+
 									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
+									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
+									
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
 																	
-									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
 
 									<Route exact path="/u/:username" render={ 
 										(routeProps) => <ProfilePage 
@@ -98,7 +101,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
 	// AUTH REDUCER
 	user: state.auth.user,
-	token: state.auth.token
+	token: state.auth.token,
+	loggingIn: state.auth.loggingIn
 })
 
 const mapDispatchToProps = (dispatch) => ({
