@@ -18,7 +18,7 @@ const forgotPwdPageReducer = (state = defaultState, action) =>  {
 			return {
 				stage: forgotPwdStages.EMAIL_SENT
 			}
-		case forgotPwdConstants.FAILURE:
+		case forgotPwdConstants.FAILED:
 			return {
 				stage: forgotPwdStages.SUBMITTING_FORM,
 				message: action.message

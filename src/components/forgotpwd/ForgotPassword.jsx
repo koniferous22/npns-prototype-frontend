@@ -1,9 +1,12 @@
 import React from 'react'
-import ForgotPasswordForm from './ForgotPasswordForm'
 import { Field, reduxForm } from 'redux-form'
 
+//import ForgotPasswordForm from './ForgotPasswordForm'
+import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
+
+
 const submit = (values, dispatch, props) => {
-	console.log(values.identifier)
+	dispatch(forgotPwdActions.forgotPwd(values.identifier))
 }
 
 const ForgotPassword = props => {
@@ -22,5 +25,5 @@ const ForgotPassword = props => {
 export default reduxForm({
 	form: 'form',
 	onSubmit: submit,
-	getFormState: ({content}) => content.forgotPassword
+	getFormState: ({content}) => content.forgotPwd.form
 })(ForgotPassword)

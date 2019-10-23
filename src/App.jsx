@@ -11,7 +11,6 @@ import ProfileRoute from "./components/routes/ProfileRoute"
 
 import SignUpPage from "./components/signup/SignUpPage"
 import Login from "./components/auth/Login"
-import LoginPage from "./components/auth/LoginPage"
 import LogoutPage from './components/auth/LogoutPage'
 
 import ForgotPassword from './components/forgotpwd/ForgotPassword'
@@ -56,7 +55,7 @@ class App extends React.Component {
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />
 									<NonAuthRoute path="/signup" loggedIn={loggedIn} render={() => <SignUpPage/> } />
 									<NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
-									<Route path="/login" loggedIn={loggedIn} render={(routeProps) => <LoginPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
+									<Route path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
 
 									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>

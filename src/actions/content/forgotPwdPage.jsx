@@ -13,7 +13,7 @@ function forgotPwd(user) {
 		fetch(appConfig.backendUrl + "/passwordReset", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(user)
+			body: JSON.stringify({user})
 		}).then(response => {
 			// NOTE: refactor this
 			if (response.status >= 200 && response.status < 400) {
@@ -25,14 +25,14 @@ function forgotPwd(user) {
 			}
 		}).then(response => response.json())
 		.then(user => {
-			dispatch(success(user))
+			dispatch(success())
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 	
 	function request() { return { type: forgotPwdConstants.REQUEST } }
-	function success({user}) { return { type: forgotPwdConstants.SUCCESS, user } }
+	function success() { return { type: forgotPwdConstants.SUCCESS } }
 	function failure(message) { return { type: forgotPwdConstants.FAILED, message } }
 	
 }
