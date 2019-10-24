@@ -3,6 +3,7 @@ import { appConfig } from '../../appConfig'
 
 export const signupActions = {
 	signup,
+	validateField,
 	reset
 };
 
@@ -35,6 +36,30 @@ function signup(user) {
 	function success({user}) { return { type: signupConstants.SUCCESS, user } }
 	function failure(message) { return { type: signupConstants.FAILED, message } }
 	
+}
+
+// this const should match the const in SignUp Form
+const availableFields = ['username', 'password', 'email']
+
+function validateField(values, field) {
+
+	if (!availableFields.includes(field)) {
+		return new Promise((resolve) => resolve())
+	}
+	return new Promise((resolve, reject) => {
+		fetch(appConfig.backendUrl + "/u/available/" + field, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({[field]: values[field]})
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return resolve()
+			}
+			return response.json().then(data => {
+				return reject({[field]: data.message})
+			})
+		})
+	}) 
 }
 
 function reset() {

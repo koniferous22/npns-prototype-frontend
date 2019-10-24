@@ -32,27 +32,6 @@ const validate = values => {
 
 const asyncBlurFields = ['username', 'password', 'email']
 
-const asyncValidate = (values, dispatch, props, blurredField) => {
-   if (!asyncBlurFields.includes(blurredField)) {
-		return new Promise((resolve) => resolve())
-   }
-   return new Promise((resolve, reject) => {
-		fetch(appConfig.backendUrl + "/u/available/" + blurredField, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({[blurredField]: values[blurredField]})
-		}).then(response => {
-			if (response.status >= 200 && response.status < 400) {
-				return resolve()
-			}
-			return response.json().then(data => {
-				return reject({[blurredField]: data.message})
-			})
-			//return {status: response.status, message: (response.status >= 400) ? response.json() : null}
-		})
-   }) 
-}
-
 const SignUpForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
@@ -69,7 +48,7 @@ const SignUpForm = props => {
 export default reduxForm({
 	form: 'form',
 	validate,
-	asyncValidate,
+	asyncValidate: (values, dispatch, props, blurredField) => signupActions.validateField(values, blurredField),
 	asyncBlurFields,
 	onSubmit: submit,
 	getFormState: ({content}) => content.signup.form
