@@ -16,7 +16,7 @@ export const contentReducer = combineReducers({
 	forgotPwd: forgotPwdReducer,
 	queuePage: queuePageReducer,
 	problemPage: problemPageReducer,
-	submitProblemPage: submitProblemPageReducer,
+	submitProblem: submitProblemPageReducer,
 	economyPage: economyPageReducer,
 	confirm: confirmReducer,
 	profile: profileReducer

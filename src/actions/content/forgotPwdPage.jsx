@@ -24,15 +24,15 @@ function forgotPwd(user) {
 				throw error
 			}
 		}).then(response => response.json())
-		.then(user => {
-			dispatch(success())
+		.then(body => {
+			dispatch(success(body.user))
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 	
 	function request() { return { type: forgotPwdConstants.REQUEST } }
-	function success() { return { type: forgotPwdConstants.SUCCESS } }
+	function success(user) { return { type: forgotPwdConstants.SUCCESS, user } }
 	function failure(message) { return { type: forgotPwdConstants.FAILED, message } }
 	
 }

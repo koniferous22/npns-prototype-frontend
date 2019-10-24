@@ -1,29 +1,30 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
-
-//import ForgotPasswordForm from './ForgotPasswordForm'
-import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
+import { connect } from 'react-redux'
 
 
-const submit = (values, dispatch, props) => {
-	dispatch(forgotPwdActions.forgotPwd(values.identifier))
-}
+import ForgotPasswordForm from './ForgotPasswordForm'
+
+import { forgotPwdStages } from '../../constants/content/forgotPwdPage'
+
+const mapStateToProps = state => state.content.forgotPwd.page
 
 const ForgotPassword = props => {
-	const { handleSubmit } = props;
-	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label htmlFor="identifier">Username or Email</label>
-				<Field name="identifier" component="input" type="text" />
-			</div>
-			<button type="submit">Send pwd reset link</button>
-		</form>
-	)
+	switch (props.stage) {
+		case forgotPwdStages.EMAIL_SENT:
+			return (
+				<div>
+					{props.message}
+				</div>
+				)
+		case forgotPwdStages.SUBMITTING_FORM:
+		default:
+			return (
+				<div>
+					{props.message}
+					<ForgotPasswordForm />
+				</div>
+			)
+	}
 }
 
-export default reduxForm({
-	form: 'form',
-	onSubmit: submit,
-	getFormState: ({content}) => content.forgotPwd.form
-})(ForgotPassword)
+export default connect(mapStateToProps)(ForgotPassword)

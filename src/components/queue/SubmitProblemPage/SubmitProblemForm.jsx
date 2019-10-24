@@ -1,17 +1,19 @@
 import React from 'react'
-import { submitProblemActions } from '../../../actions/content/submitProblemPage'
+import { submitProblemActions } from '../../../actions/content/submitProblem'
 import { Field, reduxForm } from 'redux-form'
 
 let submit = (values, dispatch, props) => {
-	dispatch(submitProblemActions.submit({
-		queue_name: props.queue,
-		submitted_by: props.userId,
-		title: values.title,
-		content: values.description
-	},
-			props.token
+	dispatch(
+		submitProblemActions
+			.submit(
+				{
+					queue_name: props.queue,
+					title: values.title,
+					content: values.description
+				},
+				props.token
 			)
-		)
+	)
 }
 
 let SubmitProblemForm = props => {
@@ -31,7 +33,8 @@ let SubmitProblemForm = props => {
 
 SubmitProblemForm = reduxForm({
 	form: 'form',
-	onSubmit: submit
+	onSubmit: submit,
+	getFormState: ({content}) => content.submitProblem.form
 })(SubmitProblemForm)
 
 export default SubmitProblemForm

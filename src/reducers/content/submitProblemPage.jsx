@@ -1,4 +1,8 @@
+import { combineReducers } from 'redux'
+import { reducer } from 'redux-form'
+
 import { submitProblemPageConstants } from '../../constants/content/submitProblemPage'
+
 
 const defaultState = {}
 
@@ -15,4 +19,9 @@ const submitProblemPageReducer = (state = defaultState, action) => {
 	}
 }
 
-export default submitProblemPageReducer
+const submitProblemFormReducer = reducer
+
+export default combineReducers({
+	page: submitProblemPageReducer,
+	form: submitProblemFormReducer
+})
