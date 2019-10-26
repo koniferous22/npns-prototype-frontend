@@ -48,7 +48,7 @@ function problemPageReducer(state = defaultState, action) {
 	}
 
 	const newSubmissionEntries = state.submissionEntries
-	const newPaging = state.paging
+	const newPaging = {...state.paging}
 	const submission = (action.submission) ? findContentInEntries(newSubmissionEntries, action.submission) : null
 	switch (action.type) {
 		case problemPageConstants.LOAD_PROBLEM_DATA_FAILED:
@@ -71,10 +71,13 @@ function problemPageReducer(state = defaultState, action) {
 				message: "Waiting for problem data"
 			}
 		case problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS:
+			const keep_problem_data = action.problem && state.problem && action.problem.id === state.problem.id
 			return {
 				...state,
 				// has to have || {} otherwise throws error, which I dunno how to solve :D 
 				problem: action.problem || {},
+				paging: keep_problem_data ? state.paging : defaultPaging,
+				submissionEntries: keep_problem_data ? state.submissionEntries : [],
 				message: ""
 			}
 		case problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST:

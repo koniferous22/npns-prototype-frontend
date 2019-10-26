@@ -26,7 +26,7 @@ import PremiumPage from './components/profile/PremiumPage'
 import TransactionPage from './components/profile/TransactionPage'
 import EconomyPage from "./components/statistics/EconomyPage"
 
-import ConfirmRegistrationPage from "./components/confirm/registration"
+import ConfirmRegistrationPage from "./components/confirm/Registration"
 
 import { authActions } from './actions/auth'
 

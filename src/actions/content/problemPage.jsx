@@ -3,7 +3,7 @@ import { appConfig } from '../../appConfig'
 import { problemPageConstants } from '../../constants/content/problemPage'
 
 function loadProblemData(problemId) {
-	const request = () => ({ type: problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS })
+	const request = () => ({ type: problemPageConstants.LOAD_PROBLEM_DATA_REQUEST })
 	const success = (problem) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS, problem})
 	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message})
 
@@ -26,7 +26,8 @@ function loadProblemData(problemId) {
 				throw error
 			}
 		}).then(response => response.json())
-		.then(body => {        
+		.then(body => {
+			console.log(body	)        
 			dispatch(success(body))
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
@@ -36,7 +37,7 @@ function loadProblemData(problemId) {
 }
 
 function loadSubmissionPage(problemId, activePage) {
-	const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST })
+	const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST, problemId })
 	const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
 	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message})
 

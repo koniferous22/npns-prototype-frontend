@@ -23,6 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class ProblemPage extends React.Component {
 	
 	componentDidMount() {
+		console.log('MOUNTING PROBLEM PAGE')
 		this.props.loadProblemData()
 	}
 
@@ -62,14 +63,17 @@ class ProblemPage extends React.Component {
 				{
 					this.props.loggedIn && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
 				}
-				<InfiniteScroll
-					pageStart={0}
-					loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
-					hasMore={this.props.paging.hasMore}
-					loader={<div className="loader" key={0}>Loading ...</div>}
-				>
-					{submissions}
-				</InfiniteScroll>
+				<div style={{height:"100%",overflow:"auto"}}>
+					<InfiniteScroll
+						pageStart={0}
+						loadMore={() => {console.log('DISPATCHINGGGG');this.props.loadSubmissionPage(this.props.paging.page + 1)}}
+						hasMore={this.props.paging.hasMore}
+						loader={<div className="loader" key={0}>Loading ...</div>}
+						
+					>
+						{submissions}
+					</InfiniteScroll>
+				</div>
 			</div>
 		)
 	}
