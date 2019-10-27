@@ -30,7 +30,7 @@ function submit(problem, authToken) {
 		})
 	}
 	
-	function request(problem) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST, problem } }
+	function request() { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST } }
 	function success(problem) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS, problem } }
 	function failure(error) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_FAILED, error } }
 }
