@@ -1,17 +1,42 @@
 import { appConfig } from '../../../appConfig'
-import { confirmEmailChangeConstants } from '../../../constants/content/confirm/passwordChange'
+import { confirmPasswordChangeConstants } from '../../../constants/content/confirm/passwordChange'
 
-function confirm(confirmationToken)  {
-	const request = () => ({type: confirmPasswordChangeConstants.REQUEST})
-	const success = () => ({type: confirmPasswordChangeConstants.SUCCESS})
-	const failure = (message) => ({type: confirmPasswordChangeConstants.FAILED, message})
+function verify(confirmationToken) {
+	const request = () => ({type: confirmPasswordChangeConstants.VERIFY_REQUEST})
+	const success = () => ({type: confirmPasswordChangeConstants.VERIFY_SUCCESS})
+	const failure = (message) => ({type: confirmPasswordChangeConstants.VERIFY_FAILED, message})
 
 	return dispatch => {
 		dispatch(request())
-		fetch(appConfig.backendUrl + "/verify/newEmail", {
+		fetch(appConfig.backendUrl + "/verify/newPasswordRequest", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({emailToken: confirmationToken})
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				dispatch(success())
+			} else {
+				var error = new Error(response.message)
+				error.response = response
+				throw error
+			}
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
+	}
+}
+
+function confirm(confirmationToken, password)  {
+	const request = () => ({type: confirmPasswordChangeConstants.CONFIRM_REQUEST})
+	const success = () => ({type: confirmPasswordChangeConstants.CONFIRM_SUCCESS})
+	const failure = (message) => ({type: confirmPasswordChangeConstants.CONFIRM_FAILED, message})
+
+	return dispatch => {
+		dispatch(request())
+		fetch(appConfig.backendUrl + "/passwordReset/confirm", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({emailToken: confirmationToken, password})
 		}).then(response => {
 			if (response.status >= 200 && response.status < 400) {
 				dispatch(success())
@@ -21,11 +46,19 @@ function confirm(confirmationToken)  {
 				throw error
 			}
 		}).catch(error => {
-			dispatch(failure(error))
+			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 }
 
-const confirmEmailChangeActions = {
-	confirm
+function reset() {
+	return {
+		type: confirmPasswordChangeConstants.RESET
+	}
+}
+
+export const confirmPasswordChangeActions = {
+	verify,
+	confirm,
+	reset
 }

@@ -1,23 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 
-import renderField from '../form/RenderField'
-import { signupActions } from '../../actions/content/signup'
+import renderField from '../../form/RenderField'
+import { confirmPasswordChangeActions } from '../../../actions/content/confirm/passwordChange'
+import { signupActions } from '../../../actions/content/signup'
 
 const submit = (values, dispatch, props) => {
-	dispatch(signupActions.signup(values))
+	dispatch(confirmPasswordChangeActions.confirm(props.token, values.password))
 }
 
 const validate = values => {
 	const errors = {}
-	if (!values.username) {
-		errors.username = 'Required'
-	}
 	if (!values.password) {
 		errors.password = 'Required'
-	}
-	if (!values.email) {
-		errors.email = 'Required'
 	}
 	if (!values.confirmPassword) {
 		errors.confirmPassword = 'Required'
@@ -28,20 +23,16 @@ const validate = values => {
 	return errors
 }
 
-const asyncBlurFields = ['username', 'password', 'email']
-
-const SignUpForm = props => {
+const PasswordChangeForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
-			<Field name="username" component={renderField} type="text" label="Username"/>
 			<Field name="password" component={renderField} type="password" label="Password (at least 8 characters)"/>
 			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password"/>
-			<Field name="email" component={renderField} type="text" label="Email"/>
-			<Field name="firstName" component={renderField} type="text" label="First Name"/>
-			<Field name="lastName" component={renderField} type="text" label="Last Name"/>
 		<button type="submit">Submit</button>
 	</form>)
 }
+
+const asyncBlurFields = ['password']
 
 export default reduxForm({
 	form: 'form',
@@ -49,6 +40,5 @@ export default reduxForm({
 	asyncValidate: (values, dispatch, props, blurredField) => signupActions.validateField(values, blurredField),
 	asyncBlurFields,
 	onSubmit: submit,
-	getFormState: ({content}) => content.signup.form
-})(SignUpForm)
-
+	getFormState: ({content}) => content.confirm.passwordChange.form
+})(PasswordChangeForm)

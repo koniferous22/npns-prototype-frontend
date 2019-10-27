@@ -27,6 +27,7 @@ import TransactionPage from './components/profile/TransactionPage'
 import EconomyPage from "./components/statistics/EconomyPage"
 
 import ConfirmRegistrationPage from "./components/confirm/Registration"
+import ConfirmPasswordChangePage from "./components/confirm/PasswordChange"
 
 import { authActions } from './actions/auth'
 
@@ -83,6 +84,7 @@ class App extends React.Component {
 									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
+									<Route path="/confirm/passwordChange/:token" render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
 									
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 									

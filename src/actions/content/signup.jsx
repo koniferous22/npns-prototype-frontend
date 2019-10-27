@@ -47,7 +47,7 @@ function validateField(values, field) {
 		return new Promise((resolve) => resolve())
 	}
 	return new Promise((resolve, reject) => {
-		fetch(appConfig.backendUrl + "/u/available/" + field, {
+		fetch(appConfig.backendUrl + "/valid/" + field, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({[field]: values[field]})
