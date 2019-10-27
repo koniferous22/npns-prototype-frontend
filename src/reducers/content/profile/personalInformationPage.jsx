@@ -1,11 +1,14 @@
-import { personalInformationPageStages, personalInformationPageConstants }
+import { reducer } from 'redux-form'
+import { combineReducers } from 'redux'
+
+import { personalInformationPageStages, personalInformationPageConstants } from '../../../constants/content/profile/personalInformationPage'
 
 const defaultState = {
 	stage: personalInformationPageStages.SUBMITTING_FORM	
 }
 
 const defaultPwdConfirmationState = {
-	state: personalInformationPageStages.PASSWORD_CONFIRMATION,
+	stage: personalInformationPageStages.PASSWORD_CONFIRMATION,
 	message:'Please confirm by entering your current password'
 }
 
@@ -16,42 +19,21 @@ const defaultCompletionState = {
 
 function personalInformationPageReducer(state=defaultState, action) {
 	switch (action.type) {
-		case personalInformationPageConstants.FORM_VERIFYING_EMAIL_REQUEST:
-			return {
+		case personalInformationPageConstants.REQUEST_FORM_FILLED:
+			return (['email','username','password','names'].includes(action.form)) ? {
+				...defaultPwdConfirmationState,
+				form: action.form,
+				values: action.values
+			} : {
 				stage: personalInformationPageStages.SUBMITTING_FORM,
-				message: 'Verifying Email',
-				form: 'email'
-			}
-		case personalInformationPageConstants.FORM_VERIFYING_USERNAME_REQUEST:
-			return {
-				state: personalInformationPageStages.SUBMITTING_FORM,
-				message: 'Verifying new username',
-				form: 'username'
-			}
-		case personalInformationPageConstants.FORM_VERIFYING_EMAIL_SUCCESS:
-			return {
-				...defaultPwdConfirmationState,
-				form:'email'
-			}
-		case personalInformationPageConstants.FORM_VERIFYING_USERNAME_SUCCESS:
-			return {
-				...defaultPwdConfirmationState,
-				form:'username'
-			}
-		case personalInformationPageConstants.FORM_VERIFYING_PASSWORD_SUCCESS:
-			return {
-				...defaultPwdConfirmationState,
-				form:'password'
-			}
-		case personalInformationPageConstants.FORM_VERIFYING_NAMES_SUCCESS:
-			return {
-				...defaultPwdConfirmationState,
-				form: 'names'
+				message: 'lol rly unexpected error xD'
 			}
 		case personalInformationPageConstants.CONFIRM_PASSWORD_REQUEST:
 			return {
-				state: personalInformationPageStages.PASSWORD_CONFIRMATION,
-				message: "Waiting for server response"
+				stage: personalInformationPageStages.PASSWORD_CONFIRMATION,
+				message: "Waiting for server response",
+				form: state.form,
+				values: state.values
 			}
 		case personalInformationPageConstants.CONFIRM_PASSWORD_FAILED:
 			return {
@@ -61,34 +43,54 @@ function personalInformationPageReducer(state=defaultState, action) {
 		case personalInformationPageConstants.CHANGE_EMAIL_REQUEST:
 			return {
 				...defaultCompletionState,
-				form: 'email'
+				form: 'email',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_USERNAME_REQUEST:
 			return {
 				...defaultCompletionState,
-				form: 'username'		
+				form: 'username',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_PASSWORD_REQUEST:
 			return {
 				...defaultCompletionState,
-				form: 'password'
+				form: 'password',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_NAMES_REQUEST:
 			return {
 				...defaultCompletionState,
-				form: 'names'
+				form: 'names',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_EMAIL_SUCCESS:
+			return {
+				...defaultCompletionState,
+				message: 'Changes submitted, check your NEW email box',
+				form: 'email',
+				values: state.values
+			}
 		case personalInformationPageConstants.CHANGE_USERNAME_SUCCESS:
+			return {
+				...defaultCompletionState,
+				message: 'Changes submitted, check your email box',
+				form: 'username',
+				values: state.values
+			}
 		case personalInformationPageConstants.CHANGE_PASSWORD_SUCCESS:
 			return {
 				...defaultCompletionState,
-				message: 'Changes submitted, check your email box'
+				message: 'Changes submitted, check your email box',
+				form: 'password',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_NAMES_SUCCESS:
 			return {
 				...defaultCompletionState,
-				message: 'Name of the user changed'
+				message: 'Name of the user changed',
+				form: 'names',
+				values: state.values
 			}
 		case personalInformationPageConstants.CHANGE_EMAIL_FAILED:
 		case personalInformationPageConstants.CHANGE_USERNAME_FAILED:
@@ -102,3 +104,10 @@ function personalInformationPageReducer(state=defaultState, action) {
 			return state
 	}
 }
+
+const personalInformationFormReducer = reducer
+
+export default combineReducers({
+	page: personalInformationPageReducer,
+	form: personalInformationFormReducer
+})

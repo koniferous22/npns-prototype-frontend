@@ -33,7 +33,7 @@ function confirm(confirmationToken, password)  {
 
 	return dispatch => {
 		dispatch(request())
-		fetch(appConfig.backendUrl + "/passwordReset/confirm", {
+		fetch(appConfig.backendUrl + "/u/passwordReset/confirm", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({emailToken: confirmationToken, password})

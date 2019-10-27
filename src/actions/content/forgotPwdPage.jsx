@@ -10,7 +10,7 @@ function forgotPwd(user) {
 	return dispatch => {
 		dispatch(request());
 
-		fetch(appConfig.backendUrl + "/passwordReset/request", {
+		fetch(appConfig.backendUrl + "/u/passwordReset/request", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({user})

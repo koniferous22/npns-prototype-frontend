@@ -1,7 +1,7 @@
 import { appConfig } from '../../../appConfig'
 import { confirmEmailChangeConstants } from '../../../constants/content/confirm/emailChange'
 
-function confirm(confirmationToken, authToken)  {
+function confirm(confirmationToken/*, authToken*/)  {
 	const request = () => ({type: confirmEmailChangeConstants.REQUEST})
 	const success = () => ({type: confirmEmailChangeConstants.SUCCESS})
 	const failure = (message) => ({type: confirmEmailChangeConstants.FAILED, message})
@@ -10,7 +10,7 @@ function confirm(confirmationToken, authToken)  {
 		dispatch(request())
 		fetch(appConfig.backendUrl + "/verify/newEmail", {
 			method: 'POST',
-			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
+			headers: { 'Content-Type': 'application/json'/*, 'Authorization': 'Bearer ' + authToken*/ },
 			body: JSON.stringify({emailToken: confirmationToken})
 		}).then(response => {
 			if (response.status >= 200 && response.status < 400) {
@@ -21,11 +21,11 @@ function confirm(confirmationToken, authToken)  {
 				throw error
 			}
 		}).catch(error => {
-			dispatch(failure(error))
+			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 }
 
-const confirmEmailChangeActions = {
+export const confirmEmailChangeActions = {
 	confirm
 }

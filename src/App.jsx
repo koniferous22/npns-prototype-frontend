@@ -28,6 +28,7 @@ import EconomyPage from "./components/statistics/EconomyPage"
 
 import ConfirmRegistrationPage from "./components/confirm/Registration"
 import ConfirmPasswordChangePage from "./components/confirm/PasswordChange"
+import ConfirmEmailChangePage from "./components/confirm/EmailChange"
 
 import { authActions } from './actions/auth'
 
@@ -76,7 +77,7 @@ class App extends React.Component {
 											user={routeProps.match.params.username}
 											loggedIn={loggedIn}
 										/> }/>
-									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
+									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username} token={this.props.token}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
@@ -85,6 +86,7 @@ class App extends React.Component {
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									<Route path="/confirm/passwordChange/:token" render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
+									<Route path="/confirm/emailChange/:token" render={(routeProps) => <ConfirmEmailChangePage authToken={this.props.token} token={routeProps.match.params.token}/>} />
 									
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 									
