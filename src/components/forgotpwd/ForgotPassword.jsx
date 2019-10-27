@@ -6,25 +6,40 @@ import ForgotPasswordForm from './ForgotPasswordForm'
 
 import { forgotPwdStages } from '../../constants/content/forgotPwdPage'
 
-const mapStateToProps = state => state.content.forgotPwd.page
+import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
 
-const ForgotPassword = props => {
-	switch (props.stage) {
-		case forgotPwdStages.EMAIL_SENT:
-			return (
-				<div>
-					{props.message}
-				</div>
+const mapStateToProps = state => state.content.forgotPwd.page
+const mapDispatchToProps = dispatch => ({
+	reset: () => dispatch(forgotPwdActions.reset())
+})
+
+class ForgotPassword extends React.Component { 
+	componentWillUnmount() {
+		this.props.reset()
+	}
+	render() {
+		switch (this.props.stage) {
+			case forgotPwdStages.EMAIL_SENT:
+				return (
+					<div>
+						{this.props.message.message}
+						<ol>
+							{this.props.message.steps.map((step, i) => (
+								<li key={i}>{step}</li>
+							))}
+						</ol>
+					</div>
+					)
+			case forgotPwdStages.SUBMITTING_FORM:
+			default:
+				return (
+					<div>
+						{this.props.message}
+						<ForgotPasswordForm />
+					</div>
 				)
-		case forgotPwdStages.SUBMITTING_FORM:
-		default:
-			return (
-				<div>
-					{props.message}
-					<ForgotPasswordForm />
-				</div>
-			)
+		}
 	}
 }
 
-export default connect(mapStateToProps)(ForgotPassword)
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)

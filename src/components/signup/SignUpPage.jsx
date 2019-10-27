@@ -18,7 +18,16 @@ class SignUpPage extends React.Component {
 	render() {
 		switch(this.props.stage) {
 			case signupStages.COMPLETED:
-				return (<div>{this.props.message}</div>)
+				return (
+					<div>
+						{this.props.message.message}
+						<ol>
+							{this.props.message.steps.map((step, i) => (
+								<li key={i}>{step}</li>
+							))}
+						</ol>
+					</div>
+				)
 			case signupStages.SUBMITTING_FORM:
 			default:
 				return (
