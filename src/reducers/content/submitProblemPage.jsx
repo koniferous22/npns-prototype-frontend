@@ -1,19 +1,21 @@
 import { combineReducers } from 'redux'
 import { reducer } from 'redux-form'
 
-import { submitProblemPageConstants } from '../../constants/content/submitProblemPage'
+import { submitProblemPageConstants, submitProblemStages } from '../../constants/content/submitProblemPage'
 
 
-const defaultState = {}
+const initialState = {
+  stage: submitProblemStages.SUBMITTING_PROBLEM
+}
 
-const submitProblemPageReducer = (state = defaultState, action) => {
+const submitProblemPageReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST:
-			return {message: "Waiting for server response"}
+			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response"}
 		case submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS:
-			return {message: "Problem submitted"}
+			return {stage: submitProblemStages.COMPLETED,	message: "Problem submitted"}
 		case submitProblemPageConstants.SUBMIT_PROBLEM_FAILED:
-				return {message: action.error}
+				return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error}
 		default:
 			return state
 	}
