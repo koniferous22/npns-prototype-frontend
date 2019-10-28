@@ -5,6 +5,8 @@ import ProfileSidebar from './ProfileSidebar'
 
 import ChangeEmailForm from './PersonalInformationPage/ChangeEmailForm'
 import ChangePasswordForm from './PersonalInformationPage/ChangePasswordForm'
+import ChangeUsernameForm from './PersonalInformationPage/ChangeUsernameForm'
+
 
 import ConfirmPasswordForm from './PersonalInformationPage/ConfirmPasswordForm'
 import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDispatcher'
@@ -51,7 +53,11 @@ class PersonalInformationPage extends React.Component {
 
 					Change Password
 					<ChangePasswordForm />
-					{/*just a button to send password reset link xD*/}
+					{this.props.form === 'password' && this.props.message}
+					
+					Change Username
+					<ChangeUsernameForm />
+					{this.props.form === 'username' && this.props.message}
 
 					
 				</div>)

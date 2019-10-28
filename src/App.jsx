@@ -29,6 +29,7 @@ import EconomyPage from "./components/statistics/EconomyPage"
 import ConfirmRegistrationPage from "./components/confirm/Registration"
 import ConfirmPasswordChangePage from "./components/confirm/PasswordChange"
 import ConfirmEmailChangePage from "./components/confirm/EmailChange"
+import ConfirmUsernameChangePage from "./components/confirm/UsernameChange"
 
 import { authActions } from './actions/auth'
 
@@ -86,7 +87,8 @@ class App extends React.Component {
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<NonAuthRoute path="/confirm/registration/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
 									<NonAuthRoute path="/confirm/passwordChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
-									<NonAuthRoute path="/confirm/emailChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmEmailChangePage authToken={this.props.token} token={routeProps.match.params.token}/>} />
+									<NonAuthRoute path="/confirm/emailChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmEmailChangePage token={routeProps.match.params.token}/>} />
+									<NonAuthRoute path="/confirm/usernameChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmUsernameChangePage token={routeProps.match.params.token}/>} />
 									
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 									

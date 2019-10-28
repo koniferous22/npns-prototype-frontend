@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { confirmEmailChangeActions } from '../../actions/content/confirm/emailChange'
+import { confirmUsernameChangeActions } from '../../actions/content/confirm/usernameChange'
 
-const mapStateToProps = state => state.content.confirm.emailChange
+const mapStateToProps = state => state.content.confirm.usernameChange
 const mapDispatchToProps = dispatch => ({
-	confirm: (confirmationToken) => dispatch(confirmEmailChangeActions.confirm(confirmationToken))
+	confirm: (confirmationToken) => dispatch(confirmUsernameChangeActions.confirm(confirmationToken))
 })
 
-class ConfirmEmailChangePage extends React.Component {
+class ConfirmUsernameChangePage extends React.Component {
 	componentDidMount() {
 		this.props.confirm(this.props.token)
 	}
@@ -25,4 +25,4 @@ class ConfirmEmailChangePage extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmEmailChangePage)
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmUsernameChangePage)

@@ -69,7 +69,7 @@ function confirmPassword(password, form, authToken) {
 }
 
 
-function submitEmailChange(email, authToken) {
+function submitEmailChange(newEmail, authToken) {
 	return dispatch => {
 		dispatch(request());
 
@@ -79,7 +79,7 @@ function submitEmailChange(email, authToken) {
 				'Content-Type': 'application/json',
 				'Authorization': 'Bearer ' + authToken
 			},
-			body: JSON.stringify({email})
+			body: JSON.stringify({newEmail})
 		}).then(response => {
 			// NOTE: refactor this
 			if (response.status >= 200 && response.status < 400) {
@@ -103,6 +103,40 @@ function submitEmailChange(email, authToken) {
 	
 }
 
+function submitUsernameChange(newUsername, authToken) {
+	return dispatch => {
+		dispatch(request());
+
+		fetch(appConfig.backendUrl + "/u/usernameChange", {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + authToken
+			},
+			body: JSON.stringify({newUsername})
+		}).then(response => {
+			// NOTE: refactor this
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(user => {
+			dispatch(success())
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
+	}
+	
+	function request() { return { type: personalInformationPageConstants.CHANGE_USERNAME_REQUEST } }
+	function success() { return { type: personalInformationPageConstants.CHANGE_USERNAME_SUCCESS} }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_USERNAME_FAILED, message } }
+	
+}
+
 const submitPasswordChange = (user) => forgotPwdActions.forgotPwd(user)
 
 /*
@@ -114,5 +148,6 @@ export const personalInformationPageActions = {
 	filled,
 	confirmPassword,
 	submitEmailChange,
+	submitUsernameChange,
 	submitPasswordChange	
 }

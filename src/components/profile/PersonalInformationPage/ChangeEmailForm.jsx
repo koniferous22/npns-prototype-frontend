@@ -1,5 +1,5 @@
-import { Field, reduxForm } from 'redux-form'
 import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../../form/RenderField'
 import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
