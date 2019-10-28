@@ -11,6 +11,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			return {
 				send: () => dispatch(personalInformationPageActions.submitEmailChange(ownProps.values.email, ownProps.token))
 			}
+		case 'password':
+			return {
+				send: () => dispatch(personalInformationPageActions.submitPasswordChange(ownProps.user))
+			}
 		default:
 			return {
 				send: () => {throw new Error('wut?')}

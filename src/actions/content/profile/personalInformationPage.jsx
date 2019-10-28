@@ -1,6 +1,8 @@
 import { appConfig } from '../../../appConfig'
 import { personalInformationPageConstants } from '../../../constants/content/profile/personalInformationPage'
 
+import { forgotPwdActions } from '../forgotPwdPage'
+
 function filled(form, values) {
 	return {
 		type: personalInformationPageConstants.REQUEST_FORM_FILLED,
@@ -101,15 +103,16 @@ function submitEmailChange(email, authToken) {
 	
 }
 
+const submitPasswordChange = (user) => forgotPwdActions.forgotPwd(user)
 
 /*
 * submit change username
-* change password
 * remaining data: first name, last name
 */
 
 export const personalInformationPageActions = {
-	submitEmailChange,
+	filled,
 	confirmPassword,
-	filled
+	submitEmailChange,
+	submitPasswordChange	
 }

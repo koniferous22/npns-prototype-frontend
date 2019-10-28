@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import ProfileSidebar from './ProfileSidebar'
+
 import ChangeEmailForm from './PersonalInformationPage/ChangeEmailForm'
+import ChangePasswordForm from './PersonalInformationPage/ChangePasswordForm'
+
 import ConfirmPasswordForm from './PersonalInformationPage/ConfirmPasswordForm'
 import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDispatcher'
 
@@ -20,6 +23,7 @@ class PersonalInformationPage extends React.Component {
 	}
 
 	render() {
+		console.log(this.props)
 		switch (this.props.stage) {
 			case personalInformationPageStages.PASSWORD_CONFIRMATION:
 				return (
@@ -29,11 +33,9 @@ class PersonalInformationPage extends React.Component {
 					</div>
 				)
 			case personalInformationPageStages.COMPLETED:
-				console.log('COMPLETED')
-				console.log(this.props)
 				return (
 					<div>
-						<ProfileUpdateDispatcher form={this.props.form} token={this.props.token} values={this.props.values}/>
+						<ProfileUpdateDispatcher form={this.props.form} token={this.props.token} values={this.props.values} user={this.props.user}/>
 						{this.props.message}
 					</div>
 				)
@@ -47,7 +49,11 @@ class PersonalInformationPage extends React.Component {
 					<ChangeEmailForm />
 					{this.props.form === 'email' && this.props.message}
 
+					Change Password
+					<ChangePasswordForm />
+					{/*just a button to send password reset link xD*/}
 
+					
 				</div>)
 		}
 	}

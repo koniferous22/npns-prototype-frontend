@@ -84,9 +84,9 @@ class App extends React.Component {
 									<PrivateRoute path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
 									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
-									<Route path="/confirm/registration/:token" render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
-									<Route path="/confirm/passwordChange/:token" render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
-									<Route path="/confirm/emailChange/:token" render={(routeProps) => <ConfirmEmailChangePage authToken={this.props.token} token={routeProps.match.params.token}/>} />
+									<NonAuthRoute path="/confirm/registration/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
+									<NonAuthRoute path="/confirm/passwordChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
+									<NonAuthRoute path="/confirm/emailChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmEmailChangePage authToken={this.props.token} token={routeProps.match.params.token}/>} />
 									
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 									
