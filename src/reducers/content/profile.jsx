@@ -4,9 +4,11 @@ import personalInformationPageReducer from './profile/personalInformationPage'
 import premiumPageReducer from './profile/premiumPage'
 import profilePageReducer from './profile/profilePage'
 import transactionPageReducer from './profile/transactionPage'
+import activityPageReducer from './profile/activityPage'
 
 export default combineReducers({
 	//transactionPage: transactionPageReducer,
+	activityPage: activityPageReducer,
 	premiumPage: premiumPageReducer,
 	profilePage: profilePageReducer,
 	personalInformationPage: personalInformationPageReducer

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import { queuePageActions } from '../../actions/content/queuePage'
 
 import QueueSidebar from './QueueSidebar'
-import { ProblemBox } from './QueuePage/ProblemBox'
+import { ProblemBox } from '../problem/ProblemBox'
 
 const mapStateToProps = (state, ownProps) => {
 	const queue = ownProps.queue
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class QueuePage extends React.Component {
 	render() {
 		/*
-			no need to solve this if queue doesnt exist, backend returns only empty array
+			no need to test if queue doesnt exist, backend returns only empty array
 		*/
 		return (
 			<div>

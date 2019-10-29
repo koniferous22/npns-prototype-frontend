@@ -4,4 +4,4 @@ export const queuePageConstants = {
 	NETWORK_ERROR: "QUEUE_PAGE_NETWORK_ERROR",
 
 	SET_ACTIVE_ENTRY: "QUEUE_PAGE_SET_ACTIVE_ENTRY"
-}	
+}

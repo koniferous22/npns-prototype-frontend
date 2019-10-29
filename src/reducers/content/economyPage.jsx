@@ -1,6 +1,6 @@
 import { economyPageConstants } from '../../constants/content/economyPage'
 
-const defaultState = []
+const defaultState = {}
 
 function economyPageReducer(state = defaultState, action) {
 	switch (action.type) {

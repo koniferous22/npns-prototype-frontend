@@ -26,7 +26,6 @@ class PersonalInformationPage extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
 		switch (this.props.stage) {
 			case personalInformationPageStages.PASSWORD_CONFIRMATION:
 				return (
