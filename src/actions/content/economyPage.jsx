@@ -8,7 +8,7 @@ function loadKarmaValues(authToken) {
 
 	return dispatch => {
 	dispatch(request());
-	var requestUrl = appConfig.backendUrl + "/queue/economy/karmaValues"
+	var requestUrl = appConfig.backendUrl + "/queue/karmaValues"
 	fetch(requestUrl, {
 					method: 'GET',
 					headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken }
