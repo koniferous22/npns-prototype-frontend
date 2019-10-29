@@ -6,6 +6,7 @@ import ProfileSidebar from './ProfileSidebar'
 import ChangeEmailForm from './PersonalInformationPage/ChangeEmailForm'
 import ChangePasswordForm from './PersonalInformationPage/ChangePasswordForm'
 import ChangeUsernameForm from './PersonalInformationPage/ChangeUsernameForm'
+import ChangeNamesForm from './PersonalInformationPage/ChangeNamesForm'
 
 
 import ConfirmPasswordForm from './PersonalInformationPage/ConfirmPasswordForm'
@@ -59,7 +60,9 @@ class PersonalInformationPage extends React.Component {
 					<ChangeUsernameForm />
 					{this.props.form === 'username' && this.props.message}
 
-					
+					Change Names
+					<ChangeNamesForm />
+					{this.props.form === 'names' && this.props.message}					
 				</div>)
 		}
 	}

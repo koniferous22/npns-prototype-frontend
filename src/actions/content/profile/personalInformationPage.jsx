@@ -137,6 +137,40 @@ function submitUsernameChange(newUsername, authToken) {
 	
 }
 
+function submitNamesChange(newFirstName, newLastName, authToken) {
+	return dispatch => {
+		dispatch(request());
+
+		fetch(appConfig.backendUrl + "/u/namesChange", {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + authToken
+			},
+			body: JSON.stringify({newFirstName, newLastName})
+		}).then(response => {
+			// NOTE: refactor this
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(user => {
+			dispatch(success())
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
+	}
+	
+	function request() { return { type: personalInformationPageConstants.CHANGE_NAMES_REQUEST } }
+	function success() { return { type: personalInformationPageConstants.CHANGE_NAMES_SUCCESS} }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_NAMES_FAILED, message } }
+	
+}
+
 const submitPasswordChange = (user) => forgotPwdActions.forgotPwd(user)
 
 /*
@@ -149,5 +183,6 @@ export const personalInformationPageActions = {
 	confirmPassword,
 	submitEmailChange,
 	submitUsernameChange,
+	submitNamesChange,
 	submitPasswordChange	
 }
