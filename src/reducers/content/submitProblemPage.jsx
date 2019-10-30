@@ -13,7 +13,7 @@ const submitProblemPageReducer = (state = initialState, action) => {
 		case submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST:
 			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response"}
 		case submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS:
-			return {stage: submitProblemStages.COMPLETED,	message: "Problem submitted"}
+			return {stage: submitProblemStages.COMPLETED, problemId: action.problem.id,	message: "Problem submitted"}
 		case submitProblemPageConstants.SUBMIT_PROBLEM_FAILED:
 				return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error}
 		default:
