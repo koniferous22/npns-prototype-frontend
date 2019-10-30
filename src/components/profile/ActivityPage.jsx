@@ -10,8 +10,6 @@ import ProfileSidebar from './ProfileSidebar'
 
 const mapStateToProps = state => {
 	const pageState = state.content.profile.activityPage
-	console.log('kokotenko')
-	console.log(pageState.entries)
 	return {
 		...pageState,
 		entries: pageState.entries.reduce((acc, cv) => acc.concat(cv),[]),

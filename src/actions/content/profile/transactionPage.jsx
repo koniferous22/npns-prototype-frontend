@@ -1,15 +1,15 @@
-import { appConfig } from '../../appConfig'
+import { appConfig } from '../../../appConfig'
 import { transactionPageConstants } from '../../../constants/content/profile/transactionPage';
 
 function setActivePage(token, pageIndex) {
 
-	const request = (activePage) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST, activePage, transaction })
+	const request = (activePage) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST, activePage })
 	const success = (activePage, data, hasMore) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_FAILED, message, transaction })
+	const failure = (message) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_FAILED, message })
 
 	return dispatch => {
 		dispatch(request(pageIndex));
-		var requestUrl = appConfig.backendUrl + "/user/transactions"
+		var requestUrl = appConfig.backendUrl + "/u/transactions"
 		requestUrl += (pageIndex && pageIndex > 0) ? "?page=" + pageIndex : ""
 		fetch(requestUrl, {
 			method: 'GET',
@@ -27,8 +27,11 @@ function setActivePage(token, pageIndex) {
 		.then(body => {        
 			dispatch(success(pageIndex, body.data, body.hasMore))
 		}).catch(error => {
-			dispatch(failure(error))
+			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 }
 
+export const transactionPageActions = {
+	setActivePage
+}

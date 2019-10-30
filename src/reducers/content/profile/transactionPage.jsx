@@ -3,11 +3,12 @@ import { transactionPageConstants } from '../../../constants/content/profile/tra
 const defaultState = {
 	entries: [],
 	paging: {
-		page: 0
+		page: 0,
+		hasMore: true
 	}
 }
 
-function transactionPageReducer(state, action) {
+function transactionPageReducer(state=defaultState, action) {
 	const activePage = (!action.activePage || action.activePage <= 1) ? 1 : action.activePage
 	switch (action.type) {
 		case transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST:
@@ -42,3 +43,5 @@ function transactionPageReducer(state, action) {
 			return state
 	}
 }
+
+export default transactionPageReducer
