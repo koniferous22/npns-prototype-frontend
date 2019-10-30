@@ -5,7 +5,6 @@ import { personalInformationPageActions } from '../../../actions/content/profile
 import { connect } from 'react-redux'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-	console.log(ownProps	)
 	switch (ownProps.form) {
 		case 'email':
 			return {

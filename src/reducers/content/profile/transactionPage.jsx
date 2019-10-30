@@ -30,7 +30,7 @@ function transactionPageReducer(state=defaultState, action) {
 			}
 		case transactionPageConstants.LOAD_TRANSACTION_PAGE_SUCCESS:
 			const newEntries = state.entries
-			newEntries[activePage - 1] = action.data
+			newEntries[activePage - 1] = action.data || []
 			return {
 				entries: newEntries.slice(0,activePage),
 				paging: {

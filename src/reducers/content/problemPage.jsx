@@ -112,7 +112,7 @@ function problemPageReducer(state = defaultState, action) {
 			}
 		case problemPageConstants.LOAD_REPLY_PAGE_SUCCESS:
 			const activeReplyPage = (!action.activeReplyPage || action.activeReplyPage <= 1) ? 1 : action.activeReplyPage
-			submission.replyEntries[activeReplyPage - 1] = action.data
+			submission.replyEntries[activeReplyPage - 1] = action.data || []
 			submission.replyEntries = submission.replyEntries.slice(0, activeReplyPage)
 
 			if (!newPaging[action.submission]) {
@@ -140,6 +140,7 @@ function problemPageReducer(state = defaultState, action) {
 			return {
 				...state,
 				submissionEntries: newSubmissionEntries,
+				paging: newPaging,
 				message: ""
 			}
 		case problemPageConstants.REPLY_SUBMISSION_REQUEST:

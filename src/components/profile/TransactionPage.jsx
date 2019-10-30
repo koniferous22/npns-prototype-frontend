@@ -10,11 +10,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadPage: (page) => dispatch(transactionPageActions.setActivePage(ownProps.token, page))
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
 	const pageState = state.content.profile.transactionPage
 	return {
 		...pageState,
-		entries: pageState.entries.reduce((acc, cv) => acc.concat(cv),[]),
+		entries: pageState.entries.reduce((acc, cv) => acc.concat(cv),[]) || [],
+		...ownProps
 	}
 }
 

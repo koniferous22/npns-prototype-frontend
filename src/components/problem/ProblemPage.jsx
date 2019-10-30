@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class ProblemPage extends React.Component {
 	
 	componentDidMount() {
-		console.log('MOUNTING PROBLEM PAGE')
 		this.props.loadProblemData()
 	}
 
@@ -43,6 +42,7 @@ class ProblemPage extends React.Component {
 		const submissions = Object.keys(mergedEntries).map((submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
+					problem={this.props.problem.id}
 					key={index}
 					problemOwner={this.props.user && this.props.user._id === this.props.problem.submitted_by}
 					hasActiveReplyForm={submissionEntry === this.props.replyForm}

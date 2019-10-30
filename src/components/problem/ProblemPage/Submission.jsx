@@ -18,15 +18,15 @@ export const Submission = props => {
 		<p>
 			{props.content}
 		</p>
-		{props.problemOwner && <button onClick={props.acceptSubmission}>Accept Submission</button>}
+		{props.problemOwner === true && <button onClick={props.acceptSubmission}>Accept Submission</button>}
 		{props.loggedIn && <button onClick={props.selectReplyForm}>Reply</button>}
-		{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id}/>}
+		{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id} problem={props.problem}/>}
 		<ul>
 			{
 				Object.keys(props.replyEntries).map((e, index) => (<li key={index}><Reply content={props.replyEntries[e].content} /></li>))
 			}
 		</ul>
-		{props.paging.hasMore && <button onClick={() => props.loadReplyPage(props.paging.page + 1)}>Load Replies</button>}
+		{props.paging && props.paging.hasMore && <button onClick={() => props.loadReplyPage(props.paging.page + 1)}>Load Replies</button>}
 	</div>
 )
 }

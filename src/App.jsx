@@ -63,7 +63,7 @@ class App extends React.Component {
 									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
 									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
 									
-									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id}/>} />
+									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />
 																	
 
 									<Route exact path="/u/:username" render={ 
@@ -80,7 +80,7 @@ class App extends React.Component {
 										/> }/>
 									<ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username} token={this.props.token}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									<ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
-									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
+									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={this.props.token}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
 									<PrivateRoute path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
 									

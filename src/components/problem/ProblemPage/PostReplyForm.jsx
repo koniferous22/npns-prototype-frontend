@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { problemPageActions } from '../../../actions/content/problemPage'
 
 const submit = (values, dispatch, props) => {
-	dispatch(problemPageActions.replySubmission({content: values.content, submission: props.submission}, props.token))
+	dispatch(problemPageActions.replySubmission({content: values.content, submission: props.submission, problem: props.problem}, props.token))
 }
 
 let PostReplyForm = props => {

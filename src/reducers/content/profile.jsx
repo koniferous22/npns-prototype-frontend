@@ -7,7 +7,6 @@ import transactionPageReducer from './profile/transactionPage'
 import activityPageReducer from './profile/activityPage'
 
 export default combineReducers({
-
 	activityPage: activityPageReducer,
 	premiumPage: premiumPageReducer,
 	profilePage: profilePageReducer,

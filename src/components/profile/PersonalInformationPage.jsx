@@ -16,10 +16,6 @@ import { personalInformationPageStages } from '../../constants/content/profile/p
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 
-/*const mapDispatchToProps = dispatch => ({
-	reset: () => {console.log('kokot')}
-})*/
-
 class PersonalInformationPage extends React.Component {
 	componentWillUnmount() {
 		// reset

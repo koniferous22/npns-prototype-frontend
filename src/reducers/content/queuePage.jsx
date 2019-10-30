@@ -21,7 +21,7 @@ function singleQueueReducer(state = defaultQueueState, action) {
 			}
 		case queuePageConstants.SET_ACTIVE_PAGE_SUCCESS:
 			const newEntries = state.entries
-			newEntries[activePage - 1] = action.data
+			newEntries[activePage - 1] = action.data || []
 			return {
 				entries: newEntries.slice(0,activePage),
 				paging: {

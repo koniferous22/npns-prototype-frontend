@@ -27,7 +27,6 @@ function loadProblemData(problemId) {
 			}
 		}).then(response => response.json())
 		.then(body => {
-			console.log(body	)        
 			dispatch(success(body))
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
