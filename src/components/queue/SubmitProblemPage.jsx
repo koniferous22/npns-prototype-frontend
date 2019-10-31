@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 
 import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
-
+import { submitProblemActions } from '../../actions/content/submitProblem'
 import { submitProblemStages } from '../../constants/content/submitProblemPage' 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -13,8 +13,15 @@ const mapStateToProps = (state, ownProps) => ({
 	message: state.content.submitProblem.page.message,
 	problemId: state.content.submitProblem.page.problemId
 })
-//mozno to tu bude chciet reset, po submitnuti problemu totiz tato page zostane na COMPLETED case a nezmeni sa dokym nereloadnem
+
+const mapDispatchToProps = dispatch => ({
+  reset: () => dispatch(submitProblemActions.reset())
+})
+
 class SubmitProblemPage extends React.Component {
+  componentWillUnmount() {
+    this.props.reset()
+  }
 	render() {
 		const queue = this.props.queue
 		const message = this.props.message
@@ -42,4 +49,4 @@ class SubmitProblemPage extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps)(SubmitProblemPage)
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitProblemPage)
