@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
 	hierarchy: () => dispatch(globalActions.hierarchy())
 })
 
-class ProblemPage extends React.Component {
+class EconomyPage extends React.Component {
 
 	componentDidMount() {
 		this.props.hierarchy()
@@ -43,4 +43,4 @@ class ProblemPage extends React.Component {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProblemPage)
+export default connect(mapStateToProps, mapDispatchToProps)(EconomyPage)

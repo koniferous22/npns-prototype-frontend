@@ -8,7 +8,7 @@ import { problemPageActions } from '../../../actions/content/problemPage'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadReplyPage: (page) => dispatch(problemPageActions.loadReplyPage(ownProps.id, page)),
-	acceptSubmission: () => dispatch(problemPageActions.acceptSubmission(ownProps.id, ownProps.token)),
+	acceptSubmission: () => dispatch(problemPageActions.acceptSubmission(ownProps.id, ownProps.problem, ownProps.token)),
 	selectReplyForm: () => dispatch(problemPageActions.selectReplyForm(ownProps.id))
 })
 // hide replies button
@@ -18,8 +18,8 @@ export const Submission = props => {
 		<p>
 			{props.content}
 		</p>
-		{props.problemOwner === true && <button onClick={props.acceptSubmission}>Accept Submission</button>}
-		{props.loggedIn && <button onClick={props.selectReplyForm}>Reply</button>}
+		{props.acceptButton && <button onClick={props.acceptSubmission}>Accept Submission</button>}
+		{props.replyButton && <button onClick={props.selectReplyForm}>Reply</button>}
 		{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id} problem={props.problem}/>}
 		<ul>
 			{

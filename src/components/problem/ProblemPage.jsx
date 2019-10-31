@@ -1,4 +1,4 @@
-import React from 'react';
+	import React from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -10,7 +10,6 @@ import { problemPageActions } from '../../actions/content/problemPage'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
-	//submissionEntries: state.content.problemPage.page.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{}),
 	...ownProps
 })
 
@@ -38,15 +37,18 @@ class ProblemPage extends React.Component {
 
 		// Honestly looked for this bug for 8 hours, when this statement was moved to mapStateToProps, new object is constructed every time, which results in cyclic updating
 		// Great infinite loop :D :D 
+		const problemOwner = this.props.user && this.props.user._id === this.props.problem.submitted_by
+		const problemActive = this.props.problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
+		const submissionForm = problemActive && this.props.loggedIn && !problemOwner
 		const submissions = Object.keys(mergedEntries).map((submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
 					problem={this.props.problem.id}
 					key={index}
-					problemOwner={this.props.user && this.props.user._id === this.props.problem.submitted_by}
-					hasActiveReplyForm={submissionEntry === this.props.replyForm}
-					loggedIn={this.props.loggedIn}
+					acceptButton={problemActive && problemOwner}
+					replyButton={this.props.loggedIn}
+					hasActiveReplyForm={problemActive && submissionEntry === this.props.replyForm}
 					paging={this.props.paging[submissionEntry]}
 					token={this.props.token}
 					content={mergedEntries[submissionEntry].content}
@@ -61,7 +63,7 @@ class ProblemPage extends React.Component {
 					{this.props.problem.content}
 				</p>
 				{
-					this.props.loggedIn && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
+					submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
 				}
 				<div style={{height:"100%",overflow:"auto"}}>
 					<InfiniteScroll

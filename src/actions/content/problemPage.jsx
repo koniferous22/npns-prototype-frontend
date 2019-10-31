@@ -151,19 +151,19 @@ function replySubmission(reply, token) {
 	}
 }
 
-function acceptSubmission(submission, token) {
+function acceptSubmission(submission, problem, token) {
 	const request = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_REQUEST })
 	const success = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_SUCCESS, submission })
 	const failure = (message) => ({type: problemPageConstants.ACCEPT_SUBMISSION_FAILED, message})
 
 	return dispatch => {
 		dispatch(request())
-		const requestUrl = appConfig.backendUrl + "/problem/" + submission.problem + "/mark_solved"
+		const requestUrl = appConfig.backendUrl + "/problem/" + problem + "/mark_solved"
 		fetch(requestUrl, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
 			body: JSON.stringify({
-				id: submission.problem,
+				id: problem,
 				submission: submission._id
 			})
 		}).then(response => {
