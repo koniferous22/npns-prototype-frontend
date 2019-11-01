@@ -1,7 +1,7 @@
 import { appConfig } from '../../../appConfig'
 import { economyPageConstants } from '../../../constants/content/statistics/economyPage';
 
-function loadKarmaValues(authToken) {
+function loadKarmaValues() {
 	const request = () => ({ type: economyPageConstants.LOAD_KARMA_VALUES_REQUEST })
 	const success = (data) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_SUCCESS, data})
 	const failure = (message) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_FAILED, message })
@@ -11,7 +11,7 @@ function loadKarmaValues(authToken) {
 	var requestUrl = appConfig.backendUrl + "/queue/karmaValues"
 	fetch(requestUrl, {
 					method: 'GET',
-					headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken }
+					headers: { 'Content-Type': 'application/json' }
 			}).then(response => {
 					if (response.status >= 200 && response.status < 400) {
 							return response

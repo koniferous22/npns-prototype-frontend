@@ -2,46 +2,62 @@ import { scoreboardPageConstants } from '../../../constants/content/statistics/s
 
 const defaultState = {
 	data: [],
-	activePage: 0
+	activePage: 1,
+	pageCount: 1,
+	searching: false
 }
 
 function scoreboardPageReducer(state=defaultState, action) {
 	switch(action.type) {
 		case scoreboardPageConstants.LOAD_PAGE_REQUEST:
 			return {
+				...state,
 				activePage: action.activePage,
 				message: 'Loading...',
-				data: state.data
 			}
 		case scoreboardPageConstants.LOAD_PAGE_SUCCESS:
 			return {
+				...state,
 				data: action.data,
 				activePage: action.activePage
 			}
 		case scoreboardPageConstants.LOAD_PAGE_FAILED:
 			return {
-				data: state.data,
+				...state,
 				message: action.message
 			}
 		case scoreboardPageConstants.USER_SEARCH_REQUEST:
 			return {
+				...state,
 				message: 'Loading...',
 				searching: true,
-				data: state.data
 			}
 		case scoreboardPageConstants.USER_SEARCH_SUCCESS:
 			return {
+				...state,
 				activePage: action.activePage,
 				searching: true,
-				data: state.data
 			}
 		case scoreboardPageConstants.USER_SEARCH_FAILED:
 			return {
-				data: state.data,
+				...state,
 				message: action.message
 			}
-		case scoreboardPageConstants.RESET:
-			return defaultState
+		case scoreboardPageConstants.USER_COUNT_REQUEST:
+			return {
+				...state,
+				message: 'Loading...'
+			}
+		case scoreboardPageConstants.USER_COUNT_SUCCESS:
+			return {
+				...state,
+				pageCount: action.pageCount
+			}
+		case scoreboardPageConstants.USER_COUNT_FAILED:
+			return {
+				...state,
+				message: action.message
+			}
 		default:
 			return state
 	}
