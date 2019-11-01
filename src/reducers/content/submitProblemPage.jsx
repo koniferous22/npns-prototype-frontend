@@ -10,12 +10,14 @@ const initialState = {
 
 const submitProblemPageReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST:
+		case submitProblemPageConstants.REQUEST:
 			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response"}
-		case submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS:
+		case submitProblemPageConstants.SUCCESS:
 			return {stage: submitProblemStages.COMPLETED, problemId: action.problem.id,	message: "Problem submitted"}
-		case submitProblemPageConstants.SUBMIT_PROBLEM_FAILED:
-				return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error}
+		case submitProblemPageConstants.FAILED:
+			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error}
+		case submitProblemPageConstants.RESET:
+			return initialState
 		default:
 			return state
 	}

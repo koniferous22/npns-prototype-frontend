@@ -2,7 +2,8 @@ import { appConfig } from '../../appConfig'
 import { submitProblemPageConstants } from '../../constants/content/submitProblemPage';
 
 export const submitProblemActions = {
-	submit
+	submit,
+	reset
 };
 
 function submit(problem, authToken) {
@@ -30,7 +31,13 @@ function submit(problem, authToken) {
 		})
 	}
 	
-	function request() { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_REQUEST } }
-	function success(problem) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_SUCCESS, problem } }
-	function failure(error) { return { type: submitProblemPageConstants.SUBMIT_PROBLEM_FAILED, error } }
+	function request() { return { type: submitProblemPageConstants.REQUEST } }
+	function success(problem) { return { type: submitProblemPageConstants.SUCCESS, problem } }
+	function failure(error) { return { type: submitProblemPageConstants.FAILED, error } }
+}
+
+function reset() {
+	return {
+		type: submitProblemPageConstants.RESET
+	}
 }
