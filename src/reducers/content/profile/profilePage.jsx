@@ -7,7 +7,8 @@ const defaultState = {
 		email: "",
 		problem_count: 0,
 		submission_count: 0,
-		reply_count: 0
+		reply_count: 0,
+		balances: {}
 	}
 }
 
@@ -16,7 +17,7 @@ function profilePageReducer(state=defaultState, action) {
 		case profilePageConstants.LOAD_USER_REQUEST:
 			return {...state, message: "Loading data"}
 		case profilePageConstants.LOAD_USER_SUCCESS:
-			return {data: action.user || defaultState}
+			return {data: action.user || defaultState.data}
 		case profilePageConstants.LOAD_USER_FAILED:
 			return {...state, message: "No user found"}
 		default:
