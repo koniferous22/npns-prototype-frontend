@@ -25,6 +25,7 @@ import PersonalInformationPage from './components/profile/PersonalInformationPag
 import PremiumPage from './components/profile/PremiumPage'
 import TransactionPage from './components/profile/TransactionPage'
 import EconomyPage from "./components/statistics/EconomyPage"
+import ScoreboardPage from "./components/statistics/ScoreboardPage"
 
 import ConfirmRegistrationPage from "./components/confirm/Registration"
 import ConfirmPasswordChangePage from "./components/confirm/PasswordChange"
@@ -63,8 +64,7 @@ class App extends React.Component {
 									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} loggedIn={loggedIn}/>} />
 									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
 									
-									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />
-																	
+									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />																	
 
 									<Route exact path="/u/:username" render={ 
 										(routeProps) => <ProfilePage 
@@ -83,6 +83,8 @@ class App extends React.Component {
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={this.props.token}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
 									<PrivateRoute path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
+									<PrivateRoute path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={this.props.token} queue={routeProps.match.params.queue}/>} loggedIn={loggedIn}/>
+
 									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>
 									<NonAuthRoute path="/confirm/registration/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />

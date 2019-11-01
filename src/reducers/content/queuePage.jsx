@@ -49,8 +49,6 @@ function singleQueueReducer(state = defaultQueueState, action) {
 				}
 				
 			}
-		case queuePageConstants.RESET:
-			return defaultQueueState
 		default:
 			return state
 	}
@@ -58,6 +56,9 @@ function singleQueueReducer(state = defaultQueueState, action) {
 
 export default function queuePageReducer(state = defaultState, action) {
 	// tried to solve this for 5 hours, when state is modified directly redux does not detect change :)
+	if (action.type === queuePageConstants.RESET) {
+		return defaultState
+	}
 	const newState = {...state}
 	if (action.queue) {
 		newState[action.queue] = singleQueueReducer(state[action.queue] || defaultQueueState, action)	

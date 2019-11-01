@@ -13,12 +13,14 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class QueueSidebar extends React.Component {
+	
 	componentDidMount() {
 		this.props.loadHierarchy()
 	}
 	render() {
+		console.log(this.props)
 		return (
-			<QueueSidebarEntries queues={this.props.hierarchy} />
+			<QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
 		)
 	}
 }

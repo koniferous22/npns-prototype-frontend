@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 
+import StatisticsSidebar from './StatisticsSidebar'
+
 import { economyPageActions } from '../../actions/content/economyPage'
 import { globalActions } from '../../actions/global'
 
@@ -27,6 +29,7 @@ class EconomyPage extends React.Component {
 		const message = this.props.message
 		return(
 			<div>
+				<StatisticsSidebar />
 				{message && message}
 				<ul>
 					{karmaValues && karmaValues.map(q => (
