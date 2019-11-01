@@ -21,8 +21,15 @@ class ScoreboardPage extends React.Component {
 		this.props.setActivePage(this.props.page)
 	}
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.queue !== this.props.queue || prevProps.page !== this.props.page) {
+			this.props.setActivePage(this.props.page)
+		}
+	}
+
 	render() {
-		const users = this.props.data.map((user, index) => (
+		const scoreboardData = this.props.data[this.props.queue] || []
+		const users = scoreboardData.map((user, index) => (
 			<tr key={index}>
 				<td>
 					<Link to={'/u/' + user.username}>{user.username}</Link>
@@ -36,6 +43,7 @@ class ScoreboardPage extends React.Component {
 			<div>
 				<StatisticsSidebar />
 				<QueueSidebar baseUrl='/statistics/scoreboard'/>
+				{this.props.message}
 				<table>
 					<thead>
 						<tr>

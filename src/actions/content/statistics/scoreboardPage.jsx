@@ -4,7 +4,7 @@ import { scoreboardPageConstants } from '../../../constants/content/statistics/s
 function setActivePage(queue, pageIndex) {
 
 	const request = (activePage) => ({ type: scoreboardPageConstants.LOAD_PAGE_REQUEST, activePage })
-	const success = (activePage, data) => ({ type: scoreboardPageConstants.LOAD_PAGE_SUCCESS, activePage, data })
+	const success = (queue, activePage, data) => ({ type: scoreboardPageConstants.LOAD_PAGE_SUCCESS, queue, activePage, data })
 	const failure = (message) => ({ type: scoreboardPageConstants.LOAD_PAGE_FAILED, message })
 
 	return dispatch => {
@@ -28,7 +28,7 @@ function setActivePage(queue, pageIndex) {
 			}
 		}).then(response => response.json())
 		.then(body => {        
-			dispatch(success(pageIndex, body.data))
+			dispatch(success(queue, pageIndex, body.data))
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
 		})
