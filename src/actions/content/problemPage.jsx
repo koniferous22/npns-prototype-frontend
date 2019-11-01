@@ -158,13 +158,14 @@ function acceptSubmission(submission, problem, token) {
 
 	return dispatch => {
 		dispatch(request())
+		console.log('ACCCCCEPTTING')
+		console.log(submission)
 		const requestUrl = appConfig.backendUrl + "/problem/" + problem + "/mark_solved"
 		fetch(requestUrl, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
 			body: JSON.stringify({
-				id: problem,
-				submission: submission._id
+				submission
 			})
 		}).then(response => {
 			if (response.status >= 200 && response.status < 400) {
