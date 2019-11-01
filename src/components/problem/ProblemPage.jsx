@@ -48,7 +48,7 @@ class ProblemPage extends React.Component {
 					key={index}
 					acceptButton={problemActive && problemOwner}
 					replyButton={this.props.loggedIn}
-					hasActiveReplyForm={problemActive && submissionEntry === this.props.replyForm}
+					hasActiveReplyForm={this.props.loggedIn && submissionEntry === this.props.replyForm}
 					paging={this.props.paging[submissionEntry]}
 					token={this.props.token}
 					content={mergedEntries[submissionEntry].content}
