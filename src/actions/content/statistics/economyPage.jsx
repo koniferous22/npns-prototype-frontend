@@ -1,5 +1,5 @@
-import { appConfig } from '../../appConfig'
-import { economyPageConstants } from '../../constants/content/economyPage';
+import { appConfig } from '../../../appConfig'
+import { economyPageConstants } from '../../../constants/content/statistics/economyPage';
 
 function loadKarmaValues(authToken) {
 	const request = () => ({ type: economyPageConstants.LOAD_KARMA_VALUES_REQUEST })

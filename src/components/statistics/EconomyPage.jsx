@@ -4,12 +4,12 @@ import { Link } from "react-router-dom"
 
 import StatisticsSidebar from './StatisticsSidebar'
 
-import { economyPageActions } from '../../actions/content/economyPage'
+import { economyPageActions } from '../../actions/content/statistics/economyPage'
 import { globalActions } from '../../actions/global'
 
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,
-	...state.content.economyPage
+	...state.content.statistics.economyPage
 })
 
 const mapDispatchToProps = (dispatch) => ({

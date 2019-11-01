@@ -1,4 +1,4 @@
-import { economyPageConstants } from '../../constants/content/economyPage'
+import { economyPageConstants } from '../../../constants/content/statistics/economyPage'
 
 const defaultState = {}
 

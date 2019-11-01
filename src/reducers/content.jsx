@@ -5,7 +5,7 @@ import loginReducer from './content/loginPage'
 import forgotPwdReducer from './content/forgotPwdPage'
 import queuePageReducer from './content/queuePage'
 import problemPageReducer from './content/problemPage'
-import economyPageReducer from './content/economyPage'
+import statisticsReducer from './content/statistics'
 import submitProblemPageReducer from './content/submitProblemPage'
 import profileReducer from './content/profile'
 import confirmReducer from './content/confirm'
@@ -17,7 +17,7 @@ export const contentReducer = combineReducers({
 	queuePage: queuePageReducer,
 	problemPage: problemPageReducer,
 	submitProblem: submitProblemPageReducer,
-	economyPage: economyPageReducer,
+	statistics: statisticsReducer,
 	confirm: confirmReducer,
 	profile: profileReducer
 })

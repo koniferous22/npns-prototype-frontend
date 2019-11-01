@@ -18,8 +18,7 @@ const forgotPwdPageReducer = (state = defaultState, action) =>  {
 			return {
 				stage: forgotPwdStages.EMAIL_SENT,
 				message: {
-					message: "Hello, this is just a demo, which doesn't use real smtp server - testing email service is used instead\n\
-									that means, to complete the process",
+					message: "Hello, this is just a demo, which doesn't use real smtp server - testing email service is used instead. That means, to complete the process",
 					steps: [
 						"go to \"https://ethereal.email\"",
 						"log in with following credentials:\n\tusername: \"oren.cremin@ethereal.email\"\n\tpassword:\"86GXzmB8sDN2u2Ycuy\"",

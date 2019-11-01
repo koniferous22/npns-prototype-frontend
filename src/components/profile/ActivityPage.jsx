@@ -35,7 +35,7 @@ class ActivityPage extends React.Component {
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 
 		return (<div>
-			<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view={auth_view}/>
+			<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 			<h3>{"Activity of user " + this.props.user}</h3>
 			<InfiniteScroll
 				pageStart={1}

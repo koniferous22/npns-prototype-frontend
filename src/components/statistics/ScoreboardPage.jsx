@@ -7,6 +7,7 @@ import QueueSidebar from '../queue/QueueSidebar'
 
 class ScoreboardPage extends React.Component {
 	render() {
+		console.log(this.props)
 		return(
 			<div>
 				<StatisticsSidebar />

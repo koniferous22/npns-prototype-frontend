@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import { connect } from 'react-redux'
 
+import IEPage from './components/issues/InternetExplorer'
+
 import Homepage from "./components/home/Homepage"
 import Header from "./components/header/Header"
 
@@ -47,11 +49,17 @@ class App extends React.Component {
 	}
 
 	render() {
+		
 		const loggedIn = !!this.props.user
+		console.log()
 		return (
 			<div className='App'>
 				<Router>
 					<Route render={({history}) => {
+						if((navigator.userAgent.indexOf("MSIE") !== -1 ) || (!!document.documentMode === true )) //IF IE > 10
+					    {
+							return (<IEPage />)
+						}
 						return (
 							<div className='App'>
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>

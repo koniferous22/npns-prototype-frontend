@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../../form/RenderField'
 import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
-import { signupActions } from '../../../actions/content/signup'
 
 const submit = (values, dispatch, props) => {
 	dispatch(personalInformationPageActions.filled('names',values))

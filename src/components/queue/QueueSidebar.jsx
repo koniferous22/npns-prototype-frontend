@@ -18,7 +18,6 @@ class QueueSidebar extends React.Component {
 		this.props.loadHierarchy()
 	}
 	render() {
-		console.log(this.props)
 		return (
 			<QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
 		)
