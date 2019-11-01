@@ -51,7 +51,6 @@ class App extends React.Component {
 	render() {
 		
 		const loggedIn = !!this.props.user
-		console.log()
 		return (
 			<div className='App'>
 				<Router>
@@ -91,7 +90,7 @@ class App extends React.Component {
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={this.props.token}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
 									<PrivateRoute path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
-									<PrivateRoute path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={this.props.token} queue={routeProps.match.params.queue}/>} loggedIn={loggedIn}/>
+									<PrivateRoute path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={this.props.token} queue={routeProps.match.params.queue} page={1}/>} loggedIn={loggedIn}/>
 
 									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>

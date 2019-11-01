@@ -9,7 +9,7 @@ function loadUserData(username) {
 	const failure = (message) => ({type: profilePageConstants.LOAD_USER_FAILED, message})
 
 	if (!username) {
-		return dispatch => {}        
+		return failure('No username specified')
 	}
 
 	return dispatch => {

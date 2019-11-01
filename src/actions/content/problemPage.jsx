@@ -8,7 +8,7 @@ function loadProblemData(problemId) {
 	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message})
 
 	if (!problemId) {
-		return dispatch => {}        
+		return failure('No Problem specified')
 	}
 
 	return dispatch => {
@@ -40,6 +40,10 @@ function loadSubmissionPage(problemId, activePage) {
 	const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
 	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message})
 
+	if (!problemId) {
+		return failure('No Problem specified')
+	}
+
 	return dispatch => {
 		dispatch(request())
 		var requestUrl = appConfig.backendUrl + "/problem/" + problemId + "/submissions"
@@ -68,6 +72,10 @@ function loadReplyPage(submissionId, activePage) {
 	const request = () => ({ type: problemPageConstants.LOAD_REPLY_PAGE_REQUEST })
 	const success = (submission, activeReplyPage, data, hasMore) => ({ type: problemPageConstants.LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
 	const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message})
+
+	if (!submissionId) {
+		return failure('No submission specified')
+	}
 
 	return dispatch => {
 		dispatch(request())
@@ -98,6 +106,10 @@ function postSubmission(submission, token) {
 	const success = (submission) => ({type: problemPageConstants.POST_SUBMISSION_SUCCESS, submission})
 	const failure = (message) => ({type: problemPageConstants.POST_SUBMISSION_FAILED, message})
 
+	if (!submission) {
+		return failure('No submission specified')
+	}
+
 	return dispatch => {
 		dispatch(request())
 		const requestUrl = appConfig.backendUrl + "/problem/" + submission.problem + "/submit"
@@ -126,6 +138,10 @@ function replySubmission(reply, token) {
 	const request = () => ({ type: problemPageConstants.REPLY_SUBMISSION_REQUEST })
 	const success = (submission, reply) => ({ type: problemPageConstants.REPLY_SUBMISSION_SUCCESS, submission, reply })
 	const failure = (message) => ({type: problemPageConstants.REPLY_SUBMISSION_FAILED, message})
+
+	if (!reply) {
+		return failure('No reply specified')
+	}
 
 	return dispatch => {
 		dispatch(request())
@@ -156,10 +172,16 @@ function acceptSubmission(submission, problem, token) {
 	const success = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_SUCCESS, submission })
 	const failure = (message) => ({type: problemPageConstants.ACCEPT_SUBMISSION_FAILED, message})
 
+	if (!submission) {
+		return failure('No submission specified')
+	}
+	if (!problem) {
+		return failure('No problem specified')
+	}
+
+
 	return dispatch => {
 		dispatch(request())
-		console.log('ACCCCCEPTTING')
-		console.log(submission)
 		const requestUrl = appConfig.backendUrl + "/problem/" + problem + "/mark_solved"
 		fetch(requestUrl, {
 			method: 'POST',
@@ -185,6 +207,7 @@ function acceptSubmission(submission, problem, token) {
 }
 
 function selectReplyForm(submission) {
+	
 	return {
 		type: problemPageConstants.SELECT_REPLY_FORM,
 		replyForm: submission

@@ -15,6 +15,11 @@ export function authReducer(state = initialState, action) {
 				token: action.token,
 				message: "Welcome"
 			};
+		case authConstants.LOGIN_FAILURE:
+			return {
+				user: action.user,
+				message: action.message
+			};
 		// parse if status was 401, then print this, other set new state for server errorz
 		case authConstants.LOGIN_INVALID_CREDENTIALS:
 			return {

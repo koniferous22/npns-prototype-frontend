@@ -7,6 +7,9 @@ export const forgotPwdActions = {
 };
 
 function forgotPwd(user) {
+	if (!user) {
+		return failed('Attempted request with no username/email')
+	}
 	return dispatch => {
 		dispatch(request());
 
@@ -27,13 +30,13 @@ function forgotPwd(user) {
 		.then(body => {
 			dispatch(success(body.user))
 		}).catch(error => {
-			dispatch(failure(JSON.stringify(error)))
+			dispatch(failed(JSON.stringify(error)))
 		})
 	}
 	
 	function request() { return { type: forgotPwdConstants.REQUEST } }
 	function success(user) { return { type: forgotPwdConstants.SUCCESS, user } }
-	function failure(message) { return { type: forgotPwdConstants.FAILED, message } }
+	function failed(message) { return { type: forgotPwdConstants.FAILED, message } }
 	
 }
 

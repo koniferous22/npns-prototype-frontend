@@ -8,6 +8,18 @@ export const authActions = {
 };
 
 function login(username, password) {
+	if (!username) {
+		return {
+			type: authConstants.LOGIN_FAILURE,
+			message: 'Missing username'
+		}
+	}
+	if (!password) {
+		return {
+			type: authConstants.LOGIN_FAILURE,
+			message: 'Missing password'
+		}
+	}
 	return dispatch => {
 		dispatch(request({ username }));
 		// 2. parse result und depending on that stuff, dispatch success/failure action/reducer idk

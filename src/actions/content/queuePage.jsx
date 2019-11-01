@@ -7,6 +7,10 @@ function setActivePage(queue,pageIndex) {
 	const success = (queue, activePage, data, hasMore) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, queue, hasMore })
 	const failure = (queue, message) => ({ type: queuePageConstants.NETWORK_ERROR, message, queue })
 
+	if (!queue) {
+		return {type: queuePageConstants.NETWORK_ERROR, queue:'Index', message: 'No queue specified'}
+	}
+
 	return dispatch => {
 		dispatch(request(queue, pageIndex));
 		var requestUrl = appConfig.backendUrl + "/queue/" + queue + "/problems"

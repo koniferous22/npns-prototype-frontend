@@ -44,7 +44,7 @@ const availableFields = ['username', 'password', 'email']
 function validateField(values, field) {
 
 	if (!availableFields.includes(field)) {
-		return new Promise((resolve) => resolve())
+		return new Promise((resolve, reject) => reject({[field]: 'Invalid field'}))
 	}
 	return new Promise((resolve, reject) => {
 		fetch(appConfig.backendUrl + "/valid/" + field, {
