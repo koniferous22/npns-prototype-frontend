@@ -32,6 +32,13 @@ function setActivePage(token, pageIndex) {
 	}
 }
 
+function reset() {
+	return {
+		type: transactionPageConstants.RESET
+	}
+}
+
 export const transactionPageActions = {
-	setActivePage
+	setActivePage,
+	reset
 }

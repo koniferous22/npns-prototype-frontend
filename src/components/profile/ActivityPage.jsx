@@ -17,12 +17,17 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	setUser: (user) => dispatch(activityPageActions.setUser(user)),
-	loadPage: (user, page) => dispatch(activityPageActions.setActivePage(user, page))
+	loadPage: (user, page) => dispatch(activityPageActions.setActivePage(user, page)),
+	reset: () => dispatch(activityPageActions.reset())
 })
 
 class ActivityPage extends React.Component {
 	componentDidMount() {
 		this.props.setUser(this.props.user)
+	}
+
+	componentWillUnmount() {
+		this.props.reset()
 	}
 
 	render() {

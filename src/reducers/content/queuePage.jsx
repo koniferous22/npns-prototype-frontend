@@ -49,6 +49,8 @@ function singleQueueReducer(state = defaultQueueState, action) {
 				}
 				
 			}
+		case queuePageConstants.RESET:
+			return defaultQueueState
 		default:
 			return state
 	}

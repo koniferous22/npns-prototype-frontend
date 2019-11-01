@@ -39,6 +39,8 @@ function transactionPageReducer(state=defaultState, action) {
 					hasMore: action.hasMore
 				},
 			}
+		case transactionPageConstants.RESET:
+			return defaultState
 		default:
 			return state
 	}

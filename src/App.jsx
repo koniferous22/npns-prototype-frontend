@@ -60,7 +60,7 @@ class App extends React.Component {
 									<NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
 									<Route path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
 
-									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} />} />
+									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} loggedIn={loggedIn}/>} />
 									<PrivateRoute path="/q/:queuename/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} queue={routeProps.match.params.queuename}/>} loggedIn={loggedIn}/>
 									
 									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />
@@ -106,8 +106,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
 	// AUTH REDUCER
 	user: state.auth.user,
-	token: state.auth.token,
-	loggingIn: state.auth.loggingIn
+	token: state.auth.token
 })
 
 const mapDispatchToProps = (dispatch) => ({

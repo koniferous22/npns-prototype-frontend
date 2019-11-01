@@ -191,6 +191,12 @@ function selectReplyForm(submission) {
 	}
 }
 
+function reset() {
+	return {
+		type: problemPageConstants.RESET
+	}
+}
+
 export const problemPageActions = {
 	loadProblemData,
 	loadSubmissionPage,
@@ -198,5 +204,6 @@ export const problemPageActions = {
 	postSubmission,
 	replySubmission,
 	acceptSubmission,
-	selectReplyForm
+	selectReplyForm,
+	reset
 }

@@ -45,7 +45,14 @@ function setUser(user) {
 	}
 }
 
+function reset() {
+	return {
+		type: activityPageConstants.RESET
+	}
+}
+
 export const activityPageActions = {
 	setActivePage,
-	setUser
+	setUser,
+	reset
 }

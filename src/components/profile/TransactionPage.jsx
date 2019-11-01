@@ -7,7 +7,8 @@ import TransactionBox from './TransactionPage/TransactionBox'
 import { transactionPageActions } from '../../actions/content/profile/transactionPage'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	loadPage: (page) => dispatch(transactionPageActions.setActivePage(ownProps.token, page))
+	loadPage: (page) => dispatch(transactionPageActions.setActivePage(ownProps.token, page)),
+	reset: () => dispatch(transactionPageActions.reset())
 })
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,6 +21,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 class TransactionPage extends React.Component {
+	componentWillUnmount() {
+		this.props.reset()
+	}
+
 	render() {
 		return (
 			<div>

@@ -44,6 +44,8 @@ function activityPageReducer(state = defaultState, action) {
 				...defaultState,
 				user: action.user
 			}
+		case activityPageConstants.RESET:
+			return defaultState
 		default:
 			return state
 	}

@@ -17,10 +17,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadProblemData: () => dispatch(problemPageActions.loadProblemData(ownProps.problemId)),
 	loadSubmissionPage: (page) => dispatch(problemPageActions.loadSubmissionPage(ownProps.problemId, page)),
 	postSubmission: (submission, token) => dispatch(problemPageActions.postSubmission(submission, token)),
+	reset: () => dispatch(problemPageActions.reset())
 })
 
 class ProblemPage extends React.Component {
-	
+	componentWillUnmount() {
+		this.props.reset()
+	}
+
 	componentDidMount() {
 		this.props.loadProblemData()
 	}

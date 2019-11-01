@@ -31,19 +31,30 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadPage: page => dispatch(queuePageActions.setActivePage(ownProps.queue, page)),
-	setActiveEntry: (page, entry) => dispatch(queuePageActions.setActiveEntry(page, entry))
+	setActiveEntry: (page, entry) => dispatch(queuePageActions.setActiveEntry(page, entry)),
+	reset: () => dispatch(queuePageActions.reset(ownProps.queue))
 })
 
 class QueuePage extends React.Component {
+	componentWillUnmount() {
+		this.props.reset()
+	}
+
 	render() {
+
+		const submitProblem = (
+			<div>
+				{'Submit problem '}
+				<Link to={'/q/' + this.props.queue + '/submitProblem'}>here</Link>
+			</div>
+		)
 		/*
 			no need to test if queue doesnt exist, backend returns only empty array
 		*/
 		return (
 			<div>
 				<QueueSidebar />
-				{'Submit problem '}
-				<Link to={'/q/' + this.props.queue + '/submitProblem'}>here</Link>
+				{this.props.loggedIn && submitProblem}
 				<h3>{"Problems of queue: " + this.props.queue}</h3>
 				<InfiniteScroll
 					pageStart={1}

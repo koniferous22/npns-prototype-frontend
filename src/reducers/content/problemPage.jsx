@@ -177,6 +177,8 @@ function problemPageReducer(state = defaultState, action) {
 				replyForm: action.replyForm,
 				message: ""
 			}
+		case problemPageConstants.RESET:
+			return defaultState
 		default:
 			return state
 

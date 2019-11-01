@@ -42,8 +42,16 @@ function setActiveEntry(queue, activePage, activeEntry) {
 	}
 }
 
+function reset(queue) {
+	return {
+		type: queuePageConstants.RESET,
+		queue
+	}
+}
+
 export const queuePageActions = {
 	setActivePage,
-	setActiveEntry
+	setActiveEntry,
+	reset
 }
 
