@@ -9,11 +9,12 @@ import ScoreboardPageBar from './ScoreboardPage/ScoreboardPageBar'
 
 import { scoreboardPageActions } from '../../actions/content/statistics/scoreboardPage'
 
-const mapStateToProps = state => state.content.statistics.scoreboardPage
+const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue]
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	setActivePage: (page) => dispatch(scoreboardPageActions.setActivePage(ownProps.queue, page)),
-	findUser: (user) => dispatch(scoreboardPageActions.findUser(ownProps.queue, user, 50))
+	findUser: (user) => dispatch(scoreboardPageActions.findUser(ownProps.queue, user, 50)),
+	reset: () => dispatch(scoreboardPageActions.reset())
 })
 
 class ScoreboardPage extends React.Component {
@@ -27,8 +28,12 @@ class ScoreboardPage extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.props.reset()
+	}
+
 	render() {
-		const scoreboardData = this.props.data[this.props.queue] || []
+		const scoreboardData = this.props.data || []
 		const users = scoreboardData.map((user, index) => (
 			<tr key={index}>
 				<td>

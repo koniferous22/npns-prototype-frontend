@@ -1,13 +1,18 @@
+import { combineReducers } from 'redux'
+import { reducer } from 'redux-form'
+
 import { scoreboardPageConstants } from '../../../constants/content/statistics/scoreboardPage'
 
-const defaultState = {
-	data: {},
+const defaultQueueScoreboardState = {
+	data: [],
 	activePage: 1,
 	pageCount: 1,
 	userFlag: false
 }
 
-function scoreboardPageReducer(state=defaultState, action) {
+const defaultState = {}
+
+function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) {
 	switch(action.type) {
 		case scoreboardPageConstants.LOAD_PAGE_REQUEST:
 			return {
@@ -16,10 +21,9 @@ function scoreboardPageReducer(state=defaultState, action) {
 				message: 'Loading...',
 			}
 		case scoreboardPageConstants.LOAD_PAGE_SUCCESS:
-			const newData = {...state.data, [action.queue]: action.data}
 			return {
 				...state,
-				data: newData,
+				data: action.data,
 				activePage: action.activePage,
 				message: ''
 			}
@@ -66,4 +70,20 @@ function scoreboardPageReducer(state=defaultState, action) {
 	}
 }
 
-export default scoreboardPageReducer;
+function scoreboardPageReducer(state = defaultState, action) {
+	if (action.type === scoreboardPageConstants.RESET) {
+		return defaultState
+	}
+	const newState = {...state}
+	if (action.queue) {
+		newState[action.queue] = singleScoreboardPageReducer(state[action.queue] || defaultQueueScoreboardState, action)	
+	}
+	return newState
+}
+
+const scoreboardSearchFormReducer = reducer
+
+export default combineReducers({
+	page: scoreboardPageReducer,
+	form: scoreboardSearchFormReducer
+})

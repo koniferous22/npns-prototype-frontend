@@ -108,8 +108,15 @@ function getNumberOfPages(queue) {
 	}
 }
 
+function reset() {
+	return {
+		type: scoreboardPageConstants.RESET
+	}
+}
+
 export const scoreboardPageActions = {
 	setActivePage,
 	findUser,
-	getNumberOfPages
+	getNumberOfPages,
+	reset
 }

@@ -42,7 +42,9 @@ function signup(user) {
 const availableFields = ['username', 'password', 'email']
 
 function validateField(values, field) {
-
+	if (!field) {
+		return new Promise(resolve => resolve())
+	}
 	if (!availableFields.includes(field)) {
 		return new Promise((resolve, reject) => reject({[field]: 'Invalid field'}))
 	}

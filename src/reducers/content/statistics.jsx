@@ -5,5 +5,5 @@ import scoreboardPageReducer from './statistics/scoreboardPage'
 
 export default combineReducers({
 	economyPage: economyPageReducer,
-	scoreboardPage: scoreboardPageReducer
+	scoreboard: scoreboardPageReducer
 })

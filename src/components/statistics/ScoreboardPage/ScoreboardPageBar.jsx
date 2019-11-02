@@ -4,9 +4,12 @@ import { Link } from "react-router-dom"
 
 import { scoreboardPageActions } from '../../../actions/content/statistics/scoreboardPage'
 
-const mapStateToProps = state => ({
-	count: state.content.statistics.scoreboardPage.pageCount
-})
+const mapStateToProps = (state, ownProps) => {
+	const scoreboardQueueReducer = state.content.statistics.scoreboard.page[ownProps.queue]
+	return {
+		count: scoreboardQueueReducer ? scoreboardQueueReducer.pageCount : 1
+	}
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	getNumberOfPages: () => dispatch(scoreboardPageActions.getNumberOfPages(ownProps.queue, ownProps.token))
@@ -28,15 +31,14 @@ class ScoreboardPageBar extends React.Component {
 		const next = (current < end) ? (current < begin ? begin : current + 1) : end
 		const baseUrl = '/statistics/scoreboard/' + this.props.queue + '?page='
 		return (
-			<div>
-				<Link to={baseUrl + begin}>{'<<'}</Link>
-				<br/>
-				<Link to={baseUrl + prev}>{'<'}</Link>
-				<br/>
-				<Link to={baseUrl + next}>{'>'}</Link>
-				<br/>
-				<Link to={baseUrl + end}>{'>>'}</Link>
-			</div>
+			<table>
+				<tr>
+					<td><Link to={baseUrl + begin}>{'<<'}</Link></td>
+					<td><Link to={baseUrl + prev}>{'<'}</Link></td>
+					<td><Link to={baseUrl + next}>{'>'}</Link></td>
+					<td><Link to={baseUrl + end}>{'>>'}</Link></td>
+				</tr>
+			</table>
 		)
 	}
 }
