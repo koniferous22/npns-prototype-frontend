@@ -90,7 +90,7 @@ class App extends React.Component {
 									<ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={this.props.token}/>} loggedIn={loggedIn} viewer={this.props.user ? this.props.user.username : null}/>
 									
 									<Route path="/statistics/economy" render={() => <EconomyPage token={this.props.token}/>} loggedIn={loggedIn}/>
-									<Route path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={this.props.token} queue={routeProps.match.params.queue} page={Number(new URLSearchParams(routeProps.location.search).get('page'))} />} loggedIn={loggedIn} />
+									<Route path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={this.props.token} queue={routeProps.match.params.queue} urlPage={Number(new URLSearchParams(routeProps.location.search).get('page')) || 1} />} loggedIn={loggedIn} />
 
 									
 									<Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={this.props.logout}/>}/>

@@ -34,7 +34,7 @@ const SignUpForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
 			<Field name="username" component={renderField} type="text" label="Username"/>
-			<Field name="password" component={renderField} type="password" label="Password (at least 8 characters)"/>
+			<Field name="password" component={renderField} type="password" label="Password" placeholder="at least 8 characters"/>
 			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password"/>
 			<Field name="email" component={renderField} type="text" label="Email"/>
 			<Field name="firstName" component={renderField} type="text" label="First Name"/>

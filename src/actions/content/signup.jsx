@@ -61,7 +61,7 @@ function validateField(values, field) {
 				return reject({[field]: data.message})
 			})
 		})
-	}) 
+	})
 }
 
 function reset() {

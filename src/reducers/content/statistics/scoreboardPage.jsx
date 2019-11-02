@@ -7,7 +7,8 @@ const defaultQueueScoreboardState = {
 	data: [],
 	activePage: 1,
 	pageCount: 1,
-	userFlag: false
+	userFlag: false,
+	highlight: null
 }
 
 const defaultState = {}
@@ -19,18 +20,23 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 				...state,
 				activePage: action.activePage,
 				message: 'Loading...',
+				highlight: null,
+				userFlag: false
 			}
 		case scoreboardPageConstants.LOAD_PAGE_SUCCESS:
 			return {
 				...state,
 				data: action.data,
 				activePage: action.activePage,
-				message: ''
+				message: '',
+				highlight: null,
+				userFlag: false
 			}
 		case scoreboardPageConstants.LOAD_PAGE_FAILED:
 			return {
 				...state,
-				message: action.message
+				message: action.message,
+				userFlag: false
 			}
 		case scoreboardPageConstants.USER_SEARCH_REQUEST:
 			return {
@@ -42,7 +48,8 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 				...state,
 				activePage: action.activePage,
 				userFlag: true,
-				message: null
+				message: null,
+				highlight: action.username
 			}
 		case scoreboardPageConstants.USER_SEARCH_FAILED:
 			return {
@@ -58,12 +65,11 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 			return {
 				...state,
 				pageCount: action.pageCount,
-				message: null
 			}
 		case scoreboardPageConstants.USER_COUNT_FAILED:
 			return {
 				...state,
-				message: action.message
+				message: action.message,
 			}
 		default:
 			return state
