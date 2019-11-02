@@ -9,7 +9,6 @@ import { submitProblemActions } from '../../../actions/content/submitProblem'
 const transformIntoOption = q => ({value: q, label: q})
 
 const submit = (values, dispatch, props) => {
-	console.log(values)
 	if (!values.queue) {
 		values.queue = transformIntoOption(props.defaultQueue)
 	}
