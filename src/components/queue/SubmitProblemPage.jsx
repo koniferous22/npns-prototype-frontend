@@ -6,33 +6,29 @@ import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
 import { submitProblemActions } from '../../actions/content/submitProblem'
 import { submitProblemStages } from '../../constants/content/submitProblemPage' 
 
-const mapStateToProps = (state, ownProps) => ({
-	queue: ownProps.queue,
-	token: ownProps.token,
-	stage: state.content.submitProblem.page.stage,
-	message: state.content.submitProblem.page.message,
-	problemId: state.content.submitProblem.page.problemId
-})
+const mapStateToProps = state => state.content.submitProblem.page
 
 const mapDispatchToProps = dispatch => ({
-  reset: () => dispatch(submitProblemActions.reset())
+	reset: () => dispatch(submitProblemActions.reset()),
+	fetchDropdownValues: () => dispatch(submitProblemActions.fetchDropdownValues())
 })
 
 class SubmitProblemPage extends React.Component {
-  componentWillUnmount() {
-    this.props.reset()
-  }
+	componentDidMount() {
+		this.props.fetchDropdownValues()
+	}
+
+	componentWillUnmount() {
+		this.props.reset()
+	}
+
 	render() {
-		const queue = this.props.queue
-		const message = this.props.message
-		const problemId = this.props.problemId
-		const token = this.props.token
 		switch(this.props.stage) {
 			case submitProblemStages.COMPLETED:
 				return(
 					<div>
-						{message}
-						<p>Would you like to check out <Link to={'/problem/' + problemId}>your submitted problem</Link> or <Link to={'/q/' + queue}>the {queue} queue</Link>?</p>
+						{this.props.message}
+						<p>Would you like to check out <Link to={'/problem/' + this.props.problemId}>your submitted problem</Link> or the <Link to={'/q/' + this.props.queue}>{this.props.queue} queue</Link>?</p>
 					</div>
 
 				)
@@ -40,9 +36,9 @@ class SubmitProblemPage extends React.Component {
 			default:
 				return(
 					<div>
-						<p>Submitting new problem to queue {queue}</p>
-						<SubmitProblemForm queue={queue} token={token}/>
-						<div>{message}</div>
+						<p>Submitting new problem</p>
+						<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={this.props.queueOptions}/>
+						<div>{this.props.message}</div>
 					</div>
 				)
 		}

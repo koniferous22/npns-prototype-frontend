@@ -40,12 +40,21 @@ class QueuePage extends React.Component {
 		this.props.reset()
 	}
 
-	render() {
+	componentDidUpdate(prevProps){
+		if (prevProps.queue !== this.props.queue) {
+			this.props.loadPage(1)
+		}
+	}
 
+	componentDidMount() {
+		this.props.loadPage(1)
+	}
+
+	render() {
 		const submitProblem = (
 			<div>
 				{'Submit problem '}
-				<Link to={'/q/' + this.props.queue + '/submitProblem'}>here</Link>
+				<Link to={'/submitProblem?q=' + this.props.queue}>here</Link>
 			</div>
 		)
 		/*
