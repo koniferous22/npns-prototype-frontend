@@ -12,13 +12,18 @@ import ChangeNamesForm from './PersonalInformationPage/ChangeNamesForm'
 import ConfirmPasswordForm from './PersonalInformationPage/ConfirmPasswordForm'
 import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDispatcher'
 
+import { personalInformationPageActions } from '../../actions/content/profile/personalInformationPage'
 import { personalInformationPageStages } from '../../constants/content/profile/personalInformationPage'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 
+const mapDispatchToProps = dispatch => ({
+	reset: () => dispatch(personalInformationPageActions.reset())
+})
+
 class PersonalInformationPage extends React.Component {
 	componentWillUnmount() {
-		// reset
+		this.props.reset()
 	}
 
 	render() {
@@ -63,4 +68,4 @@ class PersonalInformationPage extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps)(PersonalInformationPage)
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalInformationPage)

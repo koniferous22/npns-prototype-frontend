@@ -100,6 +100,8 @@ function personalInformationPageReducer(state=defaultState, action) {
 				stage: personalInformationPageStages.SUBMITTING_FORM,
 				message: action.message
 			}
+		case personalInformationPageConstants.RESET:
+			return defaultState
 		default:
 			return state
 	}
