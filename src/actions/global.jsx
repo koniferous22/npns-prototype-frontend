@@ -1,18 +1,13 @@
 import { globalConstants } from '../constants/global'
 import { appConfig } from '../appConfig'
 
-export const globalActions = {
-	hierarchy
-}
-
 function hierarchy() {
 	return dispatch => {
 		dispatch(request())
 		fetch(appConfig.backendUrl + "/queue/hierarchy", {
 			method: 'GET',
 			headers: {
-				'Content-Type'  : 'application/json'/*,
-				'Authorization' : 'Bearer ' + token*/
+				'Content-Type'  : 'application/json'
 			}
 			
 		}).then(response => {
@@ -36,4 +31,17 @@ function hierarchy() {
 	function request() { return { type: globalConstants.HIERARCHY_LOAD_REQUEST}}
 	function success(hierarchy) { return { type: globalConstants.HIERARCHY_LOAD_SUCCESS, hierarchy} }
 	function failed() { return { type: globalConstants.HIERARCHY_LOAD_FAILED } }
+}
+
+function setTheme(theme) {
+	return {
+		type: globalConstants.SET_THEME,
+		theme
+	}
+}
+
+
+export const globalActions = {
+	hierarchy,
+	setTheme
 }
