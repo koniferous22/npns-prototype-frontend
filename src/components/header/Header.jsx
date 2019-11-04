@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom"
+
 import LogoutButton from "../auth/LogoutButton"
+
+import HeaderEntry from '../../styled-components/header/StyledHeaderEntry'
+import HeaderEntries from '../../styled-components/header/StyledHeaderEntries'
+import InlineDiv from '../../styled-components/defaults/StyledInlineDiv'
 
 const Header = ({loggedIn, logout, username}) => {
 	const publicStuff = [
@@ -38,41 +43,22 @@ const Header = ({loggedIn, logout, username}) => {
 			label: "Regooster"
 		}
 	]
-
-	return loggedIn ? (
-		<div>
-			<p>{'Logged in as ' + username}</p>
-			<ul>
-				{publicStuff.map((o,index) => (
-					<li key={index}>
-						<Link to={o.to}>{o.label}</Link>	
-					</li>
-				))}
-				{privateStuff.map((o,index) => (
-					<li key={index}>
-						<Link to={o.to}>{o.label}</Link>	
-					</li>
-				))}
-			</ul>
-			<LogoutButton loggedIn={true} logout={logout}/>
-		</div>
-	) : (
-		<div>
-			<p>You are not logged in</p>
-			<ul>
-				{publicStuff.map((o,index) => (
-					<li key={index}>
-						<Link to={o.to}>{o.label}</Link>	
-					</li>
-				))}
-				{unregisteredStuff.map((o,index) => (
-					<li key={index}>
-						<Link to={o.to}>{o.label}</Link>	
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+	let stuff = loggedIn ? publicStuff.concat(privateStuff) : publicStuff.concat(unregisteredStuff)
+	stuff = stuff.map((o, index) => (
+		<HeaderEntry key={index}>
+			<Link to={o.to}>{o.label}</Link>	
+		</HeaderEntry>
+	))
+	return (
+		<InlineDiv>
+			<InlineDiv>{loggedIn ? 'Logged in as ' + username : 'You are not logged in'}
+			</InlineDiv>
+			<HeaderEntries>
+				{stuff}
+			</HeaderEntries>
+			{loggedIn && <LogoutButton loggedIn={true} logout={logout}/>}
+		</InlineDiv>
+	)
 }
 
 export default Header

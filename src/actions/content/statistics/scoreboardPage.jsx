@@ -3,9 +3,9 @@ import { scoreboardPageConstants } from '../../../constants/content/statistics/s
 
 function setActivePage(queue, pageIndex) {
 
-	const request = (activePage) => ({ type: scoreboardPageConstants.LOAD_PAGE_REQUEST, activePage })
+	const request = (activePage) => ({ type: scoreboardPageConstants.LOAD_PAGE_REQUEST, queue, activePage })
 	const success = (queue, activePage, data) => ({ type: scoreboardPageConstants.LOAD_PAGE_SUCCESS, queue, activePage, data })
-	const failure = (message) => ({ type: scoreboardPageConstants.LOAD_PAGE_FAILED, message })
+	const failure = (message) => ({ type: scoreboardPageConstants.LOAD_PAGE_FAILED, queue, message })
 
 	return dispatch => {
 		if (!queue) {
@@ -36,9 +36,9 @@ function setActivePage(queue, pageIndex) {
 }
 
 function findUser(queue, username, recordsPerPage) {
-	const request = () => ({ type: scoreboardPageConstants.USER_SEARCH_REQUEST })
-	const success = (activePage) => ({ type: scoreboardPageConstants.USER_SEARCH_SUCCESS, activePage })
-	const failure = (message) => ({ type: scoreboardPageConstants.USER_SEARCH_FAILED, message })
+	const request = () => ({ type: scoreboardPageConstants.USER_SEARCH_REQUEST, queue })
+	const success = (username, activePage) => ({ type: scoreboardPageConstants.USER_SEARCH_SUCCESS, queue, username, activePage })
+	const failure = (message) => ({ type: scoreboardPageConstants.USER_SEARCH_FAILED, queue, message })
 
 	if(!queue) {
 		return failure('No queue specified')
@@ -50,10 +50,9 @@ function findUser(queue, username, recordsPerPage) {
 	if(!recordsPerPage) {
 		recordsPerPage = 50
 	}
-	console.log(recordsPerPage)
 	return dispatch => {
 		dispatch(request());
-		const requestUrl = appConfig.backendUrl + "/queue/" + queue + '/scoreboard/position' + username
+		const requestUrl = appConfig.backendUrl + "/queue/" + queue + '/scoreboard/position/' + username
 		fetch(requestUrl, {
 			method: 'GET',
 			headers: { 'Content-Type': 'application/json' }
@@ -68,7 +67,10 @@ function findUser(queue, username, recordsPerPage) {
 			}
 		}).then(response => response.json())
 		.then(body => {        
-			dispatch(success(((body.position - 1) / recordsPerPage) + 1))
+			if (!body.position) {
+				return dispatch(failure('User "' + username + '" has no score in queue "' + queue + '"'))
+			}
+			dispatch(success(username, Math.floor(((body.position - 1) / recordsPerPage) + 1)))
 		}).catch(error => {
 			dispatch(failure(JSON.stringify(error)))
 		})
@@ -76,9 +78,9 @@ function findUser(queue, username, recordsPerPage) {
 }
 
 function getNumberOfPages(queue) {
-	const request = () => ({ type: scoreboardPageConstants.USER_COUNT_REQUEST })
-	const success = (pageCount) => ({ type: scoreboardPageConstants.USER_COUNT_SUCCESS, pageCount })
-	const failure = (message) => ({ type: scoreboardPageConstants.USER_COUNT_FAILED, message })
+	const request = () => ({ type: scoreboardPageConstants.USER_COUNT_REQUEST, queue })
+	const success = (pageCount) => ({ type: scoreboardPageConstants.USER_COUNT_SUCCESS, queue, pageCount })
+	const failure = (message) => ({ type: scoreboardPageConstants.USER_COUNT_FAILED, queue, message })
 
 	if(!queue) {
 		return failure('No queue specified')
@@ -114,9 +116,25 @@ function reset() {
 	}
 }
 
+function validateUserExists(username) {
+	return new Promise((resolve, reject) => {
+		fetch(appConfig.backendUrl + "/u/exists", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({user: username})
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return resolve()
+			}
+			return reject({identifier: 'User "' + username + '" does not exists'})
+		})
+	})
+}
+
 export const scoreboardPageActions = {
 	setActivePage,
 	findUser,
 	getNumberOfPages,
-	reset
+	reset,
+	validateUserExists
 }

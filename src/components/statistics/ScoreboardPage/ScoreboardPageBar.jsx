@@ -32,12 +32,14 @@ class ScoreboardPageBar extends React.Component {
 		const baseUrl = '/statistics/scoreboard/' + this.props.queue + '?page='
 		return (
 			<table>
-				<tr>
-					<td><Link to={baseUrl + begin}>{'<<'}</Link></td>
-					<td><Link to={baseUrl + prev}>{'<'}</Link></td>
-					<td><Link to={baseUrl + next}>{'>'}</Link></td>
-					<td><Link to={baseUrl + end}>{'>>'}</Link></td>
-				</tr>
+				<tbody>
+					<tr>
+						<td><Link to={baseUrl + begin}>{'<<'}</Link></td>
+						<td><Link to={baseUrl + prev}>{'<'}</Link></td>
+						<td><Link to={baseUrl + next}>{'>'}</Link></td>
+						<td><Link to={baseUrl + end}>{'>>'}</Link></td>
+					</tr>
+				</tbody>
 			</table>
 		)
 	}

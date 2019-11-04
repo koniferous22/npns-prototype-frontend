@@ -31,6 +31,7 @@ class ProfilePage extends React.Component {
 				</li>
 			))
 
+
 		return (
 			<div>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
@@ -41,12 +42,17 @@ class ProfilePage extends React.Component {
 					{'Number of entered problems: ' + this.props.data.problem_count}<br />
 					{'Number of entered submissions: ' + this.props.data.submission_count}<br />
 					{'Number of entered replies: ' + this.props.data.reply_count}<br />
-					{'User score in queues'}
-					<ul>
-						{balances}
-					</ul>
-					{'Stuff will be probably added l8r'}
+					
 				</p>
+				{balances.length > 0 &&  (
+					<div>
+						{'User score in queues'}
+						<ul>
+							{balances}
+						</ul>
+					</div>
+				)}
+				{'Stuff will be probably added l8r'}
 			</div>
 		);
 	}

@@ -1,7 +1,10 @@
 import React from 'react'
+
+import Button from '../../styled-components/defaults/StyledButton'
+
 const LogoutButton = (({loggedIn,logout}) => {
 	if (loggedIn) {
-		return <button onClick={logout}>Log out</button>
+		return <Button onClick={logout}>Log out</Button>
 	}
 	return <p>Oi maite show mai yar login loicense</p>
 });

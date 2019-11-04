@@ -1,8 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { personalInformationPageConstants } from '../../../constants/content/profile/personalInformationPage'
 
-import { forgotPwdActions } from '../forgotPwdPage'
-
 function filled(form, values) {
 	return {
 		type: personalInformationPageConstants.REQUEST_FORM_FILLED,
@@ -171,12 +169,45 @@ function submitNamesChange(newFirstName, newLastName, authToken) {
 	
 }
 
-const submitPasswordChange = (user) => forgotPwdActions.forgotPwd(user)
+function submitPasswordChange(user) {
+	if (!user) {
+		return failure('Attempted request with no username/email')
+	}
+	return dispatch => {
+		dispatch(request());
 
-/*
-* submit change username
-* remaining data: first name, last name
-*/
+		fetch(appConfig.backendUrl + "/u/passwordReset/request", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({user})
+		}).then(response => {
+			// NOTE: refactor this
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {
+			dispatch(success(body.user))
+		}).catch(error => {
+			dispatch(failure(JSON.stringify(error)))
+		})
+	}
+	
+	function request() { return { type: personalInformationPageConstants.CHANGE_PASSWORD_REQUEST } }
+	function success(user) { return { type: personalInformationPageConstants.CHANGE_PASSWORD_SUCCESS, user} }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_PASSWORD_FAILED, message } }
+}
+
+
+function reset() {
+	return {
+		type: personalInformationPageConstants.RESET
+	}
+}
 
 export const personalInformationPageActions = {
 	filled,
@@ -184,5 +215,6 @@ export const personalInformationPageActions = {
 	submitEmailChange,
 	submitUsernameChange,
 	submitNamesChange,
-	submitPasswordChange	
+	submitPasswordChange,
+	reset
 }

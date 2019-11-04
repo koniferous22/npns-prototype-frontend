@@ -1,16 +1,12 @@
 import { appConfig } from '../../appConfig'
 import { submitProblemPageConstants } from '../../constants/content/submitProblemPage';
 
-export const submitProblemActions = {
-	submit,
-	reset
-};
 
 function submit(problem, authToken) {
 	
 	return dispatch => {
 		dispatch(request(problem));
-
+		const queue = problem.queue_name
 		fetch(appConfig.backendUrl + "/problem/add", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
@@ -26,15 +22,44 @@ function submit(problem, authToken) {
 			}
 		}).then(response => response.json())
 		.then(problem => {
-			dispatch(success(problem))
+			dispatch(success(problem, queue))
 		}).catch(error => {
 			dispatch(failure(error))
 		})
 	}
 	
-	function request() { return { type: submitProblemPageConstants.REQUEST } }
-	function success(problem) { return { type: submitProblemPageConstants.SUCCESS, problem } }
-	function failure(error) { return { type: submitProblemPageConstants.FAILED, error } }
+	function request() { return { type: submitProblemPageConstants.SUBMIT_REQUEST } }
+	function success(problem, queue) { return { type: submitProblemPageConstants.SUBMIT_SUCCESS, problem, queue } }
+	function failure(error) { return { type: submitProblemPageConstants.SUBMIT_FAILED, error } }
+}
+
+function fetchDropdownValues() {
+
+	function request() { return { type: submitProblemPageConstants.LOAD_QUEUES_REQUEST } }
+	function success(queues) { return { type: submitProblemPageConstants.LOAD_QUEUES_SUCCESS, queues } }
+	function failure(error) { return { type: submitProblemPageConstants.LOAD_QUEUES_FAILED, error } }
+
+	return dispatch => {
+		dispatch(request());
+
+		fetch(appConfig.backendUrl + "/queue/all", {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json' },
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {
+			dispatch(success(body.queues.map(q => q.name)))
+		}).catch(error => {
+			dispatch(failure(error))
+		})
+	}
 }
 
 function reset() {
@@ -42,3 +67,9 @@ function reset() {
 		type: submitProblemPageConstants.RESET
 	}
 }
+
+export const submitProblemActions = {
+	submit,
+	fetchDropdownValues,
+	reset
+};
