@@ -5,13 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 let boost = (values, dispatch, props) => {
 	dispatch(
 		boostActions
-			.boost( //zmenit obsah tohoto
-				{
-					problemId: props.problemId,
-					boost: values.boost
-				},
-				props.token
-			)
+			.boost({value: values.boost, problemId: props.problemId}, props.token)
 	)
 }
 
@@ -28,7 +22,7 @@ let BoostForm = props => {
 
 BoostForm = reduxForm({
 	form: 'form',
-	onSubmit: submit,
+	onSubmit: boost,
 	getFormState: ({content}) => content.boost.form
 })(BoostForm)
 

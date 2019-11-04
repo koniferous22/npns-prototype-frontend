@@ -18,6 +18,7 @@ import LogoutPage from './components/auth/LogoutPage'
 import ForgotPassword from './components/forgotpwd/ForgotPassword'
 import QueuePage from "./components/queue/QueuePage"
 import ProblemPage from "./components/problem/ProblemPage"
+import BoostPage from "./components/problem/BoostPage"
 import SubmitProblemPage from "./components/queue/SubmitProblemPage"
 
 import ProfilePage from "./components/profile/ProfilePage"
@@ -73,7 +74,8 @@ class App extends React.Component {
 									<Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} loggedIn={loggedIn}/>} />
 									<PrivateRoute path="/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} urlQueue={parseUrlParam(routeProps, 'q')}/>} loggedIn={loggedIn}/>
 									
-									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />																	
+									<Route exact path="/problem/:id/boost" render={(routeProps) => <BoostPage token={this.props.token} problemId={routeProps.match.params.id} loggedIn={loggedIn}/>} />
+									<Route path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />
 
 									<Route exact path="/u/:username" render={ 
 										(routeProps) => <ProfilePage 

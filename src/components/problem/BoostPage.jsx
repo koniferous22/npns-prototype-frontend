@@ -8,9 +8,9 @@ import { boostStages } from '../../constants/content/boost'
 
 const mapStateToProps = (state, ownProps) => ({
 	token: ownProps.token,
+	problemId: ownProps.problemId,
 	stage: state.content.boost.page.stage,
 	message: state.content.boost.page.message,
-	problemId: state.content.boost.page.problemId //je toto ok? alebo ma ist problemId ako props
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -30,7 +30,7 @@ class BoostPage extends React.Component {
 				return(
 					<div>
 						{message}
-						<p>Would you like to check out <Link to={'/problem/' + problemId}>the problem you just boosted</Link>?</p>
+						<p>Would you like to go back to <Link to={'/problem/' + problemId}>the problem you just boosted</Link>?</p>
 					</div>
 
 				)

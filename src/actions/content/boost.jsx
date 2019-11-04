@@ -6,14 +6,14 @@ export const boostActions = {
 	reset
 };
 
-function boost(value, problemId, authToken) {
+function boost(boost, authToken) {
 	return dispatch => {
-		dispatch(request(value));
+		dispatch(request(boost));
 
-		fetch(appConfig.backendUrl + "/problem/" + problemId + "/boost", {
+		fetch(appConfig.backendUrl + "/problem/" + boost.problemId + "/boost", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
-			body: JSON.stringify(value)
+			body: JSON.stringify(boost)
 		}).then(response => {
 			if (response.status >= 200 && response.status < 400) {
 				return response
