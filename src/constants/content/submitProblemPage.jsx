@@ -2,7 +2,7 @@ export const submitProblemPageConstants = {
 	REQUEST: 'SUBMIT_PROBLEM_REQUEST',
 	SUCCESS: 'SUBMIT_PROBLEM_SUCCESS',
 	FAILED: 'SUBMIT_PROBLEM_FAILED',
-	RESET: 'SIGNUP_PAGE_RESET'
+	RESET: 'SUBMIT_PROBLEM_RESET'
 }
 
 export const submitProblemStages = {
