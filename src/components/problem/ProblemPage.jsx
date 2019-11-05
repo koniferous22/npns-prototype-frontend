@@ -1,4 +1,4 @@
-	import React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -7,6 +7,8 @@ import PostSubmissionForm from './ProblemPage/PostSubmissionForm'
 import Submission from './ProblemPage/Submission'
 
 import { problemPageActions } from '../../actions/content/problemPage'
+
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,

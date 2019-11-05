@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-const BuzzfeedButton = styled.button`
+export const BuzzfeedButton = styled.button`
 	background: transparent;
 	border-radius: 3px;
 	border: 2px solid palevioletred;
@@ -12,11 +12,11 @@ const BuzzfeedButton = styled.button`
 	padding: 0.25em 1em;
 `
 
-const TryhardButton = props => <button {...props}/>
+export const TryhardButton = props => <button {...props}/>
 
 const Button = props => <ThemeSelector 
-		buzzfeed={<BuzzfeedButton {...props} />} 
-		tryhard={<TryhardButton {...props} />} 
+		buzzfeed={props.buzzfeed || <BuzzfeedButton {...props} />} 
+		tryhard={props.tryhard || <TryhardButton {...props} />} 
 	/>
 
 export default Button

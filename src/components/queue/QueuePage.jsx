@@ -9,6 +9,8 @@ import { queuePageActions } from '../../actions/content/queuePage'
 import QueueSidebar from './QueueSidebar'
 import { ProblemBox } from '../problem/ProblemBox'
 
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+
 const mapStateToProps = (state, ownProps) => {
 	const queue = ownProps.queue
 	const queueState = state.content.queuePage[queue]
@@ -63,24 +65,25 @@ class QueuePage extends React.Component {
 		return (
 			<div>
 				<QueueSidebar />
-				{this.props.loggedIn && submitProblem}
-				<h3>{"Problems of queue: " + this.props.queue}</h3>
-				<InfiniteScroll
-					pageStart={1}
-					loadMore={() => {
-						this.props.loadPage(this.props.paging.page + 1) 
-					}}
-					hasMore={this.props.paging.hasMore}
-					loader={<div className="loader" key={0}>Loading ...</div>}
-				>
-					<ul>
-					{
-						this.props.entries.map((p,index) => (
-							<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
-					))}
-					</ul>
-				</InfiniteScroll>
-				
+				<ContentDiv sidebar>
+					{this.props.loggedIn && submitProblem}
+					<h3>{"Problems of queue: " + this.props.queue}</h3>
+					<InfiniteScroll
+						pageStart={1}
+						loadMore={() => {
+							this.props.loadPage(this.props.paging.page + 1) 
+						}}
+						hasMore={this.props.paging.hasMore}
+						loader={<div className="loader" key={0}>Loading ...</div>}
+					>
+						<ul>
+						{
+							this.props.entries.map((p,index) => (
+								<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
+						))}
+						</ul>
+					</InfiniteScroll>
+				</ContentDiv>
 			</div>
 		);
 	}

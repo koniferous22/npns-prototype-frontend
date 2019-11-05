@@ -1,0 +1,18 @@
+import React from 'react'
+import styled from 'styled-components';
+
+import ThemeSelector from '../ThemeSelector'
+
+const BuzzfeedContentDiv = styled.div`
+	display: inline-block;
+	margin-left: ${props => props.sidebar ? (props.marginLeft || "31%") : "0%"};
+`
+
+const TryhardContentDiv = props => <div {...props}/>
+
+const ContentDiv = props => <ThemeSelector 
+		buzzfeed={<BuzzfeedContentDiv {...props} />} 
+		tryhard={<TryhardContentDiv {...props} />} 
+	/>
+
+export default ContentDiv

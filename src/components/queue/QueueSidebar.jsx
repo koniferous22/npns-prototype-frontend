@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import QueueSidebarEntries from './QueueSidebarEntries'
 import { globalActions } from '../../actions/global'
+
+import SidebarDiv from '../../styled-components/defaults/StyledSidebar'
 const mapStateToProps = state => ({
 	hierarchy: state.global.hierarchy
 })
@@ -19,7 +21,9 @@ class QueueSidebar extends React.Component {
 	}
 	render() {
 		return (
-			<QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
+			<SidebarDiv>
+				<QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
+			</SidebarDiv>
 		)
 	}
 }

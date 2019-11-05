@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-const BuzzfeedHeaderEntry = styled.ul`
-	background: transparent;
-	list-style-type: none;
-	display: inline;
+const BuzzfeedHeaderEntry = styled.li`
+	display: inline-block;
+	width: auto;
+	margin-left: 10px;
 `
 const TryhardHeaderEntry = props => <li {...props}/>
 

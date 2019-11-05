@@ -5,7 +5,9 @@ import LogoutButton from "../auth/LogoutButton"
 
 import HeaderEntry from '../../styled-components/header/StyledHeaderEntry'
 import HeaderEntries from '../../styled-components/header/StyledHeaderEntries'
-import InlineDiv from '../../styled-components/defaults/StyledInlineDiv'
+import StyledHeader from '../../styled-components/header/StyledHeader'
+
+import HeaderDiv from '../../styled-components/header/StyledHeaderDiv'
 
 const Header = ({loggedIn, logout, username}) => {
 	const publicStuff = [
@@ -46,18 +48,18 @@ const Header = ({loggedIn, logout, username}) => {
 	let stuff = loggedIn ? publicStuff.concat(privateStuff) : publicStuff.concat(unregisteredStuff)
 	stuff = stuff.map((o, index) => (
 		<HeaderEntry key={index}>
-			<Link to={o.to}>{o.label}</Link>	
+			<Link to={o.to}>{o.label}</Link>
 		</HeaderEntry>
 	))
 	return (
-		<InlineDiv>
-			<InlineDiv>{loggedIn ? 'Logged in as ' + username : 'You are not logged in'}
-			</InlineDiv>
-			<HeaderEntries>
-				{stuff}
-			</HeaderEntries>
+		<StyledHeader>
+			<HeaderDiv width={"18%"}>{loggedIn ? 'Logged in as ' + username : 'You are not logged in'}
+			</HeaderDiv>
+				<HeaderEntries>
+					{stuff}
+				</HeaderEntries>
 			{loggedIn && <LogoutButton loggedIn={true} logout={logout}/>}
-		</InlineDiv>
+		</StyledHeader>
 	)
 }
 

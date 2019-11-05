@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Button from '../../styled-components/defaults/StyledButton'
+import Button from '../../styled-components/auth/StyledLogoutButton'
 
 const LogoutButton = (({loggedIn,logout}) => {
 	if (loggedIn) {

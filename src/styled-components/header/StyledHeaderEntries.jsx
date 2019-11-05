@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedHeader = styled.ul`
-	display: inline;
+	list-style-type: none;
+	display: inline-block;
+	float: left;
 `
 const TryhardHeader = props => <ul {...props}/>
 
