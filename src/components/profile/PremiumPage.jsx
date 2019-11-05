@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import ProfileSidebar from './ProfileSidebar'
 import { premiumPageActions } from '../../actions/content/profile/premiumPage'
 
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+
 const mapStateToProps = state => state.content.profile.premiumPage
 const mapDispatchToProps = dispatch => ({
 	subscribe: () => dispatch(premiumPageActions.subscribe()),
@@ -12,8 +14,10 @@ const mapDispatchToProps = dispatch => ({
 
 const PremiumPage = (props) => (<div>
 		<ProfileSidebar baseUrl={'/u/' + props.user} auth_view/>
-		{props.text}
-		{props.premiumActive ? <button onClick={() => props.unsubscribe()}>Unsubscribe</button> : <button onClick={() => props.subscribe()}>Subscribe</button>}
+		<ContentDiv sidebar>
+			{props.text}
+			{props.premiumActive ? <button onClick={() => props.unsubscribe()}>Unsubscribe</button> : <button onClick={() => props.subscribe()}>Subscribe</button>}
+		</ContentDiv>
 	</div>
 )
 

@@ -5,7 +5,7 @@ import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedContentDiv = styled.div`
 	display: inline-block;
-	margin-left: ${props => props.sidebar ? (props.marginLeft || "31%") : "0%"};
+	margin-left: ${props => props.sidebar ? (props.marginLeft || "21%") : "0%"};
 `
 
 const TryhardContentDiv = props => <div {...props}/>

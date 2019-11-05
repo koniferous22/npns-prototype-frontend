@@ -14,7 +14,8 @@ let BoostForm = props => {
 	return (<form onSubmit={handleSubmit}>
 		<div>
 			<label htmlFor="boost">Boost value</label>
-			<Field name="boost" component="input" type="text" />//ide tu zmenit type?
+			<Field name="boost" component="input" type="text" />
+			{/*ide tu zmenit type?*/}
 		</div>
 		<button type="submit">Boost!</button>
 	</form>)

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from "react-router-dom"
 
 import StatisticsSidebar from './StatisticsSidebar'
-import QueueSidebar from '../queue/QueueSidebar'
 
 import ScoreboardPageBar from './ScoreboardPage/ScoreboardPageBar'
 import ScoreboardSearchUserForm from './ScoreboardPage/ScoreboardSearchUserForm'
 
 import { scoreboardPageActions } from '../../actions/content/statistics/scoreboardPage'
+
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
 
@@ -50,23 +51,24 @@ class ScoreboardPage extends React.Component {
 		))
 		return(
 			<div>
-				<StatisticsSidebar />
-				<QueueSidebar baseUrl='/statistics/scoreboard'/>
-				{this.props.message}
-				<ScoreboardSearchUserForm queue={this.props.queue} />
-				<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
-				<table>
-					<thead>
-						<tr>
-							<th>Username</th>
-							<th>{'Score in "' + this.props.queue + '"'}</th>
-						</tr>
-					</thead>
-					<tbody>
-						{users}
-					</tbody>
-				</table>
-				<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+				<StatisticsSidebar addQueues queueBaseUrl='/statistics/scoreboard'/>
+				<ContentDiv sidebar>
+					{this.props.message}
+					<ScoreboardSearchUserForm queue={this.props.queue} />
+					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+					<table>
+						<thead>
+							<tr>
+								<th>Username</th>
+								<th>{'Score in "' + this.props.queue + '"'}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{users}
+						</tbody>
+					</table>
+					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+				</ContentDiv>
 			</div>
 		)
 	}

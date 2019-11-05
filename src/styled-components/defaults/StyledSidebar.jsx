@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedSidebar = styled.div`
-	width: ${props => props.sidebarWidth || "30%"};
+	width: ${props => props.sidebarWidth || "20%"};
 	float: left;
-	heigth: 100%;
+	heigth: calc(100% - 70px);
 	border: 2px solid;
 	position: fixed;
 	display: inline-block;

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
+import SidebarDiv from '../../styled-components/defaults/StyledSidebar'
+
 const ProfileSidebar = (props) => {
 	const privateRoutes = [
 		{
@@ -28,13 +30,17 @@ const ProfileSidebar = (props) => {
 	]
 
 	const routes = (props.auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
-	return (<ul>
-		{
-			routes.map((entry, index) => (
-				<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
-			))
-		}
-	</ul>)
+	return (
+		<SidebarDiv>
+			<ul>
+			{
+				routes.map((entry, index) => (
+					<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
+				))
+			}
+			</ul>
+		</SidebarDiv>
+	)
 
 }
 

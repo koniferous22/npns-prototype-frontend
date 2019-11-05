@@ -7,6 +7,8 @@ import StatisticsSidebar from './StatisticsSidebar'
 import { economyPageActions } from '../../actions/content/statistics/economyPage'
 import { globalActions } from '../../actions/global'
 
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,
 	...state.content.statistics.economyPage
@@ -30,15 +32,17 @@ class EconomyPage extends React.Component {
 		return(
 			<div>
 				<StatisticsSidebar />
-				{message && message}
-				<ul>
-					{karmaValues && karmaValues.map(q => (
-						<li key={q.name}>
-							<Link to={'/q/' + q.name}>{q.name} </Link> 
-							karma value: { q.karmaValue}
-						</li>
-					))}
-				</ul>
+				<ContentDiv sidebar>
+					{message && message}
+					<ul>
+						{karmaValues && karmaValues.map(q => (
+							<li key={q.name}>
+								<Link to={'/q/' + q.name}>{q.name} </Link> 
+								karma value: { q.karmaValue}
+							</li>
+						))}
+					</ul>
+				</ContentDiv>
 			</div>
 		)
 	}

@@ -15,6 +15,8 @@ import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDisp
 import { personalInformationPageActions } from '../../actions/content/profile/personalInformationPage'
 import { personalInformationPageStages } from '../../constants/content/profile/personalInformationPage'
 
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 
 const mapDispatchToProps = dispatch => ({
@@ -44,26 +46,30 @@ class PersonalInformationPage extends React.Component {
 				)
 			case personalInformationPageStages.SUBMITTING_FORM:
 			default:
-				return (<div>
-					<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
-					{!this.props.form && this.props.message}
+				return (
+					<div>
+						<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
+						<ContentDiv sidebar>
+							{!this.props.form && this.props.message}
 
-					Change Email
-					<ChangeEmailForm />
-					{this.props.form === 'email' && this.props.message}
+							Change Email
+							<ChangeEmailForm />
+							{this.props.form === 'email' && this.props.message}
 
-					Change Password
-					<ChangePasswordForm />
-					{this.props.form === 'password' && this.props.message}
-					
-					Change Username
-					<ChangeUsernameForm />
-					{this.props.form === 'username' && this.props.message}
+							Change Password
+							<ChangePasswordForm />
+							{this.props.form === 'password' && this.props.message}
+							
+							Change Username
+							<ChangeUsernameForm />
+							{this.props.form === 'username' && this.props.message}
 
-					Change Names
-					<ChangeNamesForm />
-					{this.props.form === 'names' && this.props.message}					
-				</div>)
+							Change Names
+							<ChangeNamesForm />
+							{this.props.form === 'names' && this.props.message}
+						</ContentDiv>
+					</div>
+				)
 		}
 	}
 }

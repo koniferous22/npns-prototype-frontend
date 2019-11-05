@@ -64,24 +64,26 @@ class ProblemPage extends React.Component {
 		return (
 			<div>
 				<QueueSidebar />
-				<h3>{this.props.problem.title}</h3>
-				<p>
-					{this.props.problem.content}
-				</p>
-				{
-					submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
-				}
-				<div style={{height:"100%",overflow:"auto"}}>
-					<InfiniteScroll
-						pageStart={0}
-						loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
-						hasMore={this.props.paging.hasMore}
-						loader={<div className="loader" key={0}>Loading ...</div>}
-						
-					>
-						{submissions}
-					</InfiniteScroll>
-				</div>
+				<ContentDiv sidebar>
+					<h3>{this.props.problem.title}</h3>
+					<p>
+						{this.props.problem.content}
+					</p>
+					{
+						submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
+					}
+					<div style={{height:"100%",overflow:"auto"}}>
+						<InfiniteScroll
+							pageStart={0}
+							loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
+							hasMore={this.props.paging.hasMore}
+							loader={<div className="loader" key={0}>Loading ...</div>}
+							
+						>
+							{submissions}
+						</InfiniteScroll>
+					</div>
+				</ContentDiv>
 			</div>
 		)
 	}
