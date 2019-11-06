@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from "react-router-dom"
 
 import QueueSidebar from '../queue/QueueSidebar'
 import PostSubmissionForm from './ProblemPage/PostSubmissionForm'
@@ -68,6 +69,9 @@ class ProblemPage extends React.Component {
 					<h3>{this.props.problem.title}</h3>
 					<p>
 						{this.props.problem.content}
+					</p>
+					<p>
+						<Link to={'/problem/' + this.props.problem.id + '/boost'}>Boost this problem</Link>
 					</p>
 					{
 						submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
