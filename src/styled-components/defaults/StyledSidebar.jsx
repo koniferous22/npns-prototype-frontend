@@ -10,6 +10,7 @@ const BuzzfeedSidebar = styled.div`
 	border: 2px solid;
 	position: fixed;
 	display: inline-block;
+	margin-top: 55px;
 `
 
 const TryhardSidebar = props => <div {...props}/>

@@ -3,16 +3,18 @@ import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 
+import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+
 const mapStateToProps = state => ({
 	message: state.auth.message
 })
 
 const LoginPage = (props) => (
-	<div>
+	<ContentDiv>
 		{props.message}
 		<LoginForm/>
 		<Link to="/forgotpwd" >Forgot Password?</Link>
-	</div>
+	</ContentDiv>
 )
 
 export default connect(mapStateToProps)(LoginPage)
