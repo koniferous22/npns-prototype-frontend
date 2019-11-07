@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../form/RenderField'
 
-import LoginButton from '../../styled-components/defaults/StyledButton'
+import LoginButton from '../../styled-components/defaults/Button'
 
 let submit = (values, dispatch, props) => {
 	dispatch(authActions.login(values.username, values.password))

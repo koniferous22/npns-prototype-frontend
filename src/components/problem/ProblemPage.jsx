@@ -9,7 +9,7 @@ import Submission from './ProblemPage/Submission'
 
 import { problemPageActions } from '../../actions/content/problemPage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,

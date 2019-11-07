@@ -9,7 +9,7 @@ import ScoreboardSearchUserForm from './ScoreboardPage/ScoreboardSearchUserForm'
 
 import { scoreboardPageActions } from '../../actions/content/statistics/scoreboardPage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
 

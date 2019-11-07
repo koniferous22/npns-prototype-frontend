@@ -2,7 +2,7 @@ import React from 'react';
 
 import QueueSidebar from '../queue/QueueSidebar'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 export default class Homepage extends React.Component {
 	render() {

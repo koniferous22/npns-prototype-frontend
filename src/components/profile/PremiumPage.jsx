@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ProfileSidebar from './ProfileSidebar'
 import { premiumPageActions } from '../../actions/content/profile/premiumPage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => state.content.profile.premiumPage
 const mapDispatchToProps = dispatch => ({

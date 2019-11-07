@@ -6,7 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import TransactionBox from './TransactionPage/TransactionBox'
 import { transactionPageActions } from '../../actions/content/profile/transactionPage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadPage: (page) => dispatch(transactionPageActions.setActivePage(ownProps.token, page)),

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-import SidebarDiv from '../../styled-components/defaults/StyledSidebar'
+import SidebarDiv from '../../styled-components/defaults/Sidebar'
 
 const ProfileSidebar = (props) => {
 	const privateRoutes = [

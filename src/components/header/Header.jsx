@@ -3,11 +3,11 @@ import { Link } from "react-router-dom"
 
 import LogoutButton from "../auth/LogoutButton"
 
-import HeaderEntry from '../../styled-components/header/StyledHeaderEntry'
-import HeaderEntries from '../../styled-components/header/StyledHeaderEntries'
-import StyledHeader from '../../styled-components/header/StyledHeader'
+import HeaderEntry from '../../styled-components/header/HeaderEntry'
+import HeaderEntries from '../../styled-components/header/HeaderEntries'
+import StyledHeader from '../../styled-components/header/Header'
 
-import HeaderDiv from '../../styled-components/header/StyledHeaderDiv'
+import HeaderDiv from '../../styled-components/header/HeaderDiv'
 
 const Header = ({loggedIn, logout, username}) => {
 	const publicStuff = [
@@ -60,7 +60,7 @@ const Header = ({loggedIn, logout, username}) => {
 				<HeaderEntries>
 					{stuff}
 				</HeaderEntries>
-			{loggedIn && <LogoutButton header loggedIn={true} logout={logout}/>}
+			{loggedIn && <LogoutButton header logout={logout}/>}
 		</StyledHeader>
 	)
 }

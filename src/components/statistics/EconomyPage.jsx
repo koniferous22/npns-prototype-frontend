@@ -7,7 +7,7 @@ import StatisticsSidebar from './StatisticsSidebar'
 import { economyPageActions } from '../../actions/content/statistics/economyPage'
 import { globalActions } from '../../actions/global'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,

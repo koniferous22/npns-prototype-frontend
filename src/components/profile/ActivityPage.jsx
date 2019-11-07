@@ -8,7 +8,7 @@ import { ProblemBox } from '../problem/ProblemBox'
 
 import ProfileSidebar from './ProfileSidebar'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => {
 	const pageState = state.content.profile.activityPage

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import QueueSidebarEntries from './QueueSidebarEntries'
 import { globalActions } from '../../actions/global'
 
-import SidebarDiv from '../../styled-components/defaults/StyledSidebar'
+import SidebarDiv from '../../styled-components/defaults/Sidebar'
 const mapStateToProps = state => ({
 	hierarchy: state.global.hierarchy
 })

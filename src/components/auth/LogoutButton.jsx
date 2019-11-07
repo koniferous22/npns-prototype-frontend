@@ -1,12 +1,9 @@
 import React from 'react'
 
-import Button from '../../styled-components/auth/StyledLogoutButton'
+import Button from '../../styled-components/auth/LogoutButton'
 
-const LogoutButton = (({loggedIn,logout, header}) => {
-	if (loggedIn) {
-		return <Button header={header} onClick={logout}>Log out</Button>
-	}
-	return <p>Oi maite show mai yar login loicense</p>
+const LogoutButton = (({logout, header}) => {
+	return <Button header={header} onClick={logout}>Log out</Button>
 });
 
 

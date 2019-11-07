@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ProfileSidebar from './ProfileSidebar'
 import { profilePageActions } from '../../actions/content/profile/profilePage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => state.content.profile.profilePage;
 const mapDispatchToProps = dispatch => ({

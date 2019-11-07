@@ -9,7 +9,7 @@ import { queuePageActions } from '../../actions/content/queuePage'
 import QueueSidebar from './QueueSidebar'
 import { ProblemBox } from '../problem/ProblemBox'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state, ownProps) => {
 	const queue = ownProps.queue

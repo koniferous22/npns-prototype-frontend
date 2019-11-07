@@ -15,7 +15,7 @@ import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDisp
 import { personalInformationPageActions } from '../../actions/content/profile/personalInformationPage'
 import { personalInformationPageStages } from '../../constants/content/profile/personalInformationPage'
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 

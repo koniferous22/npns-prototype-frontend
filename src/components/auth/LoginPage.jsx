@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 
-import ContentDiv from '../../styled-components/defaults/StyledContentDiv'
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => ({
 	message: state.auth.message
