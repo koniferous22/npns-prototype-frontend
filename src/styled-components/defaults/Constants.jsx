@@ -1,5 +1,3 @@
-export const headerStyleConstants = {
-	DEFAULT_SIDBAR_COLLAPSE_LOGGED_IN_MEDIUM: "750px",
-	DEFAULT_SIDBAR_COLLAPSE_LOGGED_IN_SMALL: "561px",
-	DEFAULT_SIDBAR_COLLAPSE_LOGGED_OUT: "750px"
+export const defaultStyleConstants = {
+	DEFAULT_SIDEBAR_COLLAPSE: "700px",
 }

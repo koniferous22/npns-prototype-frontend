@@ -3,14 +3,19 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
+import { defaultStyleConstants } from './Constants'
+
 const BuzzfeedSidebar = styled.div`
 	width: ${props => props.sidebarWidth || "20%"};
 	float: left;
-	heigth: calc(100% - 70px);
+	margin-top: 30vh;
 	border: 2px solid;
 	position: fixed;
-	display: inline-block;
-	margin-top: 55px;
+	display: flex;
+	align-items:center;
+	@media(max-width: ${defaultStyleConstants.DEFAULT_SIDEBAR_COLLAPSE}) {
+		display: none;
+	}
 `
 
 const TryhardSidebar = props => <div {...props}/>
