@@ -51,16 +51,18 @@ const Header = ({loggedIn, logout, username}) => {
 			<Link to={o.to}>{o.label}</Link>
 		</HeaderEntry>
 	))
-	console.log('LOGGED IN')
-	console.log(loggedIn)
 	return (
 		<StyledHeader loggedIn={loggedIn}>
-			<HeaderDiv>{loggedIn ? 'Logged in as ' + username : 'You are not logged in'}
+			<HeaderDiv collapse>{loggedIn ? 'Logged in as ' + username : 'You are not logged in'}
 			</HeaderDiv>
+			<HeaderDiv grow>
 				<HeaderEntries>
 					{stuff}
 				</HeaderEntries>
-			{loggedIn && <LogoutButton header logout={logout}/>}
+			</HeaderDiv>
+			<HeaderDiv shrink>
+				{loggedIn && <LogoutButton header logout={logout}/>}
+			</HeaderDiv>
 		</StyledHeader>
 	)
 }

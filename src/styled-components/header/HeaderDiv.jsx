@@ -5,15 +5,17 @@ import ThemeSelector from '../ThemeSelector'
 
 import { headerStyleConstants } from './Constants'
 
+	//float: ${props => props.float || 'left'};
 const BuzzfeedHeaderDiv = styled.div`
-	float: left;
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	${props => props.width && `width: ${props.width};`}
-	${props => props.maxWidth && `max-width: ${props.maxWidth};`}
-	${props => props.minWidth && `min-width: ${props.minWidth};`}
-	@media(max-width: ${headerStyleConstants.HEADER_COLLAPSE_LOGGED_IN_MEDIUM}) {
-    	display: ${props => props.collapse ? "none" : "block"};
-    	${props => !props.collapse && 'width: 100%;'}
+	${props => props.grow && 'flex-grow: 1;'}
+	${props => props.shrink && 'flex-shrink: 1;'}
+	vertical-align: middle;
+	@media(max-width: ${headerStyleConstants.HEADER_COLLAPSE_LOGGED_IN_CAPTION}) {
+		${props => props.collapse && "display: none;"}
 	}
 `
 const TryhardHeaderDiv = props => <div {...props}/>
