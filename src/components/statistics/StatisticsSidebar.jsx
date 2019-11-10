@@ -23,7 +23,7 @@ const StatisticsSidebar = (props) => {
 			<CollapsedSidebarDiv>
 				This is collapsed sidebar
 			</CollapsedSidebarDiv>
-			<SidebarDiv loggedIn={props.loggedIn} sidebarWidth="15em">
+			<SidebarDiv loggedIn={props.loggedIn}>
 				<ul>
 				{
 					routes.map((entry, index) => (

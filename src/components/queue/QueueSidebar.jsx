@@ -32,7 +32,7 @@ class QueueSidebar extends React.Component {
 				<CollapsedSidebarDiv>
 					This is Collapsed Sidebar
 				</CollapsedSidebarDiv>
-				<SidebarDiv sidebarWidth="15em">
+				<SidebarDiv>
 					{hierarchicalEntries}
 				</SidebarDiv>
 			</div>

@@ -8,9 +8,31 @@ import { defaultStyleConstants } from './Constants'
 const BuzzfeedCollapsedSidebar = styled.div`
 	display: none;
 	@media(max-width: ${defaultStyleConstants.DEFAULT_SIDEBAR_COLLAPSE}) {
+		display: flex;
+		align-items: center;
+	
 		height: 50px;
-		display: block;
-		border: 2px solid;
+	
+		background-color: #b85243;
+		ul {
+			flex-grow:1;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			list-style-type: none;
+			li {
+				margin: 0px 8px 0px 8px;
+			}
+		}
+		a {
+			text-decoration: none;
+			color: #65302c;
+		}
+
+		font-family: Helvetica, Arial, Sans-Serif;
+		font-weight: bold;
+		font-size: 12px;
 	}
 `
 

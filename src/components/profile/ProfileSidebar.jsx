@@ -31,19 +31,23 @@ const ProfileSidebar = (props) => {
 	]
 
 	const routes = (props.auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
+	const routeElements = (
+		<ul>
+			{
+				routes.map((entry, index) => (
+					<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
+				))
+			}
+		</ul>
+	)
 	return (
+		// render both versions, only one is displayed, depends on screen size
 		<div>
 			<CollapsedSidebarDiv>
-				This is Collapsed Sidebar
+				{routeElements}		
 			</CollapsedSidebarDiv>
-			<SidebarDiv sidebarWidth="15em">
-				<ul>
-				{
-					routes.map((entry, index) => (
-						<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
-					))
-				}
-				</ul>
+			<SidebarDiv>
+				{routeElements}
 			</SidebarDiv>
 		</div>
 	)

@@ -6,15 +6,29 @@ import ThemeSelector from '../ThemeSelector'
 import { defaultStyleConstants } from './Constants'
 
 const BuzzfeedSidebar = styled.div`
-	width: ${props => props.sidebarWidth || "20%"};
-	float: left;
-	margin-top: 30vh;
-	border: 2px solid;
-	position: fixed;
 	display: flex;
-	align-items:center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 	@media(max-width: ${defaultStyleConstants.DEFAULT_SIDEBAR_COLLAPSE}) {
 		display: none;
+	}
+
+	width: ${props => props.sidebarWidth || "17em"};
+	height: calc(100% - 50px);
+	float: left;
+	position: fixed;
+
+	background-color: #b85243;
+
+	font-family: Helvetica, Arial, Sans-Serif;
+	font-weight: bold;
+	font-size: 12px;
+	border-radius: 3px;
+
+	a {
+		text-decoration: none;
+		color: #65302c;
 	}
 `
 
