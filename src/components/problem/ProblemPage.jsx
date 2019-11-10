@@ -71,7 +71,7 @@ class ProblemPage extends React.Component {
 						{this.props.problem.content}
 					</p>
 					<p>
-						<Link to={'/problem/' + this.props.problem.id + '/boost'}>Boost this problem</Link>
+						{this.props.loggedIn && <Link to={'/problem/' + this.props.problem.id + '/boost'}>Boost this problem</Link>}
 					</p>
 					{
 						submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
