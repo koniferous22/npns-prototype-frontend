@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedHeader = styled.div`
-	height: 50px;
+	height: 70px;
 	display: flex;
 	align-items: center;
-	background: maroon;	
+	background: #bf8000;
+	border-radius: 3px;
+	margin: 0px;
 `
 
 const TryhardHeader = props => <div {...props}/>

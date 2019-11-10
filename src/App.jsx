@@ -37,6 +37,8 @@ import ConfirmUsernameChangePage from "./components/confirm/UsernameChange"
 
 import { authActions } from './actions/auth'
 
+import AppDiv from './styled-components/App'
+
 const parseUrlParam = (routeProps, paramName) => new URLSearchParams(routeProps.location.search).get(paramName)
 
 class App extends React.Component {
@@ -55,7 +57,7 @@ class App extends React.Component {
 		
 		const loggedIn = !!this.props.user
 		return (
-			<div className='App'>
+			<AppDiv>
 				<Router>
 					<Route render={({history}) => {
 						if((navigator.userAgent.indexOf("MSIE") !== -1 ) || (!!document.documentMode === true )) //IF IE > 10
@@ -63,7 +65,7 @@ class App extends React.Component {
 							return (<IEPage />)
 						}
 						return (
-							<div className='App'>
+							<AppDiv>
 								<Header logout={this.props.logout} loggedIn={loggedIn} username={this.props.user ? this.props.user.username : null}/>
 								<Switch>
 									<Route exact path="/" render={() => <Homepage user={this.props.user}/>} />
@@ -106,11 +108,11 @@ class App extends React.Component {
 									{loggedIn && <Redirect from='/profile' to={'/u/' + this.props.user.username} />}
 									
 								</Switch>
-							</div>
+							</AppDiv>
 						);
 					}} />								
 				</Router>
-			</div>
+			</AppDiv>
 		)
 	}
 }
