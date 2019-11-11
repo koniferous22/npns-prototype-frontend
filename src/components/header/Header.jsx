@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
+import ThemeDropdown from './ThemeDropdown'
+
 import LogoutButton from "../auth/LogoutButton"
 
 import HeaderEntry from '../../styled-components/header/HeaderEntry'
@@ -59,6 +61,9 @@ const Header = ({loggedIn, logout, username}) => {
 				<HeaderEntries>
 					{stuff}
 				</HeaderEntries>
+			</HeaderDiv>
+			<HeaderDiv shrink>
+				<ThemeDropdown />
 			</HeaderDiv>
 			<HeaderDiv shrink>
 				{loggedIn && <LogoutButton header logout={logout}/>}

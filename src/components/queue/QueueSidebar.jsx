@@ -7,30 +7,41 @@ import { globalActions } from '../../actions/global'
 import SidebarDiv from '../../styled-components/defaults/Sidebar'
 import CollapsedSidebarDiv from '../../styled-components/defaults/CollapsedSidebar'
 
+import QueueDropdown from './QueueDropdown'
+
 const mapStateToProps = state => ({
-	hierarchy: state.global.hierarchy
+	hierarchy: state.global.hierarchy,
+	linQueues: state.global.linQueues
 })
 
 const mapDispatchToProps = dispatch => ({
-	loadHierarchy: () => dispatch(globalActions.hierarchy())
-
+	loadHierarchy: () => dispatch(globalActions.hierarchy()),
+	loadLinQueues: () => dispatch(globalActions.queues())
 })
 
 class QueueSidebar extends React.Component {
 	
 	componentDidMount() {
+		this.props.loadLinQueues()
 		this.props.loadHierarchy()
 	}
 	render() {
 		const hierarchicalEntries = <QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
-
+		const dropdownEntries = <QueueDropdown linQueues={this.props.linQueues} baseUrl={this.props.baseUrl || '/q'}/>
 		if (this.props.reuse) {
-			return hierarchicalEntries
+			return (
+				<div>
+					{hierarchicalEntries}
+					<CollapsedSidebarDiv>
+						{dropdownEntries}
+					</CollapsedSidebarDiv>
+				</div>
+			)
 		}
 		return (
 			<div>
 				<CollapsedSidebarDiv>
-					This is Collapsed Sidebar
+					{dropdownEntries}
 				</CollapsedSidebarDiv>
 				<SidebarDiv>
 					{hierarchicalEntries}
