@@ -35,7 +35,8 @@ export default reduxForm({
 		if (blurredField === 'identifier') {
 			return scoreboardPageActions.validateUserExists(values.identifier)
 		}
-		return new Promise()
+		return new Promise((resolve,reject) => {})
+		// LEBO PROMISE VYZADUJE CALLBACK, SIGNED: DR. YANDREY
 	},
 	asyncBlurFields: ['identifier'],
 	onSubmit: submit,
