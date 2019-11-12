@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 import ThemeSelector from './ThemeSelector'
 
-const BuzzfeedApp = styled.div`
-	
+const BuzzfeedHeader = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 `
 
-const TryhardApp = props => <div {...props}/>
+const TryhardHeader = props => <div {...props}/>
 
-const App = props => <ThemeSelector 
-		buzzfeed={<BuzzfeedApp {...props} />} 
-		tryhard={<TryhardApp {...props} />} 
+const Header = props => <ThemeSelector 
+		buzzfeed={<BuzzfeedHeader {...props} />} 
+		tryhard={<TryhardHeader {...props} />} 
 	/>
 
-export default App
+export default Header

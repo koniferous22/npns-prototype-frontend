@@ -11,6 +11,9 @@ const BuzzfeedHeaderEntry = styled.li`
 		color: #6f3301;
 		text-decoration: none;
 	}
+	a:hover {
+		text-decoration: underline;
+	}
 `
 //bf8000
 const TryhardHeaderEntry = props => <li {...props}/>

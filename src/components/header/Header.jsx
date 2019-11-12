@@ -64,8 +64,6 @@ const Header = ({loggedIn, logout, username}) => {
 			</HeaderDiv>
 			<HeaderDiv shrink>
 				<ThemeDropdown />
-			</HeaderDiv>
-			<HeaderDiv shrink>
 				{loggedIn && <LogoutButton header logout={logout}/>}
 			</HeaderDiv>
 		</StyledHeader>

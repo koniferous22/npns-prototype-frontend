@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-import { defaultStyleConstants } from './Constants'
+import { sidebarStyleConstants } from './Constants'
 
 const BuzzfeedCollapsedSidebar = styled.div`
 	display: none;
-	@media(max-width: ${defaultStyleConstants.DEFAULT_SIDEBAR_COLLAPSE}) {
+	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
 		display: flex;
 		align-items: center;
 	

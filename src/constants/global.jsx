@@ -19,10 +19,11 @@ export const globalConstants = {
 export const themes = {
 	tryhard: {
 		label: 'Tryhard',
-		textWhenSelected: 'Pick a theme'
+		textWhenSelected: 'Click here to pick a theme'
 	},
 	buzzfeed: {
-		label: 'Buzzfeed'
+		label: 'Buzzfeed',
+		textWhenSelected: 'Choose theme'
 	}
 }
 

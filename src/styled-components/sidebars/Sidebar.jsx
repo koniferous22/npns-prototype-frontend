@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-import { defaultStyleConstants } from './Constants'
+import { sidebarStyleConstants } from './Constants'
 
 const BuzzfeedSidebar = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	@media(max-width: ${defaultStyleConstants.DEFAULT_SIDEBAR_COLLAPSE}) {
+	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
 		display: none;
 	}
 
@@ -29,6 +29,9 @@ const BuzzfeedSidebar = styled.div`
 	a {
 		text-decoration: none;
 		color: #65302c;
+	}
+	a:hover {
+		text-decoration: underline;
 	}
 `
 

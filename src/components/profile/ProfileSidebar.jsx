@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-import SidebarDiv from '../../styled-components/defaults/Sidebar'
-import CollapsedSidebarDiv from '../../styled-components/defaults/CollapsedSidebar'
+import SidebarDiv from '../../styled-components/sidebars/Sidebar'
+import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebar'
 
 const ProfileSidebar = (props) => {
 	const privateRoutes = [

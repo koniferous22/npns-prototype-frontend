@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import QueueSidebarEntries from './QueueSidebarEntries'
 import { globalActions } from '../../actions/global'
 
-import SidebarDiv from '../../styled-components/defaults/Sidebar'
-import CollapsedSidebarDiv from '../../styled-components/defaults/CollapsedSidebar'
+import SidebarDiv from '../../styled-components/sidebars/Sidebar'
+import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebar'
 
 import QueueDropdown from './QueueDropdown'
 

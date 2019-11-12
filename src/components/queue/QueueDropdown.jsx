@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 
 import { globalActions } from '../../actions/global'
 
+import StyledQueueDropdown from '../../styled-components/sidebars/QueueDropdown'
+import QueueDropdownEntries from '../../styled-components/sidebars/QueueDropdownEntries'
+
 const mapStateToProps = state => ({
 	displayed: state.global.linQueuesDisplayed
 })
@@ -15,7 +18,7 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-class QueueDrowdown extends React.Component {
+class QueueDropdown extends React.Component {
 
 	componentWillUnmount() {
 		if (this.props.displayed) {
@@ -25,15 +28,15 @@ class QueueDrowdown extends React.Component {
 	render() {
 		return (
 			<div  className="dropdown" >
-				<div className="button" onClick={this.props.displayed ? this.props.hide : this.props.show}> Pick a Queue </div>
+				<StyledQueueDropdown onClick={this.props.displayed ? this.props.hide : this.props.show}> Pick a Queue </StyledQueueDropdown>
 				{ this.props.displayed && (
-					<ul>
-						{this.props.linQueues.map((q, index) => <li key={index} value={q}><Link to={this.props.baseUrl + '/' + q}>{q}</Link></li>)}
-					</ul>
+					<QueueDropdownEntries>
+						{this.props.linQueues.map((q, index) => <li key={index} value={q} onClick={() => this.props.hide()}><Link to={this.props.baseUrl + '/' + q}>{q}</Link></li>)}
+					</QueueDropdownEntries>
 				)}
 			</div>
 		)
 	}
 }
 
-export default  connect(mapStateToProps, mapDispatchToProps)(QueueDrowdown)
+export default  connect(mapStateToProps, mapDispatchToProps)(QueueDropdown)

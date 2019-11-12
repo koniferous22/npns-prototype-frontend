@@ -8,9 +8,8 @@ import { headerStyleConstants } from './Constants'
 	//float: ${props => props.float || 'left'};
 const BuzzfeedHeaderDiv = styled.div`
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	${props => props.width && `width: ${props.width};`}
+	flex-wrap: wrap; 
+	justify-content: flex-start;
 	${props => props.grow && 'flex-grow: 1;'}
 	${props => props.shrink && 'flex-shrink: 1;'}
 	vertical-align: middle;

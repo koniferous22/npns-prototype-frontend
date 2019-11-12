@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
+import StyledThemeDropdown from '../../styled-components/header/ThemeDropdown'
 import ThemeDropdownEntries from '../../styled-components/header/ThemeDropdownEntries'
 
 import { globalActions } from '../../actions/global'
@@ -38,8 +39,8 @@ class ThemeDrowdown extends React.Component {
 		)
 		const currentTheme = this.props.themes[this.props.currentTheme];
 		return (
-			<div  className="dropdown" >
-				<div className="button" onClick={this.props.displayed ? this.props.hide : this.props.show}>{currentTheme.textWhenSelected || currentTheme.label}</div>
+			<div>
+				<StyledThemeDropdown className="button" onClick={this.props.displayed ? this.props.hide : this.props.show}>{currentTheme.textWhenSelected || currentTheme.label}</StyledThemeDropdown>
 				{ this.props.displayed && themeDivs}
 			</div>
 		)

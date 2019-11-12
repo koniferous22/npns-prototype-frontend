@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-import SidebarDiv from '../../styled-components/defaults/Sidebar'
+import SidebarDiv from '../../styled-components/sidebars/Sidebar'
 
 import QueueSidebar from '../queue/QueueSidebar'
-import CollapsedSidebarDiv from '../../styled-components/defaults/CollapsedSidebar'
+import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebar'
 
 const StatisticsSidebar = (props) => {
 	const routes = [

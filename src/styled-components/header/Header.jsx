@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedHeader = styled.div`
-	height: 70px;
+	flex-shrink: 1;
+	
 	display: flex;
 	align-items: center;
 	background: #bf8000;
