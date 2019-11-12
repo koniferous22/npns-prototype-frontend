@@ -31,9 +31,9 @@ class ProblemPage extends React.Component {
 	componentDidMount() {
 		this.props.loadProblemData()
 	}
-
 	render() {
-		if (!this.props.problem) {
+		const problem = this.props.problem
+		if (!problem) {
 			return (
 				<div>
 					<QueueSidebar />
@@ -44,14 +44,14 @@ class ProblemPage extends React.Component {
 
 		// Honestly looked for this bug for 8 hours, when this statement was moved to mapStateToProps, new object is constructed every time, which results in cyclic updating
 		// Great infinite loop :D :D 
-		const problemOwner = this.props.user && this.props.user._id === this.props.problem.submitted_by
-		const problemActive = this.props.problem.active
+		const problemOwner = this.props.user && this.props.user._id === problem.submitted_by
+		const problemActive = problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
 		const submissionForm = problemActive && this.props.loggedIn && !problemOwner
 		const submissions = Object.keys(mergedEntries).map((submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
-					problem={this.props.problem.id}
+					problem={problem.id}
 					key={index}
 					acceptButton={problemActive && problemOwner}
 					replyButton={this.props.loggedIn}
@@ -66,15 +66,15 @@ class ProblemPage extends React.Component {
 			<div>
 				<QueueSidebar />
 				<ContentDiv sidebar>
-					<h3>{this.props.problem.title}</h3>
+					<h3>{problem.title}</h3>
 					<p>
-						{this.props.problem.content}
+						{problem.content}
 					</p>
 					<p>
-						{this.props.loggedIn && <Link to={'/problem/' + this.props.problem.id + '/boost'}>Boost this problem</Link>}
+						{!problem.accepted_submission && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
 					</p>
 					{
-						submissionForm && <PostSubmissionForm token={this.props.token} problem={this.props.problem.id}/>
+						submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id}/>
 					}
 					<div style={{height:"100%",overflow:"auto"}}>
 						<InfiniteScroll
