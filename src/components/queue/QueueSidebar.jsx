@@ -11,7 +11,6 @@ import QueueDropdown from './QueueDropdown'
 
 const mapStateToProps = state => ({
 	hierarchy: state.global.hierarchy,
-	linQueues: state.global.linQueues
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +26,7 @@ class QueueSidebar extends React.Component {
 	}
 	render() {
 		const hierarchicalEntries = <QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
-		const dropdownEntries = <QueueDropdown linQueues={this.props.linQueues} baseUrl={this.props.baseUrl || '/q'}/>
+		const dropdownEntries = <QueueDropdown baseUrl={this.props.baseUrl || '/q'}/>
 		if (this.props.reuse) {
 			return (
 				<div>

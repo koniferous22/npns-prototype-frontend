@@ -11,11 +11,10 @@ const BuzzfeedCollapsedSidebar = styled.div`
 		display: flex;
 		align-items: center;
 	
-		height: 50px;
+		height:60px;
 	
 		background-color: #b85243;
 		ul {
-			flex-grow:1;
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;

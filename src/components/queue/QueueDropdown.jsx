@@ -8,7 +8,8 @@ import StyledQueueDropdown from '../../styled-components/sidebars/QueueDropdown'
 import QueueDropdownEntries from '../../styled-components/sidebars/QueueDropdownEntries'
 
 const mapStateToProps = state => ({
-	displayed: state.global.linQueuesDisplayed
+	displayed: state.global.linQueuesDisplayed,
+	linQueues: state.global.linQueues
 })
 
 const mapDispatchToProps = dispatch => {

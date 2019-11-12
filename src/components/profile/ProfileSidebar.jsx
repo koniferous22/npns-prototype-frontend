@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 import SidebarDiv from '../../styled-components/sidebars/Sidebar'
-import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebar'
+import CollapsedSidebar from '../../styled-components/sidebars/CollapsedSidebar'
 
 const ProfileSidebar = (props) => {
 	const privateRoutes = [
@@ -43,12 +43,12 @@ const ProfileSidebar = (props) => {
 	return (
 		// render both versions, only one is displayed, depends on screen size
 		<div>
-			<CollapsedSidebarDiv>
+			<CollapsedSidebar>
 				{routeElements}		
-			</CollapsedSidebarDiv>
+			</CollapsedSidebar>
 			<SidebarDiv>
 				{routeElements}
-			</SidebarDiv>
+1			</SidebarDiv>
 		</div>
 	)
 
