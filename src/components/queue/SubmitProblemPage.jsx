@@ -36,7 +36,6 @@ class SubmitProblemPage extends React.Component {
 				)
 			case submitProblemStages.SUBMITTING_FORM:
 			default:
-				console.log('lulik')
 				return(
 					<div>
 						<p>Submitting new problem</p>
