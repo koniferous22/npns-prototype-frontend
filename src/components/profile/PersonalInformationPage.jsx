@@ -32,17 +32,17 @@ class PersonalInformationPage extends React.Component {
 		switch (this.props.stage) {
 			case personalInformationPageStages.PASSWORD_CONFIRMATION:
 				return (
-					<div>
+					<ContentDiv>
 						{'Please confirm by entering your ' + (this.props.form === 'password' ? 'current ' : '') + 'password'}
 						<ConfirmPasswordForm form={this.props.form} token={this.props.token} />
-					</div>
+					</ContentDiv>
 				)
 			case personalInformationPageStages.COMPLETED:
 				return (
-					<div>
+					<ContentDiv>
 						<ProfileUpdateDispatcher form={this.props.form} token={this.props.token} values={this.props.values} user={this.props.user}/>
 						{this.props.message}
-					</div>
+					</ContentDiv>
 				)
 			case personalInformationPageStages.SUBMITTING_FORM:
 			default:

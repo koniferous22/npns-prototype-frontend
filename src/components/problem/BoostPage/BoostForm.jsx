@@ -2,6 +2,8 @@ import React from 'react'
 import { boostActions } from '../../../actions/content/boost'
 import { Field, reduxForm } from 'redux-form'
 
+import Button from '../../../styled-components/defaults/Button'
+
 let boost = (values, dispatch, props) => {
 	dispatch(
 		boostActions
@@ -38,7 +40,7 @@ let BoostForm = props => {
 			<label htmlFor="boost">Boost value</label>
 			<Field name="boost" component={renderField} validate={[number, positive]} type="number" step="any"/>
 		</div>
-		<button type="submit">Boost!</button>
+		<Button type="submit">Boost!</Button>
 	</form>)
 }
 

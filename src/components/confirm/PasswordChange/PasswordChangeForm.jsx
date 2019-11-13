@@ -5,6 +5,8 @@ import renderField from '../../form/RenderField'
 import { confirmPasswordChangeActions } from '../../../actions/content/confirm/passwordChange'
 import { signupActions } from '../../../actions/content/signup'
 
+import Button from '../../../styled-components/defaults/Button'
+
 const submit = (values, dispatch, props) => {
 	dispatch(confirmPasswordChangeActions.confirm(props.token, values.password))
 }
@@ -28,7 +30,7 @@ const PasswordChangeForm = props => {
 	return (<form onSubmit={handleSubmit}>
 			<Field name="password" component={renderField} type="password" label="Password (at least 8 characters)"/>
 			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password"/>
-		<button type="submit">Submit</button>
+		<Button type="submit">Submit</Button>
 	</form>)
 }
 

@@ -8,6 +8,8 @@ import { forgotPwdStages } from '../../constants/content/forgotPwdPage'
 
 import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.forgotPwd.page
 const mapDispatchToProps = dispatch => ({
 	reset: () => dispatch(forgotPwdActions.reset())
@@ -21,22 +23,22 @@ class ForgotPassword extends React.Component {
 		switch (this.props.stage) {
 			case forgotPwdStages.EMAIL_SENT:
 				return (
-					<div>
+					<ContentDiv>
 						{this.props.message.message}
 						<ol>
 							{this.props.message.steps.map((step, i) => (
 								<li key={i}>{step}</li>
 							))}
 						</ol>
-					</div>
+					</ContentDiv>
 					)
 			case forgotPwdStages.SUBMITTING_FORM:
 			default:
 				return (
-					<div>
+					<ContentDiv>
 						{this.props.message}
 						<ForgotPasswordForm />
-					</div>
+					</ContentDiv>
 				)
 		}
 	}

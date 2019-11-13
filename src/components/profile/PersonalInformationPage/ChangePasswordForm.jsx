@@ -3,6 +3,8 @@ import { reduxForm } from 'redux-form'
 
 import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
 
+import Button from '../../../styled-components/defaults/Button'
+
 const submit = (values, dispatch, props) => {
 	dispatch(personalInformationPageActions.filled('password',values))
 }
@@ -12,7 +14,7 @@ let ChangePasswordForm = (props) => (
 		<div>
 			Email containing password reset link will be sent
 		</div>
-		<button type="submit">Send password reset link</button>
+		<Button type="submit">Send password reset link</Button>
 	</form>
 )
 ChangePasswordForm = reduxForm({

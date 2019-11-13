@@ -8,6 +8,8 @@ import { confirmPasswordChangeActions } from '../../actions/content/confirm/pass
 
 import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.confirm.passwordChange.page
 
 const mapDispatchToProps = dispatch => ({
@@ -28,25 +30,25 @@ class ConfirmPasswordChangePage extends React.Component {
 		switch (this.props.stage) {
 			case confirmPasswordChangeStages.COMPLETED:
 				return (
-					<div>
+					<ContentDiv>
 						Password successfully changed, click
 						<Link to="/login">here</Link>
 						to log in
-					</div>
+					</ContentDiv>
 				)
 			case confirmPasswordChangeStages.SUBMITTING_FORM:
 				return (
-					<div>
+					<ContentDiv>
 						{this.props.message}
 						<PasswordChangeForm token={this.props.token} />
-					</div>
+					</ContentDiv>
 				)
 			case confirmPasswordChangeStages.INVALID_TOKEN:
 			default:
 				return (
-					<div>
+					<ContentDiv>
 						{this.props.message}
-					</div>
+					</ContentDiv>
 				)
 		}
 	}

@@ -22,7 +22,6 @@ const BuzzfeedProblemBox = styled.div`
 	a:hover {
 		text-decoration: underline;
 	}
-	font-family: Verdana, sans-serif;
 	font-size: 15px;
 `
 

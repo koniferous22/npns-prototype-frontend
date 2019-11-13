@@ -11,6 +11,7 @@ import Submission from './ProblemPage/Submission'
 import { problemPageActions } from '../../actions/content/problemPage'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
 import ProblemBox from '../../styled-components/problem/ProblemBox'
 
@@ -47,7 +48,7 @@ class ProblemPage extends React.Component {
 
 		// Honestly looked for this bug for 8 hours, when this statement was moved to mapStateToProps, new object is constructed every time, which results in cyclic updating
 		// Great infinite loop :D :D 
-		const problemOwner = this.props.user && this.props.user._id === problem.submitted_by
+		const problemOwner = this.props.user && problem.submitted_by && this.props.user._id === problem.submitted_by._id
 		const problemActive = problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
 		const submissionForm = problemActive && this.props.loggedIn && !problemOwner
@@ -71,7 +72,11 @@ class ProblemPage extends React.Component {
 				<ContentDiv sidebar>
 					<ProblemDiv>
 						<ProblemBox>
-							{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
+							<ContentInfo>
+								{new Date(problem.created).toLocaleDateString()}
+								{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
+								{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
+							</ContentInfo>
 							<h3>{problem.title}</h3>
 							<span>Description: </span>
 							<ReactMarkdown source={problem.content} />

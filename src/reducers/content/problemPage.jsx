@@ -174,7 +174,7 @@ function problemPageReducer(state = defaultState, action) {
 		case problemPageConstants.SELECT_REPLY_FORM:
 			return {
 				...state,
-				replyForm: action.replyForm,
+				replyForm: (action.replyForm === state.replyForm) ? null : action.replyForm,
 				message: ""
 			}
 		case problemPageConstants.RESET:

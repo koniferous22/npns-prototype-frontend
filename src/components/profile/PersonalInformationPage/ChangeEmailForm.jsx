@@ -5,6 +5,8 @@ import renderField from '../../form/RenderField'
 import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
 import { signupActions } from '../../../actions/content/signup'
 
+import Button from '../../../styled-components/defaults/Button'
+
 const validate = values => {
 	const errors = {}
 	if (!values.email) {
@@ -22,7 +24,7 @@ let ChangeEmailForm = (props) => (
 		<div>
 			<Field name="email" component={renderField} type="text" label="Email"/>
 		</div>
-		<button type="submit">Submit</button>
+		<Button type="submit">Submit</Button>
 	</form>
 )
 

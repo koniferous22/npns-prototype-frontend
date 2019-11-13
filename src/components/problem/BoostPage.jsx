@@ -6,6 +6,8 @@ import BoostForm from './BoostPage/BoostForm'
 import { boostActions } from '../../actions/content/boost'
 import { boostStages } from '../../constants/content/boost' 
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = (state, ownProps) => ({
 	token: ownProps.token,
 	problemId: ownProps.problemId,
@@ -28,20 +30,20 @@ class BoostPage extends React.Component {
 		switch(this.props.stage) {
 			case boostStages.COMPLETED:
 				return(
-					<div>
+					<ContentDiv>
 						{message}
 						<p>Would you like to go back to <Link to={'/problem/' + problemId}>the problem you just boosted</Link>?</p>
-					</div>
+					</ContentDiv>
 
 				)
 			case boostStages.BOOSTING:
 			default:
 				return(
-					<div>
+					<ContentDiv>
 						<p>Boosting problem</p>
 						<BoostForm problemId={problemId} token={token}/>
 						<div>{message}</div>
-					</div>
+					</ContentDiv>
 				)
 		}
 	}

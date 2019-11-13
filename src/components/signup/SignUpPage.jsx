@@ -5,6 +5,8 @@ import SignUpForm from './SignUpForm'
 import { signupStages } from '../../constants/content/signUpPage'
 import { signupActions } from '../../actions/content/signup'
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.signup.page
 
 const mapDispatchToProps = dispatch => ({
@@ -31,11 +33,11 @@ class SignUpPage extends React.Component {
 			case signupStages.SUBMITTING_FORM:
 			default:
 				return (
-					<div>
+					<ContentDiv>
 						{this.props.message}
 						<h1>REGISTRUJ SA PRIATELU</h1>
 						<SignUpForm />
-					</div>
+					</ContentDiv>
 				)
 		}
 	}

@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
 
+import Button from '../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
 	dispatch(forgotPwdActions.forgotPwd(values.identifier))
@@ -16,7 +17,7 @@ const ForgotPasswordForm = props => {
 				<label htmlFor="identifier">Username or Email</label>
 				<Field name="identifier" component="input" type="text" />
 			</div>
-			<button type="submit">Send pwd reset link</button>
+			<Button type="submit">Send pwd reset link</Button>
 		</form>
 	)
 }

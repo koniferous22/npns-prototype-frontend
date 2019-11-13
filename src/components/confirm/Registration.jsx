@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { confirmRegistrationActions } from '../../actions/content/confirm/registration'
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.confirm.registration
 const mapDispatchToProps = dispatch => ({
 	confirm: token => dispatch(confirmRegistrationActions.confirm(token))
@@ -16,10 +18,10 @@ class ConfirmRegistrationPage extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<ContentDiv>
 				{this.props.message && <p>{this.props.message}</p>}
 				{this.props.verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
-			</div>
+			</ContentDiv>
 		)
 	}
 }

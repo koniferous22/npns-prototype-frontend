@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form'
 import renderField from '../form/RenderField'
 import { signupActions } from '../../actions/content/signup'
 
+import Button from '../../styled-components/defaults/Button'
+
 const submit = (values, dispatch, props) => {
 	dispatch(signupActions.signup(values))
 }
@@ -39,7 +41,7 @@ const SignUpForm = props => {
 			<Field name="email" component={renderField} type="text" label="Email"/>
 			<Field name="firstName" component={renderField} type="text" label="First Name"/>
 			<Field name="lastName" component={renderField} type="text" label="Last Name"/>
-		<button type="submit">Submit</button>
+		<Button type="submit">Submit</Button>
 	</form>)
 }
 

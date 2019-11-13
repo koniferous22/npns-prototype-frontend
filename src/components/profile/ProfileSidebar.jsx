@@ -48,7 +48,7 @@ const ProfileSidebar = (props) => {
 			</CollapsedSidebar>
 			<SidebarDiv>
 				{routeElements}
-1			</SidebarDiv>
+			</SidebarDiv>
 		</div>
 	)
 

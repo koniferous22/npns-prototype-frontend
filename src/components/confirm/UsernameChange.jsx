@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { confirmUsernameChangeActions } from '../../actions/content/confirm/usernameChange'
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.confirm.usernameChange
 const mapDispatchToProps = dispatch => ({
 	confirm: (confirmationToken) => dispatch(confirmUsernameChangeActions.confirm(confirmationToken))
@@ -16,10 +18,10 @@ class ConfirmUsernameChangePage extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<ContentDiv>
 				{this.props.message && <p>{this.props.message}</p>}
 				{this.props.verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
-			</div>
+			</ContentDiv>
 		)
 	}
 }

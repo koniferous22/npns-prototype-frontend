@@ -18,6 +18,7 @@ const BuzzfeedContentDiv = styled.div`
 	}
 	margin-top: 20px;
 	padding: 10px;
+	font-family: Verdana, sans-serif;
 `
 
 const TryhardContentDiv = props => <div {...props}/>
