@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from "react-router-dom"
@@ -68,7 +69,7 @@ class ProblemPage extends React.Component {
 				<ContentDiv sidebar>
 					<h3>{problem.title}</h3>
 					<p>
-						{problem.content}
+						<ReactMarkdown source={problem.content} />
 					</p>
 					<p>
 						{!problem.accepted_submission && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
