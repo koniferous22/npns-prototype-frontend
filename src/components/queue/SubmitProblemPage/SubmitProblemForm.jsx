@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../../form/RenderField'
+import renderTextArea from '../../form/RenderTextArea'
 import ReduxFormSelect from '../../form/ReduxFormSelect'
 
 import { submitProblemActions } from '../../../actions/content/submitProblem'
@@ -44,9 +45,9 @@ const SubmitProblemForm = props => {
 	options = options.map(transformIntoOption)
 
 	return (<form onSubmit={handleSubmit}>
-			<Field name="queue" component={ReduxFormSelect} options={options} defaultValue={transformIntoOption(props.defaultQueue)} label='Select queue'/>
-			<Field name="title" component={renderField} type="text" label='Title'/>
-			<Field name="description" component={renderField} type="text" label='Description'/>
+			<Field name="queue" component={ReduxFormSelect} options={options} defaultValue={transformIntoOption(props.defaultQueue)} label="Select queue"/>
+			<Field name="title" component={renderField} type="text" label="Title"/>
+			<Field name="description" component={renderTextArea} type="textarea" label="Description" rows="10" cols="50"/>
 		<button type="submit">Submit</button>
 	</form>)
 }
