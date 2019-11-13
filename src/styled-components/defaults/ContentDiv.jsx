@@ -19,6 +19,10 @@ const BuzzfeedContentDiv = styled.div`
 	margin-top: 20px;
 	padding: 10px;
 	font-family: Verdana, sans-serif;
+
+	input {
+		border-radius: 5px;
+	}
 `
 
 const TryhardContentDiv = props => <div {...props}/>

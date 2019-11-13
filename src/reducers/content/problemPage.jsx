@@ -156,7 +156,8 @@ function problemPageReducer(state = defaultState, action) {
 			return {
 				...state,
 				submissionEntries: newSubmissionEntries,
-				message: ""
+				message: "",
+				replyForm: null
 			}
 
 		case problemPageConstants.ACCEPT_SUBMISSION_REQUEST:

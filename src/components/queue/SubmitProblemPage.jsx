@@ -7,6 +7,8 @@ import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
 import { submitProblemActions } from '../../actions/content/submitProblem'
 import { submitProblemStages } from '../../constants/content/submitProblemPage' 
 
+import ContentDiv from '../../styled-components/defaults/ContentDiv'
+
 const mapStateToProps = state => state.content.submitProblem
 
 const mapDispatchToProps = dispatch => ({
@@ -28,25 +30,25 @@ class SubmitProblemPage extends React.Component {
 		switch(page.stage) {
 			case submitProblemStages.COMPLETED:
 				return(
-					<div>
+					<ContentDiv>
 						{page.message}
 						<p>Would you like to check out <Link to={'/problem/' + page.problemId}>your submitted problem</Link> or the <Link to={'/q/' + page.queue}>{page.queue} queue</Link>?</p>
-					</div>
+					</ContentDiv>
 
 				)
 			case submitProblemStages.SUBMITTING_FORM:
 			default:
 				return(
-					<div>
+					<ContentDiv>
 						<p>Submitting new problem</p>
 						<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
 						<div>{page.message}</div>
 						<div>
-							<p>Preview</p>
+							{form && form.values && (form.values.title || form.values.description) && <p>Preview</p>}
 							{form && form.values && <h3>{form.values.title}</h3>}
 							<p>{form && form.values && <ReactMarkdown source={form.values.description} />}</p>
 						</div>
-					</div>
+					</ContentDiv>
 				)
 		}
 	}
