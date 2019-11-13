@@ -6,12 +6,18 @@ import ThemeSelector from '../ThemeSelector'
 import { sidebarStyleConstants } from '../sidebars/Constants';
 
 const BuzzfeedContentDiv = styled.div`
-	display: inline-block;
-	margin-left: ${props => props.sidebar ? (props.marginLeft || "17em") : "auto"};	
+	${props => props.sidebar ? `
+			margin-left: ${props.marginLeft || "14rem"};
+		` : `
+			margin-left: auto;
+			margin-right: auto;
+		`}
 	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
 		margin-left: auto;
 		margin-right: auto;
 	}
+	margin-top: 20px;
+	padding: 10px;
 `
 
 const TryhardContentDiv = props => <div {...props}/>

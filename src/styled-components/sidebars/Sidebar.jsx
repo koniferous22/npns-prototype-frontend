@@ -14,7 +14,7 @@ const BuzzfeedSidebar = styled.div`
 		display: none;
 	}
 
-	width: ${props => props.sidebarWidth || "17em"};
+	width: ${props => props.sidebarWidth || "14rem"};
 	height: calc(100% - 50px);
 	float: left;
 	position: fixed;

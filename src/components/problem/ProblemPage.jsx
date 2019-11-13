@@ -11,6 +11,8 @@ import Submission from './ProblemPage/Submission'
 import { problemPageActions } from '../../actions/content/problemPage'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import ProblemDiv from '../../styled-components/problem/ProblemDiv'
+import ProblemBox from '../../styled-components/problem/ProblemBox'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
@@ -67,27 +69,28 @@ class ProblemPage extends React.Component {
 			<div>
 				<QueueSidebar />
 				<ContentDiv sidebar>
-					<h3>{problem.title}</h3>
-					<p>
-						<ReactMarkdown source={problem.content} />
-					</p>
-					<p>
-						{!problem.accepted_submission && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
-					</p>
-					{
-						submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id}/>
-					}
-					<div style={{height:"100%",overflow:"auto"}}>
-						<InfiniteScroll
-							pageStart={0}
-							loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
-							hasMore={this.props.paging.hasMore}
-							loader={<div className="loader" key={0}>Loading ...</div>}
-							
-						>
-							{submissions}
-						</InfiniteScroll>
-					</div>
+					<ProblemDiv>
+						<ProblemBox>
+							{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
+							<h3>{problem.title}</h3>
+							<span>Description: </span>
+							<ReactMarkdown source={problem.content} />
+						</ProblemBox>
+						{
+							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id}/>
+						}
+						<div style={{height:"100%",overflow:"auto"}}>
+							<InfiniteScroll
+								pageStart={0}
+								loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
+								hasMore={this.props.paging.hasMore}
+								loader={<div className="loader" key={0}>Loading ...</div>}
+								
+							>
+								{submissions}
+							</InfiniteScroll>
+						</div>
+					</ProblemDiv>
 				</ContentDiv>
 			</div>
 		)
