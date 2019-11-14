@@ -1,4 +1,5 @@
-import { authConstants } from '../constants/auth';
+import { authConstants } from '../constants/auth'
+import { messageType } from '../constants/backendMessageType'
 import { appConfig } from '../appConfig'
 
 export const authActions = {
@@ -11,13 +12,15 @@ function login(username, password) {
 	if (!username) {
 		return {
 			type: authConstants.LOGIN_FAILURE,
-			message: 'Missing username'
-		}
+			message: 'Missing username',
+			messageType: messageType.ERROR
+			}
 	}
 	if (!password) {
 		return {
 			type: authConstants.LOGIN_FAILURE,
-			message: 'Missing password'
+			message: 'Missing password',
+			messageType: messageType.ERROR
 		}
 	}
 	return dispatch => {
