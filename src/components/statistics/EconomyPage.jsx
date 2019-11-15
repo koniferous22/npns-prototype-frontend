@@ -9,6 +9,7 @@ import { globalActions } from '../../actions/global'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,
@@ -34,7 +35,9 @@ class EconomyPage extends React.Component {
 			<PageDiv>
 				<StatisticsSidebar />
 				<ContentDiv sidebar>
-					{message && message}
+					<BackendMessage messageType={this.props.messageType}>
+						{message && message}
+					</BackendMessage>
 					<ul>
 						{karmaValues && karmaValues.map(q => (
 							<li key={q.name}>

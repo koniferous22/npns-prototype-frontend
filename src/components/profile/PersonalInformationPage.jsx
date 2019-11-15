@@ -17,6 +17,7 @@ import { personalInformationPageStages } from '../../constants/content/profile/p
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 
@@ -30,19 +31,25 @@ class PersonalInformationPage extends React.Component {
 	}
 
 	render() {
+		const message = this.props.message
+		const messageType = this.props.messageType
+		const form = this.props.form
+		const token = this.props.token
 		switch (this.props.stage) {
 			case personalInformationPageStages.PASSWORD_CONFIRMATION:
 				return (
 					<ContentDiv>
-						{'Please confirm by entering your ' + (this.props.form === 'password' ? 'current ' : '') + 'password'}
-						<ConfirmPasswordForm form={this.props.form} token={this.props.token} />
+						{'Please confirm by entering your ' + (form === 'password' ? 'current ' : '') + 'password'}
+						<ConfirmPasswordForm form={form} token={token} />
 					</ContentDiv>
 				)
 			case personalInformationPageStages.COMPLETED:
 				return (
 					<ContentDiv>
-						<ProfileUpdateDispatcher form={this.props.form} token={this.props.token} values={this.props.values} user={this.props.user}/>
-						{this.props.message}
+						<ProfileUpdateDispatcher form={form} token={token} values={this.props.values} user={this.props.user}/>
+						<BackendMessage messageType={messageType}>
+							{message}
+				    </BackendMessage>
 					</ContentDiv>
 				)
 			case personalInformationPageStages.SUBMITTING_FORM:
@@ -51,23 +58,33 @@ class PersonalInformationPage extends React.Component {
 					<PageDiv>
 						<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
 						<ContentDiv sidebar>
-							{!this.props.form && this.props.message}
+							<BackendMessage messageType={messageType}>
+								{!form && message}
+					    </BackendMessage>
 
 							Change Email
 							<ChangeEmailForm />
-							{this.props.form === 'email' && this.props.message}
-
+							<BackendMessage messageType={messageType}>
+								{form === 'email' && message}
+				    	</BackendMessage>
+							
 							Change Password
 							<ChangePasswordForm />
-							{this.props.form === 'password' && this.props.message}
+							<BackendMessage messageType={messageType}>
+								{form === 'password' && message}
+				    	</BackendMessage>
 							
 							Change Username
 							<ChangeUsernameForm />
-							{this.props.form === 'username' && this.props.message}
+							<BackendMessage messageType={messageType}>
+								{form === 'username' && message}
+				    	</BackendMessage>
 
 							Change Names
 							<ChangeNamesForm />
-							{this.props.form === 'names' && this.props.message}
+							<BackendMessage messageType={messageType}>
+								{form === 'names' && message}
+				    	</BackendMessage>
 						</ContentDiv>
 					</PageDiv>
 				)

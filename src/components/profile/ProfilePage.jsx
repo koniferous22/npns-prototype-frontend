@@ -7,6 +7,7 @@ import { profilePageActions } from '../../actions/content/profile/profilePage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.profilePage;
 const mapDispatchToProps = dispatch => ({
@@ -22,9 +23,9 @@ class ProfilePage extends React.Component {
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 		if (this.props.message) {
 			return (
-				<p>
+				<BackendMessage messageType={this.props.messageType}>
 					{this.props.message}
-				</p>
+				</BackendMessage>
 			)
 		}
 		const balances = Object.keys(this.props.data.balances).map((q, index) => (

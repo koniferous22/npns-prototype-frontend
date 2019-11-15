@@ -9,6 +9,7 @@ import { confirmPasswordChangeActions } from '../../actions/content/confirm/pass
 import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = state => state.content.confirm.passwordChange.page
 
@@ -26,7 +27,7 @@ class ConfirmPasswordChangePage extends React.Component {
 		this.props.reset()
 	}
 
-	render() {	
+	render() {
 		switch (this.props.stage) {
 			case confirmPasswordChangeStages.COMPLETED:
 				return (
@@ -39,7 +40,9 @@ class ConfirmPasswordChangePage extends React.Component {
 			case confirmPasswordChangeStages.SUBMITTING_FORM:
 				return (
 					<ContentDiv>
-						{this.props.message}
+    				<BackendMessage messageType={this.props.messageType}>
+							{this.props.message}
+ 		   			</BackendMessage>
 						<PasswordChangeForm token={this.props.token} />
 					</ContentDiv>
 				)
@@ -47,7 +50,9 @@ class ConfirmPasswordChangePage extends React.Component {
 			default:
 				return (
 					<ContentDiv>
-						{this.props.message}
+    				<BackendMessage messageType={this.props.messageType}>
+							{this.props.message}
+ 		   			</BackendMessage>
 					</ContentDiv>
 				)
 		}

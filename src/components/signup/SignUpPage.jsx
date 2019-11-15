@@ -6,6 +6,7 @@ import { signupStages } from '../../constants/content/signUpPage'
 import { signupActions } from '../../actions/content/signup'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = state => state.content.signup.page
 
@@ -22,7 +23,9 @@ class SignUpPage extends React.Component {
 			case signupStages.COMPLETED:
 				return (
 					<ContentDiv>
-						{this.props.message.message}
+						<BackendMessage messageType={this.props.messageType}>
+							{this.props.message.message}
+						</BackendMessage>
 						<ol>
 							{this.props.message.steps.map((step, i) => (
 								<li key={i}>{step}</li>
@@ -34,7 +37,9 @@ class SignUpPage extends React.Component {
 			default:
 				return (
 					<ContentDiv>
-						{this.props.message}
+						<BackendMessage messageType={this.props.messageType}>
+							{this.props.message}
+						</BackendMessage>
 						<h1>REGISTRUJ SA PRIATELU</h1>
 						<SignUpForm />
 					</ContentDiv>

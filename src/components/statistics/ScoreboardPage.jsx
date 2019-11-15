@@ -11,6 +11,7 @@ import { scoreboardPageActions } from '../../actions/content/statistics/scoreboa
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
 
@@ -54,7 +55,9 @@ class ScoreboardPage extends React.Component {
 			<PageDiv>
 				<StatisticsSidebar addQueues queueBaseUrl='/statistics/scoreboard'/>
 				<ContentDiv sidebar>
-					{this.props.message}
+					<BackendMessage messageType={this.props.messageType}>
+						{this.props.message}
+					</BackendMessage>
 					<ScoreboardSearchUserForm queue={this.props.queue} />
 					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
 					<table>

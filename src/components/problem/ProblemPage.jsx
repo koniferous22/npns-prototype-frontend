@@ -15,6 +15,7 @@ import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
 import ProblemBox from '../../styled-components/problem/ProblemBox'
+import BackendMessage from '../../styled-components/BackendMessage'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
@@ -42,7 +43,9 @@ class ProblemPage extends React.Component {
 			return (
 				<PageDiv>
 					<QueueSidebar />
-					{this.props.message}
+					<BackendMessage messageType={this.props.messageType}>
+						{this.props.message}
+					</BackendMessage>
 				</PageDiv>
 			)
 		}
