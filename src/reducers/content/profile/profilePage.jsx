@@ -15,11 +15,11 @@ const defaultState = {
 function profilePageReducer(state=defaultState, action) {
 	switch(action.type) {
 		case profilePageConstants.LOAD_USER_REQUEST:
-			return {...state, message: "Loading data"}
+			return {...state, message: "Loading data", messageType: action.messageType}
 		case profilePageConstants.LOAD_USER_SUCCESS:
 			return {data: action.user || defaultState.data}
 		case profilePageConstants.LOAD_USER_FAILED:
-			return {...state, message: "No user found"}
+			return {...state, message: "No user found", messageType: action.messageType}
 		default:
 			return state
 	}

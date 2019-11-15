@@ -20,6 +20,7 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 				...state,
 				activePage: action.activePage,
 				message: 'Loading...',
+				messageType: action.messageType,
 				highlight: null,
 				userFlag: false
 			}
@@ -29,6 +30,7 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 				data: action.data,
 				activePage: action.activePage,
 				message: '',
+				messageType: action.messageType,
 				highlight: null,
 				userFlag: false
 			}
@@ -36,12 +38,14 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 			return {
 				...state,
 				message: action.message,
+				messageType: action.messageType,
 				userFlag: false
 			}
 		case scoreboardPageConstants.USER_SEARCH_REQUEST:
 			return {
 				...state,
-				message: 'Loading...'
+				message: 'Loading...',
+				messageType: action.messageType
 			}
 		case scoreboardPageConstants.USER_SEARCH_SUCCESS:
 			return {
@@ -49,17 +53,20 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 				activePage: action.activePage,
 				userFlag: true,
 				message: null,
+				messageType: action.messageType,
 				highlight: action.username
 			}
 		case scoreboardPageConstants.USER_SEARCH_FAILED:
 			return {
 				...state,
-				message: action.message
+				message: action.message,
+				messageType: action.messageType
 			}
 		case scoreboardPageConstants.USER_COUNT_REQUEST:
 			return {
 				...state,
-				message: 'Loading...'
+				message: 'Loading...',
+				messageType: action.messageType
 			}
 		case scoreboardPageConstants.USER_COUNT_SUCCESS:
 			return {
@@ -70,6 +77,7 @@ function singleScoreboardPageReducer(state=defaultQueueScoreboardState, action) 
 			return {
 				...state,
 				message: action.message,
+				messageType: action.messageType
 			}
 		default:
 			return state

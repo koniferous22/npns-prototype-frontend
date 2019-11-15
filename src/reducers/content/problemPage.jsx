@@ -55,6 +55,7 @@ function problemPageReducer(state = defaultState, action) {
 			return {
 				...state,
 				message: action.message,
+				messageType: action.messageType,
 				problem: undefined
 			}
 		case problemPageConstants.LOAD_REPLY_PAGE_FAILED:
@@ -63,12 +64,14 @@ function problemPageReducer(state = defaultState, action) {
 		case problemPageConstants.ACCEPT_SUBMISSION_FAILED:
 			return {
 				...state,
-				message: action.message
+				message: action.message,
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_PROBLEM_DATA_REQUEST:
 			return {
 				...state, 
-				message: "Waiting for problem data"
+				message: "Waiting for problem data",
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS:
 			const keep_problem_data = action.problem && state.problem && action.problem.id === state.problem.id
@@ -78,12 +81,14 @@ function problemPageReducer(state = defaultState, action) {
 				problem: action.problem || {},
 				paging: keep_problem_data ? state.paging : defaultPaging,
 				submissionEntries: keep_problem_data ? state.submissionEntries : [],
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST:
 			return {
 				...state,
-				message: "Loading more submissions"
+				message: "Loading more submissions",
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS:
 			const activePage = (!action.activePage || action.activePage <= 1) ? 1 : action.activePage
@@ -95,20 +100,23 @@ function problemPageReducer(state = defaultState, action) {
 				...state,
 				submissionEntries: newSubmissionEntries.slice(0,activePage),
 				paging: newPaging,
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED:
 			newPaging.hasMore = false
 			return {
 				...state,
 				message: action.message,
+				messageType: action.messageType,
 				paging: newPaging
 					
 			}
 		case problemPageConstants.LOAD_REPLY_PAGE_REQUEST:
 			return {
 				...state,
-				message: "Loading more replies"
+				message: "Loading more replies",
+				messageType: action.messageType
 			}
 		case problemPageConstants.LOAD_REPLY_PAGE_SUCCESS:
 			const activeReplyPage = (!action.activeReplyPage || action.activeReplyPage <= 1) ? 1 : action.activeReplyPage
@@ -124,12 +132,14 @@ function problemPageReducer(state = defaultState, action) {
 				...state,
 				submissionEntries: newSubmissionEntries,
 				paging: newPaging,
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.POST_SUBMISSION_REQUEST:
 			return {
 				...state,
-				message: "Posting submission"
+				message: "Posting submission",
+				messageType: action.messageType
 			}
 		case problemPageConstants.POST_SUBMISSION_SUCCESS:
 			if (newSubmissionEntries.length === 0) {
@@ -141,12 +151,14 @@ function problemPageReducer(state = defaultState, action) {
 				...state,
 				submissionEntries: newSubmissionEntries,
 				paging: newPaging,
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.REPLY_SUBMISSION_REQUEST:
 			return {
 				...state,
-				message: "Posting reply"
+				message: "Posting reply",
+				messageType: action.messageType
 			}
 		case problemPageConstants.REPLY_SUBMISSION_SUCCESS:
 			if (submission.replyEntries.length === 0) {
@@ -157,26 +169,30 @@ function problemPageReducer(state = defaultState, action) {
 				...state,
 				submissionEntries: newSubmissionEntries,
 				message: "",
+				messageType: action.messageType,
 				replyForm: null
 			}
 
 		case problemPageConstants.ACCEPT_SUBMISSION_REQUEST:
 			return {
 				...state,
-				message: 'Marking as solved'
+				message: 'Marking as solved',
+				messageType: action.messageType
 			}
 		case problemPageConstants.ACCEPT_SUBMISSION_SUCCESS:
 			submission['accepted'] = true
 			state.problem.accepted_submission = action.submission
 			return {
 				...state,
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.SELECT_REPLY_FORM:
 			return {
 				...state,
 				replyForm: (action.replyForm === state.replyForm) ? null : action.replyForm,
-				message: ""
+				message: "",
+				messageType: action.messageType
 			}
 		case problemPageConstants.RESET:
 			return defaultState

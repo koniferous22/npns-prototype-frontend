@@ -17,7 +17,6 @@ const BuzzfeedApp = styled.div`
 		"page";
 `
 
-
 const TryhardApp = props => <div {...props}/>
 
 const App = props => <ThemeSelector 

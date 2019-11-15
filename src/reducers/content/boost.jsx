@@ -13,9 +13,9 @@ const boostPageReducer = (state = initialState, action) => {
 		case boostConstants.REQUEST:
 			return {stage: boostStages.BOOSTING, message: "Waiting for server response"}
 		case boostConstants.SUCCESS:
-			return {stage: boostStages.COMPLETED, message: "Problem boosted"}
+			return {stage: boostStages.COMPLETED, message: "Problem boosted", messageType: action.messageType}
 		case boostConstants.FAILED:
-			return {stage: boostStages.BOOSTING, message: action.error}
+			return {stage: boostStages.BOOSTING, message: action.error, messageType: action.messageType}
 		case boostConstants.RESET:
 			return initialState
 		default:

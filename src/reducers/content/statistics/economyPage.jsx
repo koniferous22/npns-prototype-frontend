@@ -6,7 +6,8 @@ function economyPageReducer(state = defaultState, action) {
 	switch (action.type) {
 		case economyPageConstants.LOAD_KARMA_VALUES_REQUEST:
 			return {
-				message: "Loading data..." 
+				message: "Loading data...",
+				messageType: action.messageType
 			}
 		case economyPageConstants.LOAD_KARMA_VALUES_SUCCESS:
 			return {
@@ -15,6 +16,7 @@ function economyPageReducer(state = defaultState, action) {
 		case economyPageConstants.LOAD_KARMA_VALUES_FAILED:
 			return {
 				message: action.message,
+				messageType: action.messageType,
 				karmaValues: state
 			}
 		default:

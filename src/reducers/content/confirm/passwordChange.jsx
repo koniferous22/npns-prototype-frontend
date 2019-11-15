@@ -8,7 +8,8 @@ function confirmPasswordChangeReducer(state={}, action) {
 		case confirmPasswordChangeConstants.VERIFY_REQUEST:
 			return {
 				stage: confirmPasswordChangeStages.SUBMITTING_FORM,
-				message: "Verifying token sent via email"
+				message: "Verifying token sent via email",
+				messageType: action.messageType
 			}
 		case confirmPasswordChangeConstants.VERIFY_SUCCESS:
 			return {
@@ -17,23 +18,27 @@ function confirmPasswordChangeReducer(state={}, action) {
 		case confirmPasswordChangeConstants.VERIFY_FAILED:
 			return {
 				stage: confirmPasswordChangeStages.INVALID_TOKEN,
-				message: "Invalid token"
+				message: "Invalid token",
+				messageType: action.messageType
 			}
 		case confirmPasswordChangeConstants.CONFIRM_REQUEST:
 			return {
 				stage: confirmPasswordChangeStages.SUBMITTING_FORM,
-				message: "Waiting for server response"
+				message: "Waiting for server response",
+				messageType: action.messageType
 			}
 		case confirmPasswordChangeConstants.CONFIRM_SUCCESS:
 			return {
 				stage: confirmPasswordChangeStages.COMPLETED,
 				message: "Password successfully changed",
+				messageType: action.messageType,
 				verified: true
 			}
 		case confirmPasswordChangeConstants.CONFIRM_FAILED:
 			return {
 				stage: confirmPasswordChangeStages.SUBMITTING_FORM,
 				message: action.message,
+				messageType: action.messageType,
 				verified: false
 			}
 		case confirmPasswordChangeConstants.RESET:

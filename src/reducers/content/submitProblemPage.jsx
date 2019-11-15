@@ -12,17 +12,17 @@ const initialState = {
 const submitProblemPageReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case submitProblemPageConstants.SUBMIT_REQUEST:
-			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response", queueOptions: state.queues}
+			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response", messageType: action.messageType, queueOptions: state.queues}
 		case submitProblemPageConstants.SUBMIT_SUCCESS:
-			return {stage: submitProblemStages.COMPLETED, problemId: action.problem.id,	message: "Problem submitted", queueOptions: state.queues, queue: action.queue}
+			return {stage: submitProblemStages.COMPLETED, problemId: action.problem.id,	message: "Problem submitted", messageType: action.messageType, queueOptions: state.queues, queue: action.queue}
 		case submitProblemPageConstants.SUBMIT_FAILED:
-			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, queueOptions: state.queues}
+			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, messageType: action.messageType, queueOptions: state.queues}
 		case submitProblemPageConstants.LOAD_QUEUES_REQUEST:
-			return {stage: state.stage, message: "Waiting for server response", queueOptions: state.queues}
+			return {stage: state.stage, message: "Waiting for server response", messageType: action.messageType, queueOptions: state.queues}
 		case submitProblemPageConstants.LOAD_QUEUES_SUCCESS:
 			return {stage: state.stage, queueOptions: action.queues}
 		case submitProblemPageConstants.LOAD_QUEUES_FAILED:
-			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, queueOptions: state.queues}
+			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, messageType: action.messageType, queueOptions: state.queues}
 		case submitProblemPageConstants.RESET:
 			return initialState
 		default:

@@ -4,16 +4,19 @@ function confirmEmailChangeReducer(state={}, action) {
 	switch (action.type) {
 		case confirmEmailChangeConstants.REQUEST:
 			return {
-				message: "Waiting for server response"
+				message: "Waiting for server response",
+				messageType: action.messageType
 			}
 		case confirmEmailChangeConstants.SUCCESS:
 			return {
 				message: "Email successfully changed",
+				messageType: action.messageType,
 				verified: true
 			}
 		case confirmEmailChangeConstants.FAILED:
 			return {
 				message: action.message,
+				messageType: action.messageType,
 				verified: false
 			}
 		default:

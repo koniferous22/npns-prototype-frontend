@@ -4,16 +4,19 @@ function confirmRegistrationReducer(state={}, action) {
 	switch (action.type) {
 		case confirmRegistrationConstants.REQUEST:
 			return {
-				message: "Waiting for server response"
+				message: "Waiting for server response",
+				messageType: action.messageType
 			}
 		case confirmRegistrationConstants.SUCCESS:
 			return {
 				message: "Email verified",
+				messageType: action.messageType,
 				verified: true
 			}
 		case confirmRegistrationConstants.FAILED:
 			return {
 				message: action.message,
+				messageType: action.messageType,
 				verified: false
 			}
 		default:

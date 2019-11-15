@@ -1,5 +1,6 @@
 import { appConfig } from '../../appConfig'
-import { boostConstants } from '../../constants/content/boost';
+import { boostConstants } from '../../constants/content/boost'
+import { messageType } from '../../constants/backendMessageType'
 
 export const boostActions = {
 	boost,
@@ -32,7 +33,7 @@ function boost(boost, authToken) {
 	
 	function request() { return { type: boostConstants.REQUEST } }
 	function success() { return { type: boostConstants.SUCCESS } }
-	function failure(error) { return { type: boostConstants.FAILED, error } }
+	function failure(error) { return { type: boostConstants.FAILED, error, messageType: messageType.ERROR } }
 }
 
 function reset() {

@@ -53,7 +53,7 @@ function login(username, password) {
 
 	function request(user) { return { type: authConstants.LOGIN_REQUEST, user: user } }
 	function success(user, token) { return { type: authConstants.LOGIN_SUCCESS, user, token} }
-	function invalid_credentials(error) { return { type: authConstants.LOGIN_INVALID_CREDENTIALS, error: error } }
+	function invalid_credentials(error) { return { type: authConstants.LOGIN_INVALID_CREDENTIALS, error: error, messageType: messageType.ERROR } }
 }
 
 function logout(token) {
