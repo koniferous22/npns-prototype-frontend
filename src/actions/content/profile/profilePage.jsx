@@ -1,12 +1,12 @@
 import { appConfig } from '../../../appConfig'
 import { profilePageConstants } from '../../../constants/content/profile/profilePage'
-
+import { messageType } from '../../../constants/backendMessageType'
 
 function loadUserData(username) {
 	
 	const request = () => ({ type: profilePageConstants.LOAD_USER_SUCCESS })
 	const success = (user) => ({type: profilePageConstants.LOAD_USER_SUCCESS, user})
-	const failure = (message) => ({type: profilePageConstants.LOAD_USER_FAILED, message})
+	const failure = (message) => ({type: profilePageConstants.LOAD_USER_FAILED, message, messageType: messageType.ERROR})
 
 	if (!username || username === '') {
 		return failure('No username specified')

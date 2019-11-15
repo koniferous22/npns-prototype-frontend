@@ -1,6 +1,6 @@
 import { appConfig } from '../../appConfig'
-import { submitProblemPageConstants } from '../../constants/content/submitProblemPage';
-
+import { submitProblemPageConstants } from '../../constants/content/submitProblemPage'
+import { messageType } from '../../constants/backendMessageType'
 
 function submit(problem, authToken) {
 	
@@ -30,14 +30,14 @@ function submit(problem, authToken) {
 	
 	function request() { return { type: submitProblemPageConstants.SUBMIT_REQUEST } }
 	function success(problem, queue) { return { type: submitProblemPageConstants.SUBMIT_SUCCESS, problem, queue } }
-	function failure(error) { return { type: submitProblemPageConstants.SUBMIT_FAILED, error } }
+	function failure(error) { return { type: submitProblemPageConstants.SUBMIT_FAILED, error, messageType: messageType.ERROR } }
 }
 
 function fetchDropdownValues() {
 
 	function request() { return { type: submitProblemPageConstants.LOAD_QUEUES_REQUEST } }
 	function success(queues) { return { type: submitProblemPageConstants.LOAD_QUEUES_SUCCESS, queues } }
-	function failure(error) { return { type: submitProblemPageConstants.LOAD_QUEUES_FAILED, error } }
+	function failure(error) { return { type: submitProblemPageConstants.LOAD_QUEUES_FAILED, error, messageType: messageType.ERROR } }
 
 	return dispatch => {
 		dispatch(request());

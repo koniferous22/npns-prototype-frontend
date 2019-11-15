@@ -1,10 +1,11 @@
 import { appConfig } from '../../../appConfig'
 import { confirmUsernameChangeConstants } from '../../../constants/content/confirm/usernameChange'
+import { messageType } from '../../../constants/backendMessageType'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmUsernameChangeConstants.REQUEST})
 	const success = () => ({type: confirmUsernameChangeConstants.SUCCESS})
-	const failure = (message) => ({type: confirmUsernameChangeConstants.FAILED, message})
+	const failure = (message) => ({type: confirmUsernameChangeConstants.FAILED, message, messageType: messageType.ERROR})
 
 	return dispatch => {
 		dispatch(request())

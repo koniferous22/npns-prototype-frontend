@@ -1,14 +1,15 @@
 import { appConfig } from '../../appConfig'
-import { queuePageConstants } from '../../constants/content/queuePage';
+import { queuePageConstants } from '../../constants/content/queuePage'
+import { messageType } from '../../constants/backendMessageType'
 
 function setActivePage(queue,pageIndex) {
 
 	const request = (queue, activePage) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_REQUEST, activePage, queue })
 	const success = (queue, activePage, data, hasMore) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, queue, hasMore })
-	const failure = (queue, message) => ({ type: queuePageConstants.NETWORK_ERROR, message, queue })
+	const failure = (queue, message) => ({ type: queuePageConstants.NETWORK_ERROR, message, messageType: messageType.ERROR, queue })
 
 	if (!queue) {
-		return {type: queuePageConstants.NETWORK_ERROR, queue:'Index', message: 'No queue specified'}
+		return {type: queuePageConstants.NETWORK_ERROR, queue:'Index', message: 'No queue specified', messageType: messageType.ERROR}
 	}
 
 	return dispatch => {

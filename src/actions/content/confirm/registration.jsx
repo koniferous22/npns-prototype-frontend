@@ -1,10 +1,11 @@
 import { appConfig } from '../../../appConfig'
 import { confirmRegistrationConstants } from '../../../constants/content/confirm/registration'
+import { messageType } from '../../../constants/backendMessageType'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmRegistrationConstants.REQUEST})
 	const success = () => ({type: confirmRegistrationConstants.SUCCESS})
-	const failure = (message) => ({type: confirmRegistrationConstants.FAILED, message})
+	const failure = (message) => ({type: confirmRegistrationConstants.FAILED, message, messageType: messageType.ERROR})
 
 	return dispatch => {
 		dispatch(request())

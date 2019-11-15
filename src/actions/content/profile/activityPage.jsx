@@ -1,12 +1,12 @@
 import { appConfig } from '../../../appConfig'
 import { activityPageConstants } from '../../../constants/content/profile/activityPage';
-
+import { messageType } from '../../../constants/backendMessageType'
 
 function setActivePage(user, pageIndex) {
 
 	const request = (activePage) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_REQUEST, activePage })
 	const success = (activePage, data, hasMore) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_FAILED, message })
+	const failure = (message) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_FAILED, message, messageType: messageType.ERROR })
 	if (!user) {
 		return dispatch => {
 			dispatch(failure('No user specified'))

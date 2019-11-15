@@ -1,5 +1,6 @@
-import { signupConstants } from '../../constants/content/signUpPage';
+import { signupConstants } from '../../constants/content/signUpPage'
 import { appConfig } from '../../appConfig'
+import { messageType } from '../../constants/backendMessageType'
 
 export const signupActions = {
 	signup,
@@ -34,7 +35,7 @@ function signup(user) {
 	
 	function request() { return { type: signupConstants.REQUEST } }
 	function success({user}) { return { type: signupConstants.SUCCESS, user } }
-	function failure(message) { return { type: signupConstants.FAILED, message } }
+	function failure(message) { return { type: signupConstants.FAILED, message, messageType: messageType.ERROR } }
 	
 }
 

@@ -1,5 +1,6 @@
-import { forgotPwdConstants } from '../../constants/content/forgotPwdPage';
+import { forgotPwdConstants } from '../../constants/content/forgotPwdPage'
 import { appConfig } from '../../appConfig'
+import { messageType } from '../../constants/backendMessageType'
 
 export const forgotPwdActions = {
 	forgotPwd,
@@ -36,7 +37,7 @@ function forgotPwd(user) {
 	
 	function request() { return { type: forgotPwdConstants.REQUEST } }
 	function success(user) { return { type: forgotPwdConstants.SUCCESS, user } }
-	function failed(message) { return { type: forgotPwdConstants.FAILED, message } }
+	function failed(message) { return { type: forgotPwdConstants.FAILED, message, messageType: messageType.ERROR } }
 	
 }
 

@@ -1,10 +1,11 @@
 import { appConfig } from '../../../appConfig'
-import { economyPageConstants } from '../../../constants/content/statistics/economyPage';
+import { economyPageConstants } from '../../../constants/content/statistics/economyPage'
+import { messageType } from '../../../constants/backendMessageType'
 
 function loadKarmaValues() {
 	const request = () => ({ type: economyPageConstants.LOAD_KARMA_VALUES_REQUEST })
-	const success = (data) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_SUCCESS, data})
-	const failure = (message) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_FAILED, message })
+	const success = (data) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_SUCCESS, data })
+	const failure = (message) => ({ type: economyPageConstants.LOAD_KARMA_VALUES_FAILED, message, messageType: messageType.ERROR })
 
 	return dispatch => {
 	dispatch(request());

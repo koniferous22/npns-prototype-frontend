@@ -1,5 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { personalInformationPageConstants } from '../../../constants/content/profile/personalInformationPage'
+import { messageType } from '../../../constants/backendMessageType'
 
 function filled(form, values) {
 	return {
@@ -59,11 +60,12 @@ function confirmPassword(password, form, authToken) {
 			default:
 				return { 
 					type: personalInformationPageConstants.CONFIRM_PASSWORD_FAILED,
-					message: 'idk wut happened, but suddenli form parameter is nul'
+					message: 'idk wut happened, but suddenli form parameter is nul',
+					messageType: messageType.ERROR
 				}
 		}
 	}
-	function failure(message) { return { type: personalInformationPageConstants.CONFIRM_PASSWORD_FAILED, message } }
+	function failure(message) { return { type: personalInformationPageConstants.CONFIRM_PASSWORD_FAILED, message, messageType: messageType.ERROR } }
 }
 
 
@@ -97,7 +99,7 @@ function submitEmailChange(newEmail, authToken) {
 	
 	function request() { return { type: personalInformationPageConstants.CHANGE_EMAIL_REQUEST } }
 	function success() { return { type: personalInformationPageConstants.CHANGE_EMAIL_SUCCESS} }
-	function failure(message) { return { type: personalInformationPageConstants.CHANGE_EMAIL_FAILED, message } }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_EMAIL_FAILED, message, messageType: messageType.ERROR } }
 	
 }
 
@@ -131,7 +133,7 @@ function submitUsernameChange(newUsername, authToken) {
 	
 	function request() { return { type: personalInformationPageConstants.CHANGE_USERNAME_REQUEST } }
 	function success() { return { type: personalInformationPageConstants.CHANGE_USERNAME_SUCCESS} }
-	function failure(message) { return { type: personalInformationPageConstants.CHANGE_USERNAME_FAILED, message } }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_USERNAME_FAILED, message, messageType: messageType.ERROR } }
 	
 }
 
@@ -165,7 +167,7 @@ function submitNamesChange(newFirstName, newLastName, authToken) {
 	
 	function request() { return { type: personalInformationPageConstants.CHANGE_NAMES_REQUEST } }
 	function success() { return { type: personalInformationPageConstants.CHANGE_NAMES_SUCCESS} }
-	function failure(message) { return { type: personalInformationPageConstants.CHANGE_NAMES_FAILED, message } }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_NAMES_FAILED, message, messageType: messageType.ERROR } }
 	
 }
 
@@ -199,7 +201,7 @@ function submitPasswordChange(user) {
 	
 	function request() { return { type: personalInformationPageConstants.CHANGE_PASSWORD_REQUEST } }
 	function success(user) { return { type: personalInformationPageConstants.CHANGE_PASSWORD_SUCCESS, user} }
-	function failure(message) { return { type: personalInformationPageConstants.CHANGE_PASSWORD_FAILED, message } }
+	function failure(message) { return { type: personalInformationPageConstants.CHANGE_PASSWORD_FAILED, message, messageType: messageType.ERROR } }
 }
 
 

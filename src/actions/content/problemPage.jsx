@@ -1,11 +1,12 @@
 
 import { appConfig } from '../../appConfig'
 import { problemPageConstants } from '../../constants/content/problemPage'
+import { messageType } from '../../constants/backendMessageType'
 
 function loadProblemData(problemId) {
 	const request = () => ({ type: problemPageConstants.LOAD_PROBLEM_DATA_REQUEST })
 	const success = (problem) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS, problem})
-	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message, messageType: messageType.ERROR})
 
 	if (!problemId) {
 		return failure('No Problem specified')
@@ -38,7 +39,7 @@ function loadProblemData(problemId) {
 function loadSubmissionPage(problemId, activePage) {
 	const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST, problemId })
 	const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message, messageType: messageType.ERROR})
 
 	if (!problemId) {
 		return failure('No Problem specified')
@@ -71,7 +72,7 @@ function loadSubmissionPage(problemId, activePage) {
 function loadReplyPage(submissionId, activePage) {
 	const request = () => ({ type: problemPageConstants.LOAD_REPLY_PAGE_REQUEST })
 	const success = (submission, activeReplyPage, data, hasMore) => ({ type: problemPageConstants.LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
-	const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submissionId) {
 		return failure('No submission specified')
@@ -104,7 +105,7 @@ function loadReplyPage(submissionId, activePage) {
 function postSubmission(submission, token) {
 	const request = () => ({ type: problemPageConstants.POST_SUBMISSION_REQUEST })
 	const success = (submission) => ({type: problemPageConstants.POST_SUBMISSION_SUCCESS, submission})
-	const failure = (message) => ({type: problemPageConstants.POST_SUBMISSION_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.POST_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submission) {
 		return failure('No submission specified')
@@ -137,7 +138,7 @@ function postSubmission(submission, token) {
 function replySubmission(reply, token) {
 	const request = () => ({ type: problemPageConstants.REPLY_SUBMISSION_REQUEST })
 	const success = (submission, reply) => ({ type: problemPageConstants.REPLY_SUBMISSION_SUCCESS, submission, reply })
-	const failure = (message) => ({type: problemPageConstants.REPLY_SUBMISSION_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.REPLY_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!reply) {
 		return failure('No reply specified')
@@ -170,7 +171,7 @@ function replySubmission(reply, token) {
 function acceptSubmission(submission, problem, token) {
 	const request = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_REQUEST })
 	const success = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_SUCCESS, submission })
-	const failure = (message) => ({type: problemPageConstants.ACCEPT_SUBMISSION_FAILED, message})
+	const failure = (message) => ({type: problemPageConstants.ACCEPT_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submission) {
 		return failure('No submission specified')

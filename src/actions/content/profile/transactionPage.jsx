@@ -1,11 +1,12 @@
 import { appConfig } from '../../../appConfig'
-import { transactionPageConstants } from '../../../constants/content/profile/transactionPage';
+import { transactionPageConstants } from '../../../constants/content/profile/transactionPage'
+import { messageType } from '../../../constants/backendMessageType'
 
 function setActivePage(token, pageIndex) {
 
 	const request = (activePage) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST, activePage })
 	const success = (activePage, data, hasMore) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_FAILED, message })
+	const failure = (message) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_FAILED, message, messageType: messageType.ERROR })
 
 	return dispatch => {
 		dispatch(request(pageIndex));

@@ -1,10 +1,11 @@
 import { appConfig } from '../../../appConfig'
 import { confirmEmailChangeConstants } from '../../../constants/content/confirm/emailChange'
+import { messageType } from '../../../constants/backendMessageType'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmEmailChangeConstants.REQUEST})
 	const success = () => ({type: confirmEmailChangeConstants.SUCCESS})
-	const failure = (message) => ({type: confirmEmailChangeConstants.FAILED, message})
+	const failure = (message) => ({type: confirmEmailChangeConstants.FAILED, message, messageType: messageType.ERROR})
 
 	return dispatch => {
 		dispatch(request())

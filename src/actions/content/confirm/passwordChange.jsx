@@ -1,10 +1,11 @@
 import { appConfig } from '../../../appConfig'
 import { confirmPasswordChangeConstants } from '../../../constants/content/confirm/passwordChange'
+import { messageType } from '../../../constants/backendMessageType'
 
 function verify(confirmationToken) {
 	const request = () => ({type: confirmPasswordChangeConstants.VERIFY_REQUEST})
 	const success = () => ({type: confirmPasswordChangeConstants.VERIFY_SUCCESS})
-	const failure = (message) => ({type: confirmPasswordChangeConstants.VERIFY_FAILED, message})
+	const failure = (message) => ({type: confirmPasswordChangeConstants.VERIFY_FAILED, message, messageType: messageType.ERROR})
 
 	return dispatch => {
 		dispatch(request())

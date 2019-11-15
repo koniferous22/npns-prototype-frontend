@@ -1,11 +1,12 @@
 import { appConfig } from '../../../appConfig'
 import { scoreboardPageConstants } from '../../../constants/content/statistics/scoreboardPage'
+import { messageType } from '../../../constants/backendMessageType'
 
 function setActivePage(queue, pageIndex) {
 
 	const request = (activePage) => ({ type: scoreboardPageConstants.LOAD_PAGE_REQUEST, queue, activePage })
 	const success = (queue, activePage, data) => ({ type: scoreboardPageConstants.LOAD_PAGE_SUCCESS, queue, activePage, data })
-	const failure = (message) => ({ type: scoreboardPageConstants.LOAD_PAGE_FAILED, queue, message })
+	const failure = (message) => ({ type: scoreboardPageConstants.LOAD_PAGE_FAILED, queue, message, messageType: messageType.ERROR })
 
 	return dispatch => {
 		if (!queue) {
@@ -38,7 +39,7 @@ function setActivePage(queue, pageIndex) {
 function findUser(queue, username, recordsPerPage) {
 	const request = () => ({ type: scoreboardPageConstants.USER_SEARCH_REQUEST, queue })
 	const success = (username, activePage) => ({ type: scoreboardPageConstants.USER_SEARCH_SUCCESS, queue, username, activePage })
-	const failure = (message) => ({ type: scoreboardPageConstants.USER_SEARCH_FAILED, queue, message })
+	const failure = (message) => ({ type: scoreboardPageConstants.USER_SEARCH_FAILED, queue, message, messageType: messageType.ERROR })
 
 	if(!queue) {
 		return failure('No queue specified')
@@ -80,7 +81,7 @@ function findUser(queue, username, recordsPerPage) {
 function getNumberOfPages(queue) {
 	const request = () => ({ type: scoreboardPageConstants.USER_COUNT_REQUEST, queue })
 	const success = (pageCount) => ({ type: scoreboardPageConstants.USER_COUNT_SUCCESS, queue, pageCount })
-	const failure = (message) => ({ type: scoreboardPageConstants.USER_COUNT_FAILED, queue, message })
+	const failure = (message) => ({ type: scoreboardPageConstants.USER_COUNT_FAILED, queue, message, messageType: messageType.ERROR })
 
 	if(!queue) {
 		return failure('No queue specified')
