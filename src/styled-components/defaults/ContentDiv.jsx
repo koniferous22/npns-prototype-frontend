@@ -6,8 +6,9 @@ import ThemeSelector from '../ThemeSelector'
 import { sidebarStyleConstants } from '../sidebars/Constants';
 
 const BuzzfeedContentDiv = styled.div`
+	grid-area: ${props => props.sidebar ? 'content' : 'page'};
 	${props => props.sidebar ? `
-			margin-left: ${props.marginLeft || "14rem"};
+			margin-left: 10rem;
 		` : `
 			margin-left: auto;
 			margin-right: auto;

@@ -8,6 +8,7 @@ import { ProblemBox } from '../problem/ProblemBox'
 
 import ProfileSidebar from './ProfileSidebar'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => {
@@ -37,7 +38,7 @@ class ActivityPage extends React.Component {
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 
 		return (
-			<div>
+			<PageDiv>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 				<ContentDiv sidebar>
 					<h3>{"Activity of user " + this.props.user}</h3>
@@ -57,7 +58,7 @@ class ActivityPage extends React.Component {
 						</ul>
 					</InfiniteScroll>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		)
 	}
 }

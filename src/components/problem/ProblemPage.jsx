@@ -10,6 +10,7 @@ import Submission from './ProblemPage/Submission'
 
 import { problemPageActions } from '../../actions/content/problemPage'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
@@ -67,7 +68,7 @@ class ProblemPage extends React.Component {
 				/>
 			))
 		return (
-			<div>
+			<PageDiv>
 				<QueueSidebar />
 				<ContentDiv sidebar>
 					<ProblemDiv>
@@ -97,7 +98,7 @@ class ProblemPage extends React.Component {
 						</div>
 					</ProblemDiv>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		)
 	}
 }

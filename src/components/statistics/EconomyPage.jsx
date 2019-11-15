@@ -7,6 +7,7 @@ import StatisticsSidebar from './StatisticsSidebar'
 import { economyPageActions } from '../../actions/content/statistics/economyPage'
 import { globalActions } from '../../actions/global'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state) => ({
@@ -30,7 +31,7 @@ class EconomyPage extends React.Component {
 		const karmaValues = this.props.karmaValues
 		const message = this.props.message
 		return(
-			<div>
+			<PageDiv>
 				<StatisticsSidebar />
 				<ContentDiv sidebar>
 					{message && message}
@@ -43,7 +44,7 @@ class EconomyPage extends React.Component {
 						))}
 					</ul>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		)
 	}
 }

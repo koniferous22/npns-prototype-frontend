@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import TransactionBox from './TransactionPage/TransactionBox'
 import { transactionPageActions } from '../../actions/content/profile/transactionPage'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -29,7 +30,7 @@ class TransactionPage extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<PageDiv>
 				<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
 				<ContentDiv sidebar>
 					<InfiniteScroll
@@ -48,7 +49,7 @@ class TransactionPage extends React.Component {
 						</ul>
 					</InfiniteScroll>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		)
 	}
 }

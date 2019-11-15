@@ -6,6 +6,9 @@ import ThemeSelector from '../ThemeSelector'
 import { sidebarStyleConstants } from './Constants'
 
 const BuzzfeedSidebar = styled.div`
+	grid-area: sidebar;
+	position: fixed;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -14,10 +17,8 @@ const BuzzfeedSidebar = styled.div`
 		display: none;
 	}
 
-	width: ${props => props.sidebarWidth || "14rem"};
-	height: calc(100% - 50px);
-	float: left;
-	position: fixed;
+	height: 100%;
+	padding: 10px;
 
 	background-color: #b85243;
 

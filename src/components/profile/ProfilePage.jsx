@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import ProfileSidebar from './ProfileSidebar'
 import { profilePageActions } from '../../actions/content/profile/profilePage'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => state.content.profile.profilePage;
@@ -35,7 +36,7 @@ class ProfilePage extends React.Component {
 
 
 		return (
-			<div>
+			<PageDiv>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 				<ContentDiv sidebar>
 					<p>
@@ -57,7 +58,7 @@ class ProfilePage extends React.Component {
 					)}
 					{'Stuff will be probably added l8r'}
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		);
 	}
 }
