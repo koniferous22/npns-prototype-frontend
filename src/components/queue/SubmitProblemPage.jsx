@@ -46,7 +46,7 @@ class SubmitProblemPage extends React.Component {
 						<div>
 							{form && form.values && (form.values.title || form.values.description) && <p>Preview</p>}
 							{form && form.values && <h3>{form.values.title}</h3>}
-							<p>{form && form.values && <ReactMarkdown source={form.values.description} />}</p>
+							<div>{form && form.values && <ReactMarkdown source={form.values.description} />}</div>
 						</div>
 					</ContentDiv>
 				)

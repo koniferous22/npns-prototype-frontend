@@ -7,12 +7,12 @@ const renderTextArea = ({
 	placeholder,
 	rows,
 	cols,
-	meta: { touched, error, warning }
+	meta: {touched, error}
 }) => (
 		<div>
 			<textarea {...input} placeholder={placeholder || label} rows={rows} cols={cols}/>
-				{touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-			</div>
+			{touched && error && <span>{error}</span>}
+		</div>
 )
 
 export default renderTextArea

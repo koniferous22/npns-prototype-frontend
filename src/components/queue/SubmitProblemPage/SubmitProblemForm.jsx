@@ -28,10 +28,10 @@ const submit = (values, dispatch, props) => {
 
 const validate = values => {
 	const errors = {}
-	/*if (!values.queue) {
-		errors.queue = 'Required'
-	}*/
 	if (!values.title) {
+		errors.title = 'Required'
+	}
+	if (!values.description) {
 		errors.title = 'Required'
 	}
 	return errors
