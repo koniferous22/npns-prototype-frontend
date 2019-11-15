@@ -15,6 +15,7 @@ export const BuzzfeedButton = styled.button`
 		text-decoration: underline;
 		cursor: pointer;
 	}
+	margin-bottom: 3px;
 `
 
 export const TryhardButton = props => <button {...props}/>

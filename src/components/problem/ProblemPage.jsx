@@ -40,10 +40,10 @@ class ProblemPage extends React.Component {
 		const problem = this.props.problem
 		if (!problem) {
 			return (
-				<div>
+				<PageDiv>
 					<QueueSidebar />
 					{this.props.message}
-				</div>
+				</PageDiv>
 			)
 		}
 
@@ -65,6 +65,8 @@ class ProblemPage extends React.Component {
 					token={this.props.token}
 					content={mergedEntries[submissionEntry].content}
 					replyEntries={mergedEntries[submissionEntry].replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})}
+					user={mergedEntries[submissionEntry].submitted_by.username}
+					created={mergedEntries[submissionEntry].created}
 				/>
 			))
 		return (
@@ -74,11 +76,11 @@ class ProblemPage extends React.Component {
 					<ProblemDiv>
 						<ProblemBox>
 							<ContentInfo>
+								<h3>{problem.title}</h3>
 								{new Date(problem.created).toLocaleDateString()}
 								{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
 								{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
 							</ContentInfo>
-							<h3>{problem.title}</h3>
 							<span>Description: </span>
 							<ReactMarkdown source={problem.content} />
 						</ProblemBox>

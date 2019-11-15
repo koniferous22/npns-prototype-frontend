@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { Link } from "react-router-dom"
 import ReactMarkdown from 'react-markdown';
 
 import Reply from './Reply'
@@ -10,6 +10,7 @@ import { problemPageActions } from '../../../actions/content/problemPage'
 
 import SubmissionDiv from '../../../styled-components/problem/SubmissionDiv'
 import SubmissionBox from '../../../styled-components/problem/SubmissionBox'
+import ContentInfo from '../../../styled-components/problem/ContentInfo'
 import Button from '../../../styled-components/defaults/Button'
 import LoadRepliesButton from '../../../styled-components/problem/LoadRepliesButton'
 
@@ -23,6 +24,10 @@ export const Submission = props => {
 	return (
 	<SubmissionDiv>
 		<SubmissionBox>
+			<ContentInfo>
+				{new Date(props.created).toLocaleDateString()}
+				{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
+			</ContentInfo>
 			<ReactMarkdown source={props.content} />
 			{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
 			{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
@@ -30,7 +35,14 @@ export const Submission = props => {
 		{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id} problem={props.problem}/>}
 			<ul>
 				{
-					Object.keys(props.replyEntries).map((e, index) => (<li key={index}><Reply content={props.replyEntries[e].content} /></li>))
+					Object.keys(props.replyEntries).map((e, index) => (
+						<li key={index}>
+							<Reply 
+								content={props.replyEntries[e].content}
+								created={props.replyEntries[e].created}
+								user={props.replyEntries[e].submitted_by.username}
+							/>
+						</li>))
 				}
 			</ul>
 		{props.paging && props.paging.hasMore && <LoadRepliesButton onClick={() => props.loadReplyPage(props.paging.page + 1)}>Load Replies</LoadRepliesButton>}
