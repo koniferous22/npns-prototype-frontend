@@ -10,11 +10,11 @@ const mapStateToProps = state => ({
 })
 
 const LoginPage = (props) => (
-	<ContentDiv>
-		{props.message}
-		<LoginForm/>
-		<Link to="/forgotpwd" >Forgot Password?</Link>
-	</ContentDiv>
+		<ContentDiv>
+			{props.message}
+			<LoginForm/>
+			<Link to="/forgotpwd" >Forgot Password?</Link>
+		</ContentDiv>
 )
 
 export default connect(mapStateToProps)(LoginPage)

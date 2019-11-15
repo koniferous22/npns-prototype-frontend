@@ -4,8 +4,20 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedContentInfo = styled.div`
-	float:right;
-	
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	margin: 0px 2px 2px 2px;
+	border-bottom: 1px solid grey;
+	h3 {
+		flex-grow: 1;
+		margin-left: 0px;
+		margin-bottom: 0px;
+	}
+	* {
+		margin-left: 7px;
+	}
+
 `
 	
 const TryhardContentInfo = props => <div {...props}/>

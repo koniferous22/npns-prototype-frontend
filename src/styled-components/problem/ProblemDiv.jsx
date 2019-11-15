@@ -4,8 +4,18 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedProblemDiv = styled.div`
-	width: 80%;
+	width: 90%;
 	margin: auto;
+
+	a {
+		display: inline-block;
+		text-decoration: none;
+		color: rgb(67, 0, 50);
+		font-style: italic;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
 `
 
 const TryhardProblemDiv = props => <div {...props}/>

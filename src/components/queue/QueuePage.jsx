@@ -9,6 +9,7 @@ import { queuePageActions } from '../../actions/content/queuePage'
 import QueueSidebar from './QueueSidebar'
 import { ProblemBox } from '../problem/ProblemBox'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state, ownProps) => {
@@ -63,7 +64,7 @@ class QueuePage extends React.Component {
 			no need to test if queue doesnt exist, backend returns only empty array
 		*/
 		return (
-			<div>
+			<PageDiv>
 				<QueueSidebar />
 				<ContentDiv sidebar>
 					{this.props.loggedIn && submitProblem}
@@ -84,7 +85,7 @@ class QueuePage extends React.Component {
 						</ul>
 					</InfiniteScroll>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		);
 	}
 }

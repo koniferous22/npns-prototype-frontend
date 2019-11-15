@@ -9,6 +9,7 @@ import ScoreboardSearchUserForm from './ScoreboardPage/ScoreboardSearchUserForm'
 
 import { scoreboardPageActions } from '../../actions/content/statistics/scoreboardPage'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
@@ -50,7 +51,7 @@ class ScoreboardPage extends React.Component {
 			</tr>
 		))
 		return(
-			<div>
+			<PageDiv>
 				<StatisticsSidebar addQueues queueBaseUrl='/statistics/scoreboard'/>
 				<ContentDiv sidebar>
 					{this.props.message}
@@ -69,7 +70,7 @@ class ScoreboardPage extends React.Component {
 					</table>
 					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
 				</ContentDiv>
-			</div>
+			</PageDiv>
 		)
 	}
 }

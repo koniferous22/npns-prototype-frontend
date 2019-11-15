@@ -8,9 +8,13 @@ import { sidebarStyleConstants } from './Constants'
 const BuzzfeedCollapsedSidebar = styled.div`
 	display: none;
 	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
+		grid-area: collapsed-sidebar;
+
 		display: flex;
 		align-items: center;
-	
+		position: fixed;
+
+		widtH: 100%;
 		height:60px;
 	
 		background-color: #b85243;

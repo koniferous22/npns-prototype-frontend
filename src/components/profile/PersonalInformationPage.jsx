@@ -15,6 +15,7 @@ import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDisp
 import { personalInformationPageActions } from '../../actions/content/profile/personalInformationPage'
 import { personalInformationPageStages } from '../../constants/content/profile/personalInformationPage'
 
+import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
@@ -47,7 +48,7 @@ class PersonalInformationPage extends React.Component {
 			case personalInformationPageStages.SUBMITTING_FORM:
 			default:
 				return (
-					<div>
+					<PageDiv>
 						<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
 						<ContentDiv sidebar>
 							{!this.props.form && this.props.message}
@@ -68,7 +69,7 @@ class PersonalInformationPage extends React.Component {
 							<ChangeNamesForm />
 							{this.props.form === 'names' && this.props.message}
 						</ContentDiv>
-					</div>
+					</PageDiv>
 				)
 		}
 	}
