@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { confirmRegistrationConstants } from '../../../constants/content/confirm/registration'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmRegistrationConstants.REQUEST})

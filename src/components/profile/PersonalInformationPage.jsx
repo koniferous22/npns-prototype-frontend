@@ -17,7 +17,7 @@ import { personalInformationPageStages } from '../../constants/content/profile/p
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
 
@@ -49,7 +49,7 @@ class PersonalInformationPage extends React.Component {
 						<ProfileUpdateDispatcher form={form} token={token} values={this.props.values} user={this.props.user}/>
 						<BackendMessage messageType={messageType}>
 							{message}
-				    </BackendMessage>
+						</BackendMessage>
 					</ContentDiv>
 				)
 			case personalInformationPageStages.SUBMITTING_FORM:
@@ -60,31 +60,31 @@ class PersonalInformationPage extends React.Component {
 						<ContentDiv sidebar>
 							<BackendMessage messageType={messageType}>
 								{!form && message}
-					    </BackendMessage>
+							</BackendMessage>
 
 							Change Email
 							<ChangeEmailForm />
 							<BackendMessage messageType={messageType}>
 								{form === 'email' && message}
-				    	</BackendMessage>
+							</BackendMessage>
 							
 							Change Password
 							<ChangePasswordForm />
 							<BackendMessage messageType={messageType}>
 								{form === 'password' && message}
-				    	</BackendMessage>
+							</BackendMessage>
 							
 							Change Username
 							<ChangeUsernameForm />
 							<BackendMessage messageType={messageType}>
 								{form === 'username' && message}
-				    	</BackendMessage>
+							</BackendMessage>
 
 							Change Names
 							<ChangeNamesForm />
 							<BackendMessage messageType={messageType}>
 								{form === 'names' && message}
-				    	</BackendMessage>
+							</BackendMessage>
 						</ContentDiv>
 					</PageDiv>
 				)

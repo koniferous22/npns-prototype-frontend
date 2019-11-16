@@ -6,6 +6,7 @@ import ThemeSelector from '../ThemeSelector'
 const BuzzfeedContentInfo = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	${props => props.end && 'justify-content: flex-end;'}
 	align-content: center;
 	margin: 0px 2px 2px 2px;
 	border-bottom: 1px solid grey;

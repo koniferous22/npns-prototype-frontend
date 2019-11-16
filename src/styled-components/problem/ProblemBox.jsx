@@ -12,8 +12,6 @@ const BuzzfeedProblemBox = styled.div`
 		margin-top: 0;
 	}
 	background-color: rgba(67, 0, 50, 0.7);
-
-	font-size: 15px;
 `
 
 const TryhardProblemBox = props => <div {...props}/>

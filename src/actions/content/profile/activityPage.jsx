@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { activityPageConstants } from '../../../constants/content/profile/activityPage';
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function setActivePage(user, pageIndex) {
 

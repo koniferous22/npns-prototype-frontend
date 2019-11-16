@@ -1,6 +1,6 @@
 import { appConfig } from '../../appConfig'
 import { submitProblemPageConstants } from '../../constants/content/submitProblemPage'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 function submit(problem, authToken) {
 	

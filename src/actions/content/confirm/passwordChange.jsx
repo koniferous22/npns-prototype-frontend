@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { confirmPasswordChangeConstants } from '../../../constants/content/confirm/passwordChange'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function verify(confirmationToken) {
 	const request = () => ({type: confirmPasswordChangeConstants.VERIFY_REQUEST})

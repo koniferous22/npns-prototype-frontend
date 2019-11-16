@@ -122,6 +122,7 @@ function problemPageReducer(state = defaultState, action) {
 			const activeReplyPage = (!action.activeReplyPage || action.activeReplyPage <= 1) ? 1 : action.activeReplyPage
 			submission.replyEntries[activeReplyPage - 1] = action.data || []
 			submission.replyEntries = submission.replyEntries.slice(0, activeReplyPage)
+			submission.repliesHidden = false
 
 			if (!newPaging[action.submission]) {
 				newPaging[action.submission] = {}
@@ -164,6 +165,7 @@ function problemPageReducer(state = defaultState, action) {
 			if (submission.replyEntries.length === 0) {
 				submission.replyEntries.push({})
 			}
+			submission.repliesHidden = false
 			submission.replyEntries[submission.replyEntries.length - 1][action.reply._id] = {...action.reply, _id:undefined}
 			return {
 				...state,
@@ -193,6 +195,14 @@ function problemPageReducer(state = defaultState, action) {
 				replyForm: (action.replyForm === state.replyForm) ? null : action.replyForm,
 				message: "",
 				messageType: action.messageType
+			}
+		case problemPageConstants.HIDE_REPLIES:
+			submission.repliesHidden = true
+			newPaging[action.submission] = defaultPaging
+			return {
+				...state,
+				submissionEntries: newSubmissionEntries,
+				paging: newPaging
 			}
 		case problemPageConstants.RESET:
 			return defaultState

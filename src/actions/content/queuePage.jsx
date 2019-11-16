@@ -1,6 +1,6 @@
 import { appConfig } from '../../appConfig'
 import { queuePageConstants } from '../../constants/content/queuePage'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 function setActivePage(queue,pageIndex) {
 

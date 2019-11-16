@@ -2,6 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { problemPageActions } from '../../../actions/content/problemPage'
 
+import Button from '../../../styled-components/defaults/Button'
+import renderTextArea from '../../form/RenderTextArea'
+
 const submit = (values, dispatch, props) => {
 	dispatch(problemPageActions.replySubmission({content: values.content, submission: props.submission, problem: props.problem}, props.token))
 }
@@ -10,9 +13,9 @@ let PostReplyForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
 		<div>
-			<Field name="content" component="input" type="text" />
+			<Field name="content" component={renderTextArea} type="text"/>
 		</div>
-		<button type="submit">Submit</button>
+		<Button type="submit">Submit</Button>
 	</form>)
 }
 

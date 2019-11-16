@@ -1,6 +1,6 @@
 import { forgotPwdConstants } from '../../constants/content/forgotPwdPage'
 import { appConfig } from '../../appConfig'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 export const forgotPwdActions = {
 	forgotPwd,

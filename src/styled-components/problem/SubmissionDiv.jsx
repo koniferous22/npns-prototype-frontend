@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedSubmissionDiv = styled.div`
-	width: 80%;
+	width: 90%;
 	ul {
 		list-style-type: none;
 		display: block;

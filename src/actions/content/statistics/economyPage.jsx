@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { economyPageConstants } from '../../../constants/content/statistics/economyPage'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function loadKarmaValues() {
 	const request = () => ({ type: economyPageConstants.LOAD_KARMA_VALUES_REQUEST })

@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { personalInformationPageConstants } from '../../../constants/content/profile/personalInformationPage'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function filled(form, values) {
 	return {

@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { transactionPageConstants } from '../../../constants/content/profile/transactionPage'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function setActivePage(token, pageIndex) {
 

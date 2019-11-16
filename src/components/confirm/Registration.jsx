@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { confirmRegistrationActions } from '../../actions/content/confirm/registration'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.confirm.registration
 const mapDispatchToProps = dispatch => ({
@@ -21,7 +21,7 @@ class ConfirmRegistrationPage extends React.Component {
 		return (
 			<ContentDiv>
 				<BackendMessage messageType={this.props.messageType}>
-					{this.props.message && <p>{this.props.message}</p>}
+					{this.props.message}
 				</BackendMessage>
 				{this.props.verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
 			</ContentDiv>

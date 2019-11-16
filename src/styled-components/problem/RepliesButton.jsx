@@ -7,9 +7,7 @@ import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedLoadRepliesButton = styled(Button)`
 	border: none;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+	display: inline-block;
 `
 
 const TryhardLoadRepliesButton = props => <button {...props} />

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import TextAreaDiv from '../../styled-components/defaults/TextAreaDiv'
+
 const renderTextArea = ({
 	input,
 	label,
@@ -7,12 +9,13 @@ const renderTextArea = ({
 	placeholder,
 	rows,
 	cols,
+	
 	meta: {touched, error}
 }) => (
-		<div>
+		<TextAreaDiv>
 			<textarea {...input} placeholder={placeholder || label} rows={rows} cols={cols}/>
 			{touched && error && <span>{error}</span>}
-		</div>
+		</TextAreaDiv>
 )
 
 export default renderTextArea

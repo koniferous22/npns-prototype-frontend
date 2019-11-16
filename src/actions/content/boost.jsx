@@ -1,6 +1,6 @@
 import { appConfig } from '../../appConfig'
 import { boostConstants } from '../../constants/content/boost'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 export const boostActions = {
 	boost,
@@ -27,7 +27,7 @@ function boost(boost, authToken) {
 		.then(value => {
 			dispatch(success())
 		}).catch(error => {
-			dispatch(failure(error))
+			dispatch(failure(JSON.stringify(error)))
 		})
 	}
 	

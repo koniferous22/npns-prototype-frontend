@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { confirmEmailChangeActions } from '../../actions/content/confirm/emailChange'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.confirm.emailChange
 const mapDispatchToProps = dispatch => ({
@@ -21,9 +21,9 @@ class ConfirmEmailChangePage extends React.Component {
 		return (
 			<ContentDiv>
 		    <BackendMessage messageType={this.props.messageType}>
-					{this.props.message && <p>{this.props.message}</p>}
+					{this.props.message}
 		    </BackendMessage>
-				{this.props.verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
+				{this.props.verified && (<div> Continue to <Link to='/login'>Login</Link> </div>)}
 			</ContentDiv>
 		)
 	}

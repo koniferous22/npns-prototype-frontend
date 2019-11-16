@@ -7,7 +7,7 @@ import { boostActions } from '../../actions/content/boost'
 import { boostStages } from '../../constants/content/boost' 
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = (state, ownProps) => ({
 	token: ownProps.token,

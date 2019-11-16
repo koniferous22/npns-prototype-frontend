@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { confirmEmailChangeConstants } from '../../../constants/content/confirm/emailChange'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmEmailChangeConstants.REQUEST})

@@ -15,7 +15,9 @@ import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
 import ProblemBox from '../../styled-components/problem/ProblemBox'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
+
+import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dateTimeOptions'
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
@@ -68,6 +70,7 @@ class ProblemPage extends React.Component {
 					token={this.props.token}
 					content={mergedEntries[submissionEntry].content}
 					replyEntries={mergedEntries[submissionEntry].replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})}
+					repliesHidden={mergedEntries[submissionEntry].repliesHidden}
 					user={mergedEntries[submissionEntry].submitted_by.username}
 					created={mergedEntries[submissionEntry].created}
 				/>
@@ -80,15 +83,17 @@ class ProblemPage extends React.Component {
 						<ProblemBox>
 							<ContentInfo>
 								<h3>{problem.title}</h3>
-								{new Date(problem.created).toLocaleDateString()}
-								{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
-								{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
+								<div>
+									{new Date(problem.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+									{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
+									{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
+								</div>
 							</ContentInfo>
 							<span>Description: </span>
 							<ReactMarkdown source={problem.content} />
 						</ProblemBox>
 						{
-							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id}/>
+							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id} user={this.props.user}/>
 						}
 						<div style={{height:"100%",overflow:"auto"}}>
 							<InfiniteScroll

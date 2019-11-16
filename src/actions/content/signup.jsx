@@ -1,6 +1,6 @@
 import { signupConstants } from '../../constants/content/signUpPage'
 import { appConfig } from '../../appConfig'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 export const signupActions = {
 	signup,

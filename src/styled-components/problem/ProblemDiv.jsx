@@ -5,7 +5,7 @@ import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedProblemDiv = styled.div`
 	width: 90%;
-	margin: auto;
+	margin: auto auto 50px auto;
 
 	a {
 		display: inline-block;
@@ -16,6 +16,10 @@ const BuzzfeedProblemDiv = styled.div`
 	a:hover {
 		text-decoration: underline;
 	}
+	input {
+		margin: 5px;
+	}
+	font-size: 15px;
 `
 
 const TryhardProblemDiv = props => <div {...props}/>

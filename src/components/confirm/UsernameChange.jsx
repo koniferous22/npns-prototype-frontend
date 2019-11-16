@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { confirmUsernameChangeActions } from '../../actions/content/confirm/usernameChange'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.confirm.usernameChange
 const mapDispatchToProps = dispatch => ({
@@ -18,11 +18,6 @@ class ConfirmUsernameChangePage extends React.Component {
 	}
 
 	render() {
-		console.log('KOKOT')
-		console.log('PICA')
-		console.log('KOKOT')
-		console.log('PICA')
-		console.log(this.props.messageType)
 		return (
 			<ContentDiv>
 				<BackendMessage messageType={this.props.messageType}>

@@ -4,7 +4,7 @@ import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => ({
 	message: state.auth.message,

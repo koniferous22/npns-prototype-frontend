@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { profilePageConstants } from '../../../constants/content/profile/profilePage'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function loadUserData(username) {
 	

@@ -9,7 +9,7 @@ import { confirmPasswordChangeActions } from '../../actions/content/confirm/pass
 import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.confirm.passwordChange.page
 

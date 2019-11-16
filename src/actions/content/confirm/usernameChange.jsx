@@ -1,6 +1,6 @@
 import { appConfig } from '../../../appConfig'
 import { confirmUsernameChangeConstants } from '../../../constants/content/confirm/usernameChange'
-import { messageType } from '../../../constants/backendMessageType'
+import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 function confirm(confirmationToken)  {
 	const request = () => ({type: confirmUsernameChangeConstants.REQUEST})

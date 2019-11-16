@@ -7,7 +7,7 @@ import { profilePageActions } from '../../actions/content/profile/profilePage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.profilePage;
 const mapDispatchToProps = dispatch => ({

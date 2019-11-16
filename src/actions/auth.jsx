@@ -1,5 +1,5 @@
 import { authConstants } from '../constants/auth'
-import { messageType } from '../constants/backendMessageType'
+import { messageType } from '../constants/misc/backendMessageTypes'
 import { appConfig } from '../appConfig'
 
 export const authActions = {
@@ -14,7 +14,7 @@ function login(username, password) {
 			type: authConstants.LOGIN_FAILURE,
 			message: 'Missing username',
 			messageType: messageType.ERROR
-			}
+		}
 	}
 	if (!password) {
 		return {

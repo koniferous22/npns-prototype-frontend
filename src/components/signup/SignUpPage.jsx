@@ -6,7 +6,7 @@ import { signupStages } from '../../constants/content/signUpPage'
 import { signupActions } from '../../actions/content/signup'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/BackendMessage'
+import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.signup.page
 

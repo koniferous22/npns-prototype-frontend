@@ -1,7 +1,7 @@
 
 import { appConfig } from '../../appConfig'
 import { problemPageConstants } from '../../constants/content/problemPage'
-import { messageType } from '../../constants/backendMessageType'
+import { messageType } from '../../constants/misc/backendMessageTypes'
 
 function loadProblemData(problemId) {
 	const request = () => ({ type: problemPageConstants.LOAD_PROBLEM_DATA_REQUEST })
@@ -215,11 +215,20 @@ function selectReplyForm(submission) {
 	}
 }
 
+function hideReplies(submission) {
+	return {
+		type: problemPageConstants.HIDE_REPLIES,
+		submission
+	}
+}
+
 function reset() {
 	return {
 		type: problemPageConstants.RESET
 	}
 }
+
+
 
 export const problemPageActions = {
 	loadProblemData,
@@ -229,5 +238,6 @@ export const problemPageActions = {
 	replySubmission,
 	acceptSubmission,
 	selectReplyForm,
+	hideReplies,
 	reset
 }
