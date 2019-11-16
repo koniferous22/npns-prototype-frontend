@@ -10,6 +10,7 @@ import ProfileSidebar from './ProfileSidebar'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import ProblemBoxWrapper from '../../styled-components/problem-related/ProblemBoxWrapper'
 
 const mapStateToProps = state => {
 	const pageState = state.content.profile.activityPage
@@ -42,21 +43,34 @@ class ActivityPage extends React.Component {
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 				<ContentDiv sidebar>
 					<h3>{"Activity of user " + this.props.user}</h3>
-					<InfiniteScroll
-						pageStart={1}
-						loadMore={() => {
-							this.props.loadPage(this.props.user, this.props.paging.page + 1) 
-						}}
-						hasMore={this.props.paging.hasMore}
-						loader={<div className="loader" key={0}>Loading ...</div>}
-					>
-						<ul>
-						{
-							this.props.entries.map((p,index) => (
-								<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
-						))}
-						</ul>
-					</InfiniteScroll>
+					<ProblemBoxWrapper>
+						<InfiniteScroll
+							pageStart={1}
+							loadMore={() => {
+								this.props.loadPage(this.props.user, this.props.paging.page + 1) 
+							}}
+							hasMore={this.props.paging.hasMore}
+							loader={<div className="loader" key={0}>Loading ...</div>}
+						>
+							<ul>
+							{
+								this.props.entries.map((p,index) => (
+									<li key={index}>
+										<ProblemBox
+											id={p._id}
+											title={p.title}
+											created={p.created}
+											bounty={p.bounty}
+											loggedIn={this.props.loggedIn}
+											viewCount={p.view_count}
+											submissionCount={p.submission_count}
+											username={p.submitted_by}
+										/>
+									</li>
+							))}
+							</ul>
+						</InfiniteScroll>
+					</ProblemBoxWrapper>
 				</ContentDiv>
 			</PageDiv>
 		)
