@@ -14,8 +14,9 @@ const BuzzfeedContentDiv = styled.div`
 			margin-right: auto;
 		`}
 	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
-		margin-left: auto;
-		margin-right: auto;
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 30px;
 	}
 	margin-top: 20px;
 	padding: 10px;

@@ -7,6 +7,7 @@ import { profilePageActions } from '../../actions/content/profile/profilePage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.profilePage;
@@ -40,7 +41,7 @@ class ProfilePage extends React.Component {
 			<PageDiv>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 				<ContentDiv sidebar>
-					<p>
+					<CenteredDiv fullWidth>
 						{'First Name: ' + this.props.data.firstName}<br />
 						{'Last Name: ' + this.props.data.lastName}<br />
 						{'Email: ' + this.props.data.email}<br />
@@ -48,16 +49,16 @@ class ProfilePage extends React.Component {
 						{'Number of entered submissions: ' + this.props.data.submission_count}<br />
 						{'Number of entered replies: ' + this.props.data.reply_count}<br />
 						
-					</p>
-					{balances.length > 0 &&  (
-						<div>
-							{'User score in queues'}
-							<ul>
-								{balances}
-							</ul>
-						</div>
-					)}
-					{'Stuff will be probably added l8r'}
+						{balances.length > 0 &&  (
+							<div>
+								{'User score in queues'}
+								<ul>
+									{balances}
+								</ul>
+							</div>
+						)}
+						{'Stuff will be probably added l8r'}
+					</CenteredDiv>
 				</ContentDiv>
 			</PageDiv>
 		);

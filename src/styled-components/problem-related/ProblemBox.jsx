@@ -12,7 +12,7 @@ const BuzzfeedProblemBox = styled.div`
 
 	width: 250px;
 	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
-		width: 100%;
+		width: 90%;
 	}
 	height: 100px;
 	margin: 20px;

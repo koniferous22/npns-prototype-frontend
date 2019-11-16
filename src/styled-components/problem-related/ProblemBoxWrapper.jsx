@@ -8,16 +8,25 @@ import { sidebarStyleConstants } from '../sidebars/Constants'
 const BuzzfeedProblemBoxWrapper = styled.div`
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
 	width: 100%;
-	flex-direction: row;
+
+	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	ul {
 		list-style-type: none;
+		padding: 0;
+	}
+	li {
+		display: inline-block;
+	}
+	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
+		display: block;
+		flex-wrap: nowrap;	
 		li {
-			display: inline-block;
+			display: block;
+			left: -50px;
 		}
 	}
 `

@@ -7,6 +7,9 @@ import { sidebarStyleConstants } from '../sidebars/Constants';
 
 const BuzzfeedCenteredDiv = styled.div`
 	text-align: center;
+	${props => props.fullWidth && `
+		margin-right: 20%;
+	`}
 `
 
 const TryhardCenteredDiv = props => <div {...props}/>

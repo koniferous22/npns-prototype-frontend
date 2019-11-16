@@ -17,6 +17,7 @@ import { personalInformationPageStages } from '../../constants/content/profile/p
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.profile.personalInformationPage.page
@@ -58,33 +59,35 @@ class PersonalInformationPage extends React.Component {
 					<PageDiv>
 						<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
 						<ContentDiv sidebar>
-							<BackendMessage messageType={messageType}>
-								{!form && message}
-							</BackendMessage>
+							<CenteredDiv fullWidth>
+								<BackendMessage messageType={messageType}>
+									{!form && message}
+								</BackendMessage>
 
-							Change Email
-							<ChangeEmailForm />
-							<BackendMessage messageType={messageType}>
-								{form === 'email' && message}
-							</BackendMessage>
-							
-							Change Password
-							<ChangePasswordForm />
-							<BackendMessage messageType={messageType}>
-								{form === 'password' && message}
-							</BackendMessage>
-							
-							Change Username
-							<ChangeUsernameForm />
-							<BackendMessage messageType={messageType}>
-								{form === 'username' && message}
-							</BackendMessage>
+								Change Email
+								<ChangeEmailForm />
+								<BackendMessage messageType={messageType}>
+									{form === 'email' && message}
+								</BackendMessage>
+								
+								Change Password
+								<ChangePasswordForm />
+								<BackendMessage messageType={messageType}>
+									{form === 'password' && message}
+								</BackendMessage>
+								
+								Change Username
+								<ChangeUsernameForm />
+								<BackendMessage messageType={messageType}>
+									{form === 'username' && message}
+								</BackendMessage>
 
-							Change Names
-							<ChangeNamesForm />
-							<BackendMessage messageType={messageType}>
-								{form === 'names' && message}
-							</BackendMessage>
+								Change Names
+								<ChangeNamesForm />
+								<BackendMessage messageType={messageType}>
+									{form === 'names' && message}
+								</BackendMessage>
+							</CenteredDiv>
 						</ContentDiv>
 					</PageDiv>
 				)

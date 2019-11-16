@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 import StyledProblemBox from '../../styled-components/problem-related/ProblemBox'
 import ProblemBoxMeta from '../../styled-components/problem-related/ProblemBoxMeta'
 
-import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dateTimeOptions'
-
 export const ProblemBox = (props) => (
 	<StyledProblemBox>
 		<ProblemBoxMeta>

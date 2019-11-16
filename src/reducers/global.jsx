@@ -6,7 +6,7 @@ import { globalConstants, themes, defaultTheme } from "../constants/global"
 
 const defaultHierarchy = {Index:{} }
 const defaultLinQueues = ['Index']
-const defaultState = {hierarchy: defaultHierarchy, linQueues: defaultLinQueues, theme:'buzzfeed', linQueuesDisplayed: false, themesDisplayed: false, themes: themes}
+const defaultState = {hierarchy: defaultHierarchy, linQueues: defaultLinQueues, theme:defaultTheme, linQueuesDisplayed: false, themesDisplayed: false, themes: themes}
 
 export function globalReducer(state = defaultState, action) {
 	switch (action.type) {

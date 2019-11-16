@@ -27,4 +27,4 @@ export const themes = {
 	}
 }
 
-export const defaultTheme = 'tryhard'
+export const defaultTheme = 'buzzfeed'
