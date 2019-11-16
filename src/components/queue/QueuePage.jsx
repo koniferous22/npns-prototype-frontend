@@ -11,6 +11,8 @@ import { ProblemBox } from '../problem/ProblemBox'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
+import ProblemBoxWrapper from '../../styled-components/problem-related/ProblemBoxWrapper'
 
 const mapStateToProps = (state, ownProps) => {
 	const queue = ownProps.queue
@@ -60,6 +62,19 @@ class QueuePage extends React.Component {
 				<Link to={'/submitProblem?q=' + this.props.queue}>here</Link>
 			</div>
 		)
+		const empty = this.props.entries.length === 0
+		if (empty) {
+			return (
+				<PageDiv>
+					<QueueSidebar />
+					<ContentDiv sidebar>
+						<h4>
+							There's nothing here
+						</h4>
+					</ContentDiv>
+				</PageDiv>
+			)
+		}
 		/*
 			no need to test if queue doesnt exist, backend returns only empty array
 		*/
@@ -67,23 +82,38 @@ class QueuePage extends React.Component {
 			<PageDiv>
 				<QueueSidebar />
 				<ContentDiv sidebar>
-					{this.props.loggedIn && submitProblem}
-					<h3>{"Problems of queue: " + this.props.queue}</h3>
-					<InfiniteScroll
-						pageStart={1}
-						loadMore={() => {
-							this.props.loadPage(this.props.paging.page + 1) 
-						}}
-						hasMore={this.props.paging.hasMore}
-						loader={<div className="loader" key={0}>Loading ...</div>}
-					>
-						<ul>
-						{
-							this.props.entries.map((p,index) => (
-								<li key={index}><ProblemBox id={p._id} title={p.title}/></li>
-						))}
-						</ul>
-					</InfiniteScroll>
+					<CenteredDiv>
+						<h3>{"Problems of queue: " + this.props.queue}</h3>
+						{this.props.loggedIn && submitProblem}
+					</CenteredDiv>
+					<ProblemBoxWrapper>
+						<InfiniteScroll
+							pageStart={1}
+							loadMore={() => {
+								this.props.loadPage(this.props.paging.page + 1) 
+							}}
+							hasMore={this.props.paging.hasMore}
+							loader={<div className="loader" key={0}>Loading ...</div>}
+						>
+							<ul>
+							{
+								this.props.entries.map((p,index) => (
+									<li key={index}>
+										<ProblemBox 
+											id={p._id}
+											title={p.title}
+											created={p.created}
+											bounty={p.bounty}
+											loggedIn={this.props.loggedIn}
+											viewCount={p.view_count}
+											submissionCount={p.submissions.length}
+											username={p.username}
+										/>
+									</li>
+							))}
+							</ul>
+						</InfiniteScroll>
+					</ProblemBoxWrapper>
 				</ContentDiv>
 			</PageDiv>
 		);
