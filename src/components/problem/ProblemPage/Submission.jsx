@@ -15,6 +15,7 @@ import Button from '../../../styled-components/defaults/Button'
 import ButtonDiv from '../../../styled-components/defaults/ButtonDiv'
 import RepliesButton from '../../../styled-components/problem/RepliesButton'
 import RepliesButtonDiv from '../../../styled-components/problem/RepliesButtonDiv'
+import SolutionLabel from '../../../styled-components/problem/SolutionLabel'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
 
@@ -26,19 +27,26 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 export const Submission = props => {
+	const submissionBox = (
+		<SubmissionBox solution={props.isSolution}>
+			<ContentInfo>
+				{props.isSolution && <SolutionLabel>SOLUTION</SolutionLabel>}
+				{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+				{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
+			</ContentInfo>
+			<ReactMarkdown source={props.content} />
+			<ButtonDiv>
+				{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
+				{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
+			</ButtonDiv>
+		</SubmissionBox>
+	)
+	if (!props.wrapper) {
+		return submissionBox
+	}
 	return (
 		<SubmissionDiv>
-			<SubmissionBox>
-				<ContentInfo>
-					{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
-					{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
-				</ContentInfo>
-				<ReactMarkdown source={props.content} />
-				<ButtonDiv>
-					{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
-					{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
-				</ButtonDiv>
-			</SubmissionBox>
+			{submissionBox}
 			{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id} problem={props.problem}/>}
 			{props.repliesHidden === false && (
 				<ul>
@@ -54,10 +62,15 @@ export const Submission = props => {
 					}
 				</ul>
 			)}
-			<RepliesButtonDiv>
-				{props.paging && props.paging.hasMore && <RepliesButton onClick={() => props.loadReplyPage(props.paging.page + 1)}>{'Load ' + (!props.repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
-				{!props.repliesHidden && <RepliesButton onClick={() => props.hideReplies()}>Hide Replies</RepliesButton>}
-			</RepliesButtonDiv>
+			{
+				props.loadRepliesButton && 
+				(
+					<RepliesButtonDiv>
+						{props.paging && props.paging.hasMore && <RepliesButton onClick={() => props.loadReplyPage(props.paging.page + 1)}>{'Load ' + (!props.repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
+						{!props.repliesHidden && <RepliesButton onClick={() => props.hideReplies()}>Hide Replies</RepliesButton>}
+					</RepliesButtonDiv>
+				)
+			}
 		</SubmissionDiv>
 	)
 }

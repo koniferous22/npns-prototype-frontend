@@ -182,8 +182,7 @@ function problemPageReducer(state = defaultState, action) {
 				messageType: action.messageType
 			}
 		case problemPageConstants.ACCEPT_SUBMISSION_SUCCESS:
-			submission['accepted'] = true
-			state.problem.accepted_submission = action.submission
+			state.problem.accepted_submission = submission
 			return {
 				...state,
 				message: "",

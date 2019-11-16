@@ -5,6 +5,7 @@ import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedSubmissionDiv = styled.div`
 	width: 90%;
+	margin-right: 18px;
 	ul {
 		list-style-type: none;
 		display: block;

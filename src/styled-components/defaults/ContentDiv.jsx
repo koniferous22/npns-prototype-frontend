@@ -24,6 +24,9 @@ const BuzzfeedContentDiv = styled.div`
 	input {
 		border-radius: 5px;
 	}
+	textarea {
+		border-radius: 5px;
+	}
 `
 
 const TryhardContentDiv = props => <div {...props}/>

@@ -58,13 +58,14 @@ class ProblemPage extends React.Component {
 		const problemActive = problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
 		const submissionForm = problemActive && this.props.loggedIn && !problemOwner
-		const submissions = Object.keys(mergedEntries).map((submissionEntry, index) => (
+		const mapSubmissionIdToComponent = (submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
 					problem={problem.id}
 					key={index}
 					acceptButton={problemActive && problemOwner}
 					replyButton={this.props.loggedIn}
+					loadRepliesButton={true}
 					hasActiveReplyForm={this.props.loggedIn && submissionEntry === this.props.replyForm}
 					paging={this.props.paging[submissionEntry]}
 					token={this.props.token}
@@ -73,8 +74,12 @@ class ProblemPage extends React.Component {
 					repliesHidden={mergedEntries[submissionEntry].repliesHidden}
 					user={mergedEntries[submissionEntry].submitted_by.username}
 					created={mergedEntries[submissionEntry].created}
+					isSolution={problem.accepted_submission && problem.accepted_submission._id === submissionEntry}
+					wrapper={true}
 				/>
-			))
+			)
+		const submissionCount = Object.keys(mergedEntries).length
+		const submissions = Object.keys(mergedEntries).map(mapSubmissionIdToComponent)
 		return (
 			<PageDiv>
 				<QueueSidebar />
@@ -91,6 +96,16 @@ class ProblemPage extends React.Component {
 							</ContentInfo>
 							<span>Description: </span>
 							<ReactMarkdown source={problem.content} />
+							{problem.accepted_submission && submissionCount > 1 && (
+								<Submission
+									id={problem.accepted_submission}
+									problem={problem.id}
+									content={mergedEntries[problem.accepted_submission._id].content}
+									user={mergedEntries[problem.accepted_submission._id].submitted_by.username}
+									created={mergedEntries[problem.accepted_submission._id].created}
+									isSolution={true}
+								/>
+							)}
 						</ProblemBox>
 						{
 							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id} user={this.props.user}/>
@@ -101,7 +116,6 @@ class ProblemPage extends React.Component {
 								loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}
 								hasMore={this.props.paging.hasMore}
 								loader={<div className="loader" key={0}>Loading ...</div>}
-								
 							>
 								{submissions}
 							</InfiniteScroll>

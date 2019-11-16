@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedSubmissionBox = styled.div`
+	${props => props.solution && `
+		box-shadow: 5px 10px 18px rgba(0, 124, 30, 0.5);
+		border: 2px solid #0d3e00;
+		margin-bottom: 20px;
+	`}
 	border-radius: 10px;
 	padding: 8px;
 	margin: 10px auto 0 auto;
