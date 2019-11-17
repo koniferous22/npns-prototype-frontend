@@ -3,6 +3,7 @@ import { boostActions } from '../../../actions/content/boost'
 import { Field, reduxForm } from 'redux-form'
 
 import Button from '../../../styled-components/defaults/Button'
+import renderField from '../../form/RenderField'
 
 let boost = (values, dispatch, props) => {
 	dispatch(
@@ -15,23 +16,6 @@ const number = value =>
 	isNaN(Number(value)) ? 'Must be a number' : undefined
 const positive = value =>
 	value > 0 ? undefined : 'Must be a positive number'
-
-const renderField = ({
-	input,
-	label,
-	type,
-	meta: { touched, error, warning }
-}) => (
-	<div>
-		<label>{label}</label>
-		<div>
-			<input {...input} placeholder={label} type={type} />
-			{touched &&
-				((error && <span>{error}</span>) ||
-				(warning && <span>{warning}</span>))}
-		</div>
-	</div>
-)
 
 let BoostForm = props => {
 	const { handleSubmit } = props;
