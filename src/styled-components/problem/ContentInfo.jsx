@@ -21,7 +21,7 @@ const BuzzfeedContentInfo = styled.div`
 
 `
 	
-const TryhardContentInfo = props => <div {...props}/>
+const TryhardContentInfo = props => <div {...props} end={undefined}/>
 
 const ContentInfo = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedContentInfo {...props} />} 

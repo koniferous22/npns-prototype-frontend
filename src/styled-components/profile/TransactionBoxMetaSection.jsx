@@ -8,7 +8,7 @@ const BuzzfeedTransactionBoxMetaSection = styled.span`
 	margin-right: 10px;
 `
 
-const TryhardTransactionBoxMetaSection = props => <span {...props}/>
+const TryhardTransactionBoxMetaSection = props => <span {...props} grow={undefined}/>
 
 const TransactionBoxMetaSection = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedTransactionBoxMetaSection {...props} />} 

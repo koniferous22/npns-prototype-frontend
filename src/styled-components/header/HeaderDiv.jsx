@@ -21,7 +21,7 @@ const BuzzfeedHeaderDiv = styled.div`
 		${props => props.collapse && "display: none;"}
 	}
 `
-const TryhardHeaderDiv = props => <div {...props}/>
+const TryhardHeaderDiv = props =><div {...props} shrink={undefined} grow={undefined} collapse={undefined} fontSize={undefined}/>
 
 const HeaderDiv = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedHeaderDiv {...props} />} 

@@ -15,7 +15,7 @@ const BuzzfeedTextAreaDiv = styled.div`
 
 `
 
-const TryhardTextAreaDiv = props => <div {...props}/>
+const TryhardTextAreaDiv = props => <div {...props} center={undefined}/>
 
 const TextAreaDiv = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedTextAreaDiv {...props} />} 

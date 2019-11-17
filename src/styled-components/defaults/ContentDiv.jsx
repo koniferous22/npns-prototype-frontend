@@ -38,7 +38,7 @@ const BuzzfeedContentDiv = styled.div`
 	}
 `
 
-const TryhardContentDiv = props => <div {...props}/>
+const TryhardContentDiv = props => <div {...props} sidebar={undefined}/>
 
 const ContentDiv = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedContentDiv {...props} />} 

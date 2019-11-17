@@ -15,7 +15,7 @@ const BuzzfeedCollapsedSidebarDiv = styled.div`
 	padding: 10px;
 	color: #2d117f;
 `
-const TryhardCollapsedSidebarDiv = props => <div {...props}/>
+const TryhardCollapsedSidebarDiv = props => <div {...props} grow={undefined} shrink={undefined}/>
 
 const CollapsedSidebarDiv = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedCollapsedSidebarDiv {...props} />} 

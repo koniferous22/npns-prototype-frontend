@@ -16,7 +16,7 @@ export const BuzzfeedButton = styled.button`
 	}
 `
 
-export const TryhardButton = props => <button {...props}/>
+export const TryhardButton = props => <button {...props} noBorder={undefined}/>
 
 const Button = props => <ThemeSelector 
 		buzzfeed={props.buzzfeed || <BuzzfeedButton {...props} />} 

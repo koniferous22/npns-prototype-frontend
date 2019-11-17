@@ -18,7 +18,7 @@ const BuzzfeedSubmissionBox = styled.div`
 	}
 `
 
-const TryhardSubmissionBox = props => <div {...props}/>
+const TryhardSubmissionBox = props =>  <div {...props} solution={undefined}/>
 
 const SubmissionBox = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedSubmissionBox {...props} />} 
