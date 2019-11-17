@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-import { sidebarStyleConstants } from '../sidebars/Constants'
-
 const BuzzfeedTransactionBox = styled.div`
 	display: flex;
 	flex-direction: column;

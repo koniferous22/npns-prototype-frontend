@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TextAreaDiv from '../../styled-components/defaults/TextAreaDiv'
+import TextAreaDiv from '../../styled-components/form/TextAreaDiv'
 
 const renderTextArea = ({
 	input,
@@ -9,10 +9,10 @@ const renderTextArea = ({
 	placeholder,
 	rows,
 	cols,
-	
+	center,
 	meta: {touched, error}
 }) => (
-		<TextAreaDiv>
+		<TextAreaDiv center={center}>
 			<textarea {...input} placeholder={placeholder || label} rows={rows} cols={cols}/>
 			{touched && error && <span>{error}</span>}
 		</TextAreaDiv>

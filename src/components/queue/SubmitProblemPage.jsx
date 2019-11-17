@@ -8,6 +8,7 @@ import { submitProblemActions } from '../../actions/content/submitProblem'
 import { submitProblemStages } from '../../constants/content/submitProblemPage' 
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => state.content.submitProblem
@@ -43,16 +44,22 @@ class SubmitProblemPage extends React.Component {
 			default:
 				return(
 					<ContentDiv>
-						<p>Submitting new problem</p>
-						<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
-						<BackendMessage messageType={page.messageType}>
-							{page.message}
-						</BackendMessage>
-						<div>
-							{form && form.values && (form.values.title || form.values.description) && <p>Preview</p>}
-							{form && form.values && <h3>{form.values.title}</h3>}
-							<div>{form && form.values && <ReactMarkdown source={form.values.description} />}</div>
-						</div>
+						<CenteredDiv>
+							Submitting new problem
+							<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
+							<BackendMessage messageType={page.messageType}>
+								{page.message}
+							</BackendMessage>
+							{
+								form && form.values && (
+									<div>
+										{(form.values.title || form.values.description) && <p>Preview</p>}
+										<h3>{form.values.title}</h3>
+										<ReactMarkdown source={form.values.description} />
+									</div>
+								)
+							}
+						</CenteredDiv>
 					</ContentDiv>
 				)
 		}

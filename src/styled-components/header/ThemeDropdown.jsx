@@ -4,12 +4,10 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedThemeDropdown = styled.div`
-	margin: 0px 10px 0px 10px;
-	font-family: Helvetica, Arial, Sans-Serif;
 	color: #962020;
 	border: 2px solid;
 	border-radius: 3px;
-	padding: 3px;
+	padding: 0.25em 1em;
 	margin: 2px;
 	:hover {
 		cursor: pointer;

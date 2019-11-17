@@ -3,6 +3,9 @@ import { Field, reduxForm } from 'redux-form'
 
 import { scoreboardPageActions } from '../../../actions/content/statistics/scoreboardPage'
 import renderField from '../../form/RenderField'
+
+import Button from '../../../styled-components/defaults/Button'
+
 const submit = (values, dispatch, props) => {
 	dispatch(scoreboardPageActions.findUser(props.queue, values.identifier, 50))
 }
@@ -21,9 +24,9 @@ const ScoreboardSearchUserForm = props => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
-				<Field name="identifier" component={renderField} type="text" label='Identifier' placeholder='Username or email'/>
+				<Field name="identifier" component={renderField} type="text" label='Search User' placeholder='Username or email'/>
 			</div>
-			<button type="submit">Search User</button>
+			<Button type="submit">Search</Button>
 		</form>
 	)
 }

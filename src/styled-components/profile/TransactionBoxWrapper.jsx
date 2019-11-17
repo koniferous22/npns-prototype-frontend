@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 import ThemeSelector from '../ThemeSelector'
 
-import { sidebarStyleConstants } from '../sidebars/Constants'
-
 const BuzzfeedTransactionBoxWrapper = styled.div`
 	margin-left: auto;
 	margin-right: auto;

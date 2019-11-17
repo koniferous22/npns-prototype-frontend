@@ -10,7 +10,6 @@ export const BuzzfeedButton = styled.button`
 	color: #962020;
 	margin: 0 1em;
 	padding: 0.25em 1em;
-	font-family: Helvetica, Arial, Sans-Serif;
 	:hover {
 		text-decoration: underline;
 		cursor: pointer;

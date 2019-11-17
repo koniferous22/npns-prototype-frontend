@@ -5,7 +5,8 @@ import ThemeSelector from '../ThemeSelector'
 
 
 const BuzzfeedTextAreaDiv = styled.div`
-	${props => props.center ? 'margin: 10px auto;' : 'margin-top: 10px; margin-bottom: 10px;'}
+	margin: 10px 5px 5px 5px;
+	${props => props.center && 'margin: 10px auto;'}
 	width: 80%;
 	textarea {
 		width: 100%;

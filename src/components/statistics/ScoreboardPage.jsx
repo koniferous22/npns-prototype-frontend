@@ -11,6 +11,7 @@ import { scoreboardPageActions } from '../../actions/content/statistics/scoreboa
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
@@ -55,23 +56,25 @@ class ScoreboardPage extends React.Component {
 			<PageDiv>
 				<StatisticsSidebar addQueues queueBaseUrl='/statistics/scoreboard'/>
 				<ContentDiv sidebar>
-					<BackendMessage messageType={this.props.messageType}>
-						{this.props.message}
-					</BackendMessage>
-					<ScoreboardSearchUserForm queue={this.props.queue} />
-					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
-					<table>
-						<thead>
-							<tr>
-								<th>Username</th>
-								<th>{'Score in "' + this.props.queue + '"'}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{users}
-						</tbody>
-					</table>
-					<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+					<CenteredDiv fullWidth>
+						<BackendMessage messageType={this.props.messageType}>
+							{this.props.message}
+						</BackendMessage>
+						<ScoreboardSearchUserForm queue={this.props.queue} />
+						<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+						<table>
+							<thead>
+								<tr>
+									<th>Username</th>
+									<th>{'Score in "' + this.props.queue + '"'}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{users}
+							</tbody>
+						</table>
+						<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
+					</CenteredDiv>
 				</ContentDiv>
 			</PageDiv>
 		)
