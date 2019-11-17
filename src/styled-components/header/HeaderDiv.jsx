@@ -15,8 +15,8 @@ const BuzzfeedHeaderDiv = styled.div`
 	vertical-align: middle;
 	padding: 10px;
 	${props => `font-size: ${props.fontSize || '14px'}` };
+	color: rgb(17,0,73);
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #962020;
 	@media(max-width: ${headerStyleConstants.HEADER_COLLAPSE_LOGGED_IN_CAPTION}) {
 		${props => props.collapse && "display: none;"}
 	}

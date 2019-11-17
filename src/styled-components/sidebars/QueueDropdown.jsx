@@ -6,7 +6,7 @@ import ThemeSelector from '../ThemeSelector'
 const BuzzfeedQueueDropdown = styled.div`
 	margin: 0px 10px 0px 10px;
 	font-family: Helvetica, Arial, Sans-Serif;
-	background-color:maroon;
+	background-color: #110042;
 	padding:6px;
 	border-radius:5px;
 	font-weight:bold;

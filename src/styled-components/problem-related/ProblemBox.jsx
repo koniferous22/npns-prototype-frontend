@@ -19,6 +19,9 @@ const BuzzfeedProblemBox = styled.div`
 	border-radius: 10px;
 	padding: 10px;
 	background-color: rgba(67, 0, 50, 0.7);
+	a {
+		color: #150050;
+	}
 `
 
 const TryhardProblemBox = props => <div {...props}/>

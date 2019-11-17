@@ -17,7 +17,7 @@ const BuzzfeedCollapsedSidebar = styled.div`
 		widtH: 100%;
 		height:60px;
 	
-		background-color: #b85243;
+		background-color: #584b7b;
 		ul {
 			display: flex;
 			align-items: center;
@@ -30,7 +30,7 @@ const BuzzfeedCollapsedSidebar = styled.div`
 		}
 		a {
 			text-decoration: none;
-			color: #65302c;
+			color: #2d117f;
 		}
 
 		font-family: Helvetica, Arial, Sans-Serif;

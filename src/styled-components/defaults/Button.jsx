@@ -6,8 +6,8 @@ import ThemeSelector from '../ThemeSelector'
 export const BuzzfeedButton = styled.button`
 	background: transparent;
 	border-radius: 3px;
-	${props => !props.noBorder && 'border: 2px solid #962020;'}
-	color: #962020;
+	${props => !props.noBorder && 'border: 2px solid rgb(17,0,73);'}
+	color: rgb(17,0,73);
 	margin: 2px 1em;
 	padding: 0.25em 1em;
 	:hover {

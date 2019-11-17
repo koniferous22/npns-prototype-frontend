@@ -8,7 +8,7 @@ const BuzzfeedHeaderEntry = styled.li`
 	font-family: Helvetica, Arial, Sans-Serif;
 	font-weight: bold;
 	a {
-		color: #6f3301;
+		color: rgb(17,0,73);
 		text-decoration: none;
 	}
 	a:hover {

@@ -17,19 +17,20 @@ const BuzzfeedSidebar = styled.div`
 		display: none;
 	}
 
-	height: 100%;
+	height: 80%;
 	padding: 10px;
+	margin: 20px 0 20px 0;
 
-	background-color: #b85243;
+	background: transparent;
+	border-right: 1px solid #3d325c;
 
 	font-family: Helvetica, Arial, Sans-Serif;
 	font-weight: bold;
 	font-size: 12px;
-	border-radius: 3px;
 
 	a {
 		text-decoration: none;
-		color: #65302c;
+		color: rgb(17,0,73);
 	}
 	a:hover {
 		text-decoration: underline;

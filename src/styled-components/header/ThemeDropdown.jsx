@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedThemeDropdown = styled.div`
-	color: #962020;
+	color: rgb(17,0,73);
 	border: 2px solid;
 	border-radius: 3px;
 	padding: 0.25em 1em;

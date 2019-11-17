@@ -13,7 +13,7 @@ const BuzzfeedCollapsedSidebarDiv = styled.div`
 	${props => props.shrink && 'flex-shrink: 1;'}
 	vertical-align: middle;
 	padding: 10px;
-	color: #962020;
+	color: #2d117f;
 `
 const TryhardCollapsedSidebarDiv = props => <div {...props}/>
 
