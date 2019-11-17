@@ -6,6 +6,7 @@ import Table from '../defaults/Table'
 import ThemeSelector from '../ThemeSelector'
 
 const BuzzfeedNumberedTable = styled(Table)`
+	counter-reset: row-num;
 	tbody tr  {
 		counter-increment: row-num;
 	}

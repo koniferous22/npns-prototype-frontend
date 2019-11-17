@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 
 import { scoreboardPageActions } from '../../../actions/content/statistics/scoreboardPage'
 
+import StyledScoreboardPageBar from '../../../styled-components/statistics/ScoreboardPageBar'
+
 const mapStateToProps = (state, ownProps) => {
 	const scoreboardQueueReducer = state.content.statistics.scoreboard.page[ownProps.queue]
 	return {
@@ -31,7 +33,7 @@ class ScoreboardPageBar extends React.Component {
 		const next = (current < end) ? (current < begin ? begin : current + 1) : end
 		const baseUrl = '/statistics/scoreboard/' + this.props.queue + '?page='
 		return (
-			<table>
+			<StyledScoreboardPageBar>
 				<tbody>
 					<tr>
 						<td><Link to={baseUrl + begin}>{'<<'}</Link></td>
@@ -40,7 +42,7 @@ class ScoreboardPageBar extends React.Component {
 						<td><Link to={baseUrl + end}>{'>>'}</Link></td>
 					</tr>
 				</tbody>
-			</table>
+			</StyledScoreboardPageBar>
 		)
 	}
 }
