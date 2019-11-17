@@ -1,13 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+
+import StyledTransactionBox from '../../../styled-components/profile/TransactionBox'
+import TransactionBoxMeta from '../../../styled-components/profile/TransactionBoxMeta'
+import TransactionBoxMetaSection from '../../../styled-components/profile/TransactionBoxMetaSection'
+
 const TransactionBox = (props) => (
-	<div>
-		{new Date(props.created).toLocaleDateString()}<br/>
-		<Link to={'/q/' + props.queue}>{props.queue}</Link>
-		{' Karma value: ' + props.karma_value}<br/>
-		{'Monetary value: ' + props.monetary_value + "$"}<br/>
+	<StyledTransactionBox>
+		<TransactionBoxMeta>
+			<TransactionBoxMetaSection grow>
+				{new Date(props.created).toLocaleDateString()}
+			</TransactionBoxMetaSection>
+			<TransactionBoxMetaSection>
+				<Link to={'/q/' + props.queue}>{props.queue}</Link>
+				{' Karma value: ' + props.karma_value}
+			</TransactionBoxMetaSection>
+			<TransactionBoxMetaSection>
+				{'Monetary value: ' + props.monetary_value + "$"}
+			</TransactionBoxMetaSection>
+		</TransactionBoxMeta>
 		{props.description}<br/>
-	</div>	
+	</StyledTransactionBox>	
 )
 
 export default TransactionBox

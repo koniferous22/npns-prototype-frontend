@@ -8,7 +8,9 @@ import { sidebarStyleConstants } from '../sidebars/Constants';
 const BuzzfeedCenteredDiv = styled.div`
 	text-align: center;
 	${props => props.fullWidth && `
-		margin-right: 20%;
+		@media(min-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
+			margin-right: 16%;
+		}
 	`}
 `
 

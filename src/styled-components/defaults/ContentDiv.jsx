@@ -16,7 +16,10 @@ const BuzzfeedContentDiv = styled.div`
 	@media(max-width: ${sidebarStyleConstants.SIDEBAR_COLLAPSE}) {
 		margin-left: 0;
 		margin-right: 0;
-		margin-top: 30px;
+		margin-top: 0px;
+		@-moz-document url-prefix() {
+			margin-top: 50px;
+		}
 	}
 	margin-top: 20px;
 	padding: 10px;

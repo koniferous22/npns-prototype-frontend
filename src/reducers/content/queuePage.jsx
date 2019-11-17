@@ -14,6 +14,7 @@ function singleQueueReducer(state = defaultQueueState, action) {
 	switch (action.type) {
 		case queuePageConstants.SET_ACTIVE_PAGE_REQUEST:
 			return {
+				loading: true,
 				entries: state.entries,
 				paging: {
 					page: state.paging.page

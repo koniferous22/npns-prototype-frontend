@@ -14,6 +14,7 @@ function transactionPageReducer(state=defaultState, action) {
 		case transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST:
 			return {
 				message: 'Loading transactions...',
+				loading: true,
 				entries: state.entries,
 				paging: {
 					page: state.paging.page

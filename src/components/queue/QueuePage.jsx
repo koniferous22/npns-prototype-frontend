@@ -24,13 +24,16 @@ const mapStateToProps = (state, ownProps) => {
 				page: 0,
 				hasMore: true
 			},
-			queue: queue
+			queue: queue,
+			queueExists: state.global.linQueues.includes(queue)
 		}
 	}
 	return {
 		entries: queueState.entries.reduce((acc, cv) => acc.concat(cv),[]),
 		paging: queueState.paging,
-		queue: queue
+		queue: queue,
+		loading: queueState.loading,
+		queueExists: state.global.linQueues.includes(queue)
 	}
 }
 
@@ -68,9 +71,12 @@ class QueuePage extends React.Component {
 				<PageDiv>
 					<QueueSidebar />
 					<ContentDiv sidebar>
-						<h4>
-							There's nothing here
-						</h4>
+						<CenteredDiv fullWidth>
+							<h3>
+								{this.props.loading ? "Loading" : " There's nothing here"}
+							</h3>
+							{this.props.queueExists && submitProblem}
+						</CenteredDiv>
 					</ContentDiv>
 				</PageDiv>
 			)
@@ -82,7 +88,7 @@ class QueuePage extends React.Component {
 			<PageDiv>
 				<QueueSidebar />
 				<ContentDiv sidebar>
-					<CenteredDiv>
+					<CenteredDiv fullWidth>
 						<h3>{"Problems of queue: " + this.props.queue}</h3>
 						{this.props.loggedIn && submitProblem}
 					</CenteredDiv>
@@ -102,6 +108,7 @@ class QueuePage extends React.Component {
 										<ProblemBox 
 											id={p._id}
 											title={p.title}
+											active={p.active}
 											created={p.created}
 											bounty={p.bounty}
 											loggedIn={this.props.loggedIn}

@@ -10,6 +10,7 @@ import ProfileSidebar from './ProfileSidebar'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import ProblemBoxWrapper from '../../styled-components/problem-related/ProblemBoxWrapper'
 
 const mapStateToProps = state => {
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class ActivityPage extends React.Component {
 	componentDidMount() {
 		this.props.setUser(this.props.user)
+		this.props.loadPage(this.props.user, 1)
 	}
 
 	componentWillUnmount() {
@@ -38,11 +40,29 @@ class ActivityPage extends React.Component {
 		const base_url = '/u/' + this.props.user
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 
+		const empty = this.props.entries.length === 0;
+		console.log('EMPTYYYY')
+		console.log(empty)
+		if (empty) {
+			return (
+				<PageDiv>
+					<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
+					<ContentDiv sidebar>
+						<CenteredDiv fullWidth>
+							<h3>{this.props.loading ? "Loading" : "User " + this.props.user + " has yet no activity"}</h3>
+						</CenteredDiv>
+					</ContentDiv>
+				</PageDiv>
+			)
+		}
+
 		return (
 			<PageDiv>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
 				<ContentDiv sidebar>
-					<h3>{"Activity of user " + this.props.user}</h3>
+					<CenteredDiv fullWidth>
+						<h3>{"Activity of user " + this.props.user}</h3>
+					</CenteredDiv>
 					<ProblemBoxWrapper>
 						<InfiniteScroll
 							pageStart={1}
@@ -59,6 +79,7 @@ class ActivityPage extends React.Component {
 										<ProblemBox
 											id={p._id}
 											title={p.title}
+											active={p.active}
 											created={p.created}
 											bounty={p.bounty}
 											loggedIn={this.props.loggedIn}

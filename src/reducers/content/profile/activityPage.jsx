@@ -14,6 +14,7 @@ function activityPageReducer(state = defaultState, action) {
 		case activityPageConstants.SET_ACTIVE_PAGE_REQUEST:
 			return {
 				entries: state.entries,
+				loading: true,
 				paging: {
 					page: state.paging.page
 				}
