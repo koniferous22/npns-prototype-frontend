@@ -4,6 +4,7 @@ import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = state => ({
@@ -13,11 +14,15 @@ const mapStateToProps = state => ({
 
 const LoginPage = (props) => (
 	<ContentDiv>
-		<BackendMessage messageType={props.messageType}>
-			{props.message}
-		</BackendMessage>
+		<CenteredDiv>
+			<BackendMessage messageType={props.messageType}>
+				{props.message}
+			</BackendMessage>
+		</CenteredDiv>
 		<LoginForm/>
-		<Link to="/forgotpwd" >Forgot Password?</Link>
+		<CenteredDiv>
+			<Link to="/forgotpwd" >Forgot Password?</Link>
+		</CenteredDiv>
 	</ContentDiv>
 )
 

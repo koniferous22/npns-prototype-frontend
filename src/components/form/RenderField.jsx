@@ -8,7 +8,7 @@ const renderField = ({
 	meta: {asyncValidating, touched, error}
 }) => (
 	<div>
-		<label>{label}</label>
+		{label && <label>{label}</label>}
 		<div className={asyncValidating ? 'async-validating' : ''}>
 			<input {...input} type={type} placeholder={placeholder || label} />
 			{touched && error && <span>{error}</span>}

@@ -21,8 +21,9 @@ const submit = (values, dispatch, props) => {
 
 let ChangeUsernameForm = (props) => (
 	<form onSubmit={props.handleSubmit}>
+		Change Username
 		<div>
-			<Field name="username" component={renderField} type="text" label="Username"/>
+			<Field name="username" component={renderField} type="text" placeholder="New username"/>
 		</div>
 		<Button type="submit">Submit</Button>
 	</form>

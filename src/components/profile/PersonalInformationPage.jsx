@@ -64,25 +64,21 @@ class PersonalInformationPage extends React.Component {
 									{!form && message}
 								</BackendMessage>
 
-								Change Email
 								<ChangeEmailForm />
 								<BackendMessage messageType={messageType}>
 									{form === 'email' && message}
 								</BackendMessage>
 								
-								Change Password
 								<ChangePasswordForm />
 								<BackendMessage messageType={messageType}>
 									{form === 'password' && message}
 								</BackendMessage>
 								
-								Change Username
 								<ChangeUsernameForm />
 								<BackendMessage messageType={messageType}>
 									{form === 'username' && message}
 								</BackendMessage>
 
-								Change Names
 								<ChangeNamesForm />
 								<BackendMessage messageType={messageType}>
 									{form === 'names' && message}

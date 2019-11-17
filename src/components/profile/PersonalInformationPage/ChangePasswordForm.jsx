@@ -12,7 +12,7 @@ const submit = (values, dispatch, props) => {
 let ChangePasswordForm = (props) => (
 	<form onSubmit={props.handleSubmit}>
 		<div>
-			Email containing password reset link will be sent
+			Password reset - email with a link will be sent
 		</div>
 		<Button type="submit">Send password reset link</Button>
 	</form>

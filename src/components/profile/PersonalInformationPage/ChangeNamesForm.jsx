@@ -13,8 +13,9 @@ const submit = (values, dispatch, props) => {
 let ChangeNamesForm = (props) => (
 	<form onSubmit={props.handleSubmit}>
 		<div>
-			<Field name="firstName" component={renderField} type="text" label="First Name"/>
-			<Field name="lastName" component={renderField} type="text" label="Last Name"/>
+			Change Names
+			<Field name="firstName" component={renderField} type="text" placeholder="First Name"/>
+			<Field name="lastName" component={renderField} type="text" placeholder="Last Name"/>
 		</div>
 		<Button type="submit">Submit</Button>
 	</form>
