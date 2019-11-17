@@ -17,7 +17,7 @@ const BuzzfeedCollapsedSidebar = styled.div`
 		widtH: 100%;
 		height:60px;
 	
-		background-color: #584b7b;
+		background: #4d3560;
 		ul {
 			display: flex;
 			align-items: center;

@@ -15,7 +15,7 @@ const BuzzfeedHeader = styled.div`
 		height: 100px;
 	}
 	align-items: center;
-	background: #3d325c;
+	background: #5d4260;
 	color: rgb(17,0,73);
 
 	margin: 0px;
