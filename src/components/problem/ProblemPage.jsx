@@ -89,7 +89,12 @@ class ProblemPage extends React.Component {
 							<ContentInfo>
 								<h3>{problem.title}</h3>
 								<div>
-									{new Date(problem.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+									<span>
+										<b>{problem.bounty + '$'}</b>
+									</span>
+									<span>
+										{new Date(problem.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+									</span>
 									{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
 									{problemActive && this.props.loggedIn && <Link to={'/problem/' + problem.id + '/boost'}>Boost this problem</Link>}
 								</div>
