@@ -14,7 +14,7 @@ import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
-import ProblemBox from '../../styled-components/problem/ProblemPageProblemBox'
+import ProblemBox from '../../styled-components/problem/ProblemBox'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dateTimeOptions'

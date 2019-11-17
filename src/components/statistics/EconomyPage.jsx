@@ -9,7 +9,9 @@ import { globalActions } from '../../actions/global'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
+import Table from '../../styled-components/defaults/Table'
 
 const mapStateToProps = (state) => ({
 	hierarchy: state.global.hierarchy,
@@ -35,17 +37,26 @@ class EconomyPage extends React.Component {
 			<PageDiv>
 				<StatisticsSidebar />
 				<ContentDiv sidebar>
+					<CenteredDiv fullWidth>
 					<BackendMessage messageType={this.props.messageType}>
 						{message && message}
 					</BackendMessage>
-					<ul>
-						{karmaValues && karmaValues.map(q => (
-							<li key={q.name}>
-								<Link to={'/q/' + q.name}>{q.name} </Link> 
-								karma value: { q.karmaValue}
-							</li>
-						))}
-					</ul>
+					<h3>
+						Karma values
+					</h3>
+					<Table>
+						<tbody>
+							{
+								karmaValues && karmaValues.map(q => (
+									<tr key={q.name}>
+										<td><Link to={'/q/' + q.name}>{q.name}</Link></td>
+										<td>{ q.karmaValue}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</Table>
+					</CenteredDiv>
 				</ContentDiv>
 			</PageDiv>
 		)

@@ -13,6 +13,7 @@ import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
+import NumberedTable from '../../styled-components/statistics/NumberedTable'
 
 const mapStateToProps = (state, ownProps) => state.content.statistics.scoreboard.page[ownProps.queue] || {}
 
@@ -62,7 +63,7 @@ class ScoreboardPage extends React.Component {
 						</BackendMessage>
 						<ScoreboardSearchUserForm queue={this.props.queue} />
 						<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
-						<table>
+						<NumberedTable>
 							<thead>
 								<tr>
 									<th>Username</th>
@@ -72,7 +73,7 @@ class ScoreboardPage extends React.Component {
 							<tbody>
 								{users}
 							</tbody>
-						</table>
+						</NumberedTable>
 						<ScoreboardPageBar currentPage={this.props.urlPage} queue={this.props.queue}/>
 					</CenteredDiv>
 				</ContentDiv>
