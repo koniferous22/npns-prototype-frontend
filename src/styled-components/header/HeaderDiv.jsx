@@ -9,7 +9,7 @@ import { headerStyleConstants } from './Constants'
 const BuzzfeedHeaderDiv = styled.div`
 	display: flex;
 	flex-wrap: wrap; 
-	justify-content: flex-start;
+	justify-content: ${props => props.shrink ? 'center' : 'flex-start'};
 	${props => props.grow && 'flex-grow: 1;'}
 	${props => props.shrink && 'flex-shrink: 1;'}
 	vertical-align: middle;

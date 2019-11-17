@@ -8,7 +8,7 @@ const BuzzfeedThemeDropdown = styled.div`
 	border: 2px solid;
 	border-radius: 3px;
 	padding: 0.25em 1em;
-	margin: 2px;
+	margin: 2px 1em
 	:hover {
 		cursor: pointer;
 		text-decoration: underline;

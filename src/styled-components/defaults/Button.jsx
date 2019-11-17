@@ -8,13 +8,12 @@ export const BuzzfeedButton = styled.button`
 	border-radius: 3px;
 	${props => !props.noBorder && 'border: 2px solid #962020;'}
 	color: #962020;
-	margin: 0 1em;
+	margin: 2px 1em;
 	padding: 0.25em 1em;
 	:hover {
 		text-decoration: underline;
 		cursor: pointer;
 	}
-	margin-bottom: 3px;
 `
 
 export const TryhardButton = props => <button {...props}/>
