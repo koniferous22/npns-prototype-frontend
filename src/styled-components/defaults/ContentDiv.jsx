@@ -24,12 +24,17 @@ const BuzzfeedContentDiv = styled.div`
 	margin-top: 20px;
 	padding: 10px;
 	font-family: Verdana, sans-serif;
-
-	input {
-		border-radius: 5px;
-	}
 	textarea {
 		border-radius: 5px;
+	}
+	form {
+		border-radius: 10px;
+		padding: 7px;
+		background-color: rgba(67, 0, 50, 0.35);
+		margin: 10px;
+		button {
+			margin: 10px;
+		}
 	}
 `
 
