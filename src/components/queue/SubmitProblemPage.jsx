@@ -1,11 +1,11 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
 
 import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
 import { submitProblemActions } from '../../actions/content/submitProblem'
-import { submitProblemStages } from '../../constants/content/submitProblemPage' 
+import { submitProblemStages } from '../../constants/content/submitProblemPage'
+import MarkdownRender from '../form/MarkdownRender'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
@@ -55,7 +55,7 @@ class SubmitProblemPage extends React.Component {
 									<div>
 										{(form.values.title || form.values.description) && <p>Preview</p>}
 										<h3>{form.values.title}</h3>
-										<ReactMarkdown source={form.values.description} />
+										<MarkdownRender source={form.values.description} />
 									</div>
 								)
 							}

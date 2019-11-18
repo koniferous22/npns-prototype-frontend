@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from "react-router-dom"
@@ -16,6 +15,7 @@ import ContentInfo from '../../styled-components/problem/ContentInfo'
 import ProblemDiv from '../../styled-components/problem/ProblemDiv'
 import ProblemBox from '../../styled-components/problem/ProblemBox'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
+import MarkdownRender from '../form/MarkdownRender'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dateTimeOptions'
 
@@ -100,7 +100,7 @@ class ProblemPage extends React.Component {
 								</div>
 							</ContentInfo>
 							<span>Description: </span>
-							<ReactMarkdown source={problem.content} />
+							<MarkdownRender source={problem.content} />
 							{problem.accepted_submission && submissionCount > 1 && (
 								<Submission
 									id={problem.accepted_submission}
