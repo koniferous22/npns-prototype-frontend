@@ -22,6 +22,7 @@ const BuzzfeedQueueEntries = styled.ul`
 		display: block;
 		padding: 8px 16px;
 		border-bottom: 1px solid #e5e5e5;
+		width: 100%;
 	}
 	li:last-child {
 		border-bottom: none;
