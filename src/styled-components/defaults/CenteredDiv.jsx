@@ -14,7 +14,7 @@ const BuzzfeedCenteredDiv = styled.div`
 	`}
 `
 
-const TryhardCenteredDiv = props => <div {...props} fullWidth={undefined}/>
+const TryhardCenteredDiv = props => <div {...props} fullWidth={undefined} textLeft={undefined}/>
 
 const CenteredDiv = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedCenteredDiv {...props} />} 

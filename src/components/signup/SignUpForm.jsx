@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import renderField from '../form/RenderField'
 import { signupActions } from '../../actions/content/signup'
 
-import Button from '../../styled-components/defaults/Button'
+import FormButton from '../../styled-components/form/FormButton'
 
 const submit = (values, dispatch, props) => {
 	dispatch(signupActions.signup(values))
@@ -35,13 +35,13 @@ const asyncBlurFields = ['username', 'password', 'email']
 const SignUpForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
-			<Field name="username" component={renderField} type="text" label="Username"/>
-			<Field name="password" component={renderField} type="password" label="Password" placeholder="at least 8 characters"/>
-			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password"/>
-			<Field name="email" component={renderField} type="text" label="Email"/>
-			<Field name="firstName" component={renderField} type="text" label="First Name"/>
-			<Field name="lastName" component={renderField} type="text" label="Last Name"/>
-		<Button type="submit">Submit</Button>
+			<Field name="username" component={renderField} type="text" label="Username" alignLeft/>
+			<Field name="password" component={renderField} type="password" label="Password" placeholder="at least 8 characters" alignLeft/>
+			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password" alignLeft/>
+			<Field name="email" component={renderField} type="text" label="Email" alignLeft/>
+			<Field name="firstName" component={renderField} type="text" label="First Name" alignLeft/>
+			<Field name="lastName" component={renderField} type="text" label="Last Name" alignLeft/>
+		<FormButton type="submit" alignLeft>Submit</FormButton>
 	</form>)
 }
 

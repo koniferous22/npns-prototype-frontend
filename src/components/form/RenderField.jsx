@@ -8,11 +8,12 @@ const renderField = ({
 	label,
 	type,
 	placeholder,
+	alignLeft,
 	meta: {asyncValidating, touched, error}
 }) => (
-	<InputDiv>
+	<InputDiv alignLeft={alignLeft}>
 		{label && <label>{label}</label>}
-		<div className={asyncValidating ? 'async-validating' : ''}>
+		<div>
 			<input {...input} type={type} placeholder={placeholder || label} />
 			{touched && error && <ValidationMessage>{error}</ValidationMessage>}
 		</div>

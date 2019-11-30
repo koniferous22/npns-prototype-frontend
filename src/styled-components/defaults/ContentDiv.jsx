@@ -32,9 +32,6 @@ const BuzzfeedContentDiv = styled.div`
 		padding: 7px;
 		background-color: rgba(67, 0, 50, 0.35);
 		margin: 10px;
-		button {
-			margin: 10px;
-		}
 	}
 `
 
