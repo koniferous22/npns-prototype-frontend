@@ -41,8 +41,6 @@ class ActivityPage extends React.Component {
 		const auth_view = (this.props.user === this.props.viewer && this.props.loggedIn)
 
 		const empty = this.props.entries.length === 0;
-		console.log('EMPTYYYY')
-		console.log(empty)
 		if (empty) {
 			return (
 				<PageDiv>

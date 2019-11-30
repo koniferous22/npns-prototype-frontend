@@ -11,9 +11,9 @@ export const BuzzfeedFormButton = styled(StyledButton)`
 
 export const TryhardFormButton = props => <button {...props} alignLeft={undefined}/>
 
-const FormButton = props => {console.log('FORMBUTTON');console.log(props);return (<ThemeSelector 
+const FormButton = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedFormButton {...props} />} 
 		tryhard={<TryhardFormButton {...props} />} 
-	/>)}
+	/>
 
 export default FormButton
