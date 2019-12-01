@@ -26,6 +26,9 @@ class SubmitProblemPage extends React.Component {
 	componentWillUnmount() {
 		this.props.reset()
 	}
+	handleChange = value => {
+  this.setState({ mdeValue: value })
+}
 	render() {
 		const page = this.props.page
 		const form = this.props.form.form

@@ -1,1 +1,1 @@
-export const appConfig = { backendUrl : 'https://npns-prototype-api.herokuapp.com/'};
+export const appConfig = { backendUrl : 'http://localhost:3000'};
