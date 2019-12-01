@@ -19,6 +19,7 @@ const BuzzfeedHeader = styled.div`
 	color: rgb(17,0,73);
 
 	margin: 0px;
+	z-index: 1;
 `
 
 const TryhardHeader = props => <div {...props}/>

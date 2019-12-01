@@ -5,6 +5,7 @@ import MyEditor from '../../form/MyEditor'
 import renderField from '../../form/RenderField'
 import ReduxFormSelect from '../../form/ReduxFormSelect'
 
+import CenteredDiv from '../../../styled-components/defaults/CenteredDiv'
 import Button from '../../../styled-components/defaults/Button'
 
 import { submitProblemActions } from '../../../actions/content/submitProblem'
@@ -46,12 +47,16 @@ const SubmitProblemForm = props => {
 	let options = props.queueOptions || []
 	options = options.map(transformIntoOption)
 
-	return (<form onSubmit={handleSubmit}>
-			<Field name="queue" component={ReduxFormSelect} options={options} defaultValue={transformIntoOption(props.defaultQueue)} label="Select queue"/>
-			<Field name="title" component={renderField} type="text" label="Title"/>
+	return (
+		<form onSubmit={handleSubmit}>
+			<CenteredDiv>
+				<Field name="queue" component={ReduxFormSelect} options={options} defaultValue={transformIntoOption(props.defaultQueue)} label="Select queue"/>
+				<Field name="title" component={renderField} type="text" label="Title"/>
+			</CenteredDiv>
 			<Field name="description" component={MyEditor} />
-		<Button type="submit">Submit</Button>
-	</form>)
+			<Button type="submit">Submit</Button>
+		</form>
+	)
 }
 
 export default reduxForm({

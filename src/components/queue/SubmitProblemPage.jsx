@@ -46,20 +46,22 @@ class SubmitProblemPage extends React.Component {
 					<ContentDiv>
 						<CenteredDiv>
 							Submitting new problem
+						</CenteredDiv>
 							<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
+						<CenteredDiv>
 							<BackendMessage messageType={page.messageType}>
 								{page.message}
 							</BackendMessage>
-							{
-								form && form.values && (
-									<div>
-										{(form.values.title || form.values.description) && <p>Preview</p>}
-										<h3>{form.values.title}</h3>
-										<MarkdownRender source={form.values.description} />
-									</div>
-								)
-							}
 						</CenteredDiv>
+						{
+							form && form.values && (
+								<div>
+									{(form.values.title || form.values.description) && <p>Preview</p>}
+									<h3>{form.values.title}</h3>
+									<MarkdownRender source={form.values.description} />
+								</div>
+							)
+						}
 					</ContentDiv>
 				)
 		}

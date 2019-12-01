@@ -21,6 +21,7 @@ const BuzzfeedContentDiv = styled.div`
 			"collapsed-sidebar"
 			"content";
 	}
+	z-index: 0;
 `
 
 
