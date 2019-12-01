@@ -1,4 +1,4 @@
 export const appConfig = { 
-	backendUrl : 'https://npns-prototype-api.herokuapp.com',
+	backendUrl : 'http://localhost:3000',
 	enableLogger: true
 };
