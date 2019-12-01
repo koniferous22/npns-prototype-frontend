@@ -32,9 +32,9 @@ class ConfirmPasswordChangePage extends React.Component {
 			case confirmPasswordChangeStages.COMPLETED:
 				return (
 					<ContentDiv>
-						Password successfully changed, click
+						{'Password successfully changed, click '}
 						<Link to="/login">here</Link>
-						to log in
+						{' to log in'}
 					</ContentDiv>
 				)
 			case confirmPasswordChangeStages.SUBMITTING_FORM:
