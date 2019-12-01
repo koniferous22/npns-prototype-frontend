@@ -28,6 +28,14 @@ const BuzzfeedSidebar = styled.div`
 	font-weight: bold;
 	font-size: 12px;
 
+	${props => props.shiftLists && `
+		ul {
+			position: relative;
+			right: 2.0em;
+		}
+		padding-left: 20px;
+	`}
+
 	a {
 		text-decoration: none;
 		color: rgb(17,0,73);
@@ -37,7 +45,7 @@ const BuzzfeedSidebar = styled.div`
 	}
 `
 
-const TryhardSidebar = props => <div {...props}/>
+const TryhardSidebar = props => <div {...props} shiftLists={undefined	}/>
 
 const Sidebar = props => <ThemeSelector 
 		buzzfeed={<BuzzfeedSidebar {...props} />} 

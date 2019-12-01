@@ -7,6 +7,7 @@ import { boostActions } from '../../actions/content/boost'
 import { boostStages } from '../../constants/content/boost' 
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
+import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -45,7 +46,9 @@ class BoostPage extends React.Component {
 			default:
 				return(
 					<ContentDiv>
-						<p>Boosting problem</p>
+						<CenteredDiv>
+							Boosting problem
+						</CenteredDiv>
 						<BoostForm problemId={problemId} token={token}/>
 						<BackendMessage messageType={messageType}>
 							{message}

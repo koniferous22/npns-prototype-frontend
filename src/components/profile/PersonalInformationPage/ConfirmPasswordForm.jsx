@@ -13,7 +13,7 @@ const submit = (values, dispatch, props) => {
 let ConfirmPasswordForm = (props) => (
 	<form onSubmit={props.handleSubmit}>
 		<Field name="password" component={renderField} type="password" label="Password" alignLeft/>
-		<FormButton type="submit">Submit</FormButton>
+		<FormButton type="submit" alignLeft>Submit</FormButton>
 	</form>
 )
 

@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 
 import { signupConstants, signupStages } from '../../constants/content/signUpPage'
 
+import { appConfig } from '../../appConfig'
+
 const initialState = {
 	stage: signupStages.SUBMITTING_FORM
 }
@@ -17,8 +19,8 @@ const signupPageReducer = (state = initialState, action) => {
 			return {
 				stage: signupStages.COMPLETED,
 				message: {
-					message:"Ok now that you've regoostered, this is a demo version that uses only testing mail service for user receiving emails, since we cannot afford SMTP server.\nThat means, to complete the process",
-					steps: [
+					message: appConfig.productionMail ? "Confermation link sent ;) pls check ur email adress, YUH!" : "Ok now that you've regoostered, this is a demo version that uses only testing mail service for user receiving emails, since we cannot afford SMTP server.\nThat means, to complete the process",
+					steps: appConfig.productionMail ? [] : [
 						"go to \"https://ethereal.email\"",
 						"log in with following credentials:\n\tusername=\"oren.cremin@ethereal.email\",\n\tpassword=\"86GXzmB8sDN2u2Ycuy\"",
 						"in section messages should be your email, i.e. addressed to \"" + action.user.username + "\" with email adress \"" + action.user.email + "\""

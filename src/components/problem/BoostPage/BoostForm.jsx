@@ -2,7 +2,7 @@ import React from 'react'
 import { boostActions } from '../../../actions/content/boost'
 import { Field, reduxForm } from 'redux-form'
 
-import Button from '../../../styled-components/defaults/Button'
+import FormButton from '../../../styled-components/form/FormButton'
 import renderField from '../../form/RenderField'
 
 let boost = (values, dispatch, props) => {
@@ -21,10 +21,9 @@ let BoostForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
 		<div>
-			<label htmlFor="boost">Boost value</label>
-			<Field name="boost" component={renderField} validate={[number, positive]} type="number" step="any"/>
+			<Field name="boost" label="Boost Value" component={renderField} validate={[number, positive]} type="number" step="any" alignLeft/>
 		</div>
-		<Button type="submit">Boost!</Button>
+		<FormButton type="submit" alignLeft>Boost!</FormButton>
 	</form>)
 }
 

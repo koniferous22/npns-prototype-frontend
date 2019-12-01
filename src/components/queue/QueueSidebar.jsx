@@ -42,7 +42,7 @@ class QueueSidebar extends React.Component {
 				<CollapsedSidebarDiv>
 					{dropdownEntries}
 				</CollapsedSidebarDiv>
-				<SidebarDiv>
+				<SidebarDiv shiftLists>
 					{hierarchicalEntries}
 				</SidebarDiv>
 			</div>
