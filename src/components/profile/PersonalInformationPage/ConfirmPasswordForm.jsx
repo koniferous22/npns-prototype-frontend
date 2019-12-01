@@ -4,7 +4,7 @@ import React from 'react'
 import renderField from '../../form/RenderField'
 import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
 
-import Button from '../../../styled-components/defaults/Button'
+import FormButton from '../../../styled-components/form/FormButton'
 
 const submit = (values, dispatch, props) => {
 	dispatch(personalInformationPageActions.confirmPassword(values.password, props.form, props.token))
@@ -12,10 +12,8 @@ const submit = (values, dispatch, props) => {
 
 let ConfirmPasswordForm = (props) => (
 	<form onSubmit={props.handleSubmit}>
-		<div>
-			<Field name="password" component={renderField} type="password" label="Password"/>
-		</div>
-		<Button type="submit">Submit</Button>
+		<Field name="password" component={renderField} type="password" label="Password" alignLeft/>
+		<FormButton type="submit">Submit</FormButton>
 	</form>
 )
 
