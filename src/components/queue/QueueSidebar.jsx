@@ -5,6 +5,7 @@ import QueueSidebarEntries from './QueueSidebarEntries'
 import { globalActions } from '../../actions/global'
 
 import SidebarDiv from '../../styled-components/sidebars/Sidebar'
+import HierarchicalListDiv from '../../styled-components/sidebars/HierarchicalListDiv'
 import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebar'
 
 import QueueDropdown from './QueueDropdown'
@@ -30,7 +31,9 @@ class QueueSidebar extends React.Component {
 		if (this.props.reuse) {
 			return (
 				<div>
-					{hierarchicalEntries}
+					<HierarchicalListDiv>
+						{hierarchicalEntries}
+					</HierarchicalListDiv>
 					<CollapsedSidebarDiv>
 						{dropdownEntries}
 					</CollapsedSidebarDiv>
@@ -42,8 +45,10 @@ class QueueSidebar extends React.Component {
 				<CollapsedSidebarDiv>
 					{dropdownEntries}
 				</CollapsedSidebarDiv>
-				<SidebarDiv shiftLists>
-					{hierarchicalEntries}
+				<SidebarDiv>
+					<HierarchicalListDiv>
+						{hierarchicalEntries}
+					</HierarchicalListDiv>
 				</SidebarDiv>
 			</div>
 		)

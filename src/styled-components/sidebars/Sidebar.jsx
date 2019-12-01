@@ -19,7 +19,8 @@ const BuzzfeedSidebar = styled.div`
 
 	height: 80%;
 	padding: 10px;
-	margin: 20px 0 20px 0;
+	margin-top: 20px;
+	margin-bottom: 20px;
 
 	background: transparent;
 	border-right: 1px solid #3d325c;
@@ -28,14 +29,6 @@ const BuzzfeedSidebar = styled.div`
 	font-weight: bold;
 	font-size: 12px;
 
-	${props => props.shiftLists && `
-		ul {
-			position: relative;
-			right: 2.0em;
-		}
-		padding-left: 20px;
-	`}
-
 	a {
 		text-decoration: none;
 		color: rgb(17,0,73);
@@ -43,7 +36,8 @@ const BuzzfeedSidebar = styled.div`
 	a:hover {
 		text-decoration: underline;
 	}
-`
+`//padding-left: 20px;
+//left: 
 
 const TryhardSidebar = props => <div {...props} shiftLists={undefined	}/>
 
