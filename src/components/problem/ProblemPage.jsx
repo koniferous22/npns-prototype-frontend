@@ -21,6 +21,7 @@ import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dat
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
+	...state.content.problemPage.form,
 	...ownProps
 })
 
@@ -40,6 +41,7 @@ class ProblemPage extends React.Component {
 		this.props.loadProblemData()
 	}
 	render() {
+		const sForm = this.props.submission
 		const problem = this.props.problem
 		if (!problem) {
 			return (
@@ -115,6 +117,14 @@ class ProblemPage extends React.Component {
 						{
 							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id} user={this.props.user}/>
 						}
+						{
+              sForm && sForm.values && (
+                <div>
+                  {(sForm.values.content) && <p>Preview</p>}
+                  <MarkdownRender source={sForm.values.content} />
+                </div>
+              )
+            }
 						<div style={{height:"100%",overflow:"auto"}}>
 							<InfiniteScroll
 								pageStart={0}
