@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
-import ReactMarkdown from 'react-markdown';
+import MarkdownRender from '../../form/MarkdownRender'
 
 import Reply from './Reply'
 import PostReplyForm from './PostReplyForm'
@@ -34,7 +34,7 @@ export const Submission = props => {
 				{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
 				{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
 			</ContentInfo>
-			<ReactMarkdown source={props.content} />
+			<MarkdownRender source={props.content} />
 			<ButtonDiv>
 				{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
 				{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}

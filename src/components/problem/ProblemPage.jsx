@@ -4,8 +4,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from "react-router-dom"
 
 import QueueSidebar from '../queue/QueueSidebar'
-import PostSubmissionForm from './ProblemPage/PostSubmissionForm'
 import Submission from './ProblemPage/Submission'
+import PostSubmissionComponent from './ProblemPage/PostSubmissionComponent'
 
 import { problemPageActions } from '../../actions/content/problemPage'
 
@@ -27,7 +27,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	loadProblemData: () => dispatch(problemPageActions.loadProblemData(ownProps.problemId)),
 	loadSubmissionPage: (page) => dispatch(problemPageActions.loadSubmissionPage(ownProps.problemId, page)),
-	postSubmission: (submission, token) => dispatch(problemPageActions.postSubmission(submission, token)),
 	reset: () => dispatch(problemPageActions.reset())
 })
 
@@ -112,17 +111,8 @@ class ProblemPage extends React.Component {
 								/>
 							)}
 						</ProblemBox>
-						{
-							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id} user={this.props.user}/>
-							/*
-								sForm && sForm.values && (
-									<div>
-										{(sForm.values.content) && <p>Preview</p>}
-										<MarkdownRender source={sForm.values.content} />
-									</div>
-								)
-							*/
-						}
+
+						<PostSubmissionComponent token={this.props.token} submissionForm={submissionForm} problemId={problem.id} />
 						
 						<div>
 							<InfiniteScroll
