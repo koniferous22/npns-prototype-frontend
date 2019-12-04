@@ -21,7 +21,6 @@ import { dateTimeDefaultLocale, dateTimeOptions } from '../../constants/misc/dat
 
 const mapStateToProps = (state, ownProps) => ({
 	...state.content.problemPage.page,
-	...state.content.problemPage.form,
 	...ownProps
 })
 
@@ -41,7 +40,6 @@ class ProblemPage extends React.Component {
 		this.props.loadProblemData()
 	}
 	render() {
-		const sForm = this.props.submission
 		const problem = this.props.problem
 		if (!problem) {
 			return (
@@ -59,7 +57,7 @@ class ProblemPage extends React.Component {
 		const problemOwner = this.props.user && problem.submitted_by && this.props.user._id === problem.submitted_by._id
 		const problemActive = problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
-		const submissionForm = problemActive && this.props.loggedIn && !problemOwner
+		const submissionForm = problemActive && this.props.loggedIn && !problemOwner && !this.props.submissionFormSubmitted
 		const mapSubmissionIdToComponent = (submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
@@ -116,16 +114,17 @@ class ProblemPage extends React.Component {
 						</ProblemBox>
 						{
 							submissionForm && <PostSubmissionForm token={this.props.token} problem={problem.id} user={this.props.user}/>
+							/*
+								sForm && sForm.values && (
+									<div>
+										{(sForm.values.content) && <p>Preview</p>}
+										<MarkdownRender source={sForm.values.content} />
+									</div>
+								)
+							*/
 						}
-						{
-              sForm && sForm.values && (
-                <div>
-                  {(sForm.values.content) && <p>Preview</p>}
-                  <MarkdownRender source={sForm.values.content} />
-                </div>
-              )
-            }
-						<div style={{height:"100%",overflow:"auto"}}>
+						
+						<div>
 							<InfiniteScroll
 								pageStart={0}
 								loadMore={() => this.props.loadSubmissionPage(this.props.paging.page + 1)}

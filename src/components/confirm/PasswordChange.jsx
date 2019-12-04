@@ -40,9 +40,9 @@ class ConfirmPasswordChangePage extends React.Component {
 			case confirmPasswordChangeStages.SUBMITTING_FORM:
 				return (
 					<ContentDiv>
-    				<BackendMessage messageType={this.props.messageType}>
-							{this.props.message}
- 		   			</BackendMessage>
+	    				<BackendMessage messageType={this.props.messageType}>
+								{this.props.message}
+	 		   			</BackendMessage>
 						<PasswordChangeForm token={this.props.token} />
 					</ContentDiv>
 				)

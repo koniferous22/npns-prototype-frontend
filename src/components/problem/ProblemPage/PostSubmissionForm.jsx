@@ -14,13 +14,15 @@ const submit = (values, dispatch, props) => {
 
 let PostSubmissionForm = props => {
 	const { handleSubmit } = props;
-	return (<form onSubmit={handleSubmit}>
-		<div>
-			<h4>Post your submission here!</h4>
-			<Field name="content" component={MyEditor} />
-		</div>
-		<Button type="submit">Submit</Button>
-	</form>)
+	return (
+		<form onSubmit={handleSubmit}>
+			<div>
+				<h4>Post your submission here!</h4>
+				<Field name="content" component={MyEditor} />
+			</div>
+			<Button type="submit">Submit</Button>
+		</form>
+	)
 }
 
 PostSubmissionForm = reduxForm({

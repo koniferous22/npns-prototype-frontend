@@ -37,6 +37,7 @@ const BuzzfeedCollapsedSidebar = styled.div`
 		font-weight: bold;
 		font-size: 12px;
 	}
+	z-index: 1;
 `
 
 const TryhardCollapsedSidebar = styled.div`

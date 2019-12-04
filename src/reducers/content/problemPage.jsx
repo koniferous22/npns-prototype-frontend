@@ -17,7 +17,8 @@ const defaultState = {
 		title:'...',
 		content:'...'
 	},
-	replyForm: null
+	replyForm: null,
+	submissionFormSubmitted: false
 }
 
 function problemPageReducer(state = defaultState, action) {
@@ -152,6 +153,7 @@ function problemPageReducer(state = defaultState, action) {
 				...state,
 				submissionEntries: newSubmissionEntries,
 				paging: newPaging,
+				submissionFormSubmitted: true,
 				message: "",
 				messageType: action.messageType
 			}

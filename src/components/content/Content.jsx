@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import MathJax from 'react-mathjax'
 import RemarkMathPlugin from 'remark-math'
 
-function MarkdownRender(props) {
+function Content(props) {
 	const newProps = {
 		...props,
 		plugins: [
@@ -12,9 +12,7 @@ function MarkdownRender(props) {
 		renderers: {
 			...props.renderers,
 			math: (props) => 
-				<MathJax.Node formula={props.value} />,
-			inlineMath: (props) => 
-				<MathJax.Node inline formula={props.value} />
+				<MathJax.Node formula={props.value} />
 		}
 	}
 	return (
@@ -24,4 +22,4 @@ function MarkdownRender(props) {
 	)
 }
 
-export default MarkdownRender
+export default Content

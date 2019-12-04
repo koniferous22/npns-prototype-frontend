@@ -28,8 +28,8 @@ const validate = values => {
 const PasswordChangeForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
-			<Field name="password" component={renderField} type="password" label="Password (at least 8 characters)"/>
-			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password"/>
+			<Field name="password" component={renderField} type="password" label="Password (at least 8 characters)" alignLeft/>
+			<Field name="confirmPassword" component={renderField} type="password" label="Confirm password" alignLeft/>
 		<Button type="submit">Submit</Button>
 	</form>)
 }

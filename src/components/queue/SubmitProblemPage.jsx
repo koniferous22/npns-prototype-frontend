@@ -47,7 +47,7 @@ class SubmitProblemPage extends React.Component {
 						<CenteredDiv>
 							Submitting new problem
 						</CenteredDiv>
-							<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
+						<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
 						<CenteredDiv>
 							<BackendMessage messageType={page.messageType}>
 								{page.message}
