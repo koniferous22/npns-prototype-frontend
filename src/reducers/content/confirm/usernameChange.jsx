@@ -17,7 +17,7 @@ function confirmUsernameChangeReducer(state={}, action) {
 			return {
 				message: action.message,
 				messageType: action.messageType,
-				verified: false
+				verified: state.verified || false
 			}
 		default:
 			return state

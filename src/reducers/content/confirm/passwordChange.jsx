@@ -39,7 +39,7 @@ function confirmPasswordChangeReducer(state={}, action) {
 				stage: confirmPasswordChangeStages.SUBMITTING_FORM,
 				message: action.message,
 				messageType: action.messageType,
-				verified: false
+				verified: state.verified || false
 			}
 		case confirmPasswordChangeConstants.RESET:
 			return {

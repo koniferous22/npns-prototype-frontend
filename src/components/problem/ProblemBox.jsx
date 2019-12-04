@@ -18,7 +18,7 @@ export const ProblemBox = (props) => (
 		</ProblemBoxMeta>
 		<h4><Link to={{pathname: "/problem/" + props.id, id: props.id}}>{props.title}</Link></h4>
 		<ProblemBoxMeta>
-			<li>{props.viewCount + ' views'}</li>
+			<li>{props.viewCount + ' view' + ((props.viewCount !== 1) ? 's' : '')}</li>
 			<li>{'Replies: ' + props.submissionCount}</li>
 			<li><Link to={'/u/' + props.username}>{props.username}</Link></li>
 		</ProblemBoxMeta>
