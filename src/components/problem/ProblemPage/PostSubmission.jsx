@@ -17,13 +17,10 @@ class PostSubmissionComponent extends React.Component {
 	render() {
 		const token = this.props.token
 		const sForm = this.props.submission
-		const submissionForm = this.props.submissionForm
 		const problemId = this.props.problemId
 		return (
 			<div>
-				{
-					submissionForm && <PostSubmissionForm token={token} problem={problemId} />
-				}
+				<PostSubmissionForm token={token} problem={problemId} />
 				{
 					sForm && sForm.values && (
 						<div>

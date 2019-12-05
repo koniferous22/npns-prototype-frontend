@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 import QueueSidebar from '../queue/QueueSidebar'
 import Submission from './ProblemPage/Submission'
-import PostSubmissionComponent from './ProblemPage/PostSubmissionComponent'
+import PostSubmission from './ProblemPage/PostSubmission'
 
 import { problemPageActions } from '../../actions/content/problemPage'
 
@@ -56,7 +56,7 @@ class ProblemPage extends React.Component {
 		const problemOwner = this.props.user && problem.submitted_by && this.props.user._id === problem.submitted_by._id
 		const problemActive = problem.active
 		const mergedEntries = this.props.submissionEntries.reduce((acc, cv) => Object.assign(acc,cv),{})
-		const submissionForm = problemActive && this.props.loggedIn && !problemOwner && !this.props.submissionFormSubmitted
+		const postSubmissionAvailable = problemActive && this.props.loggedIn && !problemOwner && !this.props.submissionFormSubmitted
 		const mapSubmissionIdToComponent = (submissionEntry, index) => (
 				<Submission
 					id={submissionEntry}
@@ -112,7 +112,7 @@ class ProblemPage extends React.Component {
 							)}
 						</ProblemBox>
 
-						<PostSubmissionComponent token={this.props.token} submissionForm={submissionForm} problemId={problem.id} />
+						{postSubmissionAvailable &&  <PostSubmission token={this.props.token} problemId={problem.id} />}
 						
 						<div>
 							<InfiniteScroll
