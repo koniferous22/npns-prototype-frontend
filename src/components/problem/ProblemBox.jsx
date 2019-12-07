@@ -6,7 +6,7 @@ import ProblemBoxMeta from '../../styled-components/problem-related/ProblemBoxMe
 import SolvedLabel from '../../styled-components/problem-related/SolvedLabel'
 
 export const ProblemBox = (props) => {
-	const displayedTitle = props.title.length > 50 ? props.title.substring(0, 50) + '...' : props.title
+	const displayedTitle = props.title.length > 45 ? props.title.substring(0, 45) + '...' : props.title
 	return (
 		<StyledProblemBox>
 			<ProblemBoxMeta>
@@ -18,7 +18,7 @@ export const ProblemBox = (props) => {
 					)}
 				</li>
 			</ProblemBoxMeta>
-			<h4><Link to={{pathname: "/problem/" + props.id, id: props.id}}>{displayedTitle}</Link></h4>
+			<h4><Link to={{pathname: "/problem/" + props.id, id: props.id}}>{displayedTitl}e</Link></h4>
 			<ProblemBoxMeta>
 				<li>{props.viewCount + ' view' + ((props.viewCount !== 1) ? 's' : '')}</li>
 				<li>{'Replies: ' + props.submissionCount}</li>
