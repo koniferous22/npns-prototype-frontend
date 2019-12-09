@@ -211,7 +211,7 @@ function selectReplyForm(submission) {
 	
 	return {
 		type: problemPageConstants.SELECT_REPLY_FORM,
-		replyForm: submission
+		reply: submission
 	}
 }
 
