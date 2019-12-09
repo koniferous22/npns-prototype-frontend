@@ -19,14 +19,25 @@ import SolutionLabel from '../../../styled-components/problem/SolutionLabel'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
 
+const mapStateToProps = (state, ownProps) => {
+	const submissionState = state.content.problemPage.page.submissionEntries[ownProps.page || 0][ownProps.submissionId]
+	return {
+		content: submissionState.content,
+		replyEntries: submissionState.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {}),
+		repliesHidden: submissionState.repliesHidden,
+		user: submissionState.submitted_by.username,
+		created: submissionState.created
+	}
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	loadReplyPage: (page) => dispatch(problemPageActions.loadReplyPage(ownProps.id, page)),
-	hideReplies: () => dispatch(problemPageActions.hideReplies(ownProps.id)),
-	acceptSubmission: () => dispatch(problemPageActions.acceptSubmission(ownProps.id, ownProps.problem, ownProps.token)),
-	selectReplyForm: () => dispatch(problemPageActions.selectReplyForm(ownProps.id))
+	loadReplyPage: (page) => dispatch(problemPageActions.loadReplyPage(ownProps.submissionId, page)),
+	hideReplies: () => dispatch(problemPageActions.hideReplies(ownProps.submissionId)),
+	acceptSubmission: () => dispatch(problemPageActions.acceptSubmission(ownProps.submissionId, ownProps.problem, ownProps.token)),
+	selectReplyForm: () => dispatch(problemPageActions.selectReplyForm(ownProps.submissionId))
 })
 
-export const Submission = props => {
+const Submission = props => {
 	const submissionBox = (
 		<SubmissionBox solution={props.isSolution}>
 			<ContentInfo>
@@ -47,7 +58,7 @@ export const Submission = props => {
 	return (
 		<SubmissionDiv>
 			{submissionBox}
-			{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.id} problem={props.problem}/>}
+			{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.submissionId} problem={props.problem}/>}
 			{props.repliesHidden === false && (
 				<ul>
 					{
@@ -76,4 +87,4 @@ export const Submission = props => {
 }
 
 
-export default connect(null, mapDispatchToProps)(Submission)
+export default connect(mapStateToProps, mapDispatchToProps)(Submission)

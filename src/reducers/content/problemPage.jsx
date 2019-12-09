@@ -15,9 +15,11 @@ const defaultState = {
 	paging: defaultPaging,
 	problem: {
 		title:'...',
-		content:'...'
+		content:'...',
+		submitted_by: null,
+		active: null
 	},
-	replyForm: null,
+	reply: null,
 	submissionFormSubmitted: false
 }
 
@@ -174,7 +176,7 @@ function problemPageReducer(state = defaultState, action) {
 				submissionEntries: newSubmissionEntries,
 				message: "",
 				messageType: action.messageType,
-				replyForm: null
+				reply: null
 			}
 
 		case problemPageConstants.ACCEPT_SUBMISSION_REQUEST:
@@ -193,7 +195,7 @@ function problemPageReducer(state = defaultState, action) {
 		case problemPageConstants.SELECT_REPLY_FORM:
 			return {
 				...state,
-				replyForm: (action.replyForm === state.replyForm) ? null : action.replyForm,
+				reply: (action.reply === state.reply) ? null : action.reply,
 				message: "",
 				messageType: action.messageType
 			}
