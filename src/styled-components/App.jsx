@@ -15,6 +15,7 @@ const BuzzfeedApp = styled.div`
 	grid-template-areas:
 		"header"
 		"page";
+	color: #17082F;
 `
 
 const TryhardApp = props => <div {...props}/>

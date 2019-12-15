@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
 	const submissionState = state.content.problemPage.page.submissionEntries[ownProps.page || 0][ownProps.submissionId]
 	return {
 		content: submissionState.content,
-		replyEntries: submissionState.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {}),
+		replyEntries: submissionState.replyEntries,
 		repliesHidden: submissionState.repliesHidden,
 		user: submissionState.submitted_by.username,
 		created: submissionState.created
@@ -37,53 +37,57 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	selectReplyForm: () => dispatch(problemPageActions.selectReplyForm(ownProps.submissionId))
 })
 
-const Submission = props => {
-	const submissionBox = (
-		<SubmissionBox solution={props.isSolution}>
-			<ContentInfo>
-				{props.isSolution && <SolutionLabel>SOLUTION</SolutionLabel>}
-				{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
-				{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
-			</ContentInfo>
-			<MarkdownRender source={props.content} />
-			<ButtonDiv>
-				{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
-				{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
-			</ButtonDiv>
-		</SubmissionBox>
-	)
-	if (!props.wrapper) {
-		return submissionBox
+class Submission extends React.Component {
+
+	render() {
+		const replyEntries = this.props.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})
+		const submissionBox = (
+			<SubmissionBox solution={this.props.isSolution}>
+				<ContentInfo>
+					{this.props.isSolution && <SolutionLabel>SOLUTION</SolutionLabel>}
+					{new Date(this.props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+					{this.props.user && <Link to={'/u/' + this.props.user}>{this.props.user}</Link>}
+				</ContentInfo>
+				<MarkdownRender source={this.props.content} />
+				<ButtonDiv>
+					{this.props.acceptButton && <Button onClick={this.props.acceptSubmission}>Accept Submission</Button>}
+					{this.props.replyButton && <Button onClick={this.props.selectReplyForm}>Reply</Button>}
+				</ButtonDiv>
+			</SubmissionBox>
+		)
+		if (!this.props.wrapper) {
+			return submissionBox
+		}
+		return (
+			<SubmissionDiv>
+				{submissionBox}
+				{this.props.hasActiveReplyForm && <PostReplyForm token={this.props.token} submission={this.props.submissionId} problem={this.props.problem}/>}
+				{this.props.repliesHidden === false && (
+					<ul>
+						{
+							Object.keys(replyEntries).map((e, index) => (
+								<li key={index}>
+									<Reply 
+										content={replyEntries[e].content}
+										created={replyEntries[e].created}
+										user={replyEntries[e].submitted_by.username}
+									/>
+								</li>))
+						}
+					</ul>
+				)}
+				{
+					this.props.loadRepliesButton && 
+					(
+						<RepliesButtonDiv>
+							{this.props.paging && this.props.paging.hasMore && <RepliesButton onClick={() => this.props.loadReplyPage(this.props.paging.page + 1)}>{'Load ' + (!this.props.repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
+							{!this.props.repliesHidden && <RepliesButton onClick={() => this.props.hideReplies()}>Hide Replies</RepliesButton>}
+						</RepliesButtonDiv>
+					)
+				}
+			</SubmissionDiv>
+		)
 	}
-	return (
-		<SubmissionDiv>
-			{submissionBox}
-			{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.submissionId} problem={props.problem}/>}
-			{props.repliesHidden === false && (
-				<ul>
-					{
-						Object.keys(props.replyEntries).map((e, index) => (
-							<li key={index}>
-								<Reply 
-									content={props.replyEntries[e].content}
-									created={props.replyEntries[e].created}
-									user={props.replyEntries[e].submitted_by.username}
-								/>
-							</li>))
-					}
-				</ul>
-			)}
-			{
-				props.loadRepliesButton && 
-				(
-					<RepliesButtonDiv>
-						{props.paging && props.paging.hasMore && <RepliesButton onClick={() => props.loadReplyPage(props.paging.page + 1)}>{'Load ' + (!props.repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
-						{!props.repliesHidden && <RepliesButton onClick={() => props.hideReplies()}>Hide Replies</RepliesButton>}
-					</RepliesButtonDiv>
-				)
-			}
-		</SubmissionDiv>
-	)
 }
 
 
