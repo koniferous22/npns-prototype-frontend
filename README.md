@@ -1,3 +1,27 @@
+# Use notes
+
+1. Activate the API
+
+Hey I'm kinda poor, that's why the backend is deployed using free heroku sandbox, that needs to be visited here:
+https://npns-prototype-api.herokuapp.com/queue/hierarchy (in order to work)
+
+2. go to https://npns-prototype.tk/
+
+As if the sandbox was not enuff, I'm using professional TLD .tk, as it works simply better than .com or .biz, it's not like I could not afford it, no way
+
+3. Sign in
+
+* click `Logen` in Header section
+* you can sign with existing account
+	* username: john.doe24
+	* pwd: IAmJohnDoe2
+* or you can try creating your own account, sometimes it might work
+
+4. Do whatever
+
+yup, it's up to you, it's not like it's been developed with best practices or whatever. make sure to let me know how latex rendering works
+
+
 # Run the app locally
 
 * Clone the repo & install stuff with `npm install`
