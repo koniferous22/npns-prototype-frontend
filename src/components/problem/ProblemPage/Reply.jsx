@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown';
+import MarkdownRender from '../../form/MarkdownRender'
 import { Link } from "react-router-dom"
 
 import ReplyBox from '../../../styled-components/problem/ReplyBox'
@@ -13,6 +13,6 @@ export default props => (
 			{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
 			{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
 		</ContentInfo>
-		<ReactMarkdown source={props.content} />
+		<MarkdownRender source={props.content} />
 	</ReplyBox>
 )
