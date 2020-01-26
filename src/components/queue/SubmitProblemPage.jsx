@@ -6,12 +6,17 @@ import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
 import { submitProblemActions } from '../../actions/content/submitProblem'
 import { submitProblemStages } from '../../constants/content/submitProblemPage'
 import MarkdownRender from '../form/MarkdownRender'
+import ImageUpload from '../upload/ImageUpload'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
-const mapStateToProps = state => state.content.submitProblem
+const mapStateToProps = (state, ownProps) => ({
+  page: state.content.submitProblem.page,
+  form: state.content.submitProblem.form,
+	imageUpload: state.content.imageUpload
+})
 
 const mapDispatchToProps = dispatch => ({
 	reset: () => dispatch(submitProblemActions.reset()),
@@ -47,7 +52,12 @@ class SubmitProblemPage extends React.Component {
 						<CenteredDiv>
 							Submitting new problem
 						</CenteredDiv>
-						<SubmitProblemForm defaultQueue={this.props.urlQueue || 'Index'} token={this.props.token} queueOptions={page.queueOptions}/>
+						<SubmitProblemForm 
+							defaultQueue={this.props.urlQueue || 'Index'} 
+							token={this.props.token} 
+							queueOptions={page.queueOptions}
+							attachmentUrl={this.props.imageUpload.url}
+						/>
 						<CenteredDiv>
 							<BackendMessage messageType={page.messageType}>
 								{page.message}
@@ -62,6 +72,7 @@ class SubmitProblemPage extends React.Component {
 								</div>
 							)
 						}
+						<ImageUpload />
 					</ContentDiv>
 				)
 		}

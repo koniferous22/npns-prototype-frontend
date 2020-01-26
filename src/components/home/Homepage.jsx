@@ -17,6 +17,6 @@ export default class Homepage extends React.Component {
 					No clue what should be added to the homepage
 				</ContentDiv>
 			</PageDiv>
-		);
+		)
 	}
 }

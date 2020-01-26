@@ -10,6 +10,7 @@ import submitProblemPageReducer from './content/submitProblemPage'
 import boostPageReducer from './content/boost'
 import profileReducer from './content/profile'
 import confirmReducer from './content/confirm'
+import imageUploadReducer from './content/imageUpload'
 
 export const contentReducer = combineReducers({
 	signup: signupReducer,
@@ -21,5 +22,6 @@ export const contentReducer = combineReducers({
 	boost: boostPageReducer,
 	statistics: statisticsReducer,
 	confirm: confirmReducer,
-	profile: profileReducer
+	profile: profileReducer,
+	imageUpload: imageUploadReducer
 })

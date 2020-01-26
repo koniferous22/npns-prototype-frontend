@@ -3,7 +3,6 @@ import { submitProblemPageConstants } from '../../constants/content/submitProble
 import { messageType } from '../../constants/misc/backendMessageTypes'
 
 function submit(problem, authToken) {
-	
 	return dispatch => {
 		dispatch(request(problem));
 		const queue = problem.queue_name
