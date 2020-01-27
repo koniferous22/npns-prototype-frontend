@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { imageUploadActions } from '../../actions/content/imageUpload'
+import { attachmentUploadActions } from '../../actions/content/attachmentUpload'
 
 import ShowAttachment from './ShowAttachment'
 
 const mapStateToProps = state => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  saveUrl: (url) => dispatch(imageUploadActions.saveUrl(url))
+  saveUrl: (url) => dispatch(attachmentUploadActions.saveUrl(url))
 })
 
 class ImageUpload extends React.Component {
@@ -21,7 +21,7 @@ class ImageUpload extends React.Component {
 			uploadPreset: 'lz6m2dte'}, 
 		(error, result) => {
 			if (!error && result && result.event === "success") { 
-			this.setState({imgurl: result.info.url})
+			this.setState({url: result.info.url})
 			this.props.saveUrl(result.info.url)
 		}})
 		widget.open()
@@ -29,8 +29,8 @@ class ImageUpload extends React.Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.showWidget}> Upload Image </button>
-				{this.state.imgurl && <ShowAttachment attachmentUrl={this.state.imgurl} />}
+				<button onClick={this.showWidget}> Upload attachment </button>
+				{this.state.url && <ShowAttachment attachmentUrl={this.state.url} />}
 			</div>
 		)
 	}
