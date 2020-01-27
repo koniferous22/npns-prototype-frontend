@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { imageUploadActions } from '../../actions/content/imageUpload'
 
+import ShowAttachment from './ShowAttachment'
+
 const mapStateToProps = state => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -28,7 +30,7 @@ class ImageUpload extends React.Component {
 		return (
 			<div>
 				<button onClick={this.showWidget}> Upload Image </button>
-				{this.state.imgurl && <img src={this.state.imgurl} alt="attachment" />}
+				{this.state.imgurl && <ShowAttachment attachmentUrl={this.state.imgurl} />}
 			</div>
 		)
 	}
