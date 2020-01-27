@@ -7,7 +7,7 @@ function saveUrl(url) {
 		}
 
 	function request() { return { type: attachmentUploadConstants.SAVE_URL_REQUEST } }
-	function success(problem, queue) { return { type: attachmentUploadConstants.SAVE_URL_SUCCESS, url } }
+	function success(url) { return { type: attachmentUploadConstants.SAVE_URL_SUCCESS, url } }
 }
 
 export const attachmentUploadActions = {
