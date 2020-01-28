@@ -36,7 +36,7 @@ const validate = values => {
 		errors.title = 'Required'
 	}
 	if (!values.description) {
-		errors.title = 'Required'
+		errors.description = 'Required'
 	}
 	return errors
 }

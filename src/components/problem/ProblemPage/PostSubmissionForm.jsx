@@ -6,7 +6,7 @@ import MyEditor from '../../form/MyEditor'
 import Button from '../../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(problemPageActions.postSubmission({content: values.content, problem: props.problem}, props.token))
+	dispatch(problemPageActions.postSubmission({content: values.content, problem: props.problem, attachmentUrls: props.attachmentUrls}, props.token))
 }
 
 let PostSubmissionForm = props => {

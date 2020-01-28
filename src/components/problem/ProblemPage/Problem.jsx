@@ -33,7 +33,7 @@ const Problem = props => {
 			</ContentInfo>
 			<span>Description: </span>
 			<MarkdownRender source={props.content} />
-			<Attachments attachmentUrls = {props.attachmentUrls} />
+			<Attachments attachmentUrls={props.attachmentUrls} />
 			{props.embeddedSolution && (
 				<Submission
 					submissionId={props.embeddedSolution.id}

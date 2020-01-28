@@ -5,6 +5,7 @@ import MarkdownRender from '../../form/MarkdownRender'
 
 import Reply from './Reply'
 import PostReplyForm from './PostReplyForm'
+import Attachments from '../../upload/Attachments'
 
 import { problemPageActions } from '../../../actions/content/problemPage'
 
@@ -26,7 +27,8 @@ const mapStateToProps = (state, ownProps) => {
 		replyEntries: submissionState.replyEntries,
 		repliesHidden: submissionState.repliesHidden,
 		user: submissionState.submitted_by.username,
-		created: submissionState.created
+		created: submissionState.created,
+		attachmentUrls: submissionState.attachmentUrls
 	}
 }
 
@@ -38,31 +40,32 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 class Submission extends React.Component {
-
 	render() {
-		const replyEntries = this.props.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})
+		const props = this.props
+		const replyEntries = props.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})
 		const submissionBox = (
-			<SubmissionBox solution={this.props.isSolution}>
+			<SubmissionBox solution={props.isSolution}>
 				<ContentInfo>
-					{this.props.isSolution && <SolutionLabel>SOLUTION</SolutionLabel>}
-					{new Date(this.props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
-					{this.props.user && <Link to={'/u/' + this.props.user}>{this.props.user}</Link>}
+					{props.isSolution && <SolutionLabel>SOLUTION</SolutionLabel>}
+					{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+					{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
 				</ContentInfo>
-				<MarkdownRender source={this.props.content} />
+				<MarkdownRender source={props.content} />
+				<Attachments attachmentUrls={props.attachmentUrls} />
 				<ButtonDiv>
-					{this.props.acceptButton && <Button onClick={this.props.acceptSubmission}>Accept Submission</Button>}
-					{this.props.replyButton && <Button onClick={this.props.selectReplyForm}>Reply</Button>}
+					{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
+					{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
 				</ButtonDiv>
 			</SubmissionBox>
 		)
-		if (!this.props.wrapper) {
+		if (!props.wrapper) {
 			return submissionBox
 		}
 		return (
 			<SubmissionDiv>
 				{submissionBox}
-				{this.props.hasActiveReplyForm && <PostReplyForm token={this.props.token} submission={this.props.submissionId} problem={this.props.problem}/>}
-				{this.props.repliesHidden === false && (
+				{props.hasActiveReplyForm && <PostReplyForm token={props.token} submission={props.submissionId} problem={props.problem}/>}
+				{props.repliesHidden === false && (
 					<ul>
 						{
 							Object.keys(replyEntries).map((e, index) => (

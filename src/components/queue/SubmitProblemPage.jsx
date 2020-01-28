@@ -27,7 +27,6 @@ class SubmitProblemPage extends React.Component {
 	componentDidMount() {
 		this.props.fetchDropdownValues()
 	}
-
 	componentWillUnmount() {
 		this.props.reset()
 	}
@@ -43,7 +42,6 @@ class SubmitProblemPage extends React.Component {
 						</BackendMessage>
 						<p>Would you like to check out <Link to={'/problem/' + page.problemId}>your submitted problem</Link> or the <Link to={'/q/' + page.queue}>{page.queue} queue</Link>?</p>
 					</ContentDiv>
-
 				)
 			case submitProblemStages.SUBMITTING_FORM:
 			default:
