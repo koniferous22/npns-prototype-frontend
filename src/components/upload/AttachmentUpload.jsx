@@ -3,26 +3,30 @@ import { connect } from 'react-redux'
 
 import { attachmentUploadActions } from '../../actions/content/attachmentUpload'
 
-import ShowAttachment from './ShowAttachment'
+import Attachments from './Attachments'
 
 const mapStateToProps = state => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  saveUrl: (url) => dispatch(attachmentUploadActions.saveUrl(url))
+  saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls))
 })
 
 class ImageUpload extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = {}
+		this.state = {
+			urls: []
+		}
 	}
 	showWidget = () => {
 		let widget = window.cloudinary.createUploadWidget({ 
 			uploadPreset: 'lz6m2dte'}, 
 		(error, result) => {
 			if (!error && result && result.event === "success") { 
-			this.setState({url: result.info.url})
-			this.props.saveUrl(result.info.url)
+			let a = this.state.urls.slice()
+			a.push(result.info.url)
+			this.setState({urls: a})
+			this.props.saveUrls(this.state.urls)
 		}})
 		widget.open()
 	}
@@ -30,7 +34,7 @@ class ImageUpload extends React.Component {
 		return (
 			<div>
 				<button onClick={this.showWidget}> Upload attachment </button>
-				{this.state.url && <ShowAttachment attachmentUrl={this.state.url} />}
+				{this.state.urls && <Attachments attachmentUrls={this.state.urls} />}
 			</div>
 		)
 	}

@@ -56,7 +56,7 @@ class SubmitProblemPage extends React.Component {
 							defaultQueue={this.props.urlQueue || 'Index'} 
 							token={this.props.token} 
 							queueOptions={page.queueOptions}
-							attachmentUrl={this.props.attachmentUpload.url}
+							attachmentUrls={this.props.attachmentUpload.urls}
 						/>
 						<CenteredDiv>
 							<BackendMessage messageType={page.messageType}>

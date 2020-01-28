@@ -1,15 +1,15 @@
 import { attachmentUploadConstants } from '../../constants/content/attachmentUpload'
 
-function saveUrl(url) {
+function saveUrls(urls) {
 	return dispatch => {
-		dispatch(request(url))
-		dispatch(success(url))
+		dispatch(request(urls))
+		dispatch(success(urls))
 		}
 
 	function request() { return { type: attachmentUploadConstants.SAVE_URL_REQUEST } }
-	function success(url) { return { type: attachmentUploadConstants.SAVE_URL_SUCCESS, url } }
+	function success(urls) { return { type: attachmentUploadConstants.SAVE_URL_SUCCESS, urls } }
 }
 
 export const attachmentUploadActions = {
-  saveUrl
+  saveUrls
 }

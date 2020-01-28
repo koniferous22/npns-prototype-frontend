@@ -2,7 +2,7 @@ import { attachmentUploadConstants } from '../../constants/content/attachmentUpl
 
 
 const initialState = {
-	url: {}
+	urls: []
 }
 
 const attachmentUploadReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const attachmentUploadReducer = (state = initialState, action) => {
 		case attachmentUploadConstants.SAVE_URL_REQUEST:
 			return {message: "Saving URL"}
 		case attachmentUploadConstants.SAVE_URL_SUCCESS:
-			return {url: action.url,	message: "URL saved"}
+			return {urls: action.urls,	message: "URL saved"}
 		case attachmentUploadConstants.SAVE_URL_FAILED:
 			return {message: action.error}
 		default:

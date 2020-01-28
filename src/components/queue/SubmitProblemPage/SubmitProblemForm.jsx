@@ -23,7 +23,7 @@ const submit = (values, dispatch, props) => {
 					queue_name: values.queue.value,
 					title: values.title,
 					content: values.description,
-					attachmentUrl: props.attachmentUrl
+					attachmentUrls: props.attachmentUrls
 				},
 				props.token
 			)

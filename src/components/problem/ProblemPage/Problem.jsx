@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import MarkdownRender from '../../form/MarkdownRender'
 
 import Submission from './Submission'
-import ShowAttachment from '../../upload/ShowAttachment'
+import Attachments from '../../upload/Attachments'
 
 import ContentInfo from '../../../styled-components/problem/ContentInfo'
 import ProblemBox from '../../../styled-components/problem/ProblemBox'
@@ -33,7 +33,7 @@ const Problem = props => {
 			</ContentInfo>
 			<span>Description: </span>
 			<MarkdownRender source={props.content} />
-			<ShowAttachment attachmentUrl = {props.attachmentUrl} />
+			<Attachments attachmentUrls = {props.attachmentUrls} />
 			{props.embeddedSolution && (
 				<Submission
 					submissionId={props.embeddedSolution.id}
