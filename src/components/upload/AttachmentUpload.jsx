@@ -8,7 +8,8 @@ import Attachments from './Attachments'
 const mapStateToProps = state => state
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls))
+  saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls)),
+	reset: () => dispatch(attachmentUploadActions.reset())
 })
 
 class ImageUpload extends React.Component {
@@ -17,6 +18,9 @@ class ImageUpload extends React.Component {
 		this.state = {
 			urls: []
 		}
+	}
+	componentWillUnmount() {
+		this.props.reset()
 	}
 	showWidget = () => {
 		let widget = window.cloudinary.createUploadWidget({ 

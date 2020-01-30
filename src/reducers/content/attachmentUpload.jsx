@@ -13,6 +13,8 @@ const attachmentUploadReducer = (state = initialState, action) => {
 			return {urls: action.urls,	message: "URL saved"}
 		case attachmentUploadConstants.SAVE_URL_FAILED:
 			return {message: action.error}
+		case attachmentUploadConstants.RESET:
+			return initialState
 		default:
 			return state
 	}

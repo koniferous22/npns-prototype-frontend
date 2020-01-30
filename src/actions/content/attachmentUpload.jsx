@@ -2,7 +2,7 @@ import { attachmentUploadConstants } from '../../constants/content/attachmentUpl
 
 function saveUrls(urls) {
 	return dispatch => {
-		dispatch(request(urls))
+		dispatch(request())
 		dispatch(success(urls))
 		}
 
@@ -10,6 +10,9 @@ function saveUrls(urls) {
 	function success(urls) { return { type: attachmentUploadConstants.SAVE_URL_SUCCESS, urls } }
 }
 
+function reset() { return { type: attachmentUploadConstants.RESET } }
+
 export const attachmentUploadActions = {
-  saveUrls
+  saveUrls,
+	reset
 }

@@ -42,11 +42,9 @@ class ProblemPage extends React.Component {
 	componentWillUnmount() {
 		this.props.reset()
 	}
-
 	componentDidMount() {
 		this.props.loadProblemData()
 	}
-
 	render() {
 		if (this.props.problemActive === null) {
 			return (
