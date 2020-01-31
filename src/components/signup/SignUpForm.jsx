@@ -30,10 +30,10 @@ const validate = values => {
 	return errors
 }
 
-const asyncBlurFields = ['username', 'password', 'email']
+const asyncBlurFields = ['username', 'password', 'email', 'referred_by']
 
 const SignUpForm = props => {
-	const { handleSubmit } = props;
+	const { handleSubmit } = props
 	return (
 		<form onSubmit={handleSubmit}>
 			<Field name="username" component={renderField} type="text" label="Username" alignLeft/>
@@ -42,6 +42,7 @@ const SignUpForm = props => {
 			<Field name="email" component={renderField} type="text" label="Email" alignLeft/>
 			<Field name="firstName" component={renderField} type="text" label="First Name" alignLeft/>
 			<Field name="lastName" component={renderField} type="text" label="Last Name" alignLeft/>
+			<Field name="referred_by" component={renderField} type="text" label="Referred by" alignLeft/>
 			<FormButton type="submit" alignLeft>Submit</FormButton>
 		</form>
 	)
@@ -55,4 +56,3 @@ export default reduxForm({
 	onSubmit: submit,
 	getFormState: ({content}) => content.signup.form
 })(SignUpForm)
-

@@ -64,7 +64,6 @@ class ProfilePage extends React.Component {
 				</tr>
 			))
 
-
 		return (
 			<PageDiv>
 				<ProfileSidebar baseUrl={base_url} auth_view={auth_view}/>
@@ -94,9 +93,11 @@ class ProfilePage extends React.Component {
 										{balances}
 									</tbody>
 								</Table>
-							</div>
+								<h3>Refer a friend!</h3>
+								{'Let your friends sign up via your link: '}
+								{window.location.host + '/signup?referred_by=' + this.props.user}
+								</div>
 						)}
-						{'Stuff will be probably added l8r'}
 					</CenteredDiv>
 				</ContentDiv>
 			</PageDiv>

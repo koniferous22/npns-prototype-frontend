@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import queryString from 'query-string'
 
 import SignUpForm from './SignUpForm'
 import { signupStages } from '../../constants/content/signUpPage'
@@ -35,18 +37,18 @@ class SignUpPage extends React.Component {
 				)
 			case signupStages.SUBMITTING_FORM:
 			default:
+				const referred_by = queryString.parse(this.props.location.search).referred_by
 				return (
 					<ContentDiv>
 						<BackendMessage messageType={this.props.messageType}>
 							{this.props.message}
 						</BackendMessage>
 						<h1>REGISTRUJ SA PRIATELU</h1>
-						<SignUpForm />
+						<SignUpForm initialValues={{referred_by: referred_by}} />
 					</ContentDiv>
 				)
 		}
 	}
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpPage))

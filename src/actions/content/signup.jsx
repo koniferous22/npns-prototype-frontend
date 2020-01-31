@@ -40,7 +40,7 @@ function signup(user) {
 }
 
 // this const should match the const in SignUp Form
-const availableFields = ['username', 'password', 'email']
+const availableFields = ['username', 'password', 'email', 'referred_by']
 
 function validateField(values, field) {
 	if (!field) {
