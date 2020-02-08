@@ -5,10 +5,10 @@ import { Field, reduxForm } from 'redux-form'
 import FormButton from '../../../styled-components/form/FormButton'
 import renderField from '../../form/RenderField'
 
-let boost = (values, dispatch, props) => {
+let adjustBoost = (values, dispatch, props) => {
 	dispatch(
 		boostActions
-			.boost({value: values.boost, problemId: props.problemId}, props.token)
+			.adjustBoost({value: values.boost})
 	)
 }
 
@@ -16,21 +16,23 @@ const number = value =>
 	isNaN(Number(value)) ? 'Must be a number' : undefined
 const positive = value =>
 	value > 0 ? undefined : 'Must be a positive number'
+const twoDecimals = value =>
+	((value*100 % 1) === 0) ? undefined : 'Must be two decimals maximum' 
 
-let BoostForm = props => {
+let AdjustBoostForm = props => {
 	const { handleSubmit } = props;
 	return (<form onSubmit={handleSubmit}>
 		<div>
-			<Field name="boost" label="Boost Value" component={renderField} validate={[number, positive]} type="number" step="any" alignLeft/>
+			<Field name="boost" label="Boost Value" component={renderField} validate={[number, positive, twoDecimals]} type="number" alignLeft/>
 		</div>
 		<FormButton type="submit" alignLeft>Boost!</FormButton>
 	</form>)
 }
 
-BoostForm = reduxForm({
+AdjustBoostForm = reduxForm({
 	form: 'form',
-	onSubmit: boost,
+	onSubmit: adjustBoost,
 	getFormState: ({content}) => content.boost.form
-})(BoostForm)
+})(AdjustBoostForm)
 
-export default BoostForm
+export default AdjustBoostForm

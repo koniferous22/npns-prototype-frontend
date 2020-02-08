@@ -3,13 +3,25 @@ import { boostConstants } from '../../constants/content/boost'
 import { messageType } from '../../constants/misc/backendMessageTypes'
 
 export const boostActions = {
-	boost,
+	adjustBoost,
+	savePaypalOrder,
 	reset
 };
 
-function boost(boost, authToken) {
+function adjustBoost(boostValue) {
 	return dispatch => {
-		dispatch(request(boost));
+		dispatch(request());
+		dispatch(success(boostValue));
+	}
+	
+	function request() { return { type: boostConstants.REQUEST } }
+	function success(boostValue) { return { type: boostConstants.ADJUST_BOOST_SUCCESS, boostValue } }
+}
+
+function savePaypalOrder(boost, authToken) {
+	return dispatch => {
+		dispatch(request());
+		dispatch(success());
 
 		fetch(appConfig.backendUrl + "/problem/" + boost.problemId + "/boost", {
 			method: 'POST',
@@ -32,9 +44,10 @@ function boost(boost, authToken) {
 	}
 	
 	function request() { return { type: boostConstants.REQUEST } }
-	function success() { return { type: boostConstants.SUCCESS } }
+	function success() { return { type: boostConstants.PAYPAL_SUCCESS } }
 	function failure(error) { return { type: boostConstants.FAILED, error, messageType: messageType.ERROR } }
 }
+
 
 function reset() {
 	return {
