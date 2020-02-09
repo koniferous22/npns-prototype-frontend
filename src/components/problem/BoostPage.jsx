@@ -14,6 +14,7 @@ import BackendMessage from '../../styled-components/defaults/BackendMessage'
 const mapStateToProps = (state, ownProps) => ({
 	token: ownProps.token,
 	problemId: ownProps.problemId,
+	title: ownProps.title,
 	stage: state.content.boost.page.stage,
 	message: state.content.boost.page.message,
 	messageType: state.content.boost.page.messageType,
@@ -33,6 +34,7 @@ class BoostPage extends React.Component {
 		const messageType = this.props.messageType
 		const problemId = this.props.problemId
 		const token = this.props.token
+		const title = this.props.title
 
 		switch(this.props.stage) {
 			case boostStages.PAYPAL:
@@ -46,7 +48,12 @@ class BoostPage extends React.Component {
 						<BackendMessage messageType={messageType}>
 							{message}
 						</BackendMessage>
-						<h3>Please choose one of the following payment methods.</h3>
+						<h3>
+							<p>You are about to boost the problem</p>
+							<p><i>"{title}"</i></p>
+							<p>for ${product.value}.</p>
+						</h3>
+						<h4>Please choose one of the payment methods below:</h4>
 						<Paypal product={product} problemId={problemId} token={token} />
 					</ContentDiv>
 				)
@@ -65,7 +72,7 @@ class BoostPage extends React.Component {
 				return(
 					<ContentDiv>
 						<CenteredDiv>
-						<h3>Here you can boost the problem. How much do you wish to boost your problem? (in USD)</h3>
+						<h3>How much do you wish to boost the problem? (in USD)</h3>
 						</CenteredDiv>
 						<AdjustBoostForm />
 						<BackendMessage messageType={messageType}>

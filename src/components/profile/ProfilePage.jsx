@@ -93,11 +93,11 @@ class ProfilePage extends React.Component {
 										{balances}
 									</tbody>
 								</Table>
-								<h3>Refer a friend!</h3>
-								{'Let your friends sign up via your link: '}
-								{window.location.host + '/signup?referred_by=' + this.props.user}
 								</div>
 						)}
+						<h3>Refer a friend!</h3>
+						{'Let your friends sign up via your link: '}
+						{window.location.host + '/signup?referred_by=' + this.props.user}
 					</CenteredDiv>
 				</ContentDiv>
 			</PageDiv>

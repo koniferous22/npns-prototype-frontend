@@ -73,7 +73,7 @@ class App extends React.Component {
 							<PrivateRoute path="/submitProblem" render={(routeProps) => <SubmitProblemPage token={this.props.token} urlQueue={parseUrlParam(routeProps, 'q')}/>} loggedIn={loggedIn}/>
 							
 							<Route exact path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={this.props.token} problemId={routeProps.match.params.id} user={this.props.user}/>} />
-							<Route path="/problem/:id/boost" render={(routeProps) => loggedIn && <BoostPage token={this.props.token} problemId={routeProps.match.params.id} loggedIn={loggedIn}/>} />
+							<Route path="/problem/:id/boost" render={(routeProps) => loggedIn && <BoostPage token={this.props.token} problemId={routeProps.match.params.id} title={routeProps.history.location.title} loggedIn={loggedIn}/>} />
 
 							<Route exact path="/u/:username" render={ 
 								(routeProps) => <ProfilePage 

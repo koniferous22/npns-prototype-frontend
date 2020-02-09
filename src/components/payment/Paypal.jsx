@@ -62,9 +62,6 @@ function Paypal({ product, problemId, token }) {
 	return (
 		<div>
 			{error && <div>Uh oh, an error occurred! {error.message}</div>}
-			<h2>
-				You are about to boost the problem for ${product.value}.
-			</h2>
 			<div ref={paypalRef} />
 		</div>
 	);

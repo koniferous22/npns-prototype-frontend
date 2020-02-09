@@ -14,7 +14,7 @@ export const ProblemBox = (props) => {
 				<li>{'Bounty: ' + props.bounty + '$'}</li>
 				<li>
 					{!props.active ? <SolvedLabel>SOLVED</SolvedLabel> : (
-						props.loggedIn && <Link to={'/problem/' + props.id + '/boost'}>Boost</Link>
+						props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost', title: props.title}}>Boost</Link>
 					)}
 				</li>
 			</ProblemBoxMeta>
