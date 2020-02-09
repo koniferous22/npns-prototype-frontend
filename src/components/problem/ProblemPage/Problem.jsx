@@ -28,7 +28,7 @@ const Problem = props => {
 						{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
 					</span>
 					{props.submitted_by && <Link to={'/u/' + props.submitted_by.username}>{props.submitted_by.username}</Link>}
-					{props.active && props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost', title: props.title}}>Boost this problem</Link>}
+					{props.active && props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost'}}>Boost this problem</Link>}
 				</div>
 			</ContentInfo>
 			<span>Description: </span>

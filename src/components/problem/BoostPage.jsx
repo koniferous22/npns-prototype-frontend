@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 
 import Paypal from '../payment/Paypal'
 import AdjustBoostForm from './BoostPage/AdjustBoostForm'
+import { problemPageActions } from '../../actions/content/problemPage'
 import { boostActions } from '../../actions/content/boost'
 import { boostStages } from '../../constants/content/boost' 
 
@@ -14,27 +15,31 @@ import BackendMessage from '../../styled-components/defaults/BackendMessage'
 const mapStateToProps = (state, ownProps) => ({
 	token: ownProps.token,
 	problemId: ownProps.problemId,
-	title: ownProps.title,
 	stage: state.content.boost.page.stage,
 	message: state.content.boost.page.message,
 	messageType: state.content.boost.page.messageType,
-	boost: state.content.boost.page.boostValue
+	boost: state.content.boost.page.boostValue,
+	problem: state.content.problemPage.page.problem
 })
 
 const mapDispatchToProps = dispatch => ({
-	reset: () => dispatch(boostActions.reset())
+	reset: () => dispatch(boostActions.reset()),
+	loadProblemData: (id) => dispatch(problemPageActions.loadProblemData(id))
 })
 
 class BoostPage extends React.Component {
 	componentWillUnmount() {
 		this.props.reset()
 	}
+	componentDidMount() {
+		this.props.loadProblemData(this.props.problemId)
+	}
 	render() {
 		const message = this.props.message
 		const messageType = this.props.messageType
 		const problemId = this.props.problemId
 		const token = this.props.token
-		const title = this.props.title
+		const problem = this.props.problem
 
 		switch(this.props.stage) {
 			case boostStages.PAYPAL:
@@ -49,8 +54,8 @@ class BoostPage extends React.Component {
 							{message}
 						</BackendMessage>
 						<h3>
-							<p>You are about to boost the problem</p>
-							<p><i>"{title}"</i></p>
+							<p>You are about to boost {problem.submitted_by.username}{"'"}s problem</p>
+							<p><i>"{problem.title}"</i></p>
 							<p>for ${product.value}.</p>
 						</h3>
 						<h4>Please choose one of the payment methods below:</h4>
