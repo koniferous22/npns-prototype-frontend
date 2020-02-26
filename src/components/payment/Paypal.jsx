@@ -12,7 +12,7 @@ function Paypal({ product, problemId, token }) {
 
 	useEffect(() => {
 		const script = document.createElement("script")
-		script.src = "https://www.paypal.com/sdk/js?client-id=AdG3BJ7WeAy-ORGh_KuGTAWwEe9FG0KlIHvXgm-UUns7ZMs_Uan-kOgtFEnzSTeBUUAm5JOjTUEngcsL"
+		script.src = "https://www.paypal.com/sdk/js?currency=EUR&client-id=AZ1HpdnQzwO8xVWTG-W9_DYDtNDmLR3xCH9RYY0N46r07ayHnUEGOekpgei5rwoVSpQTTDgdkxr7g5Fi"
 		script.addEventListener("load", () => setLoaded(true))
 		document.body.appendChild(script)
 		
@@ -26,7 +26,7 @@ function Paypal({ product, problemId, token }) {
 									{
 										description: product.description,
 										amount: {
-											currency_code: 'USD',
+											currency_code: 'EUR',
 											value: product.value,
 										},
 									},
@@ -54,7 +54,6 @@ function Paypal({ product, problemId, token }) {
 		return (
 			<div>
 				<h2>Congratulations, you just boosted the problem!</h2>
-				<span>{product.value}</span>
 			</div>
 		);
 	}

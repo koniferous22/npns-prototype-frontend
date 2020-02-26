@@ -3,10 +3,21 @@ import { boostConstants } from '../../constants/content/boost'
 import { messageType } from '../../constants/misc/backendMessageTypes'
 
 export const boostActions = {
+	submitBoost,
 	adjustBoost,
 	savePaypalOrder,
 	reset
 };
+
+function submitBoost(boostValue) {
+	return dispatch => {
+		dispatch(request());
+		dispatch(success(boostValue));
+	}
+	
+	function request() { return { type: boostConstants.SUBMIT_BOOST_REQUEST } }
+	function success(boostValue) { return { type: boostConstants.SUBMIT_BOOST_SUCCESS, boostValue } }
+}
 
 function adjustBoost(boostValue) {
 	return dispatch => {
@@ -14,9 +25,10 @@ function adjustBoost(boostValue) {
 		dispatch(success(boostValue));
 	}
 	
-	function request() { return { type: boostConstants.REQUEST } }
+	function request() { return { type: boostConstants.ADJUST_BOOST_REQUEST } }
 	function success(boostValue) { return { type: boostConstants.ADJUST_BOOST_SUCCESS, boostValue } }
 }
+
 
 function savePaypalOrder(boost, authToken) {
 	return dispatch => {
@@ -43,7 +55,7 @@ function savePaypalOrder(boost, authToken) {
 		})
 	}
 	
-	function request() { return { type: boostConstants.REQUEST } }
+	function request() { return { type: boostConstants.PAYPAL_REQUEST } }
 	function success() { return { type: boostConstants.PAYPAL_SUCCESS } }
 	function failure(error) { return { type: boostConstants.FAILED, error, messageType: messageType.ERROR } }
 }

@@ -9,10 +9,14 @@ const initialState = {
 
 const boostPageReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case boostConstants.REQUEST:
+		case boostConstants.SUBMIT_BOOST_REQUEST:
 			return {stage: boostStages.BOOSTING, message: "Waiting for response"}
+		case boostConstants.ADJUST_BOOST_REQUEST:
+			return {message: "Waiting for response"}
+		case boostConstants.SUBMIT_BOOST_SUCCESS:
+			return {stage: boostStages.PAYPAL, message: "Boost value submitted", messageType: action.messageType, boostValue: action.boostValue}
 		case boostConstants.ADJUST_BOOST_SUCCESS:
-			return {stage: boostStages.PAYPAL, message: "Boost value adjusted", messageType: action.messageType, boostValue: action.boostValue}
+			return {messageType: action.messageType, boostValue: action.boostValue}
 		case boostConstants.PAYPAL_SUCCESS:
 			return {stage: boostStages.COMPLETED, message: "Problem boosted", messageType: action.messageType, boost: action.boost}
 		case boostConstants.FAILED:

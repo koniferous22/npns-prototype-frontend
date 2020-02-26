@@ -22,7 +22,7 @@ const Problem = props => {
 				<h3>{props.title}</h3>
 				<div>
 					<span>
-						<b>{props.bounty + '$'}</b>
+						<b>{props.bounty + ' €'}</b>
 					</span>
 					<span>
 						{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}

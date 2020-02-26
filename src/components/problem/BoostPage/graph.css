@@ -1,0 +1,28 @@
+body {
+	padding: 40px 0 0 0;
+	font-family: sans-serif;
+	background: #f2f2f2;
+}
+
+.bar {
+	height: 30px;
+	margin: 0 auto;
+	display: flex;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.bar section {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: white;
+}
+#blue {
+	background: #45afd9;
+}
+#yellow {
+	background: #f6b50a;
+}
+#red {
+	background: #f54954;
+}

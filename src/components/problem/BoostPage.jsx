@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 
 import Paypal from '../payment/Paypal'
+import Transparency from './BoostPage/Transparency'
+import calculatePayment from '../payment/calculatePayment'
 import AdjustBoostForm from './BoostPage/AdjustBoostForm'
 import { problemPageActions } from '../../actions/content/problemPage'
 import { boostActions } from '../../actions/content/boost'
@@ -35,16 +37,18 @@ class BoostPage extends React.Component {
 		this.props.loadProblemData(this.props.problemId)
 	}
 	render() {
-		const message = this.props.message
-		const messageType = this.props.messageType
-		const problemId = this.props.problemId
-		const token = this.props.token
-		const problem = this.props.problem
+		const props = this.props
+		const message = props.message
+		const messageType = props.messageType
+		const problemId = props.problemId
+		const token = props.token
+		const problem = props.problem 
 
-		switch(this.props.stage) {
+		switch(props.stage) {
 			case boostStages.PAYPAL:
+				const payment = calculatePayment(props.boost.value)
 				const product = {
-					value: this.props.boost.value,
+					value: payment.requiredPayment,
 					name: 'Boost',
 					description: 'Problem boost'
 				}
@@ -56,7 +60,7 @@ class BoostPage extends React.Component {
 						<h3>
 							<p>You are about to boost {problem.submitted_by.username}{"'"}s problem</p>
 							<p><i>"{problem.title}"</i></p>
-							<p>for ${product.value}.</p>
+							<p>by {payment.boost} € for {product.value} €.</p>
 						</h3>
 						<h4>Please choose one of the payment methods below:</h4>
 						<Paypal product={product} problemId={problemId} token={token} />
@@ -77,9 +81,10 @@ class BoostPage extends React.Component {
 				return(
 					<ContentDiv>
 						<CenteredDiv>
-						<h3>How much do you wish to boost the problem? (in USD)</h3>
+						<h3>How much do you wish to boost the problem? (in EUR)</h3>
 						</CenteredDiv>
 						<AdjustBoostForm />
+						{props.boost && props.boost.value >= 1 && <Transparency boost={props.boost.value} />}
 						<BackendMessage messageType={messageType}>
 							{message}
 						</BackendMessage>
