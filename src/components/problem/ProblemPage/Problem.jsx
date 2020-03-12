@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import MarkdownRender from '../../form/MarkdownRender'
 
 import Submission from './Submission'
+import Editing from './Editing'
+import Edits from './Edits'
 import Attachments from '../../upload/Attachments'
 
 import ContentInfo from '../../../styled-components/problem/ContentInfo'
@@ -12,7 +14,7 @@ import ProblemBox from '../../../styled-components/problem/ProblemBox'
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
 
 const mapStateToProps = (state, ownProps) => ({
-	...state.content.problemPage.page.problem,
+	...state.content.problemPage.page.problem
 })
 
 const Problem = props => {
@@ -34,6 +36,7 @@ const Problem = props => {
 			<span>Description: </span>
 			<MarkdownRender source={props.content} />
 			<Attachments attachmentUrls={props.attachmentUrls} />
+			<Edits edits={props.edits} />
 			{props.embeddedSolution && (
 				<Submission
 					submissionId={props.embeddedSolution.id}
@@ -42,6 +45,7 @@ const Problem = props => {
 					isSolution={true}
 				/>
 			)}
+			<Editing contentId={props.id} token={props.token} ownerId={props.submitted_by._id}/>
 		</ProblemBox>
 	)
 }

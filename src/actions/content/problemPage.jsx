@@ -221,12 +221,46 @@ function hideReplies(submission) {
 	}
 }
 
+function edit(edit, token) {
+	const request = () => ({ type: problemPageConstants.EDIT_REQUEST })
+	const success = () => ({type: problemPageConstants.EDIT_SUCCESS, edit})
+	const failure = (message) => ({type: problemPageConstants.EDIT_FAILED, message, messageType: messageType.ERROR})
+	
+	console.log(edit)
+	if (!edit.edit) {
+		return failure('No edit specified')
+	}
+	return dispatch => {
+		dispatch(request())
+		const requestUrl = appConfig.backendUrl + '/content/' + edit.contentId + '/edit'
+		fetch(requestUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+			body: JSON.stringify(edit)
+		}).then(response => {
+			if (response.status >= 200 && response.status < 400) {
+				return response
+			} else {
+				var error = new Error(response.statusText)
+				error.response = response
+				throw error
+			}
+		}).then(response => response.json())
+		.then(body => {
+			dispatch(success(body))
+		}).catch(error => {
+			console.log(JSON.stringify(error))
+			dispatch(failure(error))
+		}) 
+	}
+}
+
+
 function reset() {
 	return {
 		type: problemPageConstants.RESET
 	}
 }
-
 
 
 export const problemPageActions = {
@@ -238,5 +272,6 @@ export const problemPageActions = {
 	acceptSubmission,
 	selectReplyForm,
 	hideReplies,
+	edit,
 	reset
 }

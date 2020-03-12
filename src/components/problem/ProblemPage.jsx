@@ -89,6 +89,7 @@ class ProblemPage extends React.Component {
 							problemId={this.props.problemId}
 							loggedIn={this.props.loggedIn}
 							embeddedSolution={embeddedSolution}
+							token = {this.props.token}
 						/>
 						{postSubmissionAvailable &&  <PostSubmission token={this.props.token} problemId={this.props.problemId} />}
 						

@@ -6,6 +6,8 @@ import MarkdownRender from '../../form/MarkdownRender'
 import Reply from './Reply'
 import PostReplyForm from './PostReplyForm'
 import Attachments from '../../upload/Attachments'
+import Editing from './Editing'
+import Edits from './Edits'
 
 import { problemPageActions } from '../../../actions/content/problemPage'
 
@@ -27,8 +29,10 @@ const mapStateToProps = (state, ownProps) => {
 		replyEntries: submissionState.replyEntries,
 		repliesHidden: submissionState.repliesHidden,
 		user: submissionState.submitted_by.username,
+		userId: submissionState.submitted_by._id,
 		created: submissionState.created,
-		attachmentUrls: submissionState.attachmentUrls
+		attachmentUrls: submissionState.attachmentUrls,
+		edits: submissionState.edits
 	}
 }
 
@@ -41,6 +45,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class Submission extends React.Component {
 	render() {
+	console.log(this.props)
+	console.log('RRRREEEEEEE')
 		const props = this.props
 		const replyEntries = props.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})
 		const submissionBox = (
@@ -52,9 +58,11 @@ class Submission extends React.Component {
 				</ContentInfo>
 				<MarkdownRender source={props.content} />
 				<Attachments attachmentUrls={props.attachmentUrls} />
+	      <Edits edits={props.edits} />
 				<ButtonDiv>
 					{props.acceptButton && <Button onClick={props.acceptSubmission}>Accept Submission</Button>}
 					{props.replyButton && <Button onClick={props.selectReplyForm}>Reply</Button>}
+					<Editing contentId={props.submissionId} token={props.token} ownerId={props.userId}/>
 				</ButtonDiv>
 			</SubmissionBox>
 		)
