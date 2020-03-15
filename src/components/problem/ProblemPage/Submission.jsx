@@ -45,8 +45,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class Submission extends React.Component {
 	render() {
-	console.log(this.props)
-	console.log('RRRREEEEEEE')
 		const props = this.props
 		const replyEntries = props.replyEntries.reduce((acc,cv) => Object.assign(acc,cv), {})
 		const submissionBox = (

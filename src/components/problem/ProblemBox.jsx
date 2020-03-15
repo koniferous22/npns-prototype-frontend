@@ -11,7 +11,7 @@ export const ProblemBox = (props) => {
 		<StyledProblemBox>
 			<ProblemBoxMeta>
 				<li>{new Date(props.created).toLocaleDateString()}</li>
-				<li>{'Bounty: ' + props.bounty + ' €'}</li>
+				<li>{'Bounty: ' + props.bounty.toFixed(2) + ' €'}</li>
 				<li>
 					{!props.active ? <SolvedLabel>SOLVED</SolvedLabel> : (
 						props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost'}}>Boost</Link>

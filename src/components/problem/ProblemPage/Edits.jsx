@@ -7,8 +7,8 @@ class Edits extends React.Component {
 		const keys = Object.keys(this.props.edits)
 		return(
 			<div>
-			{keys.map(k => (
-				<div>
+			{keys.map((k, i) => (
+				<div key={i} >
 					UPDATE {new Date(this.props.edits[k].edited).toGMTString()}:
 					<MarkdownRender source={this.props.edits[k].contents} />
 				</div>

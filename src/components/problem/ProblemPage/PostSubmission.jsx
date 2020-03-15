@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class PostSubmissionComponent extends React.Component {
 	render() {
-		console.log(this.props)
 		const token = this.props.token
 		const sForm = this.props.form
 		const problemId = this.props.problemId

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
 import MarkdownRender from '../../form/MarkdownRender'
@@ -7,6 +7,7 @@ import Submission from './Submission'
 import Editing from './Editing'
 import Edits from './Edits'
 import Attachments from '../../upload/Attachments'
+import BoostHistory from './BoostHistory'
 
 import ContentInfo from '../../../styled-components/problem/ContentInfo'
 import ProblemBox from '../../../styled-components/problem/ProblemBox'
@@ -18,13 +19,14 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const Problem = props => {
+	const [showBoostHistory, change] = useState(false)
 	return (
 		<ProblemBox>
 			<ContentInfo>
 				<h3>{props.title}</h3>
 				<div>
 					<span>
-						<b>{props.bounty + ' €'}</b>
+						<b onClick={() => change(!showBoostHistory)}>{props.bounty.toFixed(2) + ' €'}</b>
 					</span>
 					<span>
 						{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
@@ -33,6 +35,7 @@ const Problem = props => {
 					{props.active && props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost'}}>Boost this problem</Link>}
 				</div>
 			</ContentInfo>
+			{showBoostHistory && <BoostHistory boosts={props.boosts} />}
 			<span>Description: </span>
 			<MarkdownRender source={props.content} />
 			<Attachments attachmentUrls={props.attachmentUrls} />
