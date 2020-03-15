@@ -6,7 +6,7 @@ const BoostHistory = props => {
 		<div>
 			<b>Boost History</b>
 			{keys.map((k, i) => (
-				<ul key={i} >{props.boosts[k].boost_value.toFixed(2) + ' €'} boost by {props.boosts[k].username}</ul>
+				<ul key={i} >{props.boosts[k].boost_value.toFixed(2) + ' €'} boost by {props.boosts[k].username} on {new Date(props.boosts[k].timestamp).toGMTString()}</ul>
 			))}
 		</div>
 	)
