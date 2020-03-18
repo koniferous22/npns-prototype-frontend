@@ -1,7 +1,7 @@
 import { globalConstants } from '../constants/global'
 import { appConfig } from '../appConfig'
 
-function hierarchy() {
+export const hierarchy = () => {
 	return dispatch => {
 		dispatch(request())
 		fetch(appConfig.backendUrl + "/queue/hierarchy", {
@@ -33,7 +33,7 @@ function hierarchy() {
 	function failed() { return { type: globalConstants.HIERARCHY_LOAD_FAILED } }
 }
 
-function queues() {
+export const queues = () => {
 	return dispatch => {
 		dispatch(request())
 		fetch(appConfig.backendUrl + "/queue/all", {
@@ -65,32 +65,32 @@ function queues() {
 	function failed() { return { type: globalConstants.LIN_QUEUES_LOAD_FAILED } }	
 }
 
-function setTheme(theme) {
+export const setTheme = (theme) => {
 	return {
 		type: globalConstants.SET_THEME,
 		theme
 	}
 }
 
-function showLinQueues() {
+export const showLinQueues = () => {
 	return {
 		type: globalConstants.LIN_QUEUES_DISPLAY
 	}
 }
 
-function hideLinQueues() {
+export const hideLinQueues = () => {
 	return {
 		type: globalConstants.LIN_QUEUES_HIDE
 	}
 }
 
-function showThemes() {
+export const showThemes = () => {
 	return {
 		type: globalConstants.THEMES_DISPLAY
 	}
 }
 
-function hideThemes() {
+export const hideThemes = () => {
 	return {
 		type: globalConstants.THEMES_HIDE
 	}
