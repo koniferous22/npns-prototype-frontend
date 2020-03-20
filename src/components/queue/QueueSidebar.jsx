@@ -20,7 +20,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class QueueSidebar extends React.Component {
-	
 	componentDidMount() {
 		this.props.loadLinQueues()
 		this.props.loadHierarchy()
@@ -28,7 +27,8 @@ class QueueSidebar extends React.Component {
 	render() {
 		const hierarchicalEntries = <QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
 		const dropdownEntries = <QueueDropdown baseUrl={this.props.baseUrl || '/q'}/>
-		if (this.props.reuse) {
+		//if (this.props.reuse) {
+		if (false) {
 			return (
 				<div>
 					<HierarchicalListDiv>
