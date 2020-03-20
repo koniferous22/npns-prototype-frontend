@@ -1,18 +1,19 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+/*import { connect } from 'react-redux'*/
+import { useDispatch } from 'react-redux'
 
 import { attachmentUploadActions } from '../../actions/content/attachmentUpload'
 
 import Attachments from './Attachments'
 
-const mapStateToProps = state => state
+/*const mapStateToProps = state => state*/
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls)),
+/*const mapDispatchToProps = (dispatch, ownProps) => ({
+	saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls)),
 	reset: () => dispatch(attachmentUploadActions.reset())
-})
+})*/
 
-class ImageUpload extends React.Component {
+/*class ImageUpload extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
@@ -42,6 +43,42 @@ class ImageUpload extends React.Component {
 			</div>
 		)
 	}
-}
+}*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageUpload)
+const ImageUpload = () => {
+	const [urls, setUrls] = useState([])
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		console.log('componentDidMount');
+		console.log('AAAAAAA');
+
+		return () => {
+				console.log('componentWillUnmount');
+		console.log('AAAAAAA');
+		};
+	}, []);
+
+	const showWidget = () => {
+		let widget = window.cloudinary.createUploadWidget({ 
+			uploadPreset: 'lz6m2dte'}, 
+		(error, result) => {
+			if (!error && result && result.event === "success") { 
+			setUrls(urls.concat(result.info.url))
+			dispatch(attachmentUploadActions.saveUrls(urls))
+		}})
+		widget.open()
+	}
+	return(
+		<div>
+			<button onClick={showWidget}> Upload attachment </button>
+			{urls && <Attachments attachmentUrls={urls} />}
+		</div>
+	)
+}
+/*	componentWillUnmount() {
+		this.props.reset()
+	}*/
+
+/*export default connect(mapStateToProps, mapDispatchToProps)(ImageUpload)*/
+export default ImageUpload
