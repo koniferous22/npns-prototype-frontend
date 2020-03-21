@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { boostActions } from '../../actions/content/boost'
 
-function Paypal({ product, problemId, token }) {
+const Paypal = ({ product, problemId, token }) => {
 	const [paidFor, setPaidFor] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	const [error, setError] = useState(null);

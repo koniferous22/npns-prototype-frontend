@@ -7,12 +7,12 @@ import ContentInfo from '../../../styled-components/problem/ContentInfo'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
 
-export default props => (
+export default ({ created, user, content }) => (
 	<ReplyBox>
 		<ContentInfo>
-			{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
-			{props.user && <Link to={'/u/' + props.user}>{props.user}</Link>}
+			{new Date(created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+			{user && <Link to={'/u/' + user}>{user}</Link>}
 		</ContentInfo>
-		<MarkdownRender source={props.content} />
+		<MarkdownRender source={content} />
 	</ReplyBox>
 )

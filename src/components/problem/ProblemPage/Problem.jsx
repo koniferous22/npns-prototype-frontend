@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 import MarkdownRender from '../../form/MarkdownRender'
 
@@ -14,43 +14,41 @@ import ProblemBox from '../../../styled-components/problem/ProblemBox'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
 
-const mapStateToProps = (state, ownProps) => ({
-	...state.content.problemPage.page.problem
-})
-
-const Problem = props => {
+const Problem = ({ loggedIn, embeddedSolution, token }) => {
 	const [showBoostHistory, change] = useState(false)
+	const problem = useSelector(state => state.content.problemPage.page.problem)
+
 	return (
 		<ProblemBox>
 			<ContentInfo>
-				<h3>{props.title}</h3>
+				<h3>{problem.title}</h3>
 				<div>
 					<span>
-						<b onClick={() => change(!showBoostHistory)}>{props.bounty.toFixed(2) + ' €'}</b>
+						<b onClick={() => change(!showBoostHistory)}>{problem.bounty.toFixed(2) + ' €'}</b>
 					</span>
 					<span>
-						{new Date(props.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
+						{new Date(problem.created).toLocaleDateString(dateTimeDefaultLocale, dateTimeOptions)}
 					</span>
-					{props.submitted_by && <Link to={'/u/' + props.submitted_by.username}>{props.submitted_by.username}</Link>}
-					{props.active && props.loggedIn && <Link to={{pathname: '/problem/' + props.id + '/boost'}}>Boost this problem</Link>}
+					{problem.submitted_by && <Link to={'/u/' + problem.submitted_by.username}>{problem.submitted_by.username}</Link>}
+					{problem.active && loggedIn && <Link to={{pathname: '/problem/' + problem.id + '/boost'}}>Boost this problem</Link>}
 				</div>
 			</ContentInfo>
-			{showBoostHistory && <BoostHistory boosts={props.boosts} />}
+			{showBoostHistory && <BoostHistory boosts={problem.boosts} />}
 			<span>Description: </span>
-			<MarkdownRender source={props.content} />
-			<Attachments attachmentUrls={props.attachmentUrls} />
-			<Edits edits={props.edits} />
-			{props.embeddedSolution && (
+			<MarkdownRender source={problem.content} />
+			<Attachments attachmentUrls={problem.attachmentUrls} />
+			<Edits edits={problem.edits} />
+			{embeddedSolution && (
 				<Submission
-					submissionId={props.embeddedSolution.id}
-					page={props.embeddedSolution.page}
-					problem={props.id}
+					submissionId={embeddedSolution.id}
+					page={embeddedSolution.page}
+					problem={problem.id}
 					isSolution={true}
 				/>
 			)}
-			<Editing contentId={props.id} token={props.token} ownerId={props.submitted_by._id}/>
+			<Editing contentId={problem.id} token={token} ownerId={problem.submitted_by._id}/>
 		</ProblemBox>
 	)
 }
 
-export default connect(mapStateToProps)(Problem);
+export default Problem
