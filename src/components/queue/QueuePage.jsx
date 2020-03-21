@@ -59,7 +59,6 @@ class QueuePage extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.entries)
 		const submitProblem = (
 			<div>
 				{'Submit problem '}
