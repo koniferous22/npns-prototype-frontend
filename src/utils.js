@@ -1,6 +1,6 @@
 import { appConfig } from './appConfig'
 
-export const fetchData = (backendEndpoint, request, onFetching, onSuccess, onError, settings) => dispatch => { 
+export const fetchData = (backendEndpoint, request, onFetching, onSuccess, onError) => dispatch => { 
 	dispatch(onFetching());
 	return fetch(appConfig.backendUrl + backendEndpoint, request)
 		.then(response => {

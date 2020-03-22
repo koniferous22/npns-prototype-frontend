@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form'
 
 import { appConfig } from '../../appConfig'
 import { messageType } from '../../constants/misc/backendMessageTypes'
+import { fetchData } from '../../utils'
 
 const SUBMIT_BOOST = 'BOOST_PAGE_SUBMIT_BOOST'
 const ADJUST_BOOST = 'BOOST_PAGE_ADJUST_BOOST'
@@ -54,29 +55,17 @@ export const savePaypalOrder = (boost, authToken) => {
 	const success = () => ({ type: boostConstants.PAYPAL_SUCCESS })
 	const failure = (error) =>  ({ type: boostConstants.FAILED, error, messageType: messageType.ERROR })
 
-	return dispatch => {
-		dispatch(request());
-
-		fetch(appConfig.backendUrl + "/problem/" + boost.problemId + "/boost", {
+	return fetchData(
+		'/problem/' + boost.problemId + '/boost',
+		{
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken },
 			body: JSON.stringify(boost)
-		}).then(response => {
-			if (response.status >= 200 && response.status < 400) {
-				return response
-			} else {
-				var error = new Error(response.statusText)
-				error.response = response
-				throw error
-			}
-		}).then(response => response.json())
-		.then(value => {
-			dispatch(success())
-		}).catch(error => {
-			dispatch(failure(JSON.stringify(error)))
-		})
-	}
-	
+		},
+		request,
+		success,
+		failure
+	)
 }
 
 

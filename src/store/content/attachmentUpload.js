@@ -5,7 +5,7 @@ const initialState = {
 	urls: []
 }
 
-export const attachmentUploadReducer = (state = initialState, action) => {
+export default function attachmentUploadReducer(state = initialState, action) {
 	switch (action.type) {
 		case attachmentUploadConstants.SAVE_URL:
 			return {urls: action.urls,	message: "URL saved"}
@@ -17,9 +17,9 @@ export const attachmentUploadReducer = (state = initialState, action) => {
 }
 
 
-export const saveUrls = (urls) => {
-	type: SAVE_URL
+export const saveUrls = (urls) => ({
+	type: SAVE_URL,
 	urls
-}
+})
 
-export const reset = () => { return { type: RESET } }
+export const reset = () => ({ type: RESET })
