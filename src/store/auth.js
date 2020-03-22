@@ -16,7 +16,7 @@ const TOKEN_EXPIRED = 'AUTH_TOKEN_EXPIRED';
 const token = localStorage.getItem('token')
 const initialState = { token: token || token === "" ? token.replace(new RegExp('"(.*)"'),(match, x) => x) : null }
 
-export function authReducer(state = initialState, action) {
+export default function authReducer(state = initialState, action) {
 	switch (action.type) {
 		case LOGIN_REQUEST:
 			return {
@@ -54,7 +54,7 @@ export function authReducer(state = initialState, action) {
 				...state,
 				message: 'Re-logging in',
 				messageType: action.messageType
-			}
+ 				}
 		case TOKEN_VERIFIED:
 			return {
 				user: action.user,
@@ -102,7 +102,7 @@ export const login = (username, password) => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username, password })
 		},
-		(dispatch) => dispatch(request({username})),
+		() => request({username}),
 		({ user, token }) => {
 			localStorage.setItem('token', JSON.stringify(token));
 			return success(user,token)

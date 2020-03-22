@@ -4,7 +4,7 @@ import { reducer } from 'redux-form'
 import { boostConstants, boostStages } from '../../constants/content/boost'
 
 const initialState = {
-  stage: boostStages.BOOSTING
+	stage: boostStages.BOOSTING
 }
 
 const boostPageReducer = (state = initialState, action) => {

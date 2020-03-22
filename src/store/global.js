@@ -32,7 +32,7 @@ const defaultHierarchy = {Index:{} }
 const defaultLinQueues = ['Index']
 const defaultState = {hierarchy: defaultHierarchy, linQueues: defaultLinQueues, theme:defaultTheme, linQueuesDisplayed: false, themesDisplayed: false, themes: themes}
 
-export function globalReducer(state = defaultState, action) {
+export default function globalReducer(state = defaultState, action) {
 	switch (action.type) {
 		case globalConstants.HIERARCHY_LOAD_REQUEST:
 			return { ...state, hierarchy: defaultHierarchy }
