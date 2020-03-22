@@ -156,7 +156,7 @@ function findUser(queue, username, recordsPerPage) {
 		request,
 		({position}) => (
 			position
-				? success(username, Math.floor(((body.position - 1) / recordsPerPage) + 1))
+				? success(username, Math.floor(((position - 1) / recordsPerPage) + 1))
 				: failure('User "' + username + '" has no score in queue "' + queue + '"')
 		),
 		failure

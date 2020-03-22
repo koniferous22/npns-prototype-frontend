@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { reducer as boostFormReducer } from 'redux-form'
 
 import { appConfig } from '../../appConfig'
 import { messageType } from '../../constants/misc/backendMessageTypes'
@@ -18,17 +18,21 @@ export const boostStages = {
 	COMPLETED: 'COMPLETED'
 }
 
+const initialState = {
+	stage: boostStages.BOOSTING
+}
+
 const boostPageReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case boostConstants.SUBMIT_BOOST:
+		case SUBMIT_BOOST:
 			return {stage: boostStages.PAYPAL, message: "Boost value submitted", messageType: action.messageType, boostValue: action.boostValue}
-		case boostConstants.ADJUST_BOOST:
+		case ADJUST_BOOST:
 			return {messageType: action.messageType, boostValue: action.boostValue}
-		case boostConstants.PAYPAL_SUCCESS:
+		case PAYPAL_SUCCESS:
 			return {stage: boostStages.COMPLETED, message: "Problem boosted", messageType: action.messageType, boost: action.boost}
-		case boostConstants.PAYPAL_FAILED:
+		case PAYPAL_FAILED:
 			return {stage: boostStages.BOOSTING, message: action.error, messageType: action.messageType}
-		case boostConstants.RESET:
+		case RESET:
 			return initialState
 		default:
 			return state
@@ -41,19 +45,19 @@ export default combineReducers({
 })
 
 export const submitBoost = (boostValue) => ({
-	type: boostConstants.SUBMIT_BOOST_SUCCESS,
+	type: SUBMIT_BOOST,
 	boostValue 
 })
 
 export const adjustBoost = (boostValue) => ({
-	type: boostConstants.ADJUST_BOOST_SUCCESS, boostValue
+	type: ADJUST_BOOST, boostValue
 })
 
 
 export const savePaypalOrder = (boost, authToken) => {
-	const request = () => ({ type: boostConstants.PAYPAL_REQUEST })
-	const success = () => ({ type: boostConstants.PAYPAL_SUCCESS })
-	const failure = (error) =>  ({ type: boostConstants.FAILED, error, messageType: messageType.ERROR })
+	const request = () => ({ type: PAYPAL_REQUEST })
+	const success = () => ({ type: PAYPAL_SUCCESS })
+	const failure = (error) =>  ({ type: PAYPAL_FAILED, error, messageType: messageType.ERROR })
 
 	return fetchData(
 		'/problem/' + boost.problemId + '/boost',
@@ -70,5 +74,5 @@ export const savePaypalOrder = (boost, authToken) => {
 
 
 export const reset = () => ({
-	type: boostConstants.RESET
+	type: RESET
 })

@@ -1,7 +1,7 @@
 import { appConfig } from '../../../appConfig'
 import { messageType } from '../../../constants/misc/backendMessageTypes'
 
-import { fetchData } from '../../utils'
+import { fetchData } from '../../../utils'
 
 const REQUEST = "CONFIRM_EMAIL_CHANGE_REQUEST"
 const SUCCESS = "CONFIRM_EMAIL_CHANGE_SUCCESS"
@@ -32,9 +32,9 @@ export default function confirmEmailChangeReducer(state={}, action) {
 }
 
 export const confirm = (confirmationToken) => {
-	const request = () => ({type: confirmEmailChangeConstants.REQUEST})
-	const success = () => ({type: confirmEmailChangeConstants.SUCCESS})
-	const failure = (message) => ({type: confirmEmailChangeConstants.FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({type: REQUEST})
+	const success = () => ({type: SUCCESS})
+	const failure = (message) => ({type: FAILED, message, messageType: messageType.ERROR})
 
 	return fetchData(
 		"/verify/newEmail",

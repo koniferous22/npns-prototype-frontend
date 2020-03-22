@@ -35,7 +35,7 @@ import ConfirmPasswordChangePage from "./components/confirm/PasswordChange"
 import ConfirmEmailChangePage from "./components/confirm/EmailChange"
 import ConfirmUsernameChangePage from "./components/confirm/UsernameChange"
 
-import { authActions } from './actions/auth'
+import { logout, login, verify } from './store/auth'
 
 import AppDiv from './styled-components/App'
 
@@ -119,9 +119,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	// AUTH
-	logout: token => dispatch(authActions.logout(token)),
-	login: (username, pwd) => dispatch(authActions.login(username, pwd)),
-	verify: token => dispatch(authActions.verify(token))
+	logout: token => dispatch(logout(token)),
+	login: (username, pwd) => dispatch(login(username, pwd)),
+	verify: token => dispatch(verify(token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

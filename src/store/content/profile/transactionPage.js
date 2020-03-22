@@ -56,9 +56,9 @@ export default function transactionPageReducer(state=defaultState, action) {
 
 export const setActivePage = (token, pageIndex) => {
 
-	const request = (activePage) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_REQUEST, activePage })
-	const success = (activePage, data, hasMore) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({ type: transactionPageConstants.LOAD_TRANSACTION_PAGE_FAILED, message, messageType: messageType.ERROR })
+	const request = (activePage) => ({ type: LOAD_TRANSACTION_PAGE_REQUEST, activePage })
+	const success = (activePage, data, hasMore) => ({ type: LOAD_TRANSACTION_PAGE_SUCCESS, activePage, data, hasMore })
+	const failure = (message) => ({ type: LOAD_TRANSACTION_PAGE_FAILED, message, messageType: messageType.ERROR })
 
 	return fetchData(
 		"/u/transactions",
@@ -67,12 +67,12 @@ export const setActivePage = (token, pageIndex) => {
 			headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
 		},
 		() => request(pageIndex),
-		({ body, hasMore }) => success(pageIndex, data, hasMore),
+		({ data, hasMore }) => success(pageIndex, data, hasMore),
 		failure
 	)
 }
 
 export const reset = () => ({
-	type: transactionPageConstants.RESET
+	type: RESET
 })
 

@@ -255,9 +255,9 @@ export default combineReducers({
 })
 
 export const loadProblemData = (problemId) => {
-	const request = () => ({ type: problemPageConstants.LOAD_PROBLEM_DATA_REQUEST })
-	const success = (problem) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_SUCCESS, problem})
-	const failure = (message) => ({type: problemPageConstants.LOAD_PROBLEM_DATA_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: LOAD_PROBLEM_DATA_REQUEST })
+	const success = (problem) => ({type: LOAD_PROBLEM_DATA_SUCCESS, problem})
+	const failure = (message) => ({type: LOAD_PROBLEM_DATA_FAILED, message, messageType: messageType.ERROR})
 
 	if (!problemId) {
 		return failure('No Problem specified')
@@ -276,9 +276,9 @@ export const loadProblemData = (problemId) => {
 }
 
 export const loadSubmissionPage = (problemId, activePage) => {
-	const request = () => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_REQUEST, problemId })
-	const success = (data, hasMore) => ({ type: problemPageConstants.LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({type: problemPageConstants.LOAD_SUBMISSION_PAGE_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: LOAD_SUBMISSION_PAGE_REQUEST, problemId })
+	const success = (data, hasMore) => ({ type: LOAD_SUBMISSION_PAGE_SUCCESS, activePage, data, hasMore })
+	const failure = (message) => ({type: LOAD_SUBMISSION_PAGE_FAILED, message, messageType: messageType.ERROR})
 
 	if (!problemId) {
 		return failure('No Problem specified')
@@ -297,9 +297,9 @@ export const loadSubmissionPage = (problemId, activePage) => {
 }
 
 export const loadReplyPage = (submissionId, activePage) => {
-	const request = () => ({ type: problemPageConstants.LOAD_REPLY_PAGE_REQUEST })
-	const success = (submission, activeReplyPage, data, hasMore) => ({ type: problemPageConstants.LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
-	const failure = (message) => ({type: problemPageConstants.LOAD_REPLY_PAGE_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: LOAD_REPLY_PAGE_REQUEST })
+	const success = (submission, activeReplyPage, data, hasMore) => ({ type: LOAD_REPLY_PAGE_SUCCESS, submission, activeReplyPage, data, hasMore })
+	const failure = (message) => ({type: LOAD_REPLY_PAGE_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submissionId) {
 		return failure('No submission specified')
@@ -318,9 +318,9 @@ export const loadReplyPage = (submissionId, activePage) => {
 }
 
 export const postSubmission = (submission, token) => {
-	const request = () => ({ type: problemPageConstants.POST_SUBMISSION_REQUEST })
-	const success = (submission) => ({type: problemPageConstants.POST_SUBMISSION_SUCCESS, submission})
-	const failure = (message) => ({type: problemPageConstants.POST_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: POST_SUBMISSION_REQUEST })
+	const success = (submission) => ({type: POST_SUBMISSION_SUCCESS, submission})
+	const failure = (message) => ({type: POST_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submission) {
 		return failure('No submission specified')
@@ -334,15 +334,15 @@ export const postSubmission = (submission, token) => {
 			body: JSON.stringify(submission)
 		},
 		request,
-		body,
+		submission,
 		failure
 	)
 }
 
 export const replySubmission = (reply, token) => {
-	const request = () => ({ type: problemPageConstants.REPLY_SUBMISSION_REQUEST })
-	const success = (submission, reply) => ({ type: problemPageConstants.REPLY_SUBMISSION_SUCCESS, submission, reply })
-	const failure = (message) => ({type: problemPageConstants.REPLY_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: REPLY_SUBMISSION_REQUEST })
+	const success = (submission, reply) => ({ type: REPLY_SUBMISSION_SUCCESS, submission, reply })
+	const failure = (message) => ({type: REPLY_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!reply) {
 		return failure('No reply specified')
@@ -361,9 +361,9 @@ export const replySubmission = (reply, token) => {
 }
 
 const acceptSubmission = (submission, problem, token) => {
-	const request = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_REQUEST })
-	const success = () => ({ type: problemPageConstants.ACCEPT_SUBMISSION_SUCCESS, submission })
-	const failure = (message) => ({type: problemPageConstants.ACCEPT_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: ACCEPT_SUBMISSION_REQUEST })
+	const success = () => ({ type: ACCEPT_SUBMISSION_SUCCESS, submission })
+	const failure = (message) => ({type: ACCEPT_SUBMISSION_FAILED, message, messageType: messageType.ERROR})
 
 	if (!submission) {
 		return failure('No submission specified')
@@ -385,19 +385,19 @@ const acceptSubmission = (submission, problem, token) => {
 }
 
 export const selectReplyForm = (submission) => ({
-	type: problemPageConstants.SELECT_REPLY_FORM,
+	type: SELECT_REPLY_FORM,
 	reply: submission
 })
 
 export const hideReplies = (submission) => ({
-	type: problemPageConstants.HIDE_REPLIES,
+	type: HIDE_REPLIES,
 	submission
 })
 
 export const edit = (edit, token) => {
-	const request = () => ({ type: problemPageConstants.EDIT_REQUEST })
-	const success = () => ({type: problemPageConstants.EDIT_SUCCESS, edit})
-	const failure = (message) => ({type: problemPageConstants.EDIT_FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({ type: EDIT_REQUEST })
+	const success = () => ({type: EDIT_SUCCESS, edit})
+	const failure = (message) => ({type: EDIT_FAILED, message, messageType: messageType.ERROR})
 	
 	console.log(edit)
 	if (!edit.edit) {
@@ -419,17 +419,18 @@ export const edit = (edit, token) => {
 
 
 export const reset = () => ({
-	type: problemPageConstants.RESET
+	type: RESET
 })
 
 // EDIT REDUCER
+/*
 const editReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case problemPageConstants.EDIT_REQUEST:
+		case EDIT_REQUEST:
 			return {message: "Submitting edit"}
-		case problemPageConstants.EDIT_SUCCESS:
+		case EDIT_SUCCESS:
 			return {message: "Edit submitted", messageType: action.messageType, edit: action.edit, editFormSubmitted: true}
-		case problemPageConstants.EDIT_FAILED:
+		case EDIT_FAILED:
 			return {message: action.error, messageType: action.messageType}
 		default:
 			return state
@@ -437,3 +438,4 @@ const editReducer = (state = initialState, action) => {
 }
 
 
+*/

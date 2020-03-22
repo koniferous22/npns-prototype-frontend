@@ -31,9 +31,9 @@ export default function confirmUsernameChangeReducer(state={}, action) {
 }
 
 export const confirm = (confirmationToken) => {
-	const request = () => ({type: confirmUsernameChangeConstants.REQUEST})
-	const success = () => ({type: confirmUsernameChangeConstants.SUCCESS})
-	const failure = (message) => ({type: confirmUsernameChangeConstants.FAILED, message, messageType: messageType.ERROR})
+	const request = () => ({type: REQUEST})
+	const success = () => ({type: SUCCESS})
+	const failure = (message) => ({type: FAILED, message, messageType: messageType.ERROR})
 
 	return fetchData(
 		"/verify/newUsername",

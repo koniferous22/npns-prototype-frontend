@@ -63,9 +63,9 @@ export default function activityPageReducer(state = defaultState, action) {
 
 export const setActivePage = (user, pageIndex) => {
 
-	const request = (activePage) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_REQUEST, activePage })
-	const success = (activePage, data, hasMore) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, hasMore })
-	const failure = (message) => ({ type: activityPageConstants.SET_ACTIVE_PAGE_FAILED, message, messageType: messageType.ERROR })
+	const request = (activePage) => ({ type: SET_ACTIVE_PAGE_REQUEST, activePage })
+	const success = (activePage, data, hasMore) => ({ type: SET_ACTIVE_PAGE_SUCCESS, activePage, data, hasMore })
+	const failure = (message) => ({ type: SET_ACTIVE_PAGE_FAILED, message, messageType: messageType.ERROR })
 	if (!user) {
 		return dispatch => {
 			dispatch(failure('No user specified'))
@@ -79,16 +79,16 @@ export const setActivePage = (user, pageIndex) => {
 			headers: { 'Content-Type': 'application/json' }
 		},
 		() => request(pageIndex),
-		({data, hasMore}) => success(pageIndex, data, hasMore)
+		({data, hasMore}) => success(pageIndex, data, hasMore),
 		failure
 	)
 }
 
 export const setUser = (user) => ({
-	type: activityPageConstants.SET_USER,
+	type: SET_USER,
 	user: user
 })
 
 export const reset = () => ({
-	type: activityPageConstants.RESET
+	type: RESET
 })

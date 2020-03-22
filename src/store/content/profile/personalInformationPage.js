@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 
 import { fetchData } from '../../../utils'
 
+import { messageType } from '../../../constants/misc/backendMessageTypes'
+
 const REQUEST_FORM_FILLED = "PERSONAL_INFORMATION_PAGE_REQUEST_FORM_FILLED"
 
 const CONFIRM_PASSWORD_REQUEST = "PERSONAL_INFORMATION_PAGE_CONFIRM_PASSWORD_REQUEST"
@@ -142,40 +144,40 @@ export default combineReducers({
 })
 
 export const filled = (form, values) => ({
-	type: personalInformationPageConstants.REQUEST_FORM_FILLED,
+	type: REQUEST_FORM_FILLED,
 	form,
 	values
 })
 
 export const confirmPassword = (password, form, authToken) => {
-	const request = () => ({ type: personalInformationPageConstants.CONFIRM_PASSWORD_REQUEST })
+	const request = () => ({ type: CONFIRM_PASSWORD_REQUEST })
 	const success = (form) =>  { 
 		switch(form) {
 			case 'email':
 				return { 
-					type: personalInformationPageConstants.CHANGE_EMAIL_REQUEST
+					type: CHANGE_EMAIL_REQUEST
 				}
 			case 'username':
 				return { 
-					type: personalInformationPageConstants.CHANGE_USERNAME_REQUEST
+					type: CHANGE_USERNAME_REQUEST
 				}
 			case 'password':
 				return { 
-					type: personalInformationPageConstants.CHANGE_PASSWORD_REQUEST
+					type: CHANGE_PASSWORD_REQUEST
 				}
 			case 'names':
 				return { 
-					type: personalInformationPageConstants.CHANGE_NAMES_REQUEST
+					type: CHANGE_NAMES_REQUEST
 				}
 			default:
 				return { 
-					type: personalInformationPageConstants.CONFIRM_PASSWORD_FAILED,
+					type: CONFIRM_PASSWORD_FAILED,
 					message: 'idk wut happened, but suddenli form parameter is nul',
 					messageType: messageType.ERROR
 				}
 		}
 	}
-	const failure = (message) => ({ type: personalInformationPageConstants.CONFIRM_PASSWORD_FAILED, message, messageType: messageType.ERROR })
+	const failure = (message) => ({ type: CONFIRM_PASSWORD_FAILED, message, messageType: messageType.ERROR })
 
 	return fetchData(
 		"/confirmPassword",
@@ -194,9 +196,9 @@ export const confirmPassword = (password, form, authToken) => {
 }
 
 const submitEmailChange = (newEmail, authToken) => {
-	function request() ({ type: personalInformationPageConstants.CHANGE_EMAIL_REQUEST })
-	function success() ({ type: personalInformationPageConstants.CHANGE_EMAIL_SUCCESS})
-	function failure(message) ({ type: personalInformationPageConstants.CHANGE_EMAIL_FAILED, message, messageType: messageType.ERROR })
+	const request =	 () => ({ type: CHANGE_EMAIL_REQUEST })
+	const success =	 () => ({ type: CHANGE_EMAIL_SUCCESS})
+	const failure =	 (message) => ({ type: CHANGE_EMAIL_FAILED, message, messageType: messageType.ERROR })
 	
 	return fetchData(
 		"/u/emailChange",
@@ -216,9 +218,9 @@ const submitEmailChange = (newEmail, authToken) => {
 }
 
 function submitUsernameChange(newUsername, authToken) {
-	const request = () => ({ type: personalInformationPageConstants.CHANGE_USERNAME_REQUEST })
-	const success = () => ({ type: personalInformationPageConstants.CHANGE_USERNAME_SUCCESS})
-	const failure = (message) => ({ type: personalInformationPageConstants.CHANGE_USERNAME_FAILED, message, messageType: messageType.ERROR })
+	const request = () => ({ type: CHANGE_USERNAME_REQUEST })
+	const success = () => ({ type: CHANGE_USERNAME_SUCCESS})
+	const failure = (message) => ({ type: CHANGE_USERNAME_FAILED, message, messageType: messageType.ERROR })
 	return fetchData(
 		"/u/usernameChange",
 		{
@@ -231,14 +233,14 @@ function submitUsernameChange(newUsername, authToken) {
 		},
 		request,
 		success,
-		failed
+		failure	
 	)
 }
 
 function submitNamesChange(newFirstName, newLastName, authToken) {
-	const request = () => ({ type: personalInformationPageConstants.CHANGE_NAMES_REQUEST })
-	const success = () => ({ type: personalInformationPageConstants.CHANGE_NAMES_SUCCESS})
-	const failure = (message) => ({ type: personalInformationPageConstants.CHANGE_NAMES_FAILED, message, messageType: messageType.ERROR })
+	const request = () => ({ type: CHANGE_NAMES_REQUEST })
+	const success = () => ({ type: CHANGE_NAMES_SUCCESS})
+	const failure = (message) => ({ type: CHANGE_NAMES_FAILED, message, messageType: messageType.ERROR })
 	return fetchData(
 		"/u/namesChange",
 		{
@@ -253,9 +255,9 @@ function submitNamesChange(newFirstName, newLastName, authToken) {
 
 export const submitPasswordChange = (user) => {
 	
-	const request = ()  => ({ type: personalInformationPageConstants.CHANGE_PASSWORD_REQUEST })
-	const success = (user) => ({ type: personalInformationPageConstants.CHANGE_PASSWORD_SUCCESS, user})
-	const failure = (message) => ({ type: personalInformationPageConstants.CHANGE_PASSWORD_FAILED, message, messageType: messageType.ERROR })
+	const request = ()  => ({ type: CHANGE_PASSWORD_REQUEST })
+	const success = (user) => ({ type: CHANGE_PASSWORD_SUCCESS, user})
+	const failure = (message) => ({ type: CHANGE_PASSWORD_FAILED, message, messageType: messageType.ERROR })
 	if (!user) {
 		return failure('Attempted request with no username/email')
 	}
@@ -268,11 +270,11 @@ export const submitPasswordChange = (user) => {
 		},
 		request,
 		({user}) => success(user),
-		failed
+		failure	
 	)
 }
 
 
 export const reset = () => ({
-	type: personalInformationPageConstants.RESET
+	type: RESET
 })

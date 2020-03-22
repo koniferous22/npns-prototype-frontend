@@ -21,7 +21,7 @@ const defaultState = {
 	stage: forgotPwdStages.SUBMITTING_FORM
 }
 
-export default function forgotPwdPageReducer(state = defaultState, action) {
+function forgotPwdPageReducer(state = defaultState, action) {
 	switch (action.type) {
 		case REQUEST:
 			return {

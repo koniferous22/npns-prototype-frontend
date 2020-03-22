@@ -1,5 +1,7 @@
 import { fetchData } from '../../utils'
 
+import { messageType } from '../../constants/misc/backendMessageTypes'
+
 const SET_ACTIVE_PAGE_REQUEST = "QUEUE_PAGE_SET_ACTIVE_PAGE_REQUEST"
 const SET_ACTIVE_PAGE_SUCCESS = "QUEUE_PAGE_SET_ACTIVE_PAGE_SUCCESS"
 const NETWORK_ERROR = "QUEUE_PAGE_NETWORK_ERROR"
@@ -17,10 +19,10 @@ const defaultQueueState = {
 
 const defaultState = {}
 
-export default function singleQueueReducer(state = defaultQueueState, action) {
+function singleQueueReducer(state = defaultQueueState, action) {
 	const activePage = (!action.activePage || action.activePage <= 1) ? 1 : action.activePage
 	switch (action.type) {
-		case queuePageConstants.SET_ACTIVE_PAGE_REQUEST:
+		case SET_ACTIVE_PAGE_REQUEST:
 			return {
 				loading: true,
 				entries: state.entries,
@@ -28,7 +30,7 @@ export default function singleQueueReducer(state = defaultQueueState, action) {
 					page: state.paging.page
 				}
 			}
-		case queuePageConstants.SET_ACTIVE_PAGE_SUCCESS:
+		case SET_ACTIVE_PAGE_SUCCESS:
 			const newEntries = state.entries
 			newEntries[activePage - 1] = action.data || []
 			return {
@@ -39,7 +41,7 @@ export default function singleQueueReducer(state = defaultQueueState, action) {
 					hasMore: action.hasMore
 				},
 			}
-		case queuePageConstants.NETWORK_ERROR:
+		case NETWORK_ERROR:
 			return {
 				message: action.message,
 				messageType: action.messageType,
@@ -49,7 +51,7 @@ export default function singleQueueReducer(state = defaultQueueState, action) {
 				},
 				entries: state.entries
 			}
-		case queuePageConstants.SET_ACTIVE_ENTRY:
+		case SET_ACTIVE_ENTRY:
 			return {
 				entries: state,
 				paging: {
@@ -65,7 +67,7 @@ export default function singleQueueReducer(state = defaultQueueState, action) {
 
 export default function queuePageReducer(state = defaultState, action) {
 	// tried to solve this for 5 hours, when state is modified directly redux does not detect change :)
-	if (action.type === queuePageConstants.RESET) {
+	if (action.type === RESET) {
 		return defaultState
 	}
 	const newState = {...state}
@@ -77,12 +79,12 @@ export default function queuePageReducer(state = defaultState, action) {
 
 export const setActivePage = (queue,pageIndex) => {
 
-	const request = (queue, activePage) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_REQUEST, activePage, queue })
-	const success = (queue, activePage, data, hasMore) => ({ type: queuePageConstants.SET_ACTIVE_PAGE_SUCCESS, activePage, data, queue, hasMore })
-	const failure = (queue, message) => ({ type: queuePageConstants.NETWORK_ERROR, message, messageType: messageType.ERROR, queue })
+	const request = (queue, activePage) => ({ type: SET_ACTIVE_PAGE_REQUEST, activePage, queue })
+	const success = (queue, activePage, data, hasMore) => ({ type: SET_ACTIVE_PAGE_SUCCESS, activePage, data, queue, hasMore })
+	const failure = (queue, message) => ({ type: NETWORK_ERROR, message, messageType: messageType.ERROR, queue })
 
 	if (!queue) {
-		return {type: queuePageConstants.NETWORK_ERROR, queue:'Index', message: 'No queue specified', messageType: messageType.ERROR}
+		return {type: NETWORK_ERROR, queue:'Index', message: 'No queue specified', messageType: messageType.ERROR}
 	}
 
 	return fetchData(
@@ -98,13 +100,13 @@ export const setActivePage = (queue,pageIndex) => {
 }
 
 export const setActiveEntry = (queue, activePage, activeEntry) => ({
-	type: queuePageConstants.SET_ACTIVE_ENTRY,
+	type: SET_ACTIVE_ENTRY,
 	queue,
 	activePage,
 	activeEntry
 })
 
 export const reset = (queue) => ({
-	type: queuePageConstants.RESET,
+	type: RESET,
 	queue
 })

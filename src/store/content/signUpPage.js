@@ -1,3 +1,7 @@
+import { appConfig } from '../../appConfig'
+
+import { messageType } from '../../constants/misc/backendMessageTypes'
+import { fetchData } from '../../utils'
 import { reducer as signupFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
@@ -11,11 +15,16 @@ const signupStages = {
 	COMPLETED: 1
 }
 
+const initialState = {
+	stage: signupStages.SUBMITTING_FORM
+}
+
+
 const signupPageReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case signupConstants.REQUEST:
+		case REQUEST:
 			return {stage: signupStages.SUBMITTING_FORM, message: "Waiting for server response"}
-		case signupConstants.SUCCESS:
+		case SUCCESS:
 			return {
 				stage: signupStages.COMPLETED,
 				message: {
@@ -28,9 +37,9 @@ const signupPageReducer = (state = initialState, action) => {
 				},
 				messageType: action.messageType
 			}
-		case signupConstants.FAILED:
+		case FAILED:
 				return {stage: signupStages.SUBMITTING_FORM, message: action.message, messageType: action.messageType }
-		case signupConstants.RESET:
+		case RESET:
 			return initialState
 		default:
 			return state
@@ -43,9 +52,9 @@ export default combineReducers({
 })
 
 export const signup = (user) => {
-	function request() { return { type: signupConstants.REQUEST } }
-	function success({user}) { return { type: signupConstants.SUCCESS, user } }
-	function failure(message) { return { type: signupConstants.FAILED, message, messageType: messageType.ERROR } }
+	function request() { return { type: REQUEST } }
+	function success({user}) { return { type: SUCCESS, user } }
+	function failure(message) { return { type: FAILED, message, messageType: messageType.ERROR } }
 
 	return fetchData(
 		"/signup",
@@ -87,5 +96,5 @@ export const validateField = (values, field) => {
 }
 
 export const reset = () => ({
-	type: signupConstants.RESET
+	type: RESET
 })
