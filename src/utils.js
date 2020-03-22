@@ -1,6 +1,8 @@
+import { appConfig } from './appConfig'
+
 export const fetchData = (backendEndpoint, request, onFetching, onSuccess, onError, settings) => dispatch => { 
 	dispatch(onFetching());
-	return fetch(appConfig.backendUrl + endpoint, request)
+	return fetch(appConfig.backendUrl + backendEndpoint, request)
 		.then(response => {
 			if (response.status >= 200 && response.status < 400){
 				return response

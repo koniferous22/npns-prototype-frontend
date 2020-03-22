@@ -2,7 +2,6 @@ import { appConfig } from '../appConfig'
 import { globalConstants } from '../constants/global'
 import { fetchData } from '../utils'
 
-
 const HIERARCHY_LOAD_REQUEST = 'GLOBAL_HIERARCHY_LOAD';
 const HIERARCHY_LOAD_SUCCESS = 'GLOBAL_HIERARCHY_LOAD_SUCCESS';
 const HIERARCHY_LOAD_FAILED = 'GLOBAL_HIERARCHY_LOAD_FAILED';
