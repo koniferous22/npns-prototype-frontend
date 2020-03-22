@@ -1,4 +1,4 @@
-function calculatePayment(boost) {
+const calculatePayment = (boost) => {
 	const numBoost = Number(boost)
 	const paypalPayoutFee = numBoost*0.02
 	const ourFee = 0.01 + numBoost*0.06

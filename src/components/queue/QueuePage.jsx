@@ -111,6 +111,7 @@ class QueuePage extends React.Component {
 											active={p.active}
 											created={p.created}
 											bounty={p.bounty}
+											boost_value={p.boost_value}
 											loggedIn={this.props.loggedIn}
 											viewCount={p.view_count}
 											submissionCount={p.submissions.length}

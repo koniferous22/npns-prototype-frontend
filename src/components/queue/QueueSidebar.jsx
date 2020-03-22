@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 import QueueSidebarEntries from './QueueSidebarEntries'
 import { globalActions } from '../../actions/global'
@@ -10,50 +10,42 @@ import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSideb
 
 import QueueDropdown from './QueueDropdown'
 
-const mapStateToProps = state => ({
-	hierarchy: state.global.hierarchy,
-})
-
-const mapDispatchToProps = dispatch => ({
-	loadHierarchy: () => dispatch(globalActions.hierarchy()),
-	loadLinQueues: () => dispatch(globalActions.queues())
-})
-
-class QueueSidebar extends React.Component {
+/*co ma byt ta baseUrl? nikde sa to nepassuje, je to vecne undefined*/
+const QueueSidebar = ({ baseUrl }) => {
+	const hierarchy = useSelector(state => state.global.hierarchy)
+	const dispatch = useDispatch()
 	
-	componentDidMount() {
-		this.props.loadLinQueues()
-		this.props.loadHierarchy()
-	}
-	render() {
-		const hierarchicalEntries = <QueueSidebarEntries baseUrl={this.props.baseUrl || '/q'} queues={this.props.hierarchy} />
-		const dropdownEntries = <QueueDropdown baseUrl={this.props.baseUrl || '/q'}/>
-		if (this.props.reuse) {
-			return (
-				<div>
-					<HierarchicalListDiv>
-						{hierarchicalEntries}
-					</HierarchicalListDiv>
-					<CollapsedSidebarDiv>
-						{dropdownEntries}
-					</CollapsedSidebarDiv>
-				</div>
-			)
-		}
+	useEffect(() => {
+		dispatch(globalActions.queues())
+		dispatch(globalActions.hierarchy())
+	}, [dispatch]);
+
+	const hierarchicalEntries = <QueueSidebarEntries baseUrl={baseUrl || '/q'} queues={hierarchy} />
+	const dropdownEntries = <QueueDropdown baseUrl={baseUrl || '/q'}/>
+	if (false) {
 		return (
 			<div>
+				<HierarchicalListDiv>
+					{hierarchicalEntries}
+				</HierarchicalListDiv>
 				<CollapsedSidebarDiv>
 					{dropdownEntries}
 				</CollapsedSidebarDiv>
-				<SidebarDiv>
-					<HierarchicalListDiv>
-						{hierarchicalEntries}
-					</HierarchicalListDiv>
-				</SidebarDiv>
 			</div>
 		)
 	}
+	return (
+		<div>
+			<CollapsedSidebarDiv>
+				{dropdownEntries}
+			</CollapsedSidebarDiv>
+			<SidebarDiv>
+				<HierarchicalListDiv>
+					{hierarchicalEntries}
+				</HierarchicalListDiv>
+			</SidebarDiv>
+		</div>
+	)
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(QueueSidebar)
+export default QueueSidebar

@@ -4,7 +4,7 @@ import MathJax from 'react-mathjax'
 import RemarkMathPlugin from 'remark-math'
 import './MarkdownRender.css'
 
-function MarkdownRender(props) {
+const MarkdownRender = (props) => {
 	const newProps = {
 		...props,
 		plugins: [

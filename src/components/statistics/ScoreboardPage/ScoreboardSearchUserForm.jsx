@@ -10,7 +10,6 @@ const submit = (values, dispatch, props) => {
 	dispatch(scoreboardPageActions.findUser(props.queue, values.identifier, 50))
 }
 
-
 const validate = values => {
 	const errors = {}
 	if (!values.identifier) {

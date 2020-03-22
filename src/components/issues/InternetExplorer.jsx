@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-
 const IEPage = props => (
 	<div>
 		This page is for Zoomers only, no Boomers allowed<br/>

@@ -1,50 +1,39 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 import StyledThemeDropdown from '../../styled-components/header/ThemeDropdown'
 import ThemeDropdownEntries from '../../styled-components/header/ThemeDropdownEntries'
 
 import { globalActions } from '../../actions/global'
 
-const mapStateToProps = state => ({
-	displayed: state.global.themesDisplayed,
-	currentTheme: state.global.theme,
-	themes: state.global.themes || {}
-})
+const ThemeDrowdown = () => {
+	const dispatch = useDispatch()
+	const displayed = useSelector(state => state.global.themesDisplayed)
+	const currentThemeFromState = useSelector(state => state.global.theme)
+	const themes = useSelector(state => state.global.themes || {})
+	
+	useEffect(() => {
+		return () => {
+			dispatch(globalActions.hideThemes())
+		};
+	}, [dispatch]);
 
-const mapDispatchToProps = dispatch => {
-	return {
-		show: () => dispatch(globalActions.showThemes()),
-		hide: () => dispatch(globalActions.hideThemes()),
-		setTheme: (theme) => dispatch(globalActions.setTheme(theme))
-	}
+	const themeDivs = (
+		<ThemeDropdownEntries>
+			{Object.keys(themes).map((theme, index) => (
+				<li key={index}>
+					<div onClick={() => dispatch(globalActions.setTheme(theme))}>{themes[theme].label}</div>
+				</li>
+			))}
+		</ThemeDropdownEntries>
+	)
+	const currentTheme = themes[currentThemeFromState];
+	return (
+		<div>
+			<StyledThemeDropdown className="button" onClick={() => displayed ? dispatch(globalActions.hideThemes()) : dispatch(globalActions.showThemes())}>{currentTheme.textWhenSelected || currentTheme.label}</StyledThemeDropdown>
+			{displayed && themeDivs}
+		</div>
+	)
 }
 
-class ThemeDrowdown extends React.Component {
-
-	componentWillUnmount() {
-		if (this.props.displayed) {
-			this.props.hide()
-		}
-	}
-	render() {
-		const themeDivs = (
-			<ThemeDropdownEntries>
-				{Object.keys(this.props.themes).map((theme, index) => (
-					<li key={index}>
-						<div onClick={() => this.props.setTheme(theme)}>{this.props.themes[theme].label}</div>
-					</li>
-				))}
-			</ThemeDropdownEntries>
-		)
-		const currentTheme = this.props.themes[this.props.currentTheme];
-		return (
-			<div>
-				<StyledThemeDropdown className="button" onClick={this.props.displayed ? this.props.hide : this.props.show}>{currentTheme.textWhenSelected || currentTheme.label}</StyledThemeDropdown>
-				{ this.props.displayed && themeDivs}
-			</div>
-		)
-	}
-}
-
-export default  connect(mapStateToProps, mapDispatchToProps)(ThemeDrowdown)
+export default ThemeDrowdown

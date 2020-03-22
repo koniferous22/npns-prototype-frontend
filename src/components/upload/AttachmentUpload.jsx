@@ -1,47 +1,36 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { attachmentUploadActions } from '../../actions/content/attachmentUpload'
 
 import Attachments from './Attachments'
 
-const mapStateToProps = state => state
+const AttachmentUpload = () => {
+	const [urls, setUrls] = useState([])
+	const dispatch = useDispatch()
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  saveUrls: (urls) => dispatch(attachmentUploadActions.saveUrls(urls)),
-	reset: () => dispatch(attachmentUploadActions.reset())
-})
+	useEffect(() => {
+		return () => {
+			dispatch(attachmentUploadActions.reset())
+		};
+	}, [dispatch]);
 
-class ImageUpload extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			urls: []
-		}
-	}
-	componentWillUnmount() {
-		this.props.reset()
-	}
-	showWidget = () => {
+	const showWidget = () => {
 		let widget = window.cloudinary.createUploadWidget({ 
 			uploadPreset: 'lz6m2dte'}, 
 		(error, result) => {
 			if (!error && result && result.event === "success") { 
-			let a = this.state.urls.slice()
-			a.push(result.info.url)
-			this.setState({urls: a})
-			this.props.saveUrls(this.state.urls)
+			setUrls(urls.concat(result.info.url))
+			dispatch(attachmentUploadActions.saveUrls(urls))
 		}})
 		widget.open()
 	}
-	render() {
-		return (
-			<div>
-				<button onClick={this.showWidget}> Upload attachment </button>
-				{this.state.urls && <Attachments attachmentUrls={this.state.urls} />}
-			</div>
-		)
-	}
+	return(
+		<div>
+			<button onClick={showWidget}> Upload attachment </button>
+			{urls && <Attachments attachmentUrls={urls} />}
+		</div>
+	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageUpload)
+export default AttachmentUpload
