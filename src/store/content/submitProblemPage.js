@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as submitProblemFormReducer } from 'redux-form'
 
-import { appConfig } from '../../appConfig'
-import { submitProblemPageConstants } from '../../constants/content/submitProblemPage'
 import { messageType } from '../../constants/misc/backendMessageTypes'
 
 import { fetchData } from '../../utils'
@@ -30,19 +28,19 @@ const initialState = {
 
 function submitProblemPageReducer(state = initialState, action) {
 	switch (action.type) {
-		case submitProblemPageConstants.SUBMIT_REQUEST:
+		case SUBMIT_REQUEST:
 			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: "Waiting for server response", messageType: action.messageType, queueOptions: state.queues}
-		case submitProblemPageConstants.SUBMIT_SUCCESS:
+		case SUBMIT_SUCCESS:
 			return {stage: submitProblemStages.COMPLETED, problemId: action.problem.id,	message: "Problem submitted", messageType: action.messageType, queueOptions: state.queues, queue: action.queue}
-		case submitProblemPageConstants.SUBMIT_FAILED:
+		case SUBMIT_FAILED:
 			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, messageType: action.messageType, queueOptions: state.queues}
-		case submitProblemPageConstants.LOAD_QUEUES_REQUEST:
+		case LOAD_QUEUES_REQUEST:
 			return {stage: state.stage, message: "Waiting for server response", messageType: action.messageType, queueOptions: state.queues}
-		case submitProblemPageConstants.LOAD_QUEUES_SUCCESS:
+		case LOAD_QUEUES_SUCCESS:
 			return {stage: state.stage, queueOptions: action.queues}
-		case submitProblemPageConstants.LOAD_QUEUES_FAILED:
+		case LOAD_QUEUES_FAILED:
 			return {stage: submitProblemStages.SUBMITTING_PROBLEM, message: action.error, messageType: action.messageType, queueOptions: state.queues}
-		case submitProblemPageConstants.RESET:
+		case RESET:
 			return initialState
 		default:
 			return state
@@ -55,9 +53,9 @@ export default combineReducers({
 })
 
 export const submit = (problem, authToken) => {
-	const request = () => ({ type: submitProblemPageConstants.SUBMIT_REQUEST })
-	const success = (problem, queue) => ({ type: submitProblemPageConstants.SUBMIT_SUCCESS, problem, queue })
-	const failure = (error) => ({ type: submitProblemPageConstants.SUBMIT_FAILED, error, messageType: messageType.ERROR })
+	const request = () => ({ type: SUBMIT_REQUEST })
+	const success = (problem, queue) => ({ type: SUBMIT_SUCCESS, problem, queue })
+	const failure = (error) => ({ type: SUBMIT_FAILED, error, messageType: messageType.ERROR })
 
 	const queue = problem.queue_name
 	return fetchData(
@@ -74,9 +72,9 @@ export const submit = (problem, authToken) => {
 }
 
 export const fetchDropdownValues = () => {
-	const request = () => ({ type: submitProblemPageConstants.LOAD_QUEUES_REQUEST })
-	const success = (queues) => ({ type: submitProblemPageConstants.LOAD_QUEUES_SUCCESS, queues })
-	const failure = (error) => ({ type: submitProblemPageConstants.LOAD_QUEUES_FAILED, error, messageType: messageType.ERROR })
+	const request = () => ({ type: LOAD_QUEUES_REQUEST })
+	const success = (queues) => ({ type: LOAD_QUEUES_SUCCESS, queues })
+	const failure = (error) => ({ type: LOAD_QUEUES_FAILED, error, messageType: messageType.ERROR })
 
 	return fetchData(
 		"/queue/all",
@@ -91,6 +89,6 @@ export const fetchDropdownValues = () => {
 }
 
 export const reset = () => ({
-	type: submitProblemPageConstants.RESET
+	type: RESET
 })
 

@@ -1,4 +1,3 @@
-import { appConfig } from '../../../appConfig'
 import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 import { fetchData } from '../../../utils'
@@ -32,7 +31,7 @@ export default function profilePageReducer(state=defaultState, action) {
 	}
 }
 
-const loadUserData = (username) => {
+export const loadUserData = (username) => {
 	
 	const request = () => ({ type: LOAD_USER_SUCCESS })
 	const success = (user) => ({type: LOAD_USER_SUCCESS, user})

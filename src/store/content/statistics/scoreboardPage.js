@@ -132,7 +132,7 @@ export const setActivePage = (queue, pageIndex) => {
 	)
 }
 
-function findUser(queue, username, recordsPerPage) {
+export const findUser = (queue, username, recordsPerPage) => {
 	const request = () => ({ type: USER_SEARCH_REQUEST, queue })
 	const success = (username, activePage) => ({ type: USER_SEARCH_SUCCESS, queue, username, activePage })
 	const failure = (message) => ({ type: USER_SEARCH_FAILED, queue, message, messageType: messageType.ERROR })
@@ -163,7 +163,7 @@ function findUser(queue, username, recordsPerPage) {
 	)
 }
 
-function getNumberOfPages(queue) {
+export const getNumberOfPages = (queue) => {
 	const request = () => ({ type: USER_COUNT_REQUEST, queue })
 	const success = (pageCount) => ({ type: USER_COUNT_SUCCESS, queue, pageCount })
 	const failure = (message) => ({ type: USER_COUNT_FAILED, queue, message, messageType: messageType.ERROR })
@@ -184,11 +184,11 @@ function getNumberOfPages(queue) {
 	)
 }
 
-const reset = () => ({
+export const reset = () => ({
 	type: RESET
 })
 
-function validateUserExists(username) {
+export const validateUserExists = (username) => {
 	return new Promise((resolve, reject) => {
 		fetch(appConfig.backendUrl + "/u/exists", {
 			method: 'POST',

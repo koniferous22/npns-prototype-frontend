@@ -1,4 +1,3 @@
-import { appConfig } from '../../../appConfig'
 import { messageType } from '../../../constants/misc/backendMessageTypes'
 
 import { fetchData } from '../../../utils'

@@ -1,9 +1,7 @@
 import { reducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import {fetchData} from '../../utils'
-
-import { appConfig } from '../../appConfig'
+import { fetchData } from '../../utils'
 
 import { messageType } from '../../constants/misc/backendMessageTypes'
 
@@ -334,7 +332,7 @@ export const postSubmission = (submission, token) => {
 			body: JSON.stringify(submission)
 		},
 		request,
-		submission,
+		success,
 		failure
 	)
 }
@@ -360,7 +358,7 @@ export const replySubmission = (reply, token) => {
 	)
 }
 
-const acceptSubmission = (submission, problem, token) => {
+export const acceptSubmission = (submission, problem, token) => {
 	const request = () => ({ type: ACCEPT_SUBMISSION_REQUEST })
 	const success = () => ({ type: ACCEPT_SUBMISSION_SUCCESS, submission })
 	const failure = (message) => ({type: ACCEPT_SUBMISSION_FAILED, message, messageType: messageType.ERROR})

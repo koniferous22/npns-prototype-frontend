@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as boostFormReducer } from 'redux-form'
 
-import { appConfig } from '../../appConfig'
 import { messageType } from '../../constants/misc/backendMessageTypes'
 import { fetchData } from '../../utils'
 

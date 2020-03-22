@@ -1,4 +1,3 @@
-import { appConfig } from '../appConfig'
 import { globalConstants } from '../constants/global'
 import { fetchData } from '../utils'
 

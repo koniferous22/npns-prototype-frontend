@@ -195,7 +195,7 @@ export const confirmPassword = (password, form, authToken) => {
 	)
 }
 
-const submitEmailChange = (newEmail, authToken) => {
+export const submitEmailChange = (newEmail, authToken) => {
 	const request =	 () => ({ type: CHANGE_EMAIL_REQUEST })
 	const success =	 () => ({ type: CHANGE_EMAIL_SUCCESS})
 	const failure =	 (message) => ({ type: CHANGE_EMAIL_FAILED, message, messageType: messageType.ERROR })
@@ -217,7 +217,7 @@ const submitEmailChange = (newEmail, authToken) => {
 	
 }
 
-function submitUsernameChange(newUsername, authToken) {
+export const submitUsernameChange = (newUsername, authToken) => {
 	const request = () => ({ type: CHANGE_USERNAME_REQUEST })
 	const success = () => ({ type: CHANGE_USERNAME_SUCCESS})
 	const failure = (message) => ({ type: CHANGE_USERNAME_FAILED, message, messageType: messageType.ERROR })
@@ -237,7 +237,7 @@ function submitUsernameChange(newUsername, authToken) {
 	)
 }
 
-function submitNamesChange(newFirstName, newLastName, authToken) {
+export const submitNamesChange = (newFirstName, newLastName, authToken) => {
 	const request = () => ({ type: CHANGE_NAMES_REQUEST })
 	const success = () => ({ type: CHANGE_NAMES_SUCCESS})
 	const failure = (message) => ({ type: CHANGE_NAMES_FAILED, message, messageType: messageType.ERROR })
