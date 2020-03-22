@@ -8,7 +8,7 @@ import QueueDropdown from '../queue/QueueDropdown'
 import CollapsedSidebar from '../../styled-components/sidebars/CollapsedSidebar'
 import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebarDiv'
 
-const StatisticsSidebar = (props) => {
+const StatisticsSidebar = ({ addQueues, queueBaseUrl, loggedIn }) => {
 	const routes = [
 		{
 			to: "/economy",
@@ -36,16 +36,15 @@ const StatisticsSidebar = (props) => {
 					{routeElements}
 				</CollapsedSidebarDiv>
 				<CollapsedSidebarDiv shrink>
-					{props.addQueues && props.queueBaseUrl && <QueueDropdown baseUrl={props.queueBaseUrl} />}
+					{addQueues && queueBaseUrl && <QueueDropdown baseUrl={queueBaseUrl} />}
 				</CollapsedSidebarDiv>
 			</CollapsedSidebar>
-			<SidebarDiv loggedIn={props.loggedIn}>
+			<SidebarDiv loggedIn={loggedIn}>
 				{routeElements}			
-				{props.addQueues && props.queueBaseUrl && <QueueSidebar reuse baseUrl={props.queueBaseUrl}/>}
+				{addQueues && queueBaseUrl && <QueueSidebar reuse baseUrl={queueBaseUrl}/>}
 			</SidebarDiv>
 		</div>
 	)
-
 }
 
 export default StatisticsSidebar
