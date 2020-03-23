@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ShowAttachment = ({attachmentUrl}) => {
+const ShowAttachment = ({ attachmentUrl }) => {
 	var attachmentName = ''
 	if (attachmentUrl) {
 		const urlArray = attachmentUrl.split('/')
@@ -10,19 +10,20 @@ const ShowAttachment = ({attachmentUrl}) => {
 			urlArray[urlArray.length - 2] = 'w_250,c_lfill'
 			var previewUrl = urlArray.join('/')
 		}
+	}
 	return (
 		<div>
 			{
-				(attachmentUrl) ?
-					(isImage ?
-						(<a href={attachmentUrl}><img src={previewUrl} alt="attachment" /></a>) 
-						: 
-						(<a href={attachmentUrl}>{attachmentName}</a>)) 
-					:
-					<p>No attachments</p>}
+				attachmentUrl 
+					? (
+						isImage
+							? <a href={attachmentUrl}><img src={previewUrl} alt="attachment" /></a>
+							: <a href={attachmentUrl}>{attachmentName}</a>
+					)
+					: <p>No attachments</p>
+			}
 		</div>
 	)
-	}
-}
+};
 
 export default ShowAttachment 

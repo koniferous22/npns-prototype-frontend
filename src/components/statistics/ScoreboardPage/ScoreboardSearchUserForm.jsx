@@ -1,25 +1,26 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 
-import { scoreboardPageActions } from '../../../actions/content/statistics/scoreboardPage'
+
+import { findUser, validateUserExists } from '../../../store/content/statistics/scoreboardPage'
 import renderField from '../../form/RenderField'
 
 import Button from '../../../styled-components/defaults/Button'
 
-const submit = (values, dispatch, props) => {
-	dispatch(scoreboardPageActions.findUser(props.queue, values.identifier, 50))
+const submit = ({ identifier }, dispatch, { queue }) => {
+	dispatch(findUser(queue, identifier, 50))
 }
 
-const validate = values => {
+
+const validate = ({ identifier }) => {
 	const errors = {}
-	if (!values.identifier) {
+	if (!identifier) {
 		errors.identifier = 'Required'
 	}
 	return errors
 }
 
-const ScoreboardSearchUserForm = props => {
-	const { handleSubmit } = props;
+const ScoreboardSearchUserForm = ({ handleSubmit }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
@@ -35,10 +36,9 @@ export default reduxForm({
 	validate,
 	asyncValidate: (values, dispatch, props, blurredField) => {
 		if (blurredField === 'identifier') {
-			return scoreboardPageActions.validateUserExists(values.identifier)
+			return validateUserExists(values.identifier)
 		}
-		return new Promise((resolve,reject) => {})
-		// LEBO PROMISE VYZADUJE CALLBACK, SIGNED: DR. YANDREY
+		return new Promise.resolve()
 	},
 	asyncBlurFields: ['identifier'],
 	onSubmit: submit,

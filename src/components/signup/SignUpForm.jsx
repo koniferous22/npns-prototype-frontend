@@ -10,21 +10,26 @@ const submit = (values, dispatch, props) => {
 	dispatch(signupActions.signup(values))
 }
 
-const validate = values => {
+const validate = ({
+	username,
+	password,
+	email,
+	confirmPassword
+}) => {
 	const errors = {}
-	if (!values.username) {
+	if (!username) {
 		errors.username = 'Required'
 	}
-	if (!values.password) {
+	if (!password) {
 		errors.password = 'Required'
 	}
-	if (!values.email) {
+	if (!email) {
 		errors.email = 'Required'
 	}
-	if (!values.confirmPassword) {
+	if (!confirmPassword) {
 		errors.confirmPassword = 'Required'
 	}
-	if (values.confirmPassword !== values.password) {
+	if (confirmPassword !== password) {
 		errors.confirmPassword = 'Passwords don\'t match'
 	}
 	return errors
@@ -32,8 +37,7 @@ const validate = values => {
 
 const asyncBlurFields = ['username', 'password', 'email', 'referred_by']
 
-const SignUpForm = props => {
-	const { handleSubmit } = props
+const SignUpForm = ({ handleSubmit }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Field name="username" component={renderField} type="text" label="Username" alignLeft/>

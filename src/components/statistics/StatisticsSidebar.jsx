@@ -8,23 +8,23 @@ import QueueDropdown from '../queue/QueueDropdown'
 import CollapsedSidebar from '../../styled-components/sidebars/CollapsedSidebar'
 import CollapsedSidebarDiv from '../../styled-components/sidebars/CollapsedSidebarDiv'
 
+const routes = [
+	{
+		to: "/economy",
+		label: "System Economy"
+	},
+	{
+		to: "/scoreboard/Index",
+		label: "User Scoreboard"
+	}
+]
 const StatisticsSidebar = ({ addQueues, queueBaseUrl, loggedIn }) => {
-	const routes = [
-		{
-			to: "/economy",
-			label: "System Economy"
-		},
-		{
-			to: "/scoreboard/Index",
-			label: "User Scoreboard"
-		}
-	]
 	const baseUrl = "/statistics"
 	const routeElements = (
 		<ul>
 		{
-			routes.map((entry, index) => (
-				<li key={index}><Link to={baseUrl + entry.to}>{entry.label}</Link></li>
+			routes.map(({ to, label }, index) => (
+				<li key={index}><Link to={baseUrl + to}>{label}</Link></li>
 			))
 		}
 		</ul>

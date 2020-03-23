@@ -1,12 +1,12 @@
 import React from 'react'
 import ShowAttachment from './ShowAttachment'
 
-const Attachments = ({attachmentUrls}) => {
-	return (
-		<div>
-			{attachmentUrls.map((u, i) => <ShowAttachment key={i} attachmentUrl={u} />)}
-		</div>
-	)
-}
+const Attachments = ({ attachmentUrls }) => (
+	<>
+		{
+			attachmentUrls.map((u, i) => <ShowAttachment key={i} attachmentUrl={u} />)
+		}
+	</>
+)
 
 export default Attachments
