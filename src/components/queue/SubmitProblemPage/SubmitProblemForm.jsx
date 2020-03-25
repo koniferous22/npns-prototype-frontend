@@ -8,7 +8,7 @@ import ReduxFormSelect from '../../form/ReduxFormSelect'
 import CenteredDiv from '../../../styled-components/defaults/CenteredDiv'
 import Button from '../../../styled-components/defaults/Button'
 
-import { submitProblemActions } from '../../../actions/content/submitProblem'
+import { submitProblem } from '../../../store/content/submitProblemPage'
 
 const transformIntoOption = q => ({value: q, label: q})
 
@@ -17,16 +17,15 @@ const submit = (values, dispatch, props) => {
 		values.queue = transformIntoOption(props.defaultQueue)
 	}
 	dispatch(
-		submitProblemActions
-			.submit(
-				{
-					queue_name: values.queue.value,
-					title: values.title,
-					content: values.description,
-					attachmentUrls: props.attachmentUrls
-				},
-				props.token
-			)
+		submitProblem(
+			{
+				queue_name: values.queue.value,
+				title: values.title,
+				content: values.description,
+				attachmentUrls: props.attachmentUrls
+			},
+			props.token
+		)
 	)
 }
 

@@ -5,7 +5,7 @@ import queryString from 'query-string'
 
 import SignUpForm from './SignUpForm'
 import { signupStages } from '../../constants/content/signUpPage'
-import { signupActions } from '../../actions/content/signup'
+import { reset} from '../../store/content/signUpPage'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
@@ -16,7 +16,7 @@ const SignUpPage = ({ location }) => {
 
 	useEffect(() => {
 		return () => {
-			dispatch(signupActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch]);
 

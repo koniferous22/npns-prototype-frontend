@@ -1,34 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 
-import { globalActions } from '../../actions/global'
+import { hideLinQueues, showLinQueues } from '../../store/global'
 
 import StyledQueueDropdown from '../../styled-components/sidebars/QueueDropdown'
 import QueueDropdownEntries from '../../styled-components/sidebars/QueueDropdownEntries'
 
 const QueueDropdown = ({ baseUrl }) => {
-
-	const displayed = useSelector(state => state.global.linQueuesDisplayed)
-	const { linQueues } = useSelector(state => state.global)
 	const dispatch = useDispatch()
-	const show = dispatch(globalActions.showLinQueues) 
-	const hide = dispatch(globalActions.hideLinQueues)
+	const { 
+		linQueues,
+		linQueuesDisplayed: displayed
+	} = useSelector(state => state.global)
 
-	useEffect(() => {
-		return () => {
-			if (displayed) {
-				hide()
-			}
-		};
-	}, [hide, displayed]);
-
+	const show = () => dispatch(showLinQueues()) 
+	const hide = () => dispatch(hideLinQueues())
+	
 	return (
-		<div	className="dropdown" >
-			<StyledQueueDropdown onClick={() => displayed ? hide() : show()}> Pick a Queue </StyledQueueDropdown>
+		<div className="dropdown" >
+			<StyledQueueDropdown onClick={displayed ? hide : show}> Pick a Queue </StyledQueueDropdown>
 			{ displayed && (
 				<QueueDropdownEntries>
-					{linQueues.map((q, index) => <li key={index} value={q} onClick={() => hide()}><Link to={baseUrl + '/' + q}>{q}</Link></li>)}
+					{linQueues.map((q, index) => <li key={index} value={q} onClick={hide}><Link to={baseUrl + '/' + q}>{q}</Link></li>)}
 				</QueueDropdownEntries>
 			)}
 		</div>

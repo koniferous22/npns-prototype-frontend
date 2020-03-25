@@ -15,7 +15,7 @@ const LOAD_QUEUES_FAILED = 'SUBMIT_PROBLEM_PAGE_LOAD_QUEUES_FAILED'
 
 const RESET = 'SUBMIT_PROBLEM_PAGE_RESET'
 
-const submitProblemStages = {
+export const submitProblemStages = {
   SUBMITTING_PROBLEM: 0,
   COMPLETED: 1
 }
@@ -52,7 +52,7 @@ export default combineReducers({
 	form: submitProblemFormReducer
 })
 
-export const submit = (problem, authToken) => {
+export const submitProblem = (problem, authToken) => {
 	const request = () => ({ type: SUBMIT_REQUEST })
 	const success = (problem, queue) => ({ type: SUBMIT_SUCCESS, problem, queue })
 	const failure = (error) => ({ type: SUBMIT_FAILED, error, messageType: messageType.ERROR })

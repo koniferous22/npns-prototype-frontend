@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 
-const QueueSidebarEntries = ({queues, baseUrl}) => {
+const QueueSidebarEntries = ({ queues, baseUrl }) => {
 	const keys = Object.keys(queues);
 	return (
 		<ul>

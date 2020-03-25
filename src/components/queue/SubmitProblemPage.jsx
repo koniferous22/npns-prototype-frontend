@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 
 import SubmitProblemForm from './SubmitProblemPage/SubmitProblemForm'
-import { submitProblemActions } from '../../actions/content/submitProblem'
-import { submitProblemStages } from '../../constants/content/submitProblemPage'
+import { submitProblemStages, fetchDropdownValues, reset } from '../../store/content/submitProblemPage'
 import MarkdownRender from '../form/MarkdownRender'
 import AttachmentUpload from '../upload/AttachmentUpload'
 
@@ -16,9 +15,9 @@ const SubmitProblemPage = ({ urlQueue, loggedIn, token }) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(submitProblemActions.fetchDropdownValues())
+		dispatch(fetchDropdownValues())
 		return () => {
-			dispatch(submitProblemActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch]);
 

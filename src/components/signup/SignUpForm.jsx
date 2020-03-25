@@ -2,12 +2,12 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../form/RenderField'
-import { signupActions } from '../../actions/content/signup'
+import { signup, validateField } from '../../store/content/signUpPage'
 
 import FormButton from '../../styled-components/form/FormButton'
 
 const submit = (values, dispatch, props) => {
-	dispatch(signupActions.signup(values))
+	dispatch(signup(values))
 }
 
 const validate = ({
@@ -55,7 +55,7 @@ const SignUpForm = ({ handleSubmit }) => {
 export default reduxForm({
 	form: 'form',
 	validate,
-	asyncValidate: (values, dispatch, props, blurredField) => signupActions.validateField(values, blurredField),
+	asyncValidate: (values, dispatch, props, blurredField) => validateField(values, blurredField),
 	asyncBlurFields,
 	onSubmit: submit,
 	getFormState: ({content}) => content.signup.form
