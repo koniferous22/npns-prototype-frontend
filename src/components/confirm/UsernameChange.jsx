@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { confirmUsernameChangeActions } from '../../actions/content/confirm/usernameChange'
@@ -7,27 +7,23 @@ import { confirmUsernameChangeActions } from '../../actions/content/confirm/user
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
-const mapStateToProps = state => state.content.confirm.usernameChange
-const mapDispatchToProps = dispatch => ({
-	confirm: (confirmationToken) => dispatch(confirmUsernameChangeActions.confirm(confirmationToken))
-})
 
-class ConfirmUsernameChangePage extends React.Component {
-	componentDidMount() {
-		this.props.confirm(this.props.token)
-	}
+const ConfirmUsernameChangePage = ({ token }) => {
+	const { message, messageType, verified } = useSelector(state => state.content.confirm.usernameChange)
+	const dispatch = useDispatch()
 
-	render() {
-		return (
-			<ContentDiv>
-				<BackendMessage messageType={this.props.messageType}>
-					{this.props.message && <p>{this.props.message}</p>}
-				</BackendMessage>
-				{this.props.verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
-			</ContentDiv>
-		)
-	}
+	useEffect(() => {
+		dispatch(confirmUsernameChangeActions.confirm(token))
+	}, [dispatch, token]);
+
+	return (
+		<ContentDiv>
+			<BackendMessage messageType={messageType}>
+				{message && <p>{message}</p>}
+			</BackendMessage>
+			{verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
+		</ContentDiv>
+	)
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmUsernameChangePage)
+export default ConfirmUsernameChangePage

@@ -1,39 +1,29 @@
-import React from "react"
-import { Redirect } from "react-router-dom";
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from "react-router-dom"
 
 import { authActions } from '../../actions/auth'
 import history from '../../history'
 
-class Auth extends React.Component {
-	componentDidMount() {
-		this.props.verify(this.props.token)
-	}
-	
-	render() {
-		const { component: Component, loggedIn, token, ...rest } = this.props
-		return loggedIn ? (
-			<Component {...rest} />
-		) : (
-			<Redirect
-				to={{
-					pathname: "/login",
-					state: { from: history.location.pathname }
-				}}
-			/>
-		)
-	}
 
+const Auth = ({ component: Component, loggedIn, ...rest }) => {
+	const { token } = useSelector(state => state.auth)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(authActions.verify(token))
+	}, [dispatch, token]);
+
+	return loggedIn ? (
+		<Component {...rest} />
+	) : (
+		<Redirect
+			to={{
+				pathname: "/login",
+				state: { from: history.location.pathname }
+			}}
+		/>
+	)
 }
 
-const mapStateToProps = state => ({
-	token: state.auth.token
-})
-
-const mapDispatchToProps = dispatch => ({
-	verify: token => dispatch(authActions.verify(token))
-})
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Auth)
+export default Auth

@@ -1,9 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { confirmPasswordChangeStages } from '../../constants/content/confirm/passwordChange'
-
 import { confirmPasswordChangeActions } from '../../actions/content/confirm/passwordChange'
 
 import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
@@ -11,53 +10,46 @@ import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
-const mapStateToProps = state => state.content.confirm.passwordChange.page
 
-const mapDispatchToProps = dispatch => ({
-	verify: (token) => dispatch(confirmPasswordChangeActions.verify(token)),
-	reset: () => dispatch(confirmPasswordChangeActions.reset())
-})
+const ConfirmPasswordChangePage = ({ token }) => {
+	const { stage, message, messageType } = useSelector(state => state.content.confirm.passwordChange.page)
+	const dispatch = useDispatch()
 
-class ConfirmPasswordChangePage extends React.Component {
-	componentDidMount() {
-		this.props.verify(this.props.token)
-	}
+	useEffect(() => {
+		dispatch(confirmPasswordChangeActions.verify(token))
+		return () => {
+			dispatch(confirmPasswordChangeActions.reset())
+		};
+	}, [dispatch, token]);
 
-	componentWillUnmount(){
-		this.props.reset()
-	}
-
-	render() {
-		switch (this.props.stage) {
-			case confirmPasswordChangeStages.COMPLETED:
-				return (
-					<ContentDiv>
-						{'Password successfully changed, click '}
-						<Link to="/login">here</Link>
-						{' to log in'}
-					</ContentDiv>
-				)
-			case confirmPasswordChangeStages.SUBMITTING_FORM:
-				return (
-					<ContentDiv>
-	    				<BackendMessage messageType={this.props.messageType}>
-								{this.props.message}
-	 		   			</BackendMessage>
-						<PasswordChangeForm token={this.props.token} />
-					</ContentDiv>
-				)
-			case confirmPasswordChangeStages.INVALID_TOKEN:
-			default:
-				return (
-					<ContentDiv>
-    				<BackendMessage messageType={this.props.messageType}>
-							{this.props.message}
- 		   			</BackendMessage>
-					</ContentDiv>
-				)
-		}
+	switch (stage) {
+		case confirmPasswordChangeStages.COMPLETED:
+			return (
+				<ContentDiv>
+					{'Password successfully changed, click '}
+					<Link to="/login">here</Link>
+					{' to log in'}
+				</ContentDiv>
+			)
+		case confirmPasswordChangeStages.SUBMITTING_FORM:
+			return (
+				<ContentDiv>
+						<BackendMessage messageType={messageType}>
+							{message}
+						</BackendMessage>
+					<PasswordChangeForm token={token} />
+				</ContentDiv>
+			)
+		case confirmPasswordChangeStages.INVALID_TOKEN:
+		default:
+			return (
+				<ContentDiv>
+					<BackendMessage messageType={messageType}>
+						{message}
+					</BackendMessage>
+				</ContentDiv>
+			)
 	}
 } 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmPasswordChangePage)
+export default ConfirmPasswordChangePage

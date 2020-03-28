@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { confirmEmailChangeActions } from '../../actions/content/confirm/emailChange'
@@ -7,27 +7,23 @@ import { confirmEmailChangeActions } from '../../actions/content/confirm/emailCh
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
-const mapStateToProps = state => state.content.confirm.emailChange
-const mapDispatchToProps = dispatch => ({
-	confirm: (confirmationToken) => dispatch(confirmEmailChangeActions.confirm(confirmationToken))
-})
 
-class ConfirmEmailChangePage extends React.Component {
-	componentDidMount() {
-		this.props.confirm(this.props.token)
-	}
+const ConfirmEmailChangePage = ({ token }) => {
+	const { verified, message, messageType } = useSelector(state => state.content.confirm.emailChange)
+	const dispatch = useDispatch()
 
-	render() {
-		return (
-			<ContentDiv>
-		    <BackendMessage messageType={this.props.messageType}>
-					{this.props.message}
-		    </BackendMessage>
-				{this.props.verified && (<div> Continue to <Link to='/login'>Login</Link> </div>)}
-			</ContentDiv>
-		)
-	}
+	useEffect(() => {
+		dispatch(confirmEmailChangeActions.confirm(token))
+	}, [dispatch, token]);
+
+	return (
+		<ContentDiv>
+			<BackendMessage messageType={messageType}>
+				{message}
+			</BackendMessage>
+			{verified && (<div> Continue to <Link to='/login'>Login</Link> </div>)}
+		</ContentDiv>
+	)
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmEmailChangePage)
+export default ConfirmEmailChangePage

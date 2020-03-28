@@ -1,15 +1,15 @@
 import React from 'react'
-import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom"
 
 import LogoutButton from './LogoutButton'
 
-export default (props) => {
-	return !props.loggedIn ? (
-		<Redirect to={props.redirect} />
+export default ({ loggedIn, redirect, logout }) => {
+	return !loggedIn ? (
+		<Redirect to={redirect} />
 	) : (
 		<div>
-			To access resource {props.redirect}, please
-			<LogoutButton loggedIn={props.loggedIn} logout={props.logout}/>
+			To access resource {redirect}, please
+			<LogoutButton loggedIn={loggedIn} logout={logout}/>
 		</div>
 	)
 }
