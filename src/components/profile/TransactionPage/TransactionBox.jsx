@@ -5,21 +5,21 @@ import StyledTransactionBox from '../../../styled-components/profile/Transaction
 import TransactionBoxMeta from '../../../styled-components/profile/TransactionBoxMeta'
 import TransactionBoxMetaSection from '../../../styled-components/profile/TransactionBoxMetaSection'
 
-const TransactionBox = (props) => (
+const TransactionBox = ({ created, queue, karma_value, monetary_value, description }) => (
 	<StyledTransactionBox>
 		<TransactionBoxMeta>
 			<TransactionBoxMetaSection grow>
-				{new Date(props.created).toLocaleDateString()}
+				{new Date(created).toLocaleDateString()}
 			</TransactionBoxMetaSection>
 			<TransactionBoxMetaSection>
-				<Link to={'/q/' + props.queue}>{props.queue}</Link>
-				{' Karma value: ' + props.karma_value}
+				<Link to={'/q/' + queue}>{queue}</Link>
+				{' Karma value: ' + karma_value}
 			</TransactionBoxMetaSection>
 			<TransactionBoxMetaSection>
-				{'Monetary value: ' + props.monetary_value + "$"}
+				{'Monetary value: ' + monetary_value + "$"}
 			</TransactionBoxMetaSection>
 		</TransactionBoxMeta>
-		{props.description}<br/>
+		{description}<br/>
 	</StyledTransactionBox>	
 )
 

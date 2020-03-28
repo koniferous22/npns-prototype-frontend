@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import SidebarDiv from '../../styled-components/sidebars/Sidebar'
 import CollapsedSidebar from '../../styled-components/sidebars/CollapsedSidebar'
 
-const ProfileSidebar = (props) => {
+const ProfileSidebar = ({ auth_view, baseUrl }) => {
 	const privateRoutes = [
 		{
 			to: "/personal",
@@ -22,7 +22,7 @@ const ProfileSidebar = (props) => {
 	const publicRoutes = [
 		{
 			to: "/",
-			label: (props.auth_view) ? "My profile page" : "Profile page"
+			label: (auth_view) ? "My profile page" : "Profile page"
 		},
 		{
 			to: "/activity",
@@ -30,12 +30,12 @@ const ProfileSidebar = (props) => {
 		}
 	]
 
-	const routes = (props.auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
+	const routes = (auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
 	const routeElements = (
 		<ul>
 			{
 				routes.map((entry, index) => (
-					<li key={index}><Link to={props.baseUrl + entry.to}>{entry.label}</Link></li>
+					<li key={index}><Link to={baseUrl + entry.to}>{entry.label}</Link></li>
 				))
 			}
 		</ul>
@@ -51,7 +51,6 @@ const ProfileSidebar = (props) => {
 			</SidebarDiv>
 		</div>
 	)
-
 }
 
 export default ProfileSidebar

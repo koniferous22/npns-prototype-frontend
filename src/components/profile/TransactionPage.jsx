@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ProfileSidebar from './ProfileSidebar'
-import { connect } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
 
 import TransactionBox from './TransactionPage/TransactionBox'
@@ -11,72 +11,62 @@ import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import TransactionBoxWrapper from '../../styled-components/profile/TransactionBoxWrapper'
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-	loadPage: (page) => dispatch(transactionPageActions.setActivePage(ownProps.token, page)),
-	reset: () => dispatch(transactionPageActions.reset())
-})
 
-const mapStateToProps = (state, ownProps) => {
-	const pageState = state.content.profile.transactionPage
-	return {
-		...pageState,
-		entries: pageState.entries.reduce((acc, cv) => acc.concat(cv),[]) || [],
-		...ownProps
-	}
-}
+const TransactionPage = ({ user, token, loggedIn, viewer }) => {
+	const { pageState } = useSelector(state => state.content.profile.transactionPage)
+	const { loading, paging } = pageState
+	const entries = pageState.entries.reduce((acc, cv) => acc.concat(cv),[]) || []
+	
+	const dispatch = useDispatch()
+	
+	useEffect(() => {
+		dispatch(transactionPageActions.setActivePage(token, 1))
+		return () => {
+			dispatch(transactionPageActions.reset())
+		};
+	}, [dispatch, token]);
 
-class TransactionPage extends React.Component {
-	componentWillUnmount() {
-		this.props.reset()
-	}
-
-	componentDidMount() {
-		this.props.loadPage(1)
-	}
-
-	render() {
-		const empty = this.props.entries.length === 0
-		if (empty) {
-			return (
-				<PageDiv>
-					<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
-					<ContentDiv sidebar>
-						<CenteredDiv fullWidth>
-							<h3>{this.props.loading ? "Loading" : "User " + this.props.user + " has yet no transactions"}</h3>
-						</CenteredDiv>
-					</ContentDiv>
-				</PageDiv>
-			)
-		}
-
+	const empty = entries.length === 0
+	if (empty) {
 		return (
 			<PageDiv>
-				<ProfileSidebar baseUrl={'/u/' + this.props.user} auth_view/>
+				<ProfileSidebar baseUrl={'/u/' + user} auth_view/>
 				<ContentDiv sidebar>
 					<CenteredDiv fullWidth>
-						<h3>{"Transactions of user " + this.props.user}</h3>
+						<h3>{loading ? "Loading" : "User " + user + " has yet no transactions"}</h3>
 					</CenteredDiv>
-					<TransactionBoxWrapper>
-						<InfiniteScroll
-							pageStart={1}
-							loadMore={() => {
-								this.props.loadPage(this.props.paging.page + 1)
-							}}
-							hasMore={this.props.paging.hasMore}
-							loader={<div className="loader" key={0}>Loading ...</div>}
-						>
-							<ul>
-							{
-								this.props.entries.map((p,index) => (
-									<li key={index}><TransactionBox {...p}/></li>
-							))}
-							</ul>
-						</InfiniteScroll>
-					</TransactionBoxWrapper>
 				</ContentDiv>
 			</PageDiv>
 		)
 	}
+
+	return (
+		<PageDiv>
+			<ProfileSidebar baseUrl={'/u/' + user} auth_view/>
+			<ContentDiv sidebar>
+				<CenteredDiv fullWidth>
+					<h3>{"Transactions of user " + user}</h3>
+				</CenteredDiv>
+				<TransactionBoxWrapper>
+					<InfiniteScroll
+						pageStart={1}
+						loadMore={() => {
+							dispatch(transactionPageActions.setActivePage(token, paging.page + 1))
+						}}
+						hasMore={paging.hasMore}
+						loader={<div className="loader" key={0}>Loading ...</div>}
+					>
+						<ul>
+						{
+							entries.map((p,index) => (
+								<li key={index}><TransactionBox {...p}/></li>
+						))}
+						</ul>
+					</InfiniteScroll>
+				</TransactionBoxWrapper>
+			</ContentDiv>
+		</PageDiv>
+	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionPage);
+export default TransactionPage
