@@ -11,8 +11,10 @@ import ChangeNamesForm from './PersonalInformationPage/ChangeNamesForm'
 import ConfirmPasswordForm from './PersonalInformationPage/ConfirmPasswordForm'
 import ProfileUpdateDispatcher from './PersonalInformationPage/ProfileUpdateDispatcher'
 
-import { personalInformationPageActions } from '../../actions/content/profile/personalInformationPage'
-import { personalInformationPageStages } from '../../constants/content/profile/personalInformationPage'
+import {
+	personalInformationPageStages,
+	reset
+} from '../../store/content/profile/personalInformationPage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
@@ -26,7 +28,7 @@ const PersonalInformationPage = ({ user, token, loggedIn, viewer }) => {
 
 	useEffect(() => {
 		return () => {
-			dispatch(personalInformationPageActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch]);
 

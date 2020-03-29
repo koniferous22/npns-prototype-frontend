@@ -11,7 +11,7 @@ import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 const SignUpPage = ({ location }) => {
-	const { stage, message, messageType } = useSelector(state => state.content.signup.page)
+	const { stage, message, messageType } = useSelector(state => state.content.signUp.page)
 	const dispatch = useDispatch()
 
 	useEffect(() => {

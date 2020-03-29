@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom"
 
 import SidebarDiv from '../../styled-components/sidebars/Sidebar'
 import CollapsedSidebar from '../../styled-components/sidebars/CollapsedSidebar'
 
-const ProfileSidebar = ({ auth_view, baseUrl }) => {
+const getRoutes = (authView) => {
 	const privateRoutes = [
 		{
 			to: "/personal",
@@ -22,7 +22,7 @@ const ProfileSidebar = ({ auth_view, baseUrl }) => {
 	const publicRoutes = [
 		{
 			to: "/",
-			label: (auth_view) ? "My profile page" : "Profile page"
+			label: (authView) ? "My profile page" : "Profile page"
 		},
 		{
 			to: "/activity",
@@ -30,7 +30,12 @@ const ProfileSidebar = ({ auth_view, baseUrl }) => {
 		}
 	]
 
-	const routes = (auth_view) ? publicRoutes.concat(privateRoutes) : publicRoutes
+	const routes = (authView) ? publicRoutes.concat(privateRoutes) : publicRoutes
+	return routes
+}
+
+const ProfileSidebar = ({ auth_view, baseUrl }) => {
+	const routes = useMemo(() => getRoutes(auth_view), [auth_view])
 	const routeElements = (
 		<ul>
 			{

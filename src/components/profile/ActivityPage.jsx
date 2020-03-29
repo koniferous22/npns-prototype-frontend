@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { activityPageActions } from '../../actions/content/profile/activityPage'
+import { setActivePage, setUser, reset } from '../../store/content/profile/activityPage'
 
 import { ProblemBox } from '../problem/ProblemBox'
 
@@ -13,27 +13,19 @@ import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
 import ProblemBoxWrapper from '../../styled-components/problem-related/ProblemBoxWrapper'
 
-/*const mapStateToProps = state => {
-	const pageState = state.content.profile.activityPage
-	return {
-		...pageState,
-		entries: pageState.entries.reduce((acc, cv) => acc.concat(cv),[]),
-	}
-}*/
-
 const ActivityPage = ({ viewer, user, loggedIn }) => {
-	const { pageState } = useSelector(state => state.content.profile.activityPage)
+	const dispatch = useDispatch()
+	const pageState = useSelector(state => state.content.profile.activityPage)
 	const { loading, paging } = pageState
 	const entries = pageState.entries.reduce((acc, cv) => acc.concat(cv),[]) 
-	const dispatch = useDispatch()
 
-  useEffect(() => {
-		dispatch(activityPageActions.setUser(user))
-		dispatch(activityPageActions.setActivePage(user, 1))
-    return () => {
-			dispatch(activityPageActions.reset())
-    };
-  }, [dispatch, user]);
+	useEffect(() => {
+		dispatch(setUser(user))
+		dispatch(setActivePage(user, 1))
+		return () => {
+			dispatch(reset())
+		};
+	}, [dispatch, user]);
 
 	const base_url = '/u/' + user
 	const auth_view = (user === viewer && loggedIn)
@@ -63,7 +55,7 @@ const ActivityPage = ({ viewer, user, loggedIn }) => {
 					<InfiniteScroll
 						pageStart={1}
 						loadMore={() => {
-							dispatch(activityPageActions.setActivePage(user, paging.page + 1)) 
+							dispatch(setActivePage(user, paging.page + 1)) 
 						}}
 						hasMore={paging.hasMore}
 						loader={<div className="loader" key={0}>Loading ...</div>}

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { problemPageActions } from '../../../actions/content/problemPage'
+import { edit } from '../../../store/content/problemPage'
 
 import MyEditor from '../../form/MyEditor'
 import Button from '../../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(problemPageActions.edit({edit: values.edit, contentId: props.contentId}, props.token))
+	dispatch(edit({edit: values.edit, contentId: props.contentId}, props.token))
 } 
 
 let EditForm = props => {

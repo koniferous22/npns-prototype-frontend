@@ -4,7 +4,7 @@ import ProfileSidebar from './ProfileSidebar'
 import InfiniteScroll from 'react-infinite-scroller';
 
 import TransactionBox from './TransactionPage/TransactionBox'
-import { transactionPageActions } from '../../actions/content/profile/transactionPage'
+import { setActivePage, reset } from '../../store/content/profile/transactionPage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
@@ -20,9 +20,9 @@ const TransactionPage = ({ user, token, loggedIn, viewer }) => {
 	const dispatch = useDispatch()
 	
 	useEffect(() => {
-		dispatch(transactionPageActions.setActivePage(token, 1))
+		dispatch(setActivePage(token, 1))
 		return () => {
-			dispatch(transactionPageActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch, token]);
 
@@ -51,16 +51,17 @@ const TransactionPage = ({ user, token, loggedIn, viewer }) => {
 					<InfiniteScroll
 						pageStart={1}
 						loadMore={() => {
-							dispatch(transactionPageActions.setActivePage(token, paging.page + 1))
+							dispatch(setActivePage(token, paging.page + 1))
 						}}
 						hasMore={paging.hasMore}
 						loader={<div className="loader" key={0}>Loading ...</div>}
 					>
 						<ul>
 						{
-							entries.map((p,index) => (
-								<li key={index}><TransactionBox {...p}/></li>
-						))}
+							entries.map(
+								(p,index) => <li key={index}><TransactionBox {...p}/></li>
+							)
+						}
 						</ul>
 					</InfiniteScroll>
 				</TransactionBoxWrapper>

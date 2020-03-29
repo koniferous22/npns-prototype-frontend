@@ -17,7 +17,7 @@ const LoginPage = () => {
 					{message}
 				</BackendMessage>
 			</CenteredDiv>
-				<LoginForm/>
+			<LoginForm/>
 			<CenteredDiv>
 				<Link to="/forgotpwd" >Forgot Password?</Link>
 			</CenteredDiv>

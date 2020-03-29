@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ProfileSidebar from './ProfileSidebar'
-import { premiumPageActions } from '../../actions/content/profile/premiumPage'
+import { subscribe, unsubscribe } from '../../store/content/profile/premiumPage'
 
 import PageDiv from '../../styled-components/defaults/PageDiv'
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
@@ -19,7 +19,11 @@ const PremiumPage = ({ user, loggedIn, viewer }) => {
 			<ContentDiv sidebar>
 				<CenteredDiv fullWidth>
 					<p>{text}</p>
-					{premiumActive ? <Button onClick={() => dispatch(premiumPageActions.unsubscribe())}>Unsubscribe</Button> : <Button onClick={() => dispatch(premiumPageActions.subscribe())}>Subscribe</Button>}
+					{
+						premiumActive
+							? <Button onClick={() => dispatch(unsubscribe())}>Unsubscribe</Button>
+							: <Button onClick={() => dispatch(subscribe())}>Subscribe</Button>
+					}
 				</CenteredDiv>
 			</ContentDiv>
 		</PageDiv>

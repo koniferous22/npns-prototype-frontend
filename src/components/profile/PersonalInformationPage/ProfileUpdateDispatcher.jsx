@@ -5,12 +5,12 @@ import { personalInformationPageActions } from '../../../actions/content/profile
 
 
 const ProfileUpdateDispatcher = ({ form, token, values, user }) => {
-		const dispatch = useDispatch()
-		const email = useCallback(() => dispatch(personalInformationPageActions.submitEmailChange(values.email, token)), [values, token, dispatch])
-		const password = useCallback(() => dispatch(personalInformationPageActions.submitPasswordChange(user)), [user, dispatch])
-		const username = useCallback(() => dispatch(personalInformationPageActions.submitUsernameChange(values.username, token)), [values, token, dispatch])
-		const names = useCallback(() => dispatch(personalInformationPageActions.submitNamesChange(values.firstName, values.lastName, token)), [values, token, dispatch])
-		const error = () => {throw new Error('wut?')}
+	const dispatch = useDispatch()
+	const email = useCallback(() => dispatch(personalInformationPageActions.submitEmailChange(values.email, token)), [values, token, dispatch])
+	const password = useCallback(() => dispatch(personalInformationPageActions.submitPasswordChange(user)), [user, dispatch])
+	const username = useCallback(() => dispatch(personalInformationPageActions.submitUsernameChange(values.username, token)), [values, token, dispatch])
+	const names = useCallback(() => dispatch(personalInformationPageActions.submitNamesChange(values.firstName, values.lastName, token)), [values, token, dispatch])
+	const error = () => {throw new Error('wut?')}
 
 	useEffect(() => {
 		switch (form) {

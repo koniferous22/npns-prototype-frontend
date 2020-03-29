@@ -28,7 +28,7 @@ const CHANGE_NAMES_FAILED = "PERSONAL_INFORMATION_PAGE_CHANGE_NAMES_FAILED"
 
 const RESET = "PERSONAL_INFORMATION_PAGE_RESET"
 
-const personalInformationPageStages = {
+export const personalInformationPageStages = {
 	SUBMITTING_FORM: 0,
 	PASSWORD_CONFIRMATION: 1,
 	COMPLETED: 2

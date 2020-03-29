@@ -1,15 +1,15 @@
 import React from 'react'
-import { boostActions } from '../../../actions/content/boost'
+import { submitBoost, adjustBoost } from '../../../store/content/boost'
 import { Field, reduxForm } from 'redux-form'
 
 import FormButton from '../../../styled-components/form/FormButton'
 import renderField from '../../form/RenderField'
 
-let submitBoost = (values, dispatch, props) => {
-	dispatch(boostActions.submitBoost({value: values.boost}))
+const submitBoostCb = (values, dispatch, props) => {
+	dispatch(submitBoost({value: values.boost}))
 }
-let adjustBoost = (values, dispatch, props) => {
-	dispatch(boostActions.adjustBoost({value: values.boost}))
+const adjustBoostCb = (values, dispatch, props) => {
+	dispatch(adjustBoost({value: values.boost}))
 }
 
 const number = value =>
@@ -31,8 +31,8 @@ let AdjustBoostForm = props => {
 
 AdjustBoostForm = reduxForm({
 	form: 'form',
-	onChange: adjustBoost,
-	onSubmit: submitBoost,
+	onChange: adjustBoostCb,
+	onSubmit: submitBoostCb,
 	getFormState: ({content}) => content.boost.form
 })(AdjustBoostForm)
 

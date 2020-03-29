@@ -58,5 +58,5 @@ export default reduxForm({
 	asyncValidate: (values, dispatch, props, blurredField) => validateField(values, blurredField),
 	asyncBlurFields,
 	onSubmit: submit,
-	getFormState: ({content}) => content.signup.form
+	getFormState: ({content}) => content.signUp.form
 })(SignUpForm)
