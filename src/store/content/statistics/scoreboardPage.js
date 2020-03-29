@@ -2,8 +2,7 @@ import { combineReducers } from 'redux'
 import { reducer as scoreboardSearchFormReducer } from 'redux-form'
 
 import { appConfig } from '../../../appConfig'
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const LOAD_PAGE_REQUEST = 'SCOREBOARD_PAGE_LOAD_PAGE_REQUEST'
 const LOAD_PAGE_SUCCESS = 'SCOREBOARD_PAGE_LOAD_PAGE_SUCCESS'

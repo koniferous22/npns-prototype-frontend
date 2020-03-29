@@ -9,25 +9,18 @@ const Editing = ({ ownerId, contentId, token }) => {
 	const user = useSelector(state => state.auth.user)
 	const edit = useSelector(state => state.content.edit)
 
-	/*ten dementny if navyse som tam hodil lebo mi hadzalo ze user je undefined error */
-	if(user) {				
-		if(ownerId === user._id) {
-			return (
-				<div>
-					<Button onClick={() => setShowEditForm(!showEditForm)}>
-						Update
-					</Button>
-					{!edit.editFormSubmitted && showEditForm && <EditForm contentId={contentId} token={token} />}
-				</div>
-			)
-		}
-		else {
-			return(<div></div>)
-		}
+	if (!user || user._id !== ownerId) {
+		return null;
 	}
-	else {
-		return(<div></div>)
-	}
+
+	return (
+		<div>
+			<Button onClick={() => setShowEditForm(!showEditForm)}>
+				Update
+			</Button>
+			{!edit.editFormSubmitted && showEditForm && <EditForm contentId={contentId} token={token} />}
+		</div>
+	)
 }
 
 export default Editing

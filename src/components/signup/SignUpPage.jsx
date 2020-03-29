@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import queryString from 'query-string'
 
 import SignUpForm from './SignUpForm'
-import { signupStages } from '../../constants/content/signUpPage'
+import { signUpStages } from '../../store/content/signUpPage'
 import { reset} from '../../store/content/signUpPage'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
@@ -21,7 +21,7 @@ const SignUpPage = ({ location }) => {
 	}, [dispatch]);
 
 	switch(stage) {
-		case signupStages.COMPLETED:
+		case signUpStages.COMPLETED:
 			return (
 				<ContentDiv>
 					<BackendMessage messageType={messageType}>
@@ -34,7 +34,7 @@ const SignUpPage = ({ location }) => {
 					</ol>
 				</ContentDiv>
 			)
-		case signupStages.SUBMITTING_FORM:
+		case signUpStages.SUBMITTING_FORM:
 		default:
 			const referred_by = queryString.parse(location.search).referred_by
 			return (

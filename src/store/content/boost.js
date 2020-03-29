@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as boostFormReducer } from 'redux-form'
 
-import { messageType } from '../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../utils'
+import { fetchData, messageType } from '../../utils'
 
 const SUBMIT_BOOST = 'BOOST_PAGE_SUBMIT_BOOST'
 const ADJUST_BOOST = 'BOOST_PAGE_ADJUST_BOOST'

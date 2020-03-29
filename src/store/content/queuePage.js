@@ -1,6 +1,4 @@
-import { fetchData } from '../../utils'
-
-import { messageType } from '../../constants/misc/backendMessageTypes'
+import { fetchData, messageType } from '../../utils'
 
 const SET_ACTIVE_PAGE_REQUEST = "QUEUE_PAGE_SET_ACTIVE_PAGE_REQUEST"
 const SET_ACTIVE_PAGE_SUCCESS = "QUEUE_PAGE_SET_ACTIVE_PAGE_SUCCESS"

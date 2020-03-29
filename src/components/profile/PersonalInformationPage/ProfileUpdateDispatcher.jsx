@@ -1,15 +1,20 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
+import {
+	submitEmailChange,
+	submitPasswordChange,
+	submitUsernameChange,
+	submitNamesChange
+} from '../../../store/content/profile/personalInformationPage'
 
 
 const ProfileUpdateDispatcher = ({ form, token, values, user }) => {
 	const dispatch = useDispatch()
-	const email = useCallback(() => dispatch(personalInformationPageActions.submitEmailChange(values.email, token)), [values, token, dispatch])
-	const password = useCallback(() => dispatch(personalInformationPageActions.submitPasswordChange(user)), [user, dispatch])
-	const username = useCallback(() => dispatch(personalInformationPageActions.submitUsernameChange(values.username, token)), [values, token, dispatch])
-	const names = useCallback(() => dispatch(personalInformationPageActions.submitNamesChange(values.firstName, values.lastName, token)), [values, token, dispatch])
+	const email = useCallback(() => dispatch(submitEmailChange(values.email, token)), [values, token, dispatch])
+	const password = useCallback(() => dispatch(submitPasswordChange(user)), [user, dispatch])
+	const username = useCallback(() => dispatch(submitUsernameChange(values.username, token)), [values, token, dispatch])
+	const names = useCallback(() => dispatch(submitNamesChange(values.firstName, values.lastName, token)), [values, token, dispatch])
 	const error = () => {throw new Error('wut?')}
 
 	useEffect(() => {

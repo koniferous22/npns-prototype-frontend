@@ -1,5 +1,4 @@
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const LOAD_TRANSACTION_PAGE_REQUEST = "TRANSACTION_PAGE_LOAD_TRANSACTION_PAGE_REQUEST"
 const LOAD_TRANSACTION_PAGE_SUCCESS = "TRANSACTION_PAGE_LOAD_TRANSACTION_PAGE_SUCCESS"

@@ -1,6 +1,4 @@
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const REQUEST = "CONFIRM_REGISTRATION_REQUEST"
 const SUCCESS = "CONFIRM_REGISTRATION_SUCCESS"

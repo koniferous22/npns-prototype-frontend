@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ForgotPasswordForm from './ForgotPasswordForm'
-import { forgotPwdStages } from '../../constants/content/forgotPwdPage'
-import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
+import { forgotPwdStages } from '../../store/content/forgotPwdPage'
+import { reset } from '../../store/content/forgotPwdPage'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
@@ -15,7 +15,7 @@ const ForgotPassword = ({ loggedIn }) => {
 
 	useEffect(() => {
 		return () => {
-			dispatch(forgotPwdActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch]);
 

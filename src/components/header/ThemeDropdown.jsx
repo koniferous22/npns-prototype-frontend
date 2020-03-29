@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import StyledThemeDropdown from '../../styled-components/header/ThemeDropdown'
 import ThemeDropdownEntries from '../../styled-components/header/ThemeDropdownEntries'
 
-import { globalActions } from '../../actions/global'
+import { hideThemes, showThemes, setTheme } from '../../store/global'
 
 const ThemeDrowdown = () => {
 	const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const ThemeDrowdown = () => {
 	
 	useEffect(() => {
 		return () => {
-			dispatch(globalActions.hideThemes())
+			dispatch(hideThemes())
 		};
 	}, [dispatch]);
 
@@ -22,7 +22,7 @@ const ThemeDrowdown = () => {
 		<ThemeDropdownEntries>
 			{Object.keys(themes).map((theme, index) => (
 				<li key={index}>
-					<div onClick={() => dispatch(globalActions.setTheme(theme))}>{themes[theme].label}</div>
+					<div onClick={() => dispatch(setTheme(theme))}>{themes[theme].label}</div>
 				</li>
 			))}
 		</ThemeDropdownEntries>
@@ -30,7 +30,7 @@ const ThemeDrowdown = () => {
 	const currentTheme = themes[currentThemeFromState];
 	return (
 		<div>
-			<StyledThemeDropdown className="button" onClick={() => displayed ? dispatch(globalActions.hideThemes()) : dispatch(globalActions.showThemes())}>{currentTheme.textWhenSelected || currentTheme.label}</StyledThemeDropdown>
+			<StyledThemeDropdown className="button" onClick={() => displayed ? dispatch(hideThemes()) : dispatch(showThemes())}>{currentTheme.textWhenSelected || currentTheme.label}</StyledThemeDropdown>
 			{displayed && themeDivs}
 		</div>
 	)

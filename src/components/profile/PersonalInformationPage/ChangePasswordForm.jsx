@@ -1,12 +1,12 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 
-import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
+import { filled } from '../../../store/content/profile/personalInformationPage'
 
 import Button from '../../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(personalInformationPageActions.filled('password',values))
+	dispatch(filled('password',values))
 }
 
 let ChangePasswordForm = (props) => (

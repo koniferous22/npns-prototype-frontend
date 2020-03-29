@@ -1,6 +1,4 @@
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const LOAD_USER_REQUEST = 'PROFILE_PAGE_LOAD_USER_REQUEST'
 const LOAD_USER_SUCCESS = 'PROFILE_PAGE_LOAD_USER_SUCCESS'

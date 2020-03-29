@@ -2,12 +2,12 @@ import { Field, reduxForm } from 'redux-form'
 import React from 'react'
 
 import renderField from '../../form/RenderField'
-import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
+import { confirmPassword } from '../../../store/content/profile/personalInformationPage'
 
 import FormButton from '../../../styled-components/form/FormButton'
 
 const submit = (values, dispatch, props) => {
-	dispatch(personalInformationPageActions.confirmPassword(values.password, props.form, props.token))
+	dispatch(confirmPassword(values.password, props.form, props.token))
 }
 
 let ConfirmPasswordForm = (props) => (

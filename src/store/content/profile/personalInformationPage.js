@@ -1,9 +1,7 @@
 import { reducer as personalInformationFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import { fetchData } from '../../../utils'
-
-import { messageType } from '../../../constants/misc/backendMessageTypes'
+import { fetchData, messageType } from '../../../utils'
 
 const REQUEST_FORM_FILLED = "PERSONAL_INFORMATION_PAGE_REQUEST_FORM_FILLED"
 

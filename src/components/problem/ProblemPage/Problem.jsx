@@ -12,7 +12,7 @@ import BoostHistory from './BoostHistory'
 import ContentInfo from '../../../styled-components/problem/ContentInfo'
 import ProblemBox from '../../../styled-components/problem/ProblemBox'
 
-import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
+import { dateTimeDefaultLocale, dateTimeOptions } from '../../../utils'
 
 const Problem = ({ loggedIn, embeddedSolution, token }) => {
 	const [showBoostHistory, change] = useState(false)

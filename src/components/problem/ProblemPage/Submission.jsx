@@ -9,7 +9,12 @@ import Attachments from '../../upload/Attachments'
 import Editing from './Editing'
 import Edits from './Edits'
 
-import { problemPageActions } from '../../../actions/content/problemPage'
+import {
+	acceptSubmission,
+	selectReplyForm,
+	loadReplyPage,
+	hideReplies
+} from '../../../store/content/problemPage'
 
 import SubmissionDiv from '../../../styled-components/problem/SubmissionDiv'
 import SubmissionBox from '../../../styled-components/problem/SubmissionBox'
@@ -20,7 +25,7 @@ import RepliesButton from '../../../styled-components/problem/RepliesButton'
 import RepliesButtonDiv from '../../../styled-components/problem/RepliesButtonDiv'
 import SolutionLabel from '../../../styled-components/problem/SolutionLabel'
 
-import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
+import { dateTimeDefaultLocale, dateTimeOptions } from '../../../utils'
 
 const Submission = ({ submissionId, page, problem, key, acceptButton, replyButton, loadRepliesButton, hasActiveReplyForm, paging, token, isSolution, wrapper }) => {
 
@@ -39,8 +44,8 @@ const Submission = ({ submissionId, page, problem, key, acceptButton, replyButto
 			<Attachments attachmentUrls={attachmentUrls} />
       <Edits edits={edits} />
 			<ButtonDiv>
-				{acceptButton && <Button onClick={() => dispatch(problemPageActions.acceptSubmission(submissionId, problem, token))}>Accept Submission</Button>}
-				{replyButton && <Button onClick={() => dispatch(problemPageActions.selectReplyForm(submissionId))}>Reply</Button>}
+				{acceptButton && <Button onClick={() => dispatch(acceptSubmission(submissionId, problem, token))}>Accept Submission</Button>}
+				{replyButton && <Button onClick={() => dispatch(selectReplyForm(submissionId))}>Reply</Button>}
 				<Editing contentId={submissionId} token={token} ownerId={userId}/>
 			</ButtonDiv>
 		</SubmissionBox>
@@ -70,8 +75,8 @@ const Submission = ({ submissionId, page, problem, key, acceptButton, replyButto
 				loadRepliesButton && 
 				(
 					<RepliesButtonDiv>
-						{paging && paging.hasMore && <RepliesButton onClick={() => dispatch(problemPageActions.loadReplyPage(submissionId, paging.page + 1))}>{'Load ' + (!repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
-						{!repliesHidden && <RepliesButton onClick={() => dispatch(problemPageActions.hideReplies(submissionId))}>Hide Replies</RepliesButton>}
+						{paging && paging.hasMore && <RepliesButton onClick={() => dispatch(loadReplyPage(submissionId, paging.page + 1))}>{'Load ' + (!repliesHidden ? 'More ' : '') + 'Replies'}</RepliesButton>}
+						{!repliesHidden && <RepliesButton onClick={() => dispatch(hideReplies(submissionId))}>Hide Replies</RepliesButton>}
 					</RepliesButtonDiv>
 				)
 			}

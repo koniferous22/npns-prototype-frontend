@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { problemPageActions } from '../../../actions/content/problemPage'
+import { postSubmission } from '../../../store/content/problemPage'
 
 import MyEditor from '../../form/MyEditor'
 import Button from '../../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(problemPageActions.postSubmission({content: values.content, problem: props.problem, attachmentUrls: props.attachmentUrls}, props.token))
+	dispatch(postSubmission({content: values.content, problem: props.problem, attachmentUrls: props.attachmentUrls}, props.token))
 }
 
 let PostSubmissionForm = props => {

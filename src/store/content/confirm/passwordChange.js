@@ -1,8 +1,7 @@
 import { reducer as passwordChangeFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const VERIFY_REQUEST = "VERIFY_PASSWORD_CHANGE_REQUEST"
 const VERIFY_SUCCESS = "VERIFY_PASSWORD_CHANGE_SUCCESS"

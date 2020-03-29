@@ -23,7 +23,7 @@
     "redux-form": "^8.3.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "remark-math": "^2.0.0",
+    "remark-math": "^2.0.1",
     "styled-components": "^4.4.1",
     "typescript": "^3.7.5"
   },

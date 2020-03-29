@@ -1,7 +1,6 @@
 import { appConfig } from '../../appConfig'
 
-import { messageType } from '../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../utils'
+import { fetchData, messageType } from '../../utils'
 import { reducer as signupFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
@@ -10,23 +9,23 @@ const SUCCESS = 'SIGNUP_SUCCESS'
 const FAILED = 'SIGNUP_FAILED'
 const RESET = 'SIGNUP_PAGE_RESET'
 
-const signupStages = {
+export const signUpStages = {
 	SUBMITTING_FORM: 0,
 	COMPLETED: 1
 }
 
 const initialState = {
-	stage: signupStages.SUBMITTING_FORM
+	stage: signUpStages.SUBMITTING_FORM
 }
 
 
 const signupPageReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REQUEST:
-			return {stage: signupStages.SUBMITTING_FORM, message: "Waiting for server response"}
+			return {stage: signUpStages.SUBMITTING_FORM, message: "Waiting for server response"}
 		case SUCCESS:
 			return {
-				stage: signupStages.COMPLETED,
+				stage: signUpStages.COMPLETED,
 				message: {
 					message: appConfig.productionMail ? "Confermation link sent ;) pls check ur email adress, YUH!" : "Ok now that you've regoostered, this is a demo version that uses only testing mail service for user receiving emails, since we cannot afford SMTP server.\nThat means, to complete the process",
 					steps: appConfig.productionMail ? [] : [
@@ -38,7 +37,7 @@ const signupPageReducer = (state = initialState, action) => {
 				messageType: action.messageType
 			}
 		case FAILED:
-				return {stage: signupStages.SUBMITTING_FORM, message: action.message, messageType: action.messageType }
+				return {stage: signUpStages.SUBMITTING_FORM, message: action.message, messageType: action.messageType }
 		case RESET:
 			return initialState
 		default:

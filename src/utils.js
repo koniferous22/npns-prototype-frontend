@@ -20,3 +20,19 @@ export const fetchData = (backendEndpoint, request, onFetching, onSuccess, onErr
 			dispatch(onError(error))
 		});
 }
+
+export const dateTimeOptions = {
+	year: 'numeric',
+	month: 'numeric',
+	day: 'numeric',
+	hour: 'numeric',
+	minute: 'numeric'	
+}
+
+export const dateTimeDefaultLocale = 'en-GB'
+
+// TODO refactor as typescript enum
+export const messageType = {
+	INFO: "INFO",
+	ERROR: "ERROR"
+}

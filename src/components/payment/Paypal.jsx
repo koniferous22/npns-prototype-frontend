@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { boostActions } from '../../actions/content/boost'
+import { savePaypalOrder } from '../../store/content/boost'
 
 const Paypal = ({ product, problemId, token }) => {
 	const [paidFor, setPaidFor] = useState(false);
@@ -11,6 +11,7 @@ const Paypal = ({ product, problemId, token }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		// TOTO TBH DOPICE
 		const script = document.createElement("script")
 		script.src = "https://www.paypal.com/sdk/js?currency=EUR&client-id=AZ1HpdnQzwO8xVWTG-W9_DYDtNDmLR3xCH9RYY0N46r07ayHnUEGOekpgei5rwoVSpQTTDgdkxr7g5Fi"
 		script.addEventListener("load", () => setLoaded(true))
@@ -37,7 +38,7 @@ const Paypal = ({ product, problemId, token }) => {
 							const order = await actions.order.capture();
 							setPaidFor(true);
 							const boost = {value: product.value, problemId: problemId, order: order};
-							dispatch(boostActions.savePaypalOrder(boost, token));
+							dispatch(savePaypalOrder(boost, token));
 						},
 						onError: err => {
 							setError(err);

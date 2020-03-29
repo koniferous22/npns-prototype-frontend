@@ -3,8 +3,7 @@ import { combineReducers } from 'redux'
 
 import { appConfig } from '../../appConfig'
 
-import { messageType } from '../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../utils'
+import { fetchData, messageType } from '../../utils'
 
 
 const REQUEST = "FORGOT_PWD_PAGE_REQUEST"
@@ -12,7 +11,7 @@ const SUCCESS = "FORGOT_PWD_PAGE_SUCCESS"
 const FAILED = "FORGOT_PWD_PAGE_FAILURE"
 const RESET = "FORGOT_PWD_PAGE_RESET"
 
-const forgotPwdStages = {
+export const forgotPwdStages = {
 	SUBMITTING_FORM: 0,
 	EMAIL_SENT: 1
 }
@@ -87,3 +86,7 @@ export const forgotPwd = (user) => {
 		(error) => failed(JSON.stringify(error))
 	)
 }
+
+export const reset = () => ({
+	type: RESET
+})

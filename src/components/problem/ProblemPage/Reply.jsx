@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import ReplyBox from '../../../styled-components/problem/ReplyBox'
 import ContentInfo from '../../../styled-components/problem/ContentInfo'
 
-import { dateTimeDefaultLocale, dateTimeOptions } from '../../../constants/misc/dateTimeOptions'
+import { dateTimeDefaultLocale, dateTimeOptions } from '../../../utils'
 
 export default ({ created, user, content }) => (
 	<ReplyBox>

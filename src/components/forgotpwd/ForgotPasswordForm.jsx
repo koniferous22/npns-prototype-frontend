@@ -1,14 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { forgotPwdActions } from '../../actions/content/forgotPwdPage'
+import { forgotPwd } from '../../store/content/forgotPwdPage'
 
 import renderField from '../form/RenderField'
 
 import Button from '../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(forgotPwdActions.forgotPwd(values.identifier))
+	dispatch(forgotPwd(values.identifier))
 }
 
 const ForgotPasswordForm = props => {

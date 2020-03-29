@@ -6,9 +6,8 @@ import Paypal from '../payment/Paypal'
 import Transparency from './BoostPage/Transparency'
 import calculatePayment from '../payment/calculatePayment'
 import AdjustBoostForm from './BoostPage/AdjustBoostForm'
-import { problemPageActions } from '../../actions/content/problemPage'
-import { boostActions } from '../../actions/content/boost'
-import { boostStages } from '../../constants/content/boost' 
+import { loadProblemData } from '../../store/content/problemPage'
+import { boostStages, reset } from '../../store/content/boost' 
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
@@ -20,9 +19,9 @@ const BoostPage = ({ problemId, token }) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => { 
-		dispatch(problemPageActions.loadProblemData(problemId))
+		dispatch(loadProblemData(problemId))
 		return () => { 
-			dispatch(boostActions.reset())
+			dispatch(reset())
 		}; 
 	}, [dispatch, problemId]); 
 

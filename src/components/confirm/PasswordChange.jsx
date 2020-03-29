@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { confirmPasswordChangeStages } from '../../constants/content/confirm/passwordChange'
-import { confirmPasswordChangeActions } from '../../actions/content/confirm/passwordChange'
+import {
+	confirmPasswordChangeStages,
+	verify,
+	reset
+} from '../../store/content/confirm/passwordChange'
 
 import PasswordChangeForm from './PasswordChange/PasswordChangeForm'
 
@@ -16,9 +19,9 @@ const ConfirmPasswordChangePage = ({ token }) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(confirmPasswordChangeActions.verify(token))
+		dispatch(verify(token))
 		return () => {
-			dispatch(confirmPasswordChangeActions.reset())
+			dispatch(reset())
 		};
 	}, [dispatch, token]);
 

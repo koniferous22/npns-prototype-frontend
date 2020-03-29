@@ -1,6 +1,4 @@
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const REQUEST = "CONFIRM_EMAIL_CHANGE_REQUEST"
 const SUCCESS = "CONFIRM_EMAIL_CHANGE_SUCCESS"

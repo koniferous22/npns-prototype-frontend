@@ -1,5 +1,4 @@
-import { messageType } from '../../../constants/misc/backendMessageTypes'
-import { fetchData } from '../../../utils'
+import { fetchData, messageType } from '../../../utils'
 
 const LOAD_KARMA_VALUES_REQUEST = 'LOAD_KARMA_VALUES_REQUEST'
 const LOAD_KARMA_VALUES_SUCCESS = 'LOAD_KARMA_VALUES_SUCCESS'

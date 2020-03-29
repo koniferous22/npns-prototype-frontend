@@ -1,8 +1,6 @@
 
-import { messageType } from '../constants/misc/backendMessageTypes'
 import { appConfig } from '../appConfig'
-
-import { fetchData } from '../utils'
+import { fetchData, messageType } from '../utils'
 
 const LOGIN_REQUEST = 'AUTH_LOGIN_REQUEST';
 const LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';

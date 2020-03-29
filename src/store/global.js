@@ -1,4 +1,3 @@
-import { globalConstants } from '../constants/global'
 import { fetchData } from '../utils'
 
 const HIERARCHY_LOAD_REQUEST = 'GLOBAL_HIERARCHY_LOAD';
@@ -33,27 +32,27 @@ const defaultState = {hierarchy: defaultHierarchy, linQueues: defaultLinQueues, 
 
 export default function globalReducer(state = defaultState, action) {
 	switch (action.type) {
-		case globalConstants.HIERARCHY_LOAD_REQUEST:
+		case HIERARCHY_LOAD_REQUEST:
 			return { ...state, hierarchy: defaultHierarchy }
-		case globalConstants.HIERARCHY_LOAD_SUCCESS:
+		case HIERARCHY_LOAD_SUCCESS:
 			return { ...state, hierarchy: action.hierarchy || defaultHierarchy }
-		case globalConstants.HIERARCHY_LOAD_FAILED:
+		case HIERARCHY_LOAD_FAILED:
 			return { ...state, hierarchy: state.hierarchy || defaultHierarchy }
-		case globalConstants.LIN_QUEUES_LOAD_REQUEST:
+		case LIN_QUEUES_LOAD_REQUEST:
 			return { ...state, linQueues: defaultLinQueues }
-		case globalConstants.LIN_QUEUES_LOAD_SUCCESS:
+		case LIN_QUEUES_LOAD_SUCCESS:
 			return { ...state, linQueues: action.queues }
-		case globalConstants.LIN_QUEUES_LOAD_FAILED:
+		case LIN_QUEUES_LOAD_FAILED:
 			return { ...state, linQueues: state.linQueues || defaultLinQueues }
-		case globalConstants.LIN_QUEUES_DISPLAY:
+		case LIN_QUEUES_DISPLAY:
 			return { ...state, linQueuesDisplayed: true }
-		case globalConstants.LIN_QUEUES_HIDE:
+		case LIN_QUEUES_HIDE:
 			return { ...state, linQueuesDisplayed: false }
-		case globalConstants.THEMES_DISPLAY:
+		case THEMES_DISPLAY:
 			return { ...state, themesDisplayed: true }
-		case globalConstants.THEMES_HIDE:
+		case THEMES_HIDE:
 			return { ...state, themesDisplayed: false }
-		case globalConstants.SET_THEME:
+		case SET_THEME:
 			return (action.theme in themes) ? { ...state, theme: action.theme} : state
 		default:
 			return state

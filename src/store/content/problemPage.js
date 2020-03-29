@@ -1,9 +1,7 @@
 import { reducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import { fetchData } from '../../utils'
-
-import { messageType } from '../../constants/misc/backendMessageTypes'
+import { fetchData, messageType } from '../../utils'
 
 const LOAD_PROBLEM_DATA_REQUEST = "PROBLEM_PAGE_LOAD_PROBLEM_DATA_REQUEST"
 const LOAD_PROBLEM_DATA_SUCCESS = "PROBLEM_PAGE_LOAD_PROBLEM_DATA_SUCCESS"

@@ -2,12 +2,12 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../../form/RenderField'
-import { personalInformationPageActions } from '../../../actions/content/profile/personalInformationPage'
+import { filled } from '../../../store/content/profile/personalInformationPage'
 
 import Button from '../../../styled-components/defaults/Button'
 
 const submit = (values, dispatch, props) => {
-	dispatch(personalInformationPageActions.filled('names',values))
+	dispatch(filled('names',values))
 }
 
 let ChangeNamesForm = (props) => (

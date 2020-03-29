@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as submitProblemFormReducer } from 'redux-form'
 
-import { messageType } from '../../constants/misc/backendMessageTypes'
-
-import { fetchData } from '../../utils'
+import { fetchData, messageType } from '../../utils'
 
 const SUBMIT_REQUEST = 'SUBMIT_PROBLEM_PAGE_SUBMIT_REQUEST'
 const SUBMIT_SUCCESS = 'SUBMIT_PROBLEM_PAGE_SUBMIT_SUCCESS'

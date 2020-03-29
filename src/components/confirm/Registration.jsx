@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { confirmRegistrationActions } from '../../actions/content/confirm/registration'
+import { confirm } from '../../store/content/confirm/registration'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import BackendMessage from '../../styled-components/defaults/BackendMessage'
@@ -13,7 +13,7 @@ const ConfirmRegistrationPage = ({ token }) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(confirmRegistrationActions.confirm(token))
+		dispatch(confirm(token))
 	}, [dispatch, token]);
 
 	return (
