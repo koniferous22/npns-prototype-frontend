@@ -1,4 +1,4 @@
-import { appConfig } from '../../appConfig'
+import { productionMail, backendUrl } from '../../appConfig'
 
 import { fetchData, messageType } from '../../utils'
 import { reducer as signupFormReducer } from 'redux-form'
@@ -27,8 +27,8 @@ const signupPageReducer = (state = initialState, action) => {
 			return {
 				stage: signUpStages.COMPLETED,
 				message: {
-					message: appConfig.productionMail ? "Confermation link sent ;) pls check ur email adress, YUH!" : "Ok now that you've regoostered, this is a demo version that uses only testing mail service for user receiving emails, since we cannot afford SMTP server.\nThat means, to complete the process",
-					steps: appConfig.productionMail ? [] : [
+					message: productionMail ? "Confermation link sent ;) pls check ur email adress, YUH!" : "Ok now that you've regoostered, this is a demo version that uses only testing mail service for user receiving emails, since we cannot afford SMTP server.\nThat means, to complete the process",
+					steps: productionMail ? [] : [
 						"go to \"https://ethereal.email\"",
 						"log in with following credentials:\n\tusername=\"oren.cremin@ethereal.email\",\n\tpassword=\"86GXzmB8sDN2u2Ycuy\"",
 						"in section messages should be your email, i.e. addressed to \"" + action.user.username + "\" with email adress \"" + action.user.email + "\""
@@ -79,7 +79,7 @@ export const validateField = (values, field) => {
 		return new Promise((resolve, reject) => reject({[field]: 'Invalid field'}))
 	}
 	return new Promise((resolve, reject) => {
-		fetch(appConfig.backendUrl + "/valid/" + field, {
+		fetch(backendUrl + "/valid/" + field, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({[field]: values[field]})

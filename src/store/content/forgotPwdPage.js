@@ -1,7 +1,7 @@
 import { reducer as formReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 
-import { appConfig } from '../../appConfig'
+import { productionMail } from '../../appConfig'
 
 import { fetchData, messageType } from '../../utils'
 
@@ -32,8 +32,8 @@ function forgotPwdPageReducer(state = defaultState, action) {
 			return {
 				stage: forgotPwdStages.EMAIL_SENT,
 				message: {
-					message: appConfig.productionMail ? "YUH! check ur emeil adres, thereee should be an confermation link for pwd reset, so u dont have to regooster again. To do so follow these steps" : "Hello, this is just a demo, which doesn't use real smtp server - testing email service is used instead. That means, to complete the process",
-					steps: appConfig.productionMail ? [
+					message: productionMail ? "YUH! check ur emeil adres, thereee should be an confermation link for pwd reset, so u dont have to regooster again. To do so follow these steps" : "Hello, this is just a demo, which doesn't use real smtp server - testing email service is used instead. That means, to complete the process",
+					steps: productionMail ? [
 						"Open your favourite email @gmail.biz",
 						"Click the email you just received",
 						"click the link",

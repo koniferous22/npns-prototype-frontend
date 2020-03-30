@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { appConfig } from '../appConfig'
+import { enableLogger } from '../appConfig'
 
 import { reducer as formReducer } from 'redux-form'
 import authReducer from './auth'
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 
 const logger = createLogger();
 
-const middlewares = appConfig.enableLogger ? [thunkMiddleware, logger] : [thunkMiddleware]
+const middlewares = enableLogger ? [thunkMiddleware, logger] : [thunkMiddleware]
 
 export default createStore(
 	rootReducer,

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as scoreboardSearchFormReducer } from 'redux-form'
 
-import { appConfig } from '../../../appConfig'
+import { backendUrl } from '../../../appConfig'
 import { fetchData, messageType } from '../../../utils'
 
 const LOAD_PAGE_REQUEST = 'SCOREBOARD_PAGE_LOAD_PAGE_REQUEST'
@@ -189,7 +189,7 @@ export const reset = () => ({
 
 export const validateUserExists = (username) => {
 	return new Promise((resolve, reject) => {
-		fetch(appConfig.backendUrl + "/u/exists", {
+		fetch(backendUrl + "/u/exists", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({user: username})

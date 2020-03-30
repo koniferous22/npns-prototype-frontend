@@ -1,5 +1,5 @@
 
-import { appConfig } from '../appConfig'
+import { backendUrl } from '../appConfig'
 import { fetchData, messageType } from '../utils'
 
 const LOGIN_REQUEST = 'AUTH_LOGIN_REQUEST';
@@ -110,7 +110,7 @@ export const login = (username, password) => {
 }
 
 export const logout = (token) => {
-	fetch(appConfig.backendUrl + "/logout", {
+	fetch(backendUrl + "/logout", {
 		method: 'POST',
 		headers: {
 			'Content-Type'  : 'application/json',
