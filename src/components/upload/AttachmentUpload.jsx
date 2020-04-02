@@ -12,7 +12,7 @@ const ImageUpload = () => {
 		return () => {
 			dispatch(reset())
 		}
-	})
+	}, [dispatch])
 	const onClick = () => {
 		let widget = window.cloudinary.createUploadWidget(
 			{ 

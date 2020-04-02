@@ -23,7 +23,7 @@ const EconomyPage = () => {
 	useEffect(() => {
 		dispatch(loadKarmaValues())
 		dispatch(hierarchy())
-	})
+	}, [dispatch])
 	return (
 		<PageDiv>
 			<StatisticsSidebar />

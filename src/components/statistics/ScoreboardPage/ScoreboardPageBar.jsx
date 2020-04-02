@@ -14,7 +14,7 @@ const ScoreboardPageBar = ({
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(getNumberOfPages(queue, token))
-	})
+	}, [dispatch, queue, token])
 	const count = useSelector((state) => {
 		const scoreboardQueueReducer = state.content.statistics.scoreboard.page[queue]
 		return scoreboardQueueReducer ? scoreboardQueueReducer.pageCount : 1
