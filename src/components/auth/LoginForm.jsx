@@ -15,8 +15,8 @@ const LoginForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Input name="username" label="Username" type="text" ref={register} errors={errors} required alignLeft />
-			<Input name="password" label="Password" type="password" ref={register} errors={errors} required alignLeft />
+			<Input name="username" label="Username" type="text" ref={register({ required: true })} errors={errors} alignLeft />
+			<Input name="password" label="Password" type="password" ref={register({ required: true })} errors={errors} alignLeft />
 			<LoginButton type="submit" alignLeft>Submit</LoginButton>
 		</form>
 	)
