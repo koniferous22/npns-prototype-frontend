@@ -1,31 +1,25 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useForm } from 'react-hook-form'
+
 import { login } from '../../store/auth'
-import { Field, reduxForm } from 'redux-form'
-
-import renderField from '../form/RenderField'
-
 import LoginButton from '../../styled-components/form/FormButton'
 
-let submit = (values, dispatch, props) => {
-	dispatch(login(values.username, values.password))
-}
+import Input from '../form/Input'
 
-let LoginForm = props => {
-	const { handleSubmit } = props;
+
+const LoginForm = () => {
+	const dispatch = useDispatch()
+	const { register, handleSubmit, errors } = useForm()
+	const onSubmit = data => dispatch(login(data.username, data.password))
+
 	return (
-		<form onSubmit={handleSubmit}>
-			<Field name="username" component={renderField} type="text" label='Username' alignLeft/>
-			<Field name="password" component={renderField} type="password" label='Password' alignLeft/>
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<Input name="username" label="Username" type="text" register={register} errors={errors} required alignLeft />
+			<Input name="password" label="Password" type="password" register={register} errors={errors} required alignLeft />
 			<LoginButton type="submit" alignLeft>Submit</LoginButton>
 		</form>
 	)
 }
 
-
-LoginForm = reduxForm({
-	form: 'form',
-	onSubmit: submit,
-	getFormState: ({content}) => content.login
-})(LoginForm)
-
-export default LoginForm
+export default LoginForm 
