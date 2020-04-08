@@ -1,4 +1,38 @@
-import React from 'react'
+import React from 'react' 
+import { useDispatch, useSelector } from 'react-redux' 
+import { useForm } from 'react-hook-form' 
+ 
+import { signup, validate, validateField } from '../../store/content/signUpPage'
+import FormButton from '../../styled-components/form/FormButton'
+ 
+import Input from '../form/Input' 
+
+
+const SignUpForm = () => {
+  const dispatch = useDispatch()
+	console.log('DO PICE KURVA')
+  const zid = useSelector(state => state.content.signUp)
+	console.log('picusek')
+	console.log(zid)
+
+  const { register, getValues, handleSubmit, errors } = useForm()
+  const onSubmit = data => dispatch(signup(data))
+  const onBlur = (values, field) => validate(values, field)
+  return ( 
+    <form onSubmit={handleSubmit(onSubmit)}> 
+      <Input name="username" label="Username" type="text" ref={register({ required: true })} errors={errors} alignLeft /> 
+      <Input name="password" label="Password" type="password" ref={register({ required: true })} errors={errors} placeholder="at least 8 characters" alignLeft /> 
+			<Input name="confirmPassword" type="password" ref={register({ required: true })} errors={errors} label="Confirm password" alignLeft/>
+			<Input name="email" type="text" label="Email" ref={register({ required: true })} errors={errors} alignLeft/>
+			<Input name="referred_by" type="text" label="Referred by" ref={register} errors={errors} onBlur={onBlur(getValues(), 'referred_by')} alignLeft/>
+      <FormButton type="submit" alignLeft>Submit</FormButton> 
+    </form> 
+  ) 
+} 
+ 
+export default SignUpForm  
+
+/*import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import renderField from '../form/RenderField'
@@ -59,4 +93,4 @@ export default reduxForm({
 	asyncBlurFields,
 	onSubmit: submit,
 	getFormState: ({content}) => content.signUp.form
-})(SignUpForm)
+})(SignUpForm)*/

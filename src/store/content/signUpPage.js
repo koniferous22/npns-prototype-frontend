@@ -45,9 +45,23 @@ const signupPageReducer = (state = initialState, action) => {
 	}
 }
 
+const validationReducer = (state={}, action) => {
+	switch (action.type) {
+		case REQUEST:
+			return { message: "Waiting for server response" }
+		case SUCCESS:
+			return { message: "Lulz", messageType: action.messageType }
+		case FAILED:
+				return { body: action.body, message: action.message, messageType: action.messageType }
+		default:
+			return state
+	}
+}
+
 export default combineReducers({
 	page: signupPageReducer,
-	form: signupFormReducer
+	form: signupFormReducer,
+	validation: validationReducer
 })
 
 export const signup = (user) => {
@@ -69,7 +83,41 @@ export const signup = (user) => {
 }
 
 // this const should match the const in SignUp Form
+
 const availableFields = ['username', 'password', 'email', 'referred_by']
+
+export const validate = (values, field) => {
+	console.log(values, field)
+	if (!field) {
+		console.log('!field')
+		return {}
+	}
+	if (!availableFields.includes(field)) {
+		console.log('!availableFields.includes(field)')
+		return {[field]: 'Invalid field'}
+	}
+
+	const body = {[field]: values[field]}
+	console.log(body)
+
+	function request() { return { type: REQUEST } }
+	function success(kkt) { return { type: SUCCESS, kkt } }
+	function failure(message, body) { return { type: FAILED, body, message, messageType: messageType.ERROR } }
+	
+	console.log('odtialto nizsie to uz nefachci lulz')
+	return fetchData(
+		"/valid/" + field,
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		},
+		request,
+		success,
+		failure
+	)	
+}
+
 
 export const validateField = (values, field) => {
 	if (!field) {
@@ -85,9 +133,13 @@ export const validateField = (values, field) => {
 			body: JSON.stringify({[field]: values[field]})
 		}).then(response => {
 			if (response.status >= 200 && response.status < 400) {
+				console.log('KOKOT')
+				console.log(resolve())
 				return resolve()
 			}
 			return response.json().then(data => {
+				console.log('PICA')
+				console.log({[field]: data.message})
 				return reject({[field]: data.message})
 			})
 		})
