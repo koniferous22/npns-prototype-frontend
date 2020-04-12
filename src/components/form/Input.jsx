@@ -7,7 +7,7 @@ const Input = React.forwardRef(({ name, label, placeholder, type, register, onBl
 	<InputDiv alignLeft={alignLeft}>
 		<label>{label}</label>
 		<div>
-			<input name={name} type={type} ref={ref} placeholder={placeholder || label} />
+			<input name={name} type={type} onBlur={onBlur} ref={ref} placeholder={placeholder || label} />
 		</div>
 		{errors[name] && errors[name].type === 'required' && <ValidationMessage>This field is required.</ValidationMessage>}
 	</InputDiv>

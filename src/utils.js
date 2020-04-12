@@ -1,6 +1,7 @@
 import { appConfig } from './appConfig'
 
 export const fetchData = (backendEndpoint, request, onFetching, onSuccess, onError) => dispatch => { 
+	console.log('preco tento log nikdy na regoosteri nevypise?')
 	dispatch(onFetching());
 	return fetch(appConfig.backendUrl + backendEndpoint, request)
 		.then(response => {

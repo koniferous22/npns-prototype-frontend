@@ -86,7 +86,7 @@ export const signup = (user) => {
 
 const availableFields = ['username', 'password', 'email', 'referred_by']
 
-export const validate = (values, field) => {
+export const validate = (values, field) => dispatch => {
 	console.log(values, field)
 	if (!field) {
 		console.log('!field')
