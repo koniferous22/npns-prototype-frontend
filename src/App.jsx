@@ -42,8 +42,7 @@ import { logout, login, verify } from './store/auth'
 import AppDiv from './styled-components/App'
 
 const client = new ApolloClient({
-	//uri: 'http://localhost:3000/',
-	uri: 'https://48p1r2roz4.sse.codesandbox.io',
+	uri: 'http://localhost:3000/',
 	cache: new InMemoryCache()
   });
 
@@ -55,7 +54,7 @@ function App() {
 
 	const mounted = useRef();
 	useEffect(() => {
-		if (mounted.current) {
+		if (!mounted.current) {
 			dispatch(verify(token));
 			mounted.current = true;
 		} else {

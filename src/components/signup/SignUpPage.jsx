@@ -25,7 +25,7 @@ const SignUpPage = ({ location }) => {
 			return (
 				<ContentDiv>
 					<BackendMessage messageType={messageType}>
-						{message.message}
+						{JSON.stringify(message.message)}
 					</BackendMessage>
 					<ol>
 						{message.steps.map((step, i) => (
@@ -40,7 +40,7 @@ const SignUpPage = ({ location }) => {
 			return (
 				<ContentDiv>
 					<BackendMessage messageType={messageType}>
-						{message}
+						{JSON.stringify(message)}
 					</BackendMessage>
 					<h1>REGISTRUJ SA PRIATELU</h1>
 					<SignUpForm initialValues={{referred_by: referred_by}} />
