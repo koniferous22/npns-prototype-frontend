@@ -37,7 +37,7 @@ const SignUpPage = ({ location }) => {
     }
   })
 
-	const [ signUp, { loading, error } ] = useMutation(SIGN_UP, { errorPolicy: 'all'});
+	const [ signUp, { loading, error, data } ] = useMutation(SIGN_UP, { errorPolicy: 'all'});
 	const { stage, message, messageType } = useSelector(state => state.content.signUp.page)
 
   if (loading) return <ContentDiv>Loading...</ContentDiv>;
