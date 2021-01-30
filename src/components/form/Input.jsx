@@ -10,7 +10,7 @@ const Input = React.forwardRef(({ name, label, placeholder, type, register, onBl
 			<input name={name} type={type} onBlur={onBlur} ref={ref} placeholder={placeholder || label} />
 		</div>
 		{errors[name] && errors[name].type === 'required' && <ValidationMessage>This field is required.</ValidationMessage>}
-		{errors[name] && errors[name].type === 'validate' && <ValidationMessage>Invalid {name}</ValidationMessage>}
+		{errors[name] && errors[name].type === 'validate' && <ValidationMessage>{errors[name].message}</ValidationMessage>}
 	</InputDiv>
 ))
 

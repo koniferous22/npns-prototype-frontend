@@ -1,19 +1,12 @@
 import React from 'react' 
-import { useDispatch, useSelector } from 'react-redux' 
 import { useForm } from 'react-hook-form' 
- 
-//import { signup, validate, validateField } from '../../store/content/signUpPage'
-import FormButton from '../../styled-components/form/FormButton'
- 
-import Input from '../form/Input' 
-
 import { gql, useMutation } from '@apollo/client'
 
-const SignUpForm = ({ onSubmit }) => {
-  const dispatch = useDispatch()
-  const selector = useSelector(state => state.content.signUp)
-  console.log(selector)
+import FormButton from '../../styled-components/form/FormButton'
+import Input from '../form/Input' 
 
+
+const SignUpForm = ({ onSubmit }) => {
   const VALIDATE_USERNAME = gql`
     mutation ValidateUsername($username: String!) {
       validateUsername(username: $username) {
@@ -32,8 +25,10 @@ const SignUpForm = ({ onSubmit }) => {
     }
   `;
   
-  const [validateUsername, { loadingUsername, errorUsername, dataUsername }] = useMutation(VALIDATE_USERNAME, { errorPolicy: 'all'});
-  const [validateEmail, { loadingEmail, errorEmail, dataEmail }] = useMutation(VALIDATE_EMAIL, { errorPolicy: 'all'});
+  //const [validateUsername, { loadingUsername, errorUsername, dataUsername }] = useMutation(VALIDATE_USERNAME, { errorPolicy: 'all'});
+  const [validateUsername] = useMutation(VALIDATE_USERNAME, { errorPolicy: 'all'});
+  //const [validateEmail, { loadingEmail, errorEmail, dataEmail }] = useMutation(VALIDATE_EMAIL, { errorPolicy: 'all'});
+  const [validateEmail] = useMutation(VALIDATE_EMAIL, { errorPolicy: 'all'});
 
   const { 
     register,
@@ -61,7 +56,7 @@ const SignUpForm = ({ onSubmit }) => {
                     username
                   }
                 })
-                return valResult.data.validateUsername.result;
+                return valResult.data.validateUsername.result || 'Username invalid or taken';
               } catch(e) {
                 return `Uncaught GQL error ${e.message}`
               }
@@ -71,8 +66,33 @@ const SignUpForm = ({ onSubmit }) => {
         errors={errors}
         alignLeft
       /> 
-      <Input name="password" label="Password" type="password" ref={register({ required: true })} errors={errors} placeholder="at least 8 characters" alignLeft /> 
-			<Input name="confirmPassword" type="password" ref={register({ required: true })} errors={errors} label="Confirm password" alignLeft/>
+      <Input 
+        name="password" 
+        label="Password" 
+        type="password" 
+        ref={
+          register({ 
+            required: true 
+          })
+        } 
+        errors={errors} 
+        placeholder="at least 8 characters" 
+        alignLeft 
+      /> 
+      <Input 
+        name="confirmPassword" 
+        type="password" 
+        ref={
+          register({ 
+            required: true,      
+            validate: () => 
+              (getValues("confirmPassword") === getValues("password")) || 'Passwords not matching'
+          })
+        } 
+        errors={errors}
+        label="Confirm password"
+        alignLeft
+      />
       <Input 
         name="email"
         type="text" 
@@ -87,7 +107,7 @@ const SignUpForm = ({ onSubmit }) => {
                     email
                   }
                 })
-                return valResult.data.validateEmail.result;
+                return valResult.data.validateEmail.result || 'Email invalid or taken';
               } catch(e) {
                 return `Uncaught GQL error ${e.message}`
               }
