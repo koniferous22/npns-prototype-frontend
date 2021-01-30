@@ -15,7 +15,7 @@ const SignUpForm = ({ onSubmit }) => {
   console.log(selector)
 
   const VALIDATE_USERNAME = gql`
-    mutation Validate($username: String!) {
+    mutation ValidateUsername($username: String!) {
       validateUsername(username: $username) {
         result
         message
@@ -23,7 +23,17 @@ const SignUpForm = ({ onSubmit }) => {
     }
   `;
   
-  const [validateUsername, { loading, error, data }] = useMutation(VALIDATE_USERNAME, { errorPolicy: 'all'});
+  const VALIDATE_EMAIL = gql`
+    mutation ValidateEmail($email: String!) {
+      validateEmail(email: $email) {
+        result
+        message
+      }
+    }
+  `;
+  
+  const [validateUsername, { loadingUsername, errorUsername, dataUsername }] = useMutation(VALIDATE_USERNAME, { errorPolicy: 'all'});
+  const [validateEmail, { loadingEmail, errorEmail, dataEmail }] = useMutation(VALIDATE_EMAIL, { errorPolicy: 'all'});
 
   const { 
     register,
@@ -51,7 +61,6 @@ const SignUpForm = ({ onSubmit }) => {
                     username
                   }
                 })
-                console.log();
                 return valResult.data.validateUsername.result;
               } catch(e) {
                 return `Uncaught GQL error ${e.message}`
@@ -64,7 +73,30 @@ const SignUpForm = ({ onSubmit }) => {
       /> 
       <Input name="password" label="Password" type="password" ref={register({ required: true })} errors={errors} placeholder="at least 8 characters" alignLeft /> 
 			<Input name="confirmPassword" type="password" ref={register({ required: true })} errors={errors} label="Confirm password" alignLeft/>
-			<Input name="email" type="text" label="Email" ref={register({ required: true })} errors={errors} alignLeft/>
+      <Input 
+        name="email"
+        type="text" 
+        label="Email" 
+        ref={
+          register({
+            required: true,
+            validate: async (email) => {
+              try {
+                const valResult = await validateEmail({
+                  variables: {
+                    email
+                  }
+                })
+                return valResult.data.validateEmail.result;
+              } catch(e) {
+                return `Uncaught GQL error ${e.message}`
+              }
+            }
+          })
+        } 
+        errors={errors}
+        alignLeft
+      />
       <FormButton type="submit" alignLeft>Submit</FormButton> 
     </form> 
   ) 
