@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, gql, ApolloProvider, useQuery } from '@apollo/client';
 
 import React, { useEffect, useRef } from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
@@ -42,7 +42,8 @@ import { logout, login, verify } from './store/auth'
 import AppDiv from './styled-components/App'
 
 const client = new ApolloClient({
-	uri: 'http://localhost:3000/',
+	//uri: 'http://localhost:3000/',
+	uri: 'https://48p1r2roz4.sse.codesandbox.io',
 	cache: new InMemoryCache()
   });
 
@@ -68,6 +69,7 @@ function App() {
 	}
 
 	return (
+		<ApolloProvider client={client}>
 			<Router>
 				<AppDiv>
 					<Header logout={dispatch(logout)} loggedIn={loggedIn} username={user ? user.username : null}/>
@@ -110,10 +112,10 @@ function App() {
 						<NonAuthRoute path="/confirm/usernameChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmUsernameChangePage token={routeProps.match.params.token}/>} />
 						
 						{loggedIn && <Redirect from='/profile' to={'/u/' + user.username} />}
-						
 					</Switch>
 				</AppDiv>
 			</Router>
+		</ApolloProvider>
 	)
 }
 
