@@ -1,29 +1,47 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { confirm } from '../../store/content/confirm/registration'
-
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
-import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
+import { gql, useMutation } from '@apollo/client'
 
 const ConfirmRegistrationPage = ({ token }) => {
-	const { verified, message, messageType } = useSelector(state => state.content.confirm.registration)
-	const dispatch = useDispatch()
+  useEffect(() => {
+    const emailToken = token
+    verify({
+      variables: {
+        emailToken
+      }
+    })
+  }, [token]);
+  
+  console.log('bbbb')
 
-	useEffect(() => {
-		dispatch(confirm(token))
-	}, [dispatch, token]);
+  const USER_VERIFY = gql`
+    mutation UserVerify($emailToken: String!) {
+      userVerify(emailToken: $emailToken) {
+        message
+      }
+    }
+  `;
 
-	return (
-		<ContentDiv>
-			<BackendMessage messageType={messageType}>
-				{message}
-			</BackendMessage>
-			{verified && (<p> Continue to <Link to='/login'>Login</Link> </p>)}
-		</ContentDiv>
-	)
+  const [ verify, { loading, error, data } ] = useMutation(USER_VERIFY, { errorPolicy: 'all'})
+  console.log(data)
+
+  if (loading) return <ContentDiv>Loading...</ContentDiv>;
+  if (error) return (
+    <ContentDiv>
+      {error.message}
+      <p>Error! Account is either already confirmed, or the link is incorrect.</p>
+    </ContentDiv>
+  )
+  return (
+    <ContentDiv>
+      Success!
+      <p>{data && data.userVerify.message}</p>
+      <p>Continue to <Link to='/login'>Login</Link></p>
+    </ContentDiv>
+  )
 }
 
 export default ConfirmRegistrationPage
