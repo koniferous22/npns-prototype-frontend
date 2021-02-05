@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 import { gql, useMutation } from '@apollo/client'
@@ -10,14 +10,7 @@ import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 
 const LoginPage = () => {
-  const { loggedIn, logIn, setToken, token } = useContext(AuthContext);
-
-  useEffect(() => {
-    console.log('toto je z LoginPage')
-    console.log(loggedIn)
-    console.log(token)
-  });
-
+  const { loggedIn, logIn, setToken, setUser } = useContext(AuthContext);
 
   const SIGN_IN = gql`
     mutation UserSignIn($identifier: String!, $password: String!) {
@@ -40,7 +33,8 @@ const LoginPage = () => {
   })
   .then(res => {
     console.log(res);
-    setToken(res.data.userSignIn.token);
+    setUser(res.data.userSignIn.user);
+    setToken({token: res.data.userSignIn.token});
     logIn();
     }
   )

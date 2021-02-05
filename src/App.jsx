@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
+import AuthContext from './AuthContext'
 
 import AppContext from './AppContext'
 import IEPage from './components/issues/InternetExplorer'
@@ -44,20 +45,25 @@ import AppDiv from './styled-components/App'
 const parseUrlParam = (routeProps, paramName) => new URLSearchParams(routeProps.location.search).get(paramName)
 
 function App() {
-  const { user, token } = useSelector(state => state.auth)
+  const { loggedIn, token, user } = useContext(AuthContext);
+  console.log(loggedIn, token, user)
+  console.log('RRRREEEEEEE')
+
+
+  //const { user, token } = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const mounted = useRef();
   useEffect(() => {
     if (!mounted.current) {
       dispatch(verify(token));
-       mounted.current = true;
+      mounted.current = true;
     } else {
       dispatch(verify(token));
     }
   }, []);
 
-  const loggedIn = !!user
+  //const loggedIn = !!user
   if((navigator.userAgent.indexOf("MSIE") !== -1 ) || (!!document.documentMode === true )) { //IF IE > 10
     return (<IEPage />)
   }

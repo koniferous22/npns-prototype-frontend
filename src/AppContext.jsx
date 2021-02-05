@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import AuthContext from './AuthContext'
+import AuthContext from './AuthContext';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/',
@@ -9,7 +9,8 @@ const client = new ApolloClient({
 
 function AppContext({ children }) {
   const [loggedIn, toggleLoggedIn] = useState(false);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState({});
+  const [user, setUser] = useState({});
   
   return (
     <div>
@@ -19,7 +20,9 @@ function AppContext({ children }) {
         logIn: () => toggleLoggedIn(true),
         logOut: () => toggleLoggedIn(false),
         token,
-        setToken: (t) => setToken(t)
+        setToken: (t) => setToken(t),
+        user,
+        setUser: (u) => setUser(u)
       }}>
         {children}
       </AuthContext.Provider>
