@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import LoginForm from './LoginForm'
 import { Link } from "react-router-dom"
 import { gql, useMutation } from '@apollo/client'
+import AuthContext from '../../AuthContext'
 
 import ContentDiv from '../../styled-components/defaults/ContentDiv'
 import CenteredDiv from '../../styled-components/defaults/CenteredDiv'
@@ -9,6 +10,14 @@ import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 
 const LoginPage = () => {
+  const { loggedIn, logIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log('toto je z LoginPage')
+    console.log(loggedIn)
+  });
+
+
   const SIGN_IN = gql`
     mutation UserSignIn($identifier: String!, $password: String!) {
       userSignIn(identifier: $identifier, password: $password) {
@@ -30,8 +39,9 @@ const LoginPage = () => {
   })
 
   const [ signIn, { loading, error, data } ] = useMutation(SIGN_IN, { errorPolicy: 'all'});
-  console.log(loading, error, data)
+  console.log(loading, error, data);
   
+
   if (loading) return <ContentDiv>Loading...</ContentDiv>;
 
   return(
@@ -42,6 +52,8 @@ const LoginPage = () => {
         </BackendMessage>
       </CenteredDiv>
       <LoginForm onSubmit={onSubmit} />
+      <button onClick={() => logIn()}>LOG IIIIIN</button>
+      { loggedIn && <div>logged in currently</div>}
       <ContentDiv></ContentDiv>
       <CenteredDiv>
         <Link to="/forgotpwd" >Forgot Password?</Link>
