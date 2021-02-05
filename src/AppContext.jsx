@@ -9,6 +9,7 @@ const client = new ApolloClient({
 
 function AppContext({ children }) {
   const [loggedIn, toggleLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
   
   return (
     <div>
@@ -16,7 +17,9 @@ function AppContext({ children }) {
       <AuthContext.Provider value={{
         loggedIn,
         logIn: () => toggleLoggedIn(true),
-        logOut: () => toggleLoggedIn(false)
+        logOut: () => toggleLoggedIn(false),
+        token,
+        setToken: (t) => setToken(t)
       }}>
         {children}
       </AuthContext.Provider>

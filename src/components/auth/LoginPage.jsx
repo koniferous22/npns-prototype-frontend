@@ -10,11 +10,12 @@ import BackendMessage from '../../styled-components/defaults/BackendMessage'
 
 
 const LoginPage = () => {
-  const { loggedIn, logIn } = useContext(AuthContext);
+  const { loggedIn, logIn, setToken, token } = useContext(AuthContext);
 
   useEffect(() => {
     console.log('toto je z LoginPage')
     console.log(loggedIn)
+    console.log(token)
   });
 
 
@@ -37,10 +38,19 @@ const LoginPage = () => {
       password
     }
   })
+  .then(res => {
+    console.log(res);
+    setToken(res.data.userSignIn.token);
+    logIn();
+    }
+  )
+  .catch(error => {
+    console.log(error);
+    }
+  );
 
   const [ signIn, { loading, error, data } ] = useMutation(SIGN_IN, { errorPolicy: 'all'});
   console.log(loading, error, data);
-  
 
   if (loading) return <ContentDiv>Loading...</ContentDiv>;
 
@@ -52,7 +62,6 @@ const LoginPage = () => {
         </BackendMessage>
       </CenteredDiv>
       <LoginForm onSubmit={onSubmit} />
-      <button onClick={() => logIn()}>LOG IIIIIN</button>
       { loggedIn && <div>logged in currently</div>}
       <ContentDiv></ContentDiv>
       <CenteredDiv>
