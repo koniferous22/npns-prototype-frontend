@@ -35,6 +35,7 @@ const LoginPage = () => {
     console.log(res);
     setUser(res.data.userSignIn.user);
     setToken({token: res.data.userSignIn.token});
+    localStorage.setItem('token', JSON.stringify(res.data.userSignIn.token))
     logIn();
     }
   )

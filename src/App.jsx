@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import { useSelector, useDispatch } from 'react-redux'
 import AuthContext from './AuthContext'
 
-import AppContext from './AppContext'
 import IEPage from './components/issues/InternetExplorer'
 
 import Homepage from "./components/home/Homepage"
@@ -38,6 +37,7 @@ import ConfirmEmailChangePage from "./components/confirm/EmailChange"
 import ConfirmUsernameChangePage from "./components/confirm/UsernameChange"
 
 import { logout, login, verify } from './store/auth'
+//import { gql, useMutation } from '@apollo/client'
 
 import AppDiv from './styled-components/App'
 
@@ -49,10 +49,6 @@ function App() {
   console.log(loggedIn, token, user)
   console.log('RRRREEEEEEE')
 
-
-  //const { user, token } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
-
   const mounted = useRef();
   useEffect(() => {
     if (!mounted.current) {
@@ -62,6 +58,38 @@ function App() {
       dispatch(verify(token));
     }
   }, []);
+/*
+  const KEEP_ALIVE = gql`
+    mutation UserKeepAlive($authToken: String!) {
+      userKeepAlive(authToken: $authToken) {
+        message
+      }
+    }
+  `;
+ 
+  const [ userKeepAlive, { loading, error, data } ] = useMutation(KEEP_ALIVE, { errorPolicy: 'all'});
+  console.log('pod mutation v App.jsx')
+  console.log(loading, error, data)
+
+  const keepAlive = (authToken) => userKeepAlive({
+    variables: {
+      authToken
+    }
+  })
+  .then(res => {
+    console.log('succceeeeessss')
+    console.log(res);
+    }
+  )
+  .catch(error => {
+    console.log('errrooorrrr')
+    console.log(error);
+    }
+  );
+*/
+  //const { user, token } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
 
   //const loggedIn = !!user
   if((navigator.userAgent.indexOf("MSIE") !== -1 ) || (!!document.documentMode === true )) { //IF IE > 10
@@ -69,53 +97,51 @@ function App() {
   }
 
   return (
-    <AppContext>
-      <Router>
-        <AppDiv>
-          <Header logout={dispatch(logout)} loggedIn={loggedIn} username={user ? user.username : null}/>
-          <Switch>
-            <Route exact path="/" render={() => <Homepage user={user}/>} />
-            <NonAuthRoute path="/signup" loggedIn={loggedIn} render={() => <SignUpPage/> } />
-            <NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
-            <Route path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
+    <Router>
+      <AppDiv>
+        <Header logout={dispatch(logout)} loggedIn={loggedIn} username={user ? user.username : null}/>
+        <Switch>
+          <Route exact path="/" render={() => <Homepage user={user}/>} />
+          <NonAuthRoute path="/signup" loggedIn={loggedIn} render={() => <SignUpPage/> } />
+          <NonAuthRoute path="/forgotpwd" loggedIn={loggedIn} render={(routeProps) => <ForgotPassword loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : null}/>}/>
+          <Route path="/login" loggedIn={loggedIn} render={(routeProps) => <Login loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/'}/>} />
 
-            <Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} loggedIn={loggedIn}/>} />
-            <PrivateRoute path="/submitProblem" render={(routeProps) => <SubmitProblemPage token={token} urlQueue={parseUrlParam(routeProps, 'q')}/>} loggedIn={loggedIn}/>
-            
-            <Route exact path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={token} problemId={routeProps.match.params.id} user={user}/>} />
-            <Route path="/problem/:id/boost" render={(routeProps) => loggedIn && <BoostPage token={token} problemId={routeProps.match.params.id} loggedIn={loggedIn}/>} />
+          <Route exact path="/q/:name" render={(routeProps) => <QueuePage queue={routeProps.match.params.name} loggedIn={loggedIn}/>} />
+          <PrivateRoute path="/submitProblem" render={(routeProps) => <SubmitProblemPage token={token} urlQueue={parseUrlParam(routeProps, 'q')}/>} loggedIn={loggedIn}/>
+          
+          <Route exact path="/problem/:id" render={ (routeProps) => <ProblemPage loggedIn={loggedIn} token={token} problemId={routeProps.match.params.id} user={user}/>} />
+          <Route path="/problem/:id/boost" render={(routeProps) => loggedIn && <BoostPage token={token} problemId={routeProps.match.params.id} loggedIn={loggedIn}/>} />
 
-            <Route exact path="/u/:username" render={ 
-              (routeProps) => <ProfilePage 
-                viewer={user ? user.username : null}
-                user={routeProps.match.params.username}
-                loggedIn={loggedIn}
-              /> }/>
-            <Route path="/u/:username/activity" render={ 
-              (routeProps) => <ActivityPage 
-                viewer={user ? user.username : null}
-                user={routeProps.match.params.username}
-                loggedIn={loggedIn}
-              /> }/>
-            <ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username} token={token}/>)} loggedIn={loggedIn} viewer={user ? user.username : null}/>
-            <ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={user ? user.username : null}/>
-            <ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={token}/>} loggedIn={loggedIn} viewer={user ? user.username : null}/>
-            
-            <Route path="/statistics/economy" render={() => <EconomyPage token={token}/>} loggedIn={loggedIn}/>
-            <Route path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={token} queue={routeProps.match.params.queue} urlPage={Number(parseUrlParam(routeProps, 'page')) || 1} />} loggedIn={loggedIn} />
+          <Route exact path="/u/:username" render={ 
+            (routeProps) => <ProfilePage 
+              viewer={user ? user.username : null}
+              user={routeProps.match.params.username}
+              loggedIn={loggedIn}
+            /> }/>
+          <Route path="/u/:username/activity" render={ 
+            (routeProps) => <ActivityPage 
+              viewer={user ? user.username : null}
+              user={routeProps.match.params.username}
+              loggedIn={loggedIn}
+            /> }/>
+          <ProfileRoute path={'/u/:username/personal'} render={(routeProps) => (<PersonalInformationPage user={routeProps.match.params.username} token={token}/>)} loggedIn={loggedIn} viewer={user ? user.username : null}/>
+          <ProfileRoute path={'/u/:username/premium'} render={(routeProps) => (<PremiumPage user={routeProps.match.params.username}/>)} loggedIn={loggedIn} viewer={user ? user.username : null}/>
+          <ProfileRoute path={'/u/:username/transactions'} render={(routeProps) => <TransactionPage user={routeProps.match.params.username} token={token}/>} loggedIn={loggedIn} viewer={user ? user.username : null}/>
+          
+          <Route path="/statistics/economy" render={() => <EconomyPage token={token}/>} loggedIn={loggedIn}/>
+          <Route path="/statistics/scoreboard/:queue" render={(routeProps) => <ScoreboardPage token={token} queue={routeProps.match.params.queue} urlPage={Number(parseUrlParam(routeProps, 'page')) || 1} />} loggedIn={loggedIn} />
 
-            
-            <Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={dispatch(logout)}/>}/>
-            <NonAuthRoute path="/confirm/registration/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
-            <NonAuthRoute path="/confirm/passwordChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
-            <NonAuthRoute path="/confirm/emailChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmEmailChangePage token={routeProps.match.params.token}/>} />
-            <NonAuthRoute path="/confirm/usernameChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmUsernameChangePage token={routeProps.match.params.token}/>} />
-            
-            {loggedIn && <Redirect from='/profile' to={'/u/' + user.username} />}
-          </Switch>
-        </AppDiv>
-      </Router>
-    </AppContext>
+          
+          <Route path='/logout' render={(routeProps) => <LogoutPage loggedIn={loggedIn} redirect={(routeProps.location && routeProps.location.state) ? routeProps.location.state.from : '/login'} logout={dispatch(logout)}/>}/>
+          <NonAuthRoute path="/confirm/registration/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmRegistrationPage token={routeProps.match.params.token}/>} />
+          <NonAuthRoute path="/confirm/passwordChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmPasswordChangePage token={routeProps.match.params.token}/>} />
+          <NonAuthRoute path="/confirm/emailChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmEmailChangePage token={routeProps.match.params.token}/>} />
+          <NonAuthRoute path="/confirm/usernameChange/:token" loggedIn={loggedIn} render={(routeProps) => <ConfirmUsernameChangePage token={routeProps.match.params.token}/>} />
+          
+          {loggedIn && <Redirect from='/profile' to={'/u/' + user.username} />}
+        </Switch>
+      </AppDiv>
+    </Router>
   )
 }
 

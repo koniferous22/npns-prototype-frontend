@@ -61,7 +61,7 @@ export default function authReducer(state = initialState, action) {
 				messageType: action.messageType
 			}
 		case TOKEN_EXPIRED:
-			localStorage.removeItem('token')
+			//localStorage.removeItem('token')
 			return {
 				message: 'Session expired re-log in',
 				messageType: action.messageType,
@@ -117,7 +117,7 @@ export const logout = (token) => {
 			'Authorization' : 'Bearer ' + token
 		}
 	}).catch(error => console.log(error));
-	localStorage.removeItem('token')
+	//localStorage.removeItem('token')
 	return { type: LOGOUT };
 }
 
