@@ -27,7 +27,7 @@ import SolutionLabel from '../../../styled-components/problem/SolutionLabel'
 
 import { dateTimeDefaultLocale, dateTimeOptions } from '../../../utils'
 
-const Submission = ({ submissionId, page, problem, key, acceptButton, replyButton, loadRepliesButton, hasActiveReplyForm, paging, token, isSolution, wrapper }) => {
+const Submission = ({ submissionId, page, problem, acceptButton, replyButton, loadRepliesButton, hasActiveReplyForm, paging, token, isSolution, wrapper }) => {
 
 	const { content, replyEntries, repliesHidden, user, userId, created, attachmentUrls, edits } = useSelector(state => state.content.problemPage.page.submissionEntries[page || 0][submissionId])
 
