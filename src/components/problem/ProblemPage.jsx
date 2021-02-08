@@ -32,8 +32,8 @@ const getProblemPageState = user => state => {
 }
 
 const getSubmissionIdentifiers = (state) => {
-	const submissionEntries = state.content.probelmPage.page.submissionEntries;
-	submissionEntries.reduce((acc, cv, index) => acc.concat(Object.keys(cv).map(submissionId => ({id: submissionId, page: index}))), [])
+	const submissionEntries = state.content.problemPage.page.submissionEntries;
+	return submissionEntries.reduce((acc, cv, index) => acc.concat(Object.keys(cv).map(submissionId => ({id: submissionId, page: index}))), [])
 }
 
 const ProblemPage = ({
@@ -44,7 +44,7 @@ const ProblemPage = ({
 }) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
-		dispatch(loadProblemData())
+		dispatch(loadProblemData(problemId))
 		return () => {
 			dispatch(reset())
 		}
@@ -56,6 +56,8 @@ const ProblemPage = ({
 		paging,
 		reply,
 		submissionFormSubmitted,
+    message,
+    messageType
 	} = useSelector(getProblemPageState(user))
 
 	const submissionIdentifiers = useSelector(getSubmissionIdentifiers)
@@ -64,8 +66,8 @@ const ProblemPage = ({
 		return (
 			<PageDiv>
 				<QueueSidebar />
-				<BackendMessage messageType={this.props.messageType}>
-					{this.props.message}
+				<BackendMessage messageType={messageType}>
+					{message}
 				</BackendMessage>
 			</PageDiv>
 		)
