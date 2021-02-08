@@ -5,11 +5,6 @@ import ReactSelect from '../../styled-components/form/ReactSelect'
 
 const ReduxFormSelect = props => {
 	const { input, options, label, defaultValue, defaultInputValue } = props;
-	if (defaultValue) {
-		// LOOOOL FIXOL SOM TOOOOOs
-		// UPDATE: LEIDER NEIN, FUNKTIONIERT NICHT :D :D
-		input.value = defaultValue
-	}
 	return (
 		<div>
 			{label && <label>{label}</label>}

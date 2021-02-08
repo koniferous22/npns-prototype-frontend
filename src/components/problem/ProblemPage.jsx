@@ -110,7 +110,6 @@ const ProblemPage = ({
 							pageStart={0}
 							loadMore={() => loadSubmissionPage(paging.page + 1)}
 							hasMore={paging.hasMore}
-							loader={<div className="loader" key={0}>Loading ...</div>}
 						>
 							{submissions}
 						</InfiniteScroll>
