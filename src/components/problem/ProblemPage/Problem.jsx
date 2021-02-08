@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import MarkdownRender from '../../form/MarkdownRender'
 
 import Submission from './Submission'
-import Editing from './Editing'
-import Edits from './Edits'
+//import Editing from './Editing'
+//import Edits from './Edits'
 import Attachments from '../../upload/Attachments'
 import BoostHistory from './BoostHistory'
 
@@ -37,7 +37,7 @@ const Problem = ({ loggedIn, embeddedSolution, token }) => {
 			<span>Description: </span>
 			<MarkdownRender source={problem.content} />
 			<Attachments attachmentUrls={problem.attachmentUrls} />
-			<Edits edits={problem.edits} />
+			{/*<Edits edits={problem.edits} />*/}
 			{embeddedSolution && (
 				<Submission
 					submissionId={embeddedSolution.id}
@@ -46,7 +46,7 @@ const Problem = ({ loggedIn, embeddedSolution, token }) => {
 					isSolution={true}
 				/>
 			)}
-			<Editing contentId={problem.id} token={token} ownerId={problem.submitted_by._id}/>
+			{/*<Editing contentId={problem.id} token={token} ownerId={problem.submitted_by._id}/>*/}
 		</ProblemBox>
 	)
 }

@@ -27,12 +27,14 @@ const getProblemPageState = user => state => {
 		reply: problemPageState.reply,
 		submissionFormSubmitted: problemPageState.submissionFormSubmitted,
 		message: problemPageState.message,
-		messageType: problemPageState.messageType
+		messageType: problemPageState.messageType,
 	}
 }
 
 const getSubmissionIdentifiers = (state) => {
 	const submissionEntries = state.content.problemPage.page.submissionEntries;
+	console.log(state)
+	console.log(submissionEntries, 'aaaaaaaaaaaaaaaaaaaaaaaa')
 	return submissionEntries.reduce((acc, cv, index) => acc.concat(Object.keys(cv).map(submissionId => ({id: submissionId, page: index}))), [])
 }
 
@@ -45,10 +47,11 @@ const ProblemPage = ({
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(loadProblemData(problemId))
+		dispatch(loadSubmissionPage(problemId, 1))
 		return () => {
 			dispatch(reset())
 		}
-	}, [dispatch])
+	}, [dispatch, problemId])
 	const {
 		problemActive,
 		problemOwner,
@@ -56,8 +59,8 @@ const ProblemPage = ({
 		paging,
 		reply,
 		submissionFormSubmitted,
-    message,
-    messageType
+    	message,
+    	messageType
 	} = useSelector(getProblemPageState(user))
 
 	const submissionIdentifiers = useSelector(getSubmissionIdentifiers)
@@ -90,6 +93,8 @@ const ProblemPage = ({
 		)
 	const submissionCount = submissionIdentifiers.length
 	const submissions = submissionIdentifiers.map(mapSubmissionIdToComponent)
+	console.log(submissions)
+	console.log('SSSSSSSSSSSS')
 	const embeddedSolution = (problemSolution && submissionCount > 1) ? (submissionIdentifiers.find(x => x.id === problemSolution) || null) : null
 	return (
 		<PageDiv>

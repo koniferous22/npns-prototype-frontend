@@ -432,6 +432,4 @@ const editReducer = (state = initialState, action) => {
 			return state
 	}
 }
-
-
 */
